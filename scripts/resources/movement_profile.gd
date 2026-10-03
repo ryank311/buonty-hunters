@@ -5,6 +5,7 @@ extends Resource
 @export var walk_speed: float = 1.6
 @export var crouch_speed: float = 2.5
 @export var prone_speed: float = 0.38
+@export var prone_strafe_seconds: float = 1.15
 @export var prone_turn_speed: float = 1.2
 @export var dive_speed: float = 5.6
 @export var dive_lift: float = 3.0

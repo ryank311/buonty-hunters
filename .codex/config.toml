@@ -1,0 +1,60 @@
+# Project-scoped Codex settings. Loaded only when Codex trusts this project.
+
+# Godot MCP server (godot-mcp-runtime). The launcher pins the server version and the
+# Godot binary; .mcp.json points Claude Code at the same script.
+[mcp_servers.godot]
+command = "sh"
+args = ["-c", "exec \"$(git rev-parse --show-toplevel 2>/dev/null || pwd)/tools/agent/mcp\""]
+startup_timeout_sec = 60
+tool_timeout_sec = 180
+
+# Tools that only observe the project or drive the game window run without a prompt.
+# run_script (arbitrary GDScript in the running game) and the scene-editing tools keep
+# Codex's normal approval flow.
+[mcp_servers.godot.tools.check_project]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.get_project_files]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.get_project_settings]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.search_project]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.get_scene_dependencies]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.list_autoloads]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.get_scene_tree]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.get_node_properties]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.get_node_signals]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.validate]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.run_project]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.stop_project]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.get_debug_output]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.take_screenshot]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.get_ui_elements]
+approval_mode = "approve"
+
+[mcp_servers.godot.tools.simulate_input]
+approval_mode = "approve"

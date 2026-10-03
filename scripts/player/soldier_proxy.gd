@@ -5,7 +5,9 @@ const THIGH_LENGTH := 0.43
 const SHIN_LENGTH := 0.42
 const LEG_REACH := THIGH_LENGTH + SHIN_LENGTH - 0.001
 const STANDING_HIP := 0.955
-const CROUCH_HIP := 0.52
+const CROUCH_HIP := 0.60
+const KNEEL_HIP := 0.47
+const RUN_HIP_DROP := 0.075
 const UPPER_ARM_LENGTH := 0.31
 const FOREARM_LENGTH := 0.29
 const RIFLE_STOCK := Vector3(0, 0, 0.375)
@@ -35,6 +37,13 @@ var step_blend: float = 0.0
 var dive_blend: float = 0.0
 var crawl_cycle: float = 0.0
 var crawl_blend: float = 0.0
+var strafe_phase: float = 0.0
+var strafe_blend: float = 0.0
+var strafe_side: float = 1.0
+var strafe_reach: float = 0.0
+var strafe_lift: float = 0.0
+var jog_bounce: float = 0.0
+var kneel_blend: float = 0.0
 var hip_shift := Vector3.ZERO
 var stride_contact: float = 0.58
 var arm_joints: Dictionary = {}
@@ -47,7 +56,7 @@ func _ready() -> void:
 	var skin := _material(Color("b5a080"))
 	var dark := _material(Color("272d29"))
 	# Faceted, tapered cloth volumes keep the proxy human at the play camera distance.
-	_form("Torso", [Vector3(0.185,-0.18,0.135), Vector3(0.245,0.10,0.15), Vector3(0.20,0.18,0.12)], cloth)
+	_form("Torso", [Vector3(0.185,-0.18,0.135), Vector3(0.245,0.145,0.15), Vector3(0.20,0.225,0.12)], cloth)
 	_form("Abdomen", [Vector3(0.18,-0.12,0.135), Vector3(0.175,0.12,0.13)], cloth)
 	_form("Vest", [Vector3(0.195,-0.17,0.07), Vector3(0.24,0.12,0.075), Vector3(0.18,0.17,0.06)], gear)
 	_form("Pack", [Vector3(0.16,-0.19,0.075), Vector3(0.195,-0.13,0.10), Vector3(0.175,0.17,0.09), Vector3(0.13,0.20,0.06)], gear)
@@ -139,6 +148,12 @@ func reset_pose() -> void:
 	dive_blend = 0.0
 	crawl_blend = 0.0
 	crawl_cycle = 0.0
+	strafe_phase = 0.0
+	strafe_blend = 0.0
+	strafe_reach = 0.0
+	strafe_lift = 0.0
+	jog_bounce = 0.0
+	kneel_blend = 0.0
 	focus_blend = 0.0
 	locomotion_yaw = 0.0
 	torso_yaw = 0.0
@@ -162,7 +177,25 @@ static func solve_knee(hip: Vector3, ankle: Vector3, pole: Vector3 = Vector3.FOR
 	var height := sqrt(maxf(0.0, THIGH_LENGTH * THIGH_LENGTH - along * along))
 	return hip + axis * along + bend.normalized() * height
 
-static func sample_step(phase: float, stride: float, contact: float, lift_height: float, facing: float = 1.0) -> Dictionary:
+static func sample_prone_strafe(phase: float) -> Dictionary:
+	# Reach before translating, pull the torso to the planted hand/foot, then settle.
+	# The speed curve integrates to one over a cycle, preserving the crawl speed.
+	var reach: float
+	var lift := 0.0
+	var speed := 0.16
+	if phase < 0.22:
+		var progress := phase / 0.22
+		reach = smoothstep(0.0, 1.0, progress)
+		lift = sin(PI * progress)
+	elif phase < 0.82:
+		var pull := (phase - 0.22) / 0.60
+		reach = 1.0 - smoothstep(0.0, 1.0, pull)
+		speed += 2.8 * pow(sin(PI * pull), 2.0)
+	else:
+		reach = 0.0
+	return {"reach":reach,"lift":lift,"speed":speed}
+
+static func sample_step(phase: float, stride: float, contact: float, lift_height: float, facing: float = 1.0, jog: float = 0.0) -> Dictionary:
 	# Heel contact -> flat support -> toe-off -> low swing -> heel contact.
 	var travel: float
 	var lift := 0.0
@@ -172,13 +205,16 @@ static func sample_step(phase: float, stride: float, contact: float, lift_height
 		travel = lerpf(stride, -stride, progress)
 		if progress < 0.18:
 			pitch = lerpf(6.0, 0.0, smoothstep(0, 0.18, progress))
-		elif progress > 0.8:
-			pitch = lerpf(0.0, -7.0, smoothstep(0.8, 1.0, progress))
+		elif progress > lerpf(0.8, 0.55, jog):
+			pitch = lerpf(0.0, lerpf(-7.0,-20.0,jog), smoothstep(lerpf(0.8, 0.55, jog), 1.0, progress))
 	else:
 		var swing := (phase - contact) / (1.0 - contact)
-		travel = lerpf(-stride, stride, smoothstep(0, 1, swing))
-		lift = sin(PI * swing) * lift_height
-		pitch = lerpf(-7.0, 6.0, smoothstep(0, 1, swing))
+		# A walk carries the foot through on a low arc. A jog first folds the heel up
+		# behind the hip, then drives the knee through and reaches out to land.
+		travel = lerpf(lerpf(-stride, stride, smoothstep(0, 1, swing)), lerpf(-stride, stride, smoothstep(0.16, 0.9, swing)), jog)
+		lift = lerpf(sin(PI * swing), sin(PI * pow(swing, 0.7)), jog) * lift_height
+		var jog_pitch := lerpf(-20.0, -48.0, smoothstep(0.0, 0.35, swing)) if swing < 0.35 else lerpf(-48.0, 6.0, smoothstep(0.35, 0.9, swing))
+		pitch = lerpf(lerpf(-7.0, 6.0, smoothstep(0, 1, swing)), jog_pitch, jog)
 	pitch = deg_to_rad(pitch * facing)
 	# Keep the boot sole on the floor during contact, including its heel/toe rotation.
 	var sole_height := absf(cos(pitch)) * 0.07 + absf(sin(pitch)) * 0.145
@@ -245,7 +281,7 @@ func _bone(id: String, start: Vector3, end: Vector3, amount: float) -> void:
 	var target := Transform3D(Basis(Quaternion(Vector3.UP, direction.normalized())) * Basis.from_scale(Vector3(1, direction.length(), 1)), (start + end) * 0.5)
 	part.transform = part.transform.interpolate_with(target, amount)
 
-func pose(stance: int, speed: float, movement: Vector2, aim_pitch: float, lean: float, delta: float, weight: float = 1.0, acceleration: Vector3 = Vector3.ZERO, grounded: bool = true, recoil_kick: float = 0.0, draw_amount: float = 0.0, focused: bool = false, dive: float = 0.0) -> void:
+func pose(stance: int, speed: float, movement: Vector2, aim_pitch: float, lean: float, delta: float, weight: float = 1.0, acceleration: Vector3 = Vector3.ZERO, grounded: bool = true, recoil_kick: float = 0.0, draw_amount: float = 0.0, focused: bool = false, dive: float = 0.0, crawl_phase: float = -1.0, lateral_intent: float = 0.0) -> void:
 	var amount := 1.0 - exp(-16.0 * delta)
 	blend = lerpf(blend, minf(speed / 4.5, 1.0) if grounded else 0.0, 1.0 - exp(-12.0 * delta))
 	if movement.length() > 0.05:
@@ -257,14 +293,30 @@ func pose(stance: int, speed: float, movement: Vector2, aim_pitch: float, lean: 
 	step_blend = lerpf(step_blend,clampf(speed / 0.4,0,1) if grounded else 0.0,amount)
 	crawl_blend = lerpf(crawl_blend,clampf(speed / 0.38,0,1) if prone and grounded and dive == 0 else 0.0,amount)
 	crawl_cycle += speed * TAU / 0.5 * delta if prone and grounded else 0.0
+	var strafe_intent := lateral_intent if crawl_phase >= 0.0 else (movement.normalized().x if speed > 0.02 else 0.0)
+	var reversing := absf(strafe_intent) > 0.05 and strafe_side != signf(strafe_intent)
+	if reversing and strafe_blend < 0.03:
+		strafe_side = signf(strafe_intent)
+		reversing = false
+	strafe_blend = lerpf(strafe_blend,absf(strafe_intent) if prone and grounded and dive == 0 and not reversing else 0.0,amount)
+	strafe_phase = crawl_phase if crawl_phase >= 0.0 else fposmod(strafe_phase + delta / 1.15,1.0)
+	var strafe_pose := sample_prone_strafe(strafe_phase)
+	strafe_reach = lerpf(strafe_reach,strafe_pose.reach,amount)
+	strafe_lift = lerpf(strafe_lift,strafe_pose.lift,amount)
 	stance_blend = lerpf(stance_blend, 1.0 if crouching else 0.0, amount)
+	# A stopped crouch drops onto the right knee; any travel lifts straight back out of it.
+	var kneeling := crouching and grounded and speed < 0.2 and dive == 0
+	kneel_blend = lerpf(kneel_blend, 1.0 if kneeling else 0.0, 1.0 - exp(-(9.0 if kneeling else 16.0) * delta))
 	prone_blend = lerpf(prone_blend, 1.0 if prone else 0.0, 1.0 - exp(-(22.0 if dive > 0 else 10.0) * delta))
 	focus_blend = lerpf(focus_blend, 1.0 if focused else 0.0, amount)
 	# Walks retain overlapping foot contact and a longer, slower stride. A jog has
 	# shorter contact and a distinct cadence, instead of playing a tiny run at walking speed.
+	# A crouch walk takes long, rolling, knee-bent steps rather than a quick squat shuffle.
 	var walk_stride := lerpf(0.11,0.34,sqrt(clampf(speed / 1.6,0.0,1.0)))
-	var stride_span := lerpf(walk_stride,0.37,run_blend) * step_blend
-	var plant_fraction := 0.48 if crouching else lerpf(0.58,0.30,run_blend)
+	var crouch_stride := lerpf(0.14,0.40,sqrt(clampf(speed / 2.5,0.0,1.0)))
+	var stride_span := lerpf(lerpf(walk_stride,0.40,run_blend),crouch_stride,stance_blend) * step_blend
+	var plant_fraction := lerpf(lerpf(0.58,0.30,run_blend),0.46,stance_blend)
+	var stride_style := maxf(run_blend,0.35 * stance_blend)
 	stride_contact = plant_fraction
 	# During contact, local foot travel cancels body travel instead of skating sideways.
 	cycle += speed * TAU * plant_fraction / (2.0 * maxf(stride_span, 0.12)) * delta if grounded else 0.0
@@ -281,22 +333,38 @@ func pose(stance: int, speed: float, movement: Vector2, aim_pitch: float, lean: 
 	landing_compression *= exp(-13.0 * delta)
 	var compression := (0.006 * (1.0 - cos(cycle * 2.0)) * blend + minf(acceleration.length() / 1500.0, 0.012)) * weight
 	body_drop = lerpf(body_drop, compression + landing_compression, amount)
-	var hip_height := lerpf(STANDING_HIP, CROUCH_HIP, stance_blend) - body_drop
+	# Two authored loading/push-off arcs per stride. Only the visual pelvis bounces;
+	# the collision body and camera stay grounded and the aim remains steady.
+	jog_bounce = (-0.035 + 0.09 * (0.5 - 0.5 * cos(cycle * 2.0 - TAU * 0.34))) * run_blend * weight
+	var hip_height := lerpf(lerpf(STANDING_HIP - RUN_HIP_DROP * run_blend, CROUCH_HIP, stance_blend), KNEEL_HIP, kneel_blend) - body_drop + jog_bounce
 	var feet: Array[Dictionary] = []
 	var facing := 1.0 if gait_direction.dot(gait_basis * Vector3.FORWARD) >= 0 else -1.0
 	for index: int in range(2):
 		var sign_side := -1.0 if index == 0 else 1.0
 		var phase := fposmod(cycle / TAU + index * 0.5, 1.0)
-		var step := sample_step(phase, stride_span, plant_fraction, (0.022 if crouching else lerpf(0.024,0.04,run_blend)) * step_blend, facing)
+		# Backpedals keep the low walking arc; a heel kick reads wrong in front of the body.
+		var step := sample_step(phase, stride_span, plant_fraction, lerpf(lerpf(0.024,0.22,run_blend),0.075,stance_blend) * step_blend, facing,stride_style if facing > 0 else 0.0)
 		step.pitch *= step_blend
 		step.sole_height = absf(cos(step.pitch)) * 0.07 + absf(sin(step.pitch)) * 0.145
 		var foot_basis := gait_basis * Basis(Vector3.RIGHT, step.pitch)
-		var boot_center: Vector3 = gait_basis * Vector3(sign_side * 0.155, 0, -0.035) + gait_direction * step.travel
+		var boot_center: Vector3 = gait_basis * Vector3(sign_side * lerpf(0.155,0.11,run_blend), 0, -0.035) + gait_direction * step.travel
 		# Left foot slightly ahead at rest, without a permanent deep bend at either knee.
 		boot_center.z += sign_side * 0.025 * (1.0 - blend)
 		boot_center.y = step.sole_height + step.lift
 		if not grounded:
 			boot_center.y += 0.06
+		if kneel_blend > 0.0:
+			# Kneel: the left boot plants flat ahead under a square knee; the right knee
+			# rests on the floor with its toes tucked under, sole facing back.
+			var kneel_pitch := 0.0 if index == 0 else deg_to_rad(-62.0)
+			var kneel_basis := gait_basis * Basis(Vector3.UP, 0.14 if index == 0 else 0.0) * Basis(Vector3.RIGHT, kneel_pitch)
+			var kneel_center := gait_basis * Vector3(-0.17 if index == 0 else 0.16, 0, -0.42 if index == 0 else 0.23)
+			kneel_center.y = absf(kneel_basis.x.y) * 0.09 + absf(kneel_basis.y.y) * 0.07 + absf(kneel_basis.z.y) * 0.145
+			var placed := Transform3D(foot_basis, boot_center).interpolate_with(Transform3D(kneel_basis, kneel_center), kneel_blend)
+			foot_basis = placed.basis
+			# Each foot steps clear of the floor while it moves between gait and kneel.
+			boot_center = placed.origin + Vector3.UP * sin(PI * kneel_blend) * 0.06
+			step.pitch = lerpf(step.pitch, kneel_pitch, kneel_blend)
 		var ankle: Vector3 = boot_center + foot_basis * Vector3(0, 0.04, 0.035)
 		var hip_horizontal := gait_basis * Vector3(sign_side * 0.14,0,0) + hip_shift
 		var horizontal := Vector2(ankle.x, ankle.z) - Vector2(hip_horizontal.x,hip_horizontal.z)
@@ -314,6 +382,9 @@ func pose(stance: int, speed: float, movement: Vector2, aim_pitch: float, lean: 
 		var ankle: Vector3 = feet[index].ankle
 		var crawl_stroke := sin(crawl_cycle + index * PI) * crawl_blend
 		var prone_ankle := Vector3(sign_side * (0.22 + crawl_stroke * 0.025),0.11,0.875 + crawl_stroke * 0.07)
+		var lead := sign_side == strafe_side
+		var lateral_ankle := Vector3(sign_side * (0.22 + (0.23 * strafe_reach if lead else 0.03 * strafe_reach)),0.11 + (strafe_lift * 0.045 if lead else 0.0),0.875 - (0.14 * strafe_reach if lead else 0.0))
+		prone_ankle = prone_ankle.lerp(lateral_ankle,strafe_blend)
 		prone_ankle = prone_ankle.lerp(Vector3(sign_side * 0.145,0.23,0.955),dive_blend)
 		var prone_hip := Vector3(sign_side * 0.14 + sin(crawl_cycle) * crawl_blend * 0.01,0.23,0.12)
 		hip = hip.lerp(prone_hip,prone_blend)
@@ -336,10 +407,11 @@ func pose(stance: int, speed: float, movement: Vector2, aim_pitch: float, lean: 
 func _pose_upper_body(hip_height: float, aim_pitch: float, acceleration: Vector3, weight: float, kick: float, draw: float, amount: float) -> void:
 	# The waist follows travel. The shoulder girdle counter-turns to keep a shouldered rifle
 	# reachable by both arms, especially when moving left across the aim direction.
-	var gait_twist := sin(cycle) * step_blend * 0.035 * weight
+	var gait_twist := sin(cycle) * step_blend * lerpf(0.035, 0.06, run_blend) * weight
 	var waist_yaw := torso_yaw - 0.14 * (1.0 - blend) + gait_twist
 	var shoulder_yaw := clampf(torso_yaw * 0.5 - 0.14 * (1.0 - blend) - gait_twist * 0.65, -0.62, 0.16)
-	var target_pitch := -lerpf(0.15 + 0.12 * run_blend + 0.035 * focus_blend, 0.72, stance_blend)
+	# A jog leans into the run; the kneel sits a little taller over the planted knee.
+	var target_pitch := -lerpf(0.15 + 0.10 * run_blend + 0.035 * focus_blend, lerpf(0.66, 0.60, kneel_blend), stance_blend)
 	target_pitch += clampf(acceleration.z * 0.002, -0.04, 0.04) * weight
 	target_pitch += clampf(aim_pitch * 0.12, -0.06, 0.08)
 	torso_pitch = lerpf(torso_pitch, target_pitch, amount)
@@ -348,7 +420,8 @@ func _pose_upper_body(hip_height: float, aim_pitch: float, acceleration: Vector3
 	var pelvis := Transform3D(Basis(Vector3.UP, locomotion_yaw + gait_twist), Vector3(0, hip_height, 0) + hip_shift)
 	var waist := Transform3D(Basis(Vector3.UP, waist_yaw) * Basis(Vector3.RIGHT, torso_pitch * 0.45), spine.origin)
 	var crawl_sway := sin(crawl_cycle) * crawl_blend
-	var prone_spine := Transform3D(Basis(Vector3.UP,crawl_sway * 0.04) * Basis(Vector3.RIGHT,-PI / 2.0),Vector3(crawl_sway * 0.01,0.30,0.12))
+	var side_load := strafe_side * strafe_reach * strafe_blend
+	var prone_spine := Transform3D(Basis(Vector3.FORWARD,side_load * 0.07) * Basis(Vector3.UP,crawl_sway * 0.04) * Basis(Vector3.RIGHT,-PI / 2.0),Vector3(crawl_sway * 0.01 - side_load * 0.015,0.30 + strafe_reach * strafe_blend * 0.012,0.12))
 	spine = spine.interpolate_with(prone_spine,prone_blend)
 	pelvis = pelvis.interpolate_with(Transform3D(prone_spine.basis,Vector3(crawl_sway * 0.01,0.23,0.12)),prone_blend)
 	waist = waist.interpolate_with(prone_spine,prone_blend)
@@ -366,10 +439,10 @@ func _pose_upper_body(hip_height: float, aim_pitch: float, acceleration: Vector3
 		var sign_side := -1.0 if i == 0 else 1.0
 		_rig_part(side + "Pouch", pelvis, Vector3(sign_side * 0.215, -0.10, 0.075))
 		_rig_part(side + "Strap", chest, Vector3(sign_side * 0.145,0.015,-0.218))
-	var head_point := spine * Vector3(0.018 + focus_blend * 0.018, 0.63 - stance_blend * 0.035, -0.035 - focus_blend * 0.02)
-	head_point.y -= stance_blend * 0.035 + focus_blend * 0.008
+	var head_point := spine * Vector3(0.018 + focus_blend * 0.018, 0.63 - stance_blend * 0.035, -0.06 - focus_blend * 0.02)
+	head_point.y -= stance_blend * 0.055 + focus_blend * 0.008
 	head_point.x = lerpf(head_point.x,0.025,prone_blend)
-	head_point.y += 0.075 * prone_blend
+	head_point.y += 0.10 * prone_blend
 	var head_frame := Transform3D(Basis(Vector3.UP, shoulder_yaw * 0.2) * Basis(Vector3.RIGHT, aim_pitch * 0.32 - 0.055), head_point)
 	_rig_part("Neck", spine, Vector3(0,0.50,0))
 	_rig_part("Head", head_frame, Vector3.ZERO)
@@ -377,8 +450,10 @@ func _pose_upper_body(hip_height: float, aim_pitch: float, acceleration: Vector3
 	_rig_part("HatBrim", head_frame, Vector3(0,0.09,0.006))
 	var shoulders: Array[Vector3] = []
 	for i: int in range(2):
-		var shoulder := spine * Vector3(-0.235 if i == 0 else 0.235,0.445,-0.02)
-		shoulder.y += 0.03 * prone_blend
+		# Raised, forward shoulders shorten the exposed neck and keep the rifle high,
+		# matching the compact upper-body silhouette in the supplied gameplay references.
+		var shoulder := spine * Vector3(-0.235 if i == 0 else 0.235,0.49,-0.055)
+		shoulder.y += 0.065 * prone_blend
 		shoulders.append(shoulder)
 	# Pivot pitch at the stock, rather than rotating a floating rifle around its center.
 	var gun_pitch := aim_pitch + deg_to_rad(kick * (3.0 if weapon_slot == 0 else 7.0)) - draw * 0.5
@@ -410,7 +485,12 @@ func _pose_upper_body(hip_height: float, aim_pitch: float, acceleration: Vector3
 					break
 				grip.z += 0.02
 				hand = weapon_pivot.transform * grip
-		var pole := Vector3(sign_side * 0.28,-1.0,0.08).lerp(Vector3(sign_side,-0.1,0.1),prone_blend)
+		if sign_side == strafe_side:
+			# The leading hand releases the gun, reaches sideways and plants. The
+			# other hand keeps the weapon; the body catches up during the pull phase.
+			var planted_hand := Vector3(shoulder.x + sign_side * (0.04 + strafe_reach * 0.23),0.075 + strafe_lift * 0.045,shoulder.z - 0.15)
+			hand = hand.lerp(planted_hand,strafe_blend * prone_blend * (1.0 - dive_blend))
+		var pole := Vector3(sign_side * 0.28,-1.0,0.08).lerp(Vector3(sign_side,-0.04,0.1),prone_blend)
 		var elbow := solve_elbow(shoulder, hand, pole)
 		arm_joints[side] = [shoulder, elbow, hand]
 		_bone(side + "UpperArm", shoulder, elbow, 1.0)

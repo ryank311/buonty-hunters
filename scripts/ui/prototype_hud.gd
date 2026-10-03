@@ -311,6 +311,7 @@ func _build_menu() -> void:
 	_slider("field_of_view", "Vertical field of view", 50.0, 80.0, 1.0)
 	_slider("distance", "Camera distance (m)", 1.8, 4.5, 0.1)
 	_slider("shoulder_offset", "Camera side offset (m)", -0.5, 0.5, 0.05)
+	_slider("height_offset", "Camera height above stance (m)", 0.0, 1.4, 0.05)
 	_slider("mouse_sensitivity", "Mouse sensitivity", 0.001, 0.006, 0.0001)
 	_slider("hud_opacity", "HUD backing opacity", 0.0, 0.5, 0.02)
 	retro_toggle = CheckButton.new()
@@ -474,4 +475,4 @@ func update_display(delta: float) -> void:
 	_layout_hud()
 	minimap.refresh()
 	weapon_icon.queue_redraw()
-	crosshair.update_reticle(player.weapon.spread_degrees(),player.camera_rig.camera.fov,delta,player.weapon.blocked,player.weapon.hit_flash > 0,session.modal)
+	crosshair.update_reticle(player.weapon.spread_degrees(),player.camera_rig.camera.fov,delta,player.weapon.blocked,player.weapon.hit_flash > 0,session.modal,player.camera_rig.reticle_offset(crosshair.size))

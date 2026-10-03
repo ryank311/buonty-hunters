@@ -88,7 +88,7 @@ func _run() -> void:
 	var low_swing := true
 	var controlled_roll := true
 	for tick: int in range(240):
-		player.soldier.pose(0,4.5,Vector2.UP,0,0,1.0/120.0)
+		player.soldier.pose(0,1.6,Vector2.UP,0,0,1.0/120.0)
 		for side: String in ["L", "R"]:
 			var step: Dictionary = player.soldier.foot_samples[side]
 			var boot: MeshInstance3D = player.soldier.parts[side + "Boot"]
@@ -267,12 +267,24 @@ func _run() -> void:
 	weapon.profiles[0].vertical_kick = 0.85
 	weapon.profiles[1].recovery_speed = 14.0
 	player.movement.body_weight = 1.4
+	weapon.profiles[0].run_spread = 7.4
+	weapon.profiles[1].walk_spread = 1.4
+	player.movement.prone_speed = 0.3
 	var saved: String = session.settings_config().encode_to_text()
 	session.reset_tuning()
 	var config := ConfigFile.new()
 	var parse_error := config.parse(saved)
 	session.apply_settings_config(config)
 	check(parse_error == OK and is_equal_approx(weapon.profiles[0].vertical_kick, 0.85) and is_equal_approx(weapon.profiles[1].recovery_speed, 14.0) and is_equal_approx(player.movement.body_weight, 1.4), "Per-weapon recoil and body weight survive settings serialization")
+	check(is_equal_approx(weapon.profiles[0].run_spread,7.4) and is_equal_approx(weapon.profiles[1].walk_spread,1.4) and is_equal_approx(player.movement.prone_speed,0.3),"Accuracy and crawl tuning survive settings serialization")
+	session.reset_tuning()
+	var legacy := ConfigFile.new()
+	legacy.set_value("meta","version",2)
+	legacy.set_value("weapon_0","vertical_kick",0.42)
+	legacy.set_value("weapon_0","spread_per_shot",0.13)
+	legacy.set_value("camera","distance",2.9)
+	session.apply_settings_config(legacy)
+	check(is_equal_approx(weapon.profiles[0].vertical_kick,0.65) and is_equal_approx(weapon.profiles[0].spread_per_shot,0.35) and is_equal_approx(player.camera_settings.distance,2.9),"Earlier saved presets receive the new firing baseline while preserving camera preferences")
 	session.reset_tuning()
 	check(is_equal_approx(weapon.profiles[0].vertical_kick, 0.65) and is_equal_approx(player.movement.acceleration, 18.0), "Restore defaults returns the new weighted preset")
 	print("\nRESULT: %d failure(s)" % failures.size())

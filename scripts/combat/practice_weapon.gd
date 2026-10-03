@@ -107,17 +107,17 @@ func spread_degrees() -> float:
 
 func shot_direction() -> Vector3:
 	# The UI and the real hitscan shot use the same cone half-angle.
-	var camera := player.camera_rig.camera
+	var firing_basis := player.camera_rig.aim_basis()
 	var angle := rng.randf() * TAU
 	var radius := sqrt(rng.randf()) * tan(deg_to_rad(spread_degrees()))
-	return (-camera.global_basis.z + camera.global_basis.x * cos(angle) * radius + camera.global_basis.y * sin(angle) * radius).normalized()
+	return (-firing_basis.z + firing_basis.x * cos(angle) * radius + firing_basis.y * sin(angle) * radius).normalized()
 
 func query_aim(with_spread: bool = false) -> Dictionary:
 	# Hitscan resolves immediately: camera chooses aim, then the muzzle resolves the first obstruction.
 	var camera := player.camera_rig.camera
 	var space := player.get_world_3d().direct_space_state
 	var camera_origin := camera.global_position
-	var direction := -camera.global_basis.z
+	var direction := player.camera_rig.aim_direction()
 	if with_spread:
 		direction = shot_direction()
 	var endpoint := camera_origin + direction * profile.range_metres

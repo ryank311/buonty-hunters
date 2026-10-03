@@ -45,8 +45,9 @@ The keyboard and gamepad are both supported. Keyboard controls are the first imp
 | --- | --- | --- |
 | Move / look | WASD / mouse | Left stick / right stick |
 | Slow walk | Hold Shift | Partial left-stick deflection |
-| Crouch / stand | C | Tap east face button |
-| Prone / stand | Z | Hold east face button |
+| Crouch / stand | Tap C | Tap east face button |
+| Prone / stand | Hold C or press Z | Hold east face button |
+| Forward dive to prone | Hold C while running forward | Hold east face button while running forward |
 | Jump | Space | South face button |
 | Lean left / right | Hold Q / E | Hold LB / RB |
 | Fire / focus aim | Left / right mouse | RT / LT |
@@ -65,11 +66,11 @@ Tap/hold stance inputs must not trigger both actions. Interact/reload/weapon bin
 | Parameter | Starting value | Purpose |
 | --- | --- | --- |
 | Standing run | 4.5 m/s | Ordinary travel speed; no separate sprint. |
-| Slow walk | 2.0 m/s | Fine movement and quieter later audio. |
+| Slow walk | 1.6 m/s | Fine movement with a slower, deliberate stride. |
 | Crouch movement | 2.5 m/s | Useful repositioning behind cover. |
-| Prone crawl | 0.9 m/s | Strong concealment with a clear movement cost. |
+| Prone crawl | 0.38 m/s | Slow, low shimmy; sideways and backward travel are slower still. |
 | Strafe / backward multiplier | 0.95 / 0.80 | Preserve mobile fights; test direction changes. |
-| Ground acceleration / braking | 30 / 40 m/s² | Reach speed and stop promptly without teleporting velocity. |
+| Ground acceleration / braking | 18 / 24 m/s² | Build momentum and settle without teleporting velocity. |
 | Jump apex / gravity | 0.65 m / 18 m/s² | Small purposeful jumps; derive launch speed from these. |
 | Jump rules | Grounded only; 0.25 s minimum between takeoffs | No speed gain from repeated jumping. |
 | Stand / crouch body height | 1.80 / 1.15 m | Establish cover and door dimensions. |
@@ -82,7 +83,7 @@ Normalize diagonal input. Start with no stamina meter and no automated cover att
 
 Before enlarging a stance collider, test the destination volume. If blocked, remain in the current stance and show a brief obstruction indication. Preserve foot position across transitions. Prone requires a volume that accounts for body length and turning; a short upright capsule alone would let the visible body rotate through walls. M0 may use a simple visible proxy, but must validate that envelope before permitting prone-only spaces.
 
-Use simple ramps beneath visible stair meshes initially. Add genuine step traversal only if required by the later collision kit. Start with no ledge grab, ladder climbing, or dive; reserve each as an explicit follow-up after base transitions are sound. This is a scope choice despite the historical games' larger action set.
+Use simple ramps beneath visible stair meshes initially. Add genuine step traversal only if required by the later collision kit. Holding crouch for 0.35 seconds while running forward launches a committed dive: 5.6 m/s forward speed, 3 m/s upward velocity, collision against the world, and a prone landing with 0.45 seconds of recovery. Fire and reload are locked during the dive and recovery. Check the prone envelope before launching. Ledge grabs and ladder climbing remain follow-ups.
 
 ## Third-person camera and aiming
 
@@ -112,7 +113,7 @@ M0 can display a debug aim ray without weapon damage. M1 must use this sequence:
 3. Cast from that valid origin toward the aim point. The first obstruction determines the hit.
 4. Show a blocked-fire cue when the camera sees a target that the weapon cannot reach. Effects and damage use the same result.
 
-A target visible above a crate must not take damage if the muzzle is below the crate's edge. Lean moves the relevant weapon and exposure volumes along with the visual pose. The reticle communicates spread without implying that every third-person shot is inaccurate. Optional first-person and scope views reuse the same weapon simulation later.
+A target visible above a crate must not take damage if the muzzle is below the crate's edge. Lean moves the relevant weapon and exposure volumes along with the visual pose. The reticle has a fixed, semi-transparent charcoal circle and pale center dot. Four independent cardinal marks move outward with actual angular spread and ease inward as accuracy recovers. Optional first-person and scope views reuse the same weapon simulation later.
 
 ## Combat for M1
 
@@ -128,9 +129,9 @@ Start with one fictional general-purpose rifle. Give both teams the same weapon 
 | Health | 100, no regeneration, no revive |
 | Damage within test range | 34 torso, 100 head, 25 limb |
 | Test ranges | 10, 25, and 50 m; defer damage falloff |
-| Accuracy | Starting cone half-angle: 0.25° stationary, 0.8° moving |
-| Stance adjustment | Crouch ×0.8, prone ×0.6 to base spread |
-| Recoil | Separate visible aim displacement from spread; tune short bursts before sustained fire |
+| Accuracy | Rifle cone half-angle: 0.25° stationary, 1.1° walking, 5.75° running; sustained running fire reaches 9.25° |
+| Stance adjustment | Crouch ×0.8, prone ×0.5 to total spread and recoil; focus aim adds ×0.75 |
+| Recoil | Rifle climbs 0.65° per standing shot, capped at 8°; bloom grows 0.35° per shot, capped at 3.5°. Full running adds ×1.25 kick and ×2.8 bloom growth. |
 
 Three torso hits at 600 RPM imply 0.20 seconds between first and lethal third hit when every shot lands. That is a weapon-system test value, not a promise about real encounter duration or original SOCOM lethality. Avoid long damage exchanges, but tune against actual target acquisition and movement.
 

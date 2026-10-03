@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Starts the Godot MCP server for this project over stdio.
+#
+# Both agent configs (.mcp.json for Claude Code, .codex/config.toml for Codex) run this
+# launcher, so the server version and the Godot binary are pinned in one place.
+#
+# Server: godot-mcp-runtime (https://github.com/Erodenn/godot-mcp-runtime). It needs no
+# addon in the project: the runtime bridge is injected when a game session starts and
+# removed when it stops.
+set -euo pipefail
+
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# GUI-launched agents may start with a minimal PATH; make sure node/npx resolve.
+export PATH="$PATH:/usr/local/bin:/opt/homebrew/bin"
+
+export GODOT_PATH="$here/godot"
+
+# The server asks for confirmation (an MCP elicitation) before it launches a project and
+# before run_script code that writes files or opens sockets. Headless and background
+# agents cannot answer, so for them the call simply fails. Each agent's own permission
+# settings already decide whether these tools may run on this project, so the second
+# prompt is skipped. The server still hard-blocks process execution and dynamic code
+# loading in run_script. SOCOM_MCP_CONFIRM=1 turns the prompts back on.
+if [[ "${SOCOM_MCP_CONFIRM:-0}" != "1" ]]; then
+	export GODOT_MCP_DISABLE_ELICITATION=true
+fi
+
+exec npx -y "godot-mcp-runtime@${GODOT_MCP_VERSION:-3.8.1}" "$@"

@@ -1,0 +1,270 @@
+#!/usr/bin/env bash
+# One entry point for building, checking, testing, and looking at the game from a
+# terminal. Written for agents: output is short, failures come with file:line, and
+# every command exits non-zero when something is wrong.
+set -uo pipefail
+
+root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+godot="$root/tools/agent/godot"
+out="$root/.agent"
+
+usage() {
+	cat <<'EOF'
+Usage: tools/dev <command>
+
+  check                 Load every script, scene, and resource headlessly; report parse
+                        errors and broken references as file:line. Takes about 2 s.
+  test [suite...]       Run the headless regression suites in tests/ in parallel
+                        (all of them, or the ones named, e.g. `test hud_layout`).
+  shot [options] [scenario...]
+                        Render scenarios to PNG in a hidden window. No arguments lists
+                        the scenarios. Options: --all, --sheet, --state, --full, --show,
+                        --spec='<json>', --step='<json>', --out=<dir>.
+  import                Re-import assets and rebuild the global class cache. Needed
+                        after adding an asset or a new `class_name`.
+  doctor                Check the toolchain, the MCP setup, and who else is using the project.
+  mcp-smoke             Drive the MCP server end to end against this project.
+  godot [args...]       Run Godot through the project wrapper.
+EOF
+}
+
+# Each invocation writes to its own directory, so agents sharing this checkout never
+# read each other's logs or frames. Anything older than an hour is pruned.
+new_run() {
+	local base="$out/$1" run
+	mkdir -p "$base"
+	[[ -f "$out/.gdignore" ]] || : > "$out/.gdignore"
+	find "$base" -mindepth 1 -maxdepth 1 -mmin +60 -exec rm -rf {} + 2>/dev/null
+	run="$base/$(date +%H%M%S)-$$"
+	mkdir -p "$run"
+	echo "$run"
+}
+
+# Turns Godot's two-line error records into `path:line: message`.
+format_errors() {
+	awk '
+		/^SCRIPT ERROR: / { message = substr($0, 15); pending = 1; next }
+		pending && /^ +at: / {
+			pending = 0
+			location = ""
+			if (match($0, /res:\/\/[^)]+/)) location = substr($0, RSTART + 6, RLENGTH - 6)
+			line = (location != "" ? location ": " : "") message
+			if (!(line in seen)) { seen[line] = 1; print line }
+			next
+		}
+		/^ERROR: / {
+			pending = 0
+			if ($0 ~ /Failed to load script/) next
+			if (!($0 in seen)) { seen[$0] = 1; print $0 }
+		}
+	'
+}
+
+cmd_check() {
+	local run log status problems summary
+	run="$(new_run logs)"
+	log="$run/check.log"
+	"$godot" --headless --path "$root" --script res://tools/agent/check.gd >"$log" 2>&1
+	status=$?
+	problems="$(format_errors <"$log")"
+	[[ -n "$problems" ]] && echo "$problems"
+	# A resource can fail to load without an engine error line; name it anyway.
+	sed -n 's/^CHECK_FAILED res:\/\//failed to load: /p' "$log" | while read -r line; do
+		echo "$problems" | grep -qF "${line#failed to load: }" || echo "$line"
+	done
+	summary="$(sed -n 's/^CHECK_DONE //p' "$log")"
+	if [[ -z "$summary" ]]; then
+		echo "CHECK: did not finish (exit $status). Log: ${log#"$root"/}"
+		return 1
+	fi
+	if [[ $status -ne 0 || -n "$problems" ]]; then
+		echo "CHECK: FAIL ($summary)"
+		return 1
+	fi
+	rm -rf "$run"
+	echo "CHECK: ok ($summary)"
+}
+
+run_suite() {
+	local name="$1" log="$2/$1.log" limit="${SOCOM_TEST_TIMEOUT:-240}" started=$SECONDS
+	"$godot" --headless --path "$root" --fixed-fps 60 --script "res://tests/$name.gd" -- --qa >"$log" 2>&1 &
+	local pid=$!
+	# A suite whose script fails to compile never reaches quit(); do not wait forever.
+	# The watchdog gives up its output streams so a caller piping ours is not kept waiting.
+	( sleep "$limit"; kill "$pid" 2>/dev/null ) </dev/null >/dev/null 2>&1 &
+	local watchdog=$!
+	wait "$pid" 2>/dev/null
+	local status=$?
+	pkill -P "$watchdog" 2>/dev/null
+	kill "$watchdog" 2>/dev/null
+	wait "$watchdog" 2>/dev/null
+	local passed failed
+	passed="$(grep -c '^PASS ' "$log")"
+	failed="$(grep -c '^FAIL ' "$log")"
+	{
+		if [[ $status -eq 143 || $status -eq 137 ]]; then
+			printf '%-28s TIMEOUT after %ss (%s passed before it stalled)\n' "$name" "$limit" "$passed"
+		elif [[ $status -eq 0 && $failed -eq 0 && $passed -gt 0 ]]; then
+			printf '%-28s PASS  %3s checks  %ss\n' "$name" "$passed" "$((SECONDS - started))"
+		else
+			printf '%-28s FAIL  %s of %s checks failed  %ss\n' "$name" "$failed" "$((passed + failed))" "$((SECONDS - started))"
+		fi
+		if [[ $status -ne 0 || $failed -gt 0 || $passed -eq 0 ]]; then
+			grep '^FAIL ' "$log" | sed 's/^/  /'
+			format_errors <"$log" | head -8 | sed 's/^/  /'
+			echo "  log: ${log#"$root"/}"
+		fi
+	} >"$2/$name.summary"
+	[[ $status -eq 0 && $failed -eq 0 && $passed -gt 0 ]]
+}
+
+cmd_test() {
+	local suites=() name available
+	available="$(cd "$root/tests" && grep -l '^extends SceneTree' *.gd 2>/dev/null | sed 's/\.gd$//')"
+	if [[ $# -gt 0 ]]; then
+		for name in "$@"; do
+			name="${name%.gd}"
+			name="${name##*/}"
+			if ! echo "$available" | grep -qx "$name"; then
+				echo "No suite tests/$name.gd. Available: $(echo $available)"
+				return 2
+			fi
+			suites+=("$name")
+		done
+	else
+		for name in $available; do
+			suites+=("$name")
+		done
+	fi
+	if [[ ${#suites[@]} -eq 0 ]]; then
+		echo "TESTS: no suites found in tests/"
+		return 1
+	fi
+	local run pids=() failures=0 index=0
+	run="$(new_run logs)"
+	for name in "${suites[@]}"; do
+		run_suite "$name" "$run" &
+		pids+=($!)
+	done
+	for name in "${suites[@]}"; do
+		wait "${pids[$index]}" || failures=$((failures + 1))
+		cat "$run/$name.summary"
+		index=$((index + 1))
+	done
+	if [[ $failures -gt 0 ]]; then
+		echo "TESTS: FAIL ($failures of ${#suites[@]} suites)"
+		return 1
+	fi
+	rm -rf "$run"
+	echo "TESTS: ok (${#suites[@]} suite$([[ ${#suites[@]} -eq 1 ]] || echo s))"
+}
+
+cmd_shot() {
+	local run log shots="" arg show=0 status args=("$@")
+	for arg in "$@"; do
+		[[ "$arg" == "--show" ]] && show=1
+		[[ "$arg" == --out=* ]] && shots="${arg#--out=}"
+	done
+	if [[ -z "$shots" ]]; then
+		shots="$(new_run shots)"
+		args+=("--out=$shots")
+	fi
+	run="$(new_run logs)"
+	log="$run/shot.log"
+	SOCOM_AGENT_SHOW=$show "$godot" --path "$root" --script res://tools/agent/capture.gd -- --qa "${args[@]}" >"$log" 2>&1
+	status=$?
+	grep -E '^(SHOT|SHEET|Scenarios:|capture:) ?' "$log"
+	format_errors <"$log" | head -12
+	rmdir "$shots" 2>/dev/null
+	if [[ $status -ne 0 ]]; then
+		echo "SHOT: FAIL (exit $status). Log: ${log#"$root"/}"
+		return 1
+	fi
+	rm -rf "$run"
+}
+
+cmd_import() {
+	local run log status
+	run="$(new_run logs)"
+	log="$run/import.log"
+	"$godot" --headless --path "$root" --import >"$log" 2>&1
+	status=$?
+	format_errors <"$log" | head -20
+	if [[ $status -ne 0 ]]; then
+		echo "IMPORT: FAIL (exit $status). Log: ${log#"$root"/}"
+		return 1
+	fi
+	rm -rf "$run"
+	echo "IMPORT: ok"
+}
+
+cmd_doctor() {
+	local problems=0 version wanted
+	version="$("$godot" --version 2>/dev/null)" || { echo "FAIL  Godot not found (set GODOT_BIN)"; problems=1; }
+	wanted="$(sed -n 's/^config\/features=PackedStringArray("\([0-9.]*\)".*/\1/p' "$root/project.godot")"
+	if [[ -n "$version" ]]; then
+		if [[ "$version" == "$wanted"* ]]; then
+			echo "ok    Godot $version"
+		else
+			echo "WARN  Godot $version, but project.godot targets $wanted"
+		fi
+	fi
+	if command -v node >/dev/null 2>&1 && [[ "$(node -p 'process.versions.node.split(".")[0]')" -ge 20 ]]; then
+		echo "ok    Node $(node --version) (the MCP server needs 20+)"
+	else
+		echo "FAIL  Node 20+ not found; the MCP server cannot start"
+		problems=1
+	fi
+	for config in .mcp.json .codex/config.toml; do
+		if grep -q 'tools/agent/mcp' "$root/$config" 2>/dev/null; then
+			echo "ok    $config registers the godot MCP server"
+		else
+			echo "WARN  $config does not register the godot MCP server"
+		fi
+	done
+	local owners
+	owners="$(ls "$root/.mcp/godot-runtime/bridge/owners" 2>/dev/null | wc -l | tr -d ' ')"
+	if grep -q '^McpBridge=' "$root/project.godot"; then
+		if [[ "$owners" -gt 0 ]]; then
+			echo "ok    MCP runtime session live ($owners); project.godot carries its temporary McpBridge autoload"
+		else
+			echo "FAIL  project.godot has a leftover McpBridge autoload and no live session; delete that line"
+			problems=1
+		fi
+	fi
+	local missing=""
+	while read -r class; do
+		grep -q "\"class\": &\"$class\"" "$root/.godot/global_script_class_cache.cfg" 2>/dev/null || missing="$missing $class"
+	done < <(grep -rhs --include='*.gd' --exclude-dir='.*' '^class_name ' "$root" | awk '{print $2}')
+	if [[ -n "$missing" ]]; then
+		if pgrep -f "Godot.*--path $root.*--editor" >/dev/null 2>&1; then
+			echo "FAIL  class cache is missing:$missing (focus the open Godot editor so it rescans, or run: tools/dev import)"
+		else
+			echo "FAIL  class cache is missing:$missing (run: tools/dev import)"
+		fi
+		problems=1
+	else
+		echo "ok    global class cache is current"
+	fi
+	local others
+	others="$(pgrep -fl "Godot.*--path $root" 2>/dev/null | sed -E 's/^([0-9]+) .*Godot /\1 /' | cut -c1-110)"
+	if [[ -n "$others" ]]; then
+		echo "note  Godot processes on this project (leave any you did not start):"
+		echo "$others" | sed 's/^/        /'
+	fi
+	return $problems
+}
+
+command="${1:-help}"
+[[ $# -gt 0 ]] && shift
+case "$command" in
+	check) cmd_check ;;
+	test) cmd_test "$@" ;;
+	shot) cmd_shot "$@" ;;
+	import) cmd_import ;;
+	doctor) cmd_doctor ;;
+	mcp-smoke) exec node "$root/tools/agent/mcp_smoke.mjs" "$@" ;;
+	godot) exec "$godot" "$@" ;;
+	help|-h|--help) usage ;;
+	*) echo "Unknown command: $command"; usage; exit 2 ;;
+esac

@@ -35,7 +35,7 @@ func _run() -> void:
 	settle(0,0,Vector2.UP,0,true)
 	check(soldier.pose_points.head.z < neutral_head.z - 0.02 and soldier.pose_points.head.y < neutral_head.y, "Focus aim brings the head forward and down toward the sights")
 	settle(0,4.5)
-	check(soldier.torso_pitch < -0.21 and soldier.torso_pitch > -0.30, "Movement loads the upper body forward without a deep permanent crouch")
+	check(soldier.torso_pitch < -0.15 and soldier.torso_pitch > -0.21, "Jog keeps the upper body upright with a modest forward hinge")
 	settle(1)
 	check(soldier.pose_points.head.y < 1.0 and soldier.pose_points.chest.z < -0.17, "Crouch folds the torso over the hips within low-cover height")
 	var mesh_ends := true
@@ -81,7 +81,7 @@ func _run() -> void:
 	check(arm_lengths, "Fixed arm lengths reach both weapons throughout all poses (maximum error %.5f m)" % maximum_arm_error)
 	if not arm_lengths:
 		print("Worst arm pose: ",worst_arm_pose)
-	check(hands_attached, "Hands remain on the grip as the weapon pitches, draws and recoils")
+	check(hands_attached, "Hands stay connected to wrists through weapon and crawl poses")
 	check(stock_attached, "Rifle pitch pivots around the shoulder through the full look range")
 	check(elbows_clear, "Prone elbows stay above the ground")
 	if not elbows_clear:

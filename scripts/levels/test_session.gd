@@ -162,10 +162,10 @@ func _save_settings() -> void:
 
 func settings_config() -> ConfigFile:
 	var config := ConfigFile.new()
-	config.set_value("meta", "version", 3)
+	config.set_value("meta", "version", 4)
 	for key: String in ["run_speed", "acceleration", "braking", "body_weight", "prone_speed"]:
 		config.set_value("movement", key, player.movement.get(key))
-	for key: String in ["field_of_view", "distance", "shoulder_offset", "mouse_sensitivity", "pad_sensitivity", "pad_deadzone", "pad_aim_multiplier", "vibration", "invert_y", "hud_opacity"]:
+	for key: String in ["field_of_view", "distance", "shoulder_offset", "height_offset", "mouse_sensitivity", "pad_sensitivity", "pad_deadzone", "pad_aim_multiplier", "vibration", "invert_y", "hud_opacity"]:
 		config.set_value("camera", key, player.camera_settings.get(key))
 	for slot: int in range(2):
 		for key: String in WeaponProfile.TUNING_KEYS:
@@ -187,7 +187,9 @@ func apply_settings_config(config: ConfigFile) -> void:
 		if config.get_value("meta", "version", 1) < 2 and key in ["acceleration", "braking"]:
 			continue
 		player.movement.set(key, config.get_value("movement", key, player.movement.get(key)))
-	for key: String in ["field_of_view", "distance", "shoulder_offset", "mouse_sensitivity", "pad_sensitivity", "pad_deadzone", "pad_aim_multiplier", "vibration", "invert_y", "hud_opacity"]:
+	for key: String in ["field_of_view", "distance", "shoulder_offset", "height_offset", "mouse_sensitivity", "pad_sensitivity", "pad_deadzone", "pad_aim_multiplier", "vibration", "invert_y", "hud_opacity"]:
+		if config.get_value("meta", "version", 1) < 4 and key == "shoulder_offset":
+			continue
 		player.camera_settings.set(key, config.get_value("camera", key, player.camera_settings.get(key)))
 	for slot: int in range(2):
 		for key: String in WeaponProfile.TUNING_KEYS:

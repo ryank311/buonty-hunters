@@ -12,6 +12,7 @@ var displayed_spread: float = 0.0
 var target_spread: float = 0.0
 var mark_distance: float = 40.0
 var ui_scale: float = 1.0
+var mark_length: float = 22.0
 var ink := Color(0.89,0.90,0.86,0.88)
 var blocked: bool = false
 var hit: bool = false
@@ -30,15 +31,15 @@ func _ready() -> void:
 		add_child(mark)
 		spread_marks.append(mark)
 		mark.draw.connect(func() -> void:
-			mark.draw_line(Vector2.ZERO,DIRECTIONS[index] * 14.0 * ui_scale,Color(0.04,0.06,0.04,0.65),4.0 * ui_scale,true)
-			mark.draw_line(Vector2.ZERO,DIRECTIONS[index] * 14.0 * ui_scale,ink,2.0 * ui_scale,true)
+			mark.draw_line(Vector2.ZERO,DIRECTIONS[index] * mark_length * ui_scale,Color(0.04,0.06,0.04,0.65),4.0 * ui_scale,true)
+			mark.draw_line(Vector2.ZERO,DIRECTIONS[index] * mark_length * ui_scale,ink,2.0 * ui_scale,true)
 		)
 	feedback.name = "HitAndObstruction"
 	feedback.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(feedback)
 	feedback.draw.connect(_draw_feedback)
 
-func update_reticle(spread_degrees: float, vertical_fov: float, delta: float, obstructed: bool, hit_flash: bool, paused: bool) -> void:
+func update_reticle(spread_degrees: float, vertical_fov: float, delta: float, obstructed: bool, hit_flash: bool, paused: bool, recoil_pixels: Vector2 = Vector2.ZERO) -> void:
 	visible = not paused
 	blocked = obstructed
 	hit = hit_flash
@@ -50,7 +51,7 @@ func update_reticle(spread_degrees: float, vertical_fov: float, delta: float, ob
 	var rate := 35.0 if target_spread > displayed_spread else 9.0
 	displayed_spread = lerpf(displayed_spread,target_spread,1.0 - exp(-rate * delta))
 	mark_distance = circle_radius + 8.0 * ui_scale + displayed_spread
-	var center := size * 0.5
+	var center := size * 0.5 + recoil_pixels
 	center_ring.position = center
 	feedback.position = center
 	for index: int in range(spread_marks.size()):

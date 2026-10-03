@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+# Locates the Godot 4 binary and execs it with the given arguments.
+#
+# Every agent entry point goes through here (tools/dev, and the MCP server via
+# GODOT_PATH), so the engine is resolved one way for everyone:
+#   $GODOT_BIN, then `godot`/`godot4` on PATH, then the standard macOS app bundles.
+#
+# Two adjustments make agent-launched runs safe beside a person using the machine:
+#   - Game runs (a window, no --script) get `-- --qa` appended: saved tuning is ignored,
+#     settings are never written, and losing window focus does not open the pause menu.
+#     SOCOM_AGENT_QA=0 launches exactly as a player would.
+#   - Any windowed run on macOS hands keyboard focus back to the app the user was in.
+#     Godot always activates itself at startup, which would otherwise swallow their
+#     typing for as long as a hidden game runs. SOCOM_AGENT_SHOW=1 keeps focus on the game.
+set -euo pipefail
+
+self="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
+
+find_godot() {
+	local candidate resolved
+	if [[ -n "${GODOT_BIN:-}" ]]; then
+		[[ -x "$GODOT_BIN" ]] && { echo "$GODOT_BIN"; return 0; }
+		echo "tools/agent/godot: GODOT_BIN is set but not executable: $GODOT_BIN" >&2
+		return 1
+	fi
+	for candidate in godot godot4; do
+		resolved="$(command -v "$candidate" 2>/dev/null || true)"
+		if [[ -n "$resolved" && "$resolved" != "$self" ]]; then
+			echo "$resolved"
+			return 0
+		fi
+	done
+	for candidate in \
+		"/Applications/Godot.app/Contents/MacOS/Godot" \
+		"$HOME/Applications/Godot.app/Contents/MacOS/Godot" \
+		"/Applications/Godot_mono.app/Contents/MacOS/Godot"; do
+		[[ -x "$candidate" ]] && { echo "$candidate"; return 0; }
+	done
+	echo "tools/agent/godot: Godot 4 not found. Install it, or set GODOT_BIN to the executable." >&2
+	return 1
+}
+
+app_field() {
+	lsappinfo info -only "$2" "$1" 2>/dev/null | sed -n 's/^[^=]*="\{0,1\}\([^"]*\)"\{0,1\}$/\1/p'
+}
+
+# Waits for the launching game ($2 = its pid) to take the foreground from the app that
+# had it ($1 = that app's ASN), then gives it back. Leaves things alone if the user has
+# moved to a different app in the meantime.
+restore_focus() {
+	local original="$1" game_pid="$2" bundle current restored=0 calm=0
+	bundle="$(app_field "$original" bundleid)"
+	[[ -n "$bundle" ]] || return 0
+	for _ in $(seq 1 100); do
+		sleep 0.1
+		current="$(lsappinfo front 2>/dev/null)"
+		if [[ "$current" == "$original" ]]; then
+			calm=$((calm + 1))
+			# Godot re-activates itself a few times while starting; outlast that.
+			(( restored > 0 && calm >= 20 )) && return 0
+			continue
+		fi
+		calm=0
+		if [[ "$(app_field "$current" pid)" != "$game_pid" && "$(app_field "$current" name)" != "SystemUIServer" ]]; then
+			return 0
+		fi
+		(( restored >= 5 )) && return 0
+		sleep 0.3
+		open -b "$bundle" 2>/dev/null || return 0
+		restored=$((restored + 1))
+	done
+}
+
+bin="$(find_godot)"
+
+windowed=1
+game=1
+[[ $# -eq 0 ]] && game=0
+for arg in "$@"; do
+	case "$arg" in
+		--headless|--editor|-e|--project-manager|-p|--version|--help|-h|--import|--check-only|--export-*|--doctool)
+			windowed=0; game=0 ;;
+		--script|-s|--)
+			game=0 ;;
+	esac
+done
+
+if (( windowed )) && [[ "$(uname)" == "Darwin" && "${SOCOM_AGENT_SHOW:-0}" != "1" ]] && command -v lsappinfo >/dev/null 2>&1; then
+	# A session the MCP server started with a visible window was asked for; let it keep focus.
+	if [[ -z "${MCP_BRIDGE_PORT:-}" || "${MCP_BACKGROUND:-}" == "1" ]]; then
+		front="$(lsappinfo front 2>/dev/null || true)"
+		if [[ -n "$front" && "$(app_field "$front" name)" != "SystemUIServer" ]]; then
+			restore_focus "$front" "$$" </dev/null >/dev/null 2>&1 &
+		fi
+	fi
+fi
+
+# While an MCP session is live, project.godot carries its bridge autoload, so every other
+# Godot process on the project loads the bridge too. Outside an MCP launch the bridge
+# would listen on its default port with no token; give those runs a private port and a
+# token nobody knows. Plain game runs are left alone so the server's attach mode works.
+if (( ! game )) && [[ -z "${MCP_BRIDGE_PORT:-}" ]]; then
+	export MCP_BRIDGE_PORT=$(( 20000 + $$ % 20000 ))
+	MCP_SESSION_TOKEN="$(od -An -N16 -tx1 /dev/urandom | tr -d ' \n')"
+	export MCP_SESSION_TOKEN
+fi
+
+if (( game )) && [[ "${SOCOM_AGENT_QA:-1}" != "0" ]]; then
+	exec "$bin" "$@" -- --qa
+fi
+exec "$bin" "$@"

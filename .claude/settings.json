@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tools/dev help)",
+      "Bash(tools/dev check)",
+      "Bash(tools/dev test)",
+      "Bash(tools/dev test *)",
+      "Bash(tools/dev shot)",
+      "Bash(tools/dev shot *)",
+      "Bash(tools/dev doctor)",
+      "Bash(tools/dev mcp-smoke)",
+      "Bash(tools/dev mcp-smoke *)",
+      "mcp__godot__check_project",
+      "mcp__godot__list_projects",
+      "mcp__godot__get_project_files",
+      "mcp__godot__get_project_settings",
+      "mcp__godot__search_project",
+      "mcp__godot__get_scene_dependencies",
+      "mcp__godot__list_autoloads",
+      "mcp__godot__get_scene_tree",
+      "mcp__godot__get_node_properties",
+      "mcp__godot__get_node_signals",
+      "mcp__godot__validate",
+      "mcp__godot__run_project",
+      "mcp__godot__stop_project",
+      "mcp__godot__get_debug_output",
+      "mcp__godot__take_screenshot",
+      "mcp__godot__get_ui_elements",
+      "mcp__godot__simulate_input",
+      "mcp__godot__profile_project",
+      "mcp__godot__start_profiler",
+      "mcp__godot__stop_profiler"
+    ]
+  }
+}

@@ -12,8 +12,9 @@ Open `project.godot` in **Godot 4.7** and press **F5**. You start in **Old Quart
 | --- | --- |
 | Move / look | WASD / mouse |
 | Slow walk | Hold Shift |
-| Crouch / stand | C |
-| Prone / stand | Z |
+| Crouch / stand | Tap C |
+| Prone / stand | Hold C, or Z |
+| Dive forward into prone | Hold C while running forward |
 | Jump / rise from a lower stance | Space |
 | Lean | Hold Q / E |
 | Fire / focus aim | Left / right mouse button |
@@ -28,6 +29,8 @@ Open `project.godot` in **Godot 4.7** and press **F5**. You start in **Old Quart
 
 Gamepad bindings use left/right sticks for movement/look, A for jump, B tap for crouch or hold for prone, LB/RB for lean, LT/RT for aim/fire, and X for reload. **D-pad left equips the rifle; right equips the pistol.** D-pad up cycles spawns; down resets/refills. Y controls the timer, L3 holds slow walk, and R3 toggles diagnostics. Labels use Xbox names; the corresponding positions on PlayStation controllers work through Godot's mappings.
 
+**Hold C/B for 0.35 seconds** to lie prone; hold while running forward to dive. The dive uses physics collision and lands prone, with a brief settling period before firing or changing stance. Prone crawls at **0.38 m/s**, with slower sideways/backward shimmying and turning. Tap C/B to rise to crouch, or Space/A to stand. Walking and running now have different stride timing, with a higher, forward shoulder posture and restrained boot motion.
+
 **Start** or **Back/Select** opens tuning. **LB/RB** changes pages; **up/down** selects a control; **left/right** adjusts a slider; **A** confirms; **B/Start** resumes. Level switching and every tuning setting are available through this menu without a mouse. Bindings are currently fixed; look speed, focused aim sensitivity, dead zone, inversion, and vibration are adjustable. Actual hardware feel still needs a playtest.
 
 **Old Quarter** has three traversable routes, ten spawn markers, cover, an arch, market, courtyard, balconies, and a covered service passage. **Movement Lab** has distance markers, ramps, stairs, narrow doorways, stance-clearance fixtures, camera corners, and static/moving practice targets.
@@ -36,7 +39,9 @@ The rifle starts with **30 loaded / 90 reserve** rounds; the semi-auto pistol ha
 
 Both weapons use **instant hitscan**. Bullet-hole decals stay on the struck walls, floors, cover, and targets, including moving targets. The latest 128 marks remain until replaced or until you reset/change levels. Swapping or reloading preserves them. Impact sizes are adjustable through `impact_diameter` in each weapon resource (metres).
 
-F1 exposes movement, body weight, camera, controller, and separate **Rifle recoil / Pistol recoil** pages. Changes save when you resume. Use **Restore all defaults** to return to the baseline. See [playtest notes](docs/PLAYTEST.md) for the recoil comparison sequence and validation limits.
+The reticle has a fixed **translucent charcoal circle** and four separate pale marks. Movement and firing push the marks outward; they animate back as accuracy recovers. The rifle's cone starts at 0.25° stationary, 1.1° walking, and 5.75° running, reaching 9.25° during sustained running fire. Crouch reduces recoil and total spread by 20%; prone reduces both by 50%. Focus aim adds a further stability benefit.
+
+F1 exposes movement, body weight, camera, controller, separate **Rifle recoil / Pistol recoil** pages, and **Accuracy** for walking/running spread and maximum shot bloom. Changes save when you resume. Use **Restore all defaults** to return to the baseline. See [playtest notes](docs/PLAYTEST.md) for the comparison sequence and validation limits.
 
 The HUD uses compact, borderless translucent strips with a 5% screen margin. Bottom left shows the equipped weapon, AUTO/SEMI mode, ammunition, reserve-magazine equivalents, and health. Bottom right shows your stance/health and four open squad slots. The circular map at top right follows your position and facing over the level's real building footprints: yellow is you, cyan is the selected spawn, and N indicates north. **F1/Start → Camera → HUD backing opacity** adjusts the strip opacity (18% by default). This solo build starts at 100 health and has no incoming damage or AI squad members yet.
 
@@ -57,6 +62,7 @@ godot --headless --path . --log-file /tmp/socom-feel.log --fixed-fps 60 --script
 godot --headless --path . --log-file /tmp/socom-hud-layout.log --fixed-fps 60 --script res://tests/hud_layout.gd -- --qa
 godot --headless --path . --log-file /tmp/socom-impact.log --fixed-fps 60 --script res://tests/impact_regression.gd -- --qa
 godot --headless --path . --log-file /tmp/socom-posture.log --fixed-fps 60 --script res://tests/posture_regression.gd -- --qa
+godot --headless --path . --log-file /tmp/socom-combat-movement.log --fixed-fps 60 --script res://tests/combat_movement_regression.gd -- --qa
 ```
 
 On this Mac the executable is `/Applications/Godot.app/Contents/MacOS/Godot`. The suites exercise character motion/collision, all three town routes, visible limb endpoints and posture, controller input events and menu navigation, ammunition conservation, recoil/recovery, and persistent surface impacts. QA mode ignores saved tuning; headless runs skip audio playback and vibration. The project retains Mobile rendering and Jolt Physics.

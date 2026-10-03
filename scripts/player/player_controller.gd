@@ -25,6 +25,8 @@ var diving: bool = false
 var dive_time: float = 0.0
 var dive_recovery: float = 0.0
 var dive_direction := Vector3.FORWARD
+var prone_strafe_phase: float = 0.0
+var prone_strafe_amount: float = 0.0
 var test_command: Dictionary = {}
 var pending_mouse := Vector2.ZERO
 var input_armed: bool = true
@@ -143,10 +145,23 @@ func _physics_process(delta: float) -> void:
 		local_input.x *= 0.65
 		if local_input.y > 0:
 			local_input.y *= 0.75
+	var previous_strafe := prone_strafe_amount
+	prone_strafe_amount = move_input.limit_length().x if stance.current == StanceController.Stance.PRONE and is_on_floor() and not diving and dive_recovery <= 0 else 0.0
+	if signf(previous_strafe) != signf(prone_strafe_amount):
+		prone_strafe_phase = 0.0
+	if absf(prone_strafe_amount) > 0.05:
+		# An authored reach/pull/settle clock drives both displacement and the pose.
+		# This is kinematic movement, not forces, limb simulation, or root-motion drift.
+		prone_strafe_phase = fposmod(prone_strafe_phase + delta * absf(prone_strafe_amount) / movement.prone_strafe_seconds, 1.0)
+		local_input.x *= SoldierProxy.sample_prone_strafe(prone_strafe_phase).speed
+	else:
+		prone_strafe_phase = 0.0
 	var desired := basis * Vector3(local_input.x, 0, local_input.y) * speed
 	var rate := movement.braking if local_input.is_zero_approx() else movement.acceleration
 	var before_horizontal := Vector3(velocity.x, 0, velocity.z)
 	var horizontal := before_horizontal.move_toward(desired, rate * delta)
+	if stance.current == StanceController.Stance.PRONE:
+		horizontal = desired
 	if diving:
 		dive_time += delta
 		horizontal = dive_direction * maxf(0.0,movement.dive_speed - dive_time * 0.6)
@@ -183,7 +198,7 @@ func _physics_process(delta: float) -> void:
 	camera_rig.update_view(self, StanceController.EYE_HEIGHTS[stance.current], lean, aiming, delta)
 	var speed_now := Vector2(velocity.x, velocity.z).length()
 	var local_velocity := basis.inverse() * Vector3(velocity.x, 0, velocity.z)
-	soldier.pose(stance.current, speed_now, Vector2(local_velocity.x, local_velocity.z), camera_rig.rotation.x, camera_rig.actual_lean, delta, movement.body_weight, local_acceleration, is_on_floor(), weapon.recoil.visual_kick, weapon.draw_remaining / weapon.profile.draw_seconds, aiming, 1.0 if diving else 0.0)
+	soldier.pose(stance.current, speed_now, Vector2(local_velocity.x, local_velocity.z), camera_rig.aim_pitch(), camera_rig.actual_lean, delta, movement.body_weight, local_acceleration, is_on_floor(), weapon.recoil.visual_kick, weapon.draw_remaining / weapon.profile.draw_seconds, aiming, 1.0 if diving else 0.0, prone_strafe_phase, prone_strafe_amount)
 	soldier.set_close_fade(camera_rig.arm.get_hit_length() < 0.70)
 	weapon.tick(delta, Input.is_action_pressed("fire"), Input.is_action_just_pressed("reload"))
 	if is_on_floor() and speed_now > 0.25 and stance.current != StanceController.Stance.PRONE:
@@ -225,6 +240,8 @@ func reset_at(spawn_transform: Transform3D) -> void:
 	diving = false
 	dive_time = 0.0
 	dive_recovery = 0.0
+	prone_strafe_phase = 0.0
+	prone_strafe_amount = 0.0
 	floor_snap_length = 0.25
 	input_armed = true
 	local_acceleration = Vector3.ZERO
