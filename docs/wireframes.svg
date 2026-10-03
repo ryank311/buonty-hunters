@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1480" viewBox="0 0 1440 1480" role="img" aria-labelledby="title desc">
+  <title id="title">Old Quarter map and HUD wireframes</title>
+  <desc id="desc">An original conceptual town layout with west and east spawns, central market, northern courtyard and balcony, and southern service passage. Below it is a proposed third-person round HUD. These are planning wireframes, not implemented gameplay or a measured floor plan.</desc>
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#29353b" stroke-width="1"/></pattern>
+    <pattern id="solid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M0 10L10 0" stroke="#435057" stroke-width="1"/></pattern>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #e5e9df; }
+      .title { font-size: 34px; font-weight: 700; }
+      .sub { font-size: 16px; fill: #a8b8ba; }
+      .h { font-size: 20px; font-weight: 700; }
+      .label { font-size: 16px; font-weight: 700; }
+      .small { font-size: 14px; fill: #b6c4c4; }
+      .tiny { font-size: 12px; fill: #b6c4c4; }
+      .room { fill: #26373c; stroke: #92a8a8; stroke-width: 2; }
+      .block { fill: url(#solid); stroke: #526068; stroke-width: 2; }
+      .route { fill: none; stroke: #b9cbb5; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+      .cross { fill: none; stroke: #b9cbb5; stroke-width: 3; stroke-dasharray: 8 6; }
+      .accent { fill: #ddc27f; }
+    </style>
+  </defs>
+  <rect width="1440" height="1480" fill="#111b20"/>
+  <text x="48" y="55" class="small" letter-spacing="3">SOCOM SUCCESSOR / DESIGN STUDY 01</text>
+  <text x="48" y="102" class="title">Old Quarter</text>
+  <text x="48" y="132" class="sub">Original 5v5 town concept • Connectivity sketch, not a measured floor plan • October 2, 2026</text>
+
+  <rect x="48" y="164" width="944" height="690" rx="6" fill="#19262c" stroke="#3d4b52"/>
+  <rect x="72" y="188" width="896" height="640" fill="url(#grid)" stroke="#5f7076" stroke-dasharray="6 6"/>
+  <text x="88" y="215" class="small">NORTH / COURTYARD ROUTE</text>
+  <text x="902" y="215" class="label">N ↑</text>
+
+  <!-- Circulation is drawn before the rooms, with deliberately offset approaches. -->
+  <path class="route" d="M165 436V310H355M595 310H646M786 310H874V436"/>
+  <path class="route" d="M235 502H410M640 502H804"/>
+  <path class="route" d="M165 568V716H350M710 716H874V568"/>
+  <path class="cross" d="M453 362V426M565 362V385M698 352V385M528 596V680"/>
+
+  <rect x="270" y="387" width="90" height="70" class="block"/>
+  <rect x="270" y="552" width="90" height="72" class="block"/>
+  <rect x="693" y="435" width="75" height="34" class="block"/>
+  <rect x="693" y="544" width="75" height="80" class="block"/>
+  <rect x="248" y="242" width="65" height="35" class="block"/>
+  <text x="284" y="423" class="tiny">SOLID</text>
+  <text x="284" y="591" class="tiny">SOLID</text>
+
+  <rect x="95" y="436" width="140" height="132" rx="4" fill="#244c4d" stroke="#85c2b7" stroke-width="2"/>
+  <text x="110" y="467" class="label">WEST YARD</text>
+  <text x="110" y="491" class="small">Team A spawn</text>
+  <text x="110" y="518" class="small">Base A</text>
+  <g fill="#a2d0c4"><circle cx="114" cy="548" r="4"/><circle cx="138" cy="548" r="4"/><circle cx="162" cy="548" r="4"/><circle cx="186" cy="548" r="4"/><circle cx="210" cy="548" r="4"/></g>
+
+  <rect x="804" y="436" width="140" height="132" rx="4" fill="#51492e" stroke="#d6bd7d" stroke-width="2"/>
+  <text x="818" y="467" class="label">EAST YARD</text>
+  <text x="818" y="491" class="small">Team B spawn</text>
+  <text x="818" y="518" class="small">Base B</text>
+  <g fill="#ddc27f"><circle cx="822" cy="548" r="4"/><circle cx="847" cy="548" r="4"/><circle cx="872" cy="548" r="4"/><circle cx="897" cy="548" r="4"/><circle cx="922" cy="548" r="4"/></g>
+
+  <rect x="355" y="250" width="240" height="112" rx="3" class="room"/>
+  <text x="376" y="284" class="label">COURTYARD</text>
+  <text x="376" y="309" class="small">Covered rotation</text>
+  <rect x="376" y="328" width="65" height="13" class="block"/>
+  <rect x="491" y="328" width="76" height="13" class="block"/>
+
+  <rect x="646" y="240" width="140" height="112" rx="3" class="room"/>
+  <text x="660" y="269" class="label">STAIR HOUSE</text>
+  <text x="660" y="294" class="small">Interior test</text>
+  <path d="M660 306H748M660 314H748M660 322H748M660 330H748M660 338H748" stroke="#92a8a8" stroke-width="2"/>
+
+  <rect x="473" y="385" width="242" height="26" fill="#55604b" stroke="#b9cbb5" stroke-dasharray="6 4"/>
+  <text x="480" y="403" class="tiny">BALCONY +3.2 m / TWO APPROACHES</text>
+
+  <rect x="410" y="426" width="230" height="170" rx="3" class="room"/>
+  <text x="430" y="456" class="h">MARKET</text>
+  <text x="430" y="479" class="small">Central contest</text>
+  <rect x="430" y="493" width="38" height="30" fill="#626652" stroke="#a7ac8f"/>
+  <rect x="572" y="535" width="46" height="32" fill="#626652" stroke="#a7ac8f"/>
+  <circle cx="527" cy="526" r="18" fill="#5b5030" stroke="#ddc27f" stroke-width="2"/>
+  <text x="521" y="532" class="label accent">B</text>
+  <text x="430" y="580" class="small">Shared bomb in M3</text>
+  <path d="M377 477V527M389 477V527M377 477H389" stroke="#ddc27f" stroke-width="3"/>
+  <text x="370" y="466" class="tiny accent">ARCH</text>
+
+  <rect x="350" y="680" width="360" height="70" rx="3" class="room"/>
+  <text x="369" y="709" class="label">SERVICE PASSAGE</text>
+  <text x="369" y="733" class="small">Bends, close cover, Market cross-link</text>
+  <text x="92" y="791" class="small">Approximate design envelope: 112 × 96 m</text>
+  <text x="92" y="812" class="tiny">Opaque blockers must interrupt the center route's spawn-to-spawn sightline.</text>
+
+  <rect x="1016" y="164" width="376" height="690" rx="6" fill="#19262c" stroke="#3d4b52"/>
+  <text x="1040" y="203" class="h">What this blockout tests</text>
+  <text x="1040" y="243" class="label accent">01 / Movement before detail</text>
+  <text x="1040" y="269" class="sub"><tspan x="1040">Walk, strafe, crouch, prone, jump.</tspan><tspan x="1040" dy="23">Use a visible soldier proxy.</tspan></text>
+  <text x="1040" y="334" class="label accent">02 / Three connected choices</text>
+  <text x="1040" y="360" class="sub"><tspan x="1040">Direct Market route: 12–17 s.</tspan><tspan x="1040" dy="23">Outer approaches: 18–23 s.</tspan><tspan x="1040" dy="23">Proposed first-contact targets.</tspan></text>
+  <text x="1040" y="448" class="label accent">03 / Useful, limited high ground</text>
+  <text x="1040" y="474" class="sub"><tspan x="1040">Balcony sees part of Market.</tspan><tspan x="1040" dy="23">Keep two ways to challenge it.</tspan></text>
+  <text x="1040" y="539" class="label accent">04 / Camera clearance</text>
+  <text x="1040" y="565" class="sub"><tspan x="1040">Test the arch, stairs, low cover,</tspan><tspan x="1040" dy="23">indoor corners and both leans.</tspan></text>
+  <path d="M1040 621H1368" stroke="#3d4b52"/>
+  <path d="M1040 649H1087" class="route"/><text x="1102" y="655" class="small">Main route connection</text>
+  <path d="M1040 685H1087" class="cross"/><text x="1102" y="691" class="small">Cross-link / vertical access</text>
+  <rect x="1040" y="711" width="47" height="23" class="block"/><text x="1102" y="729" class="small">Solid sightline blocker</text>
+  <text x="1040" y="779" class="small"><tspan x="1040">M0 = traversal only.</tspan><tspan x="1040" dy="23">Measure routes in the built scene.</tspan><tspan x="1040" dy="23">Human balance testing comes later.</tspan></text>
+
+  <text x="48" y="904" class="h">Round HUD / information hierarchy</text>
+  <text x="48" y="930" class="sub">Proposed later round view. M0 shows only stance, location, reticle and control help.</text>
+  <rect x="48" y="953" width="944" height="470" rx="6" fill="#273236" stroke="#66777b"/>
+  <!-- Abstract world-space composition, deliberately schematic. -->
+  <path d="M49 1215L383 1095H650L991 1215V1422H49Z" fill="#3c4544"/>
+  <path d="M49 1055H270V1198L49 1280Z" fill="#56605a" stroke="#748078"/>
+  <path d="M753 1041H991V1280L753 1189Z" fill="#56605a" stroke="#748078"/>
+  <path d="M336 1128H426V1210H336ZM641 1154H715V1240H641Z" fill="#71745f" stroke="#91947a"/>
+  <path d="M405 1277L451 1249H489L519 1277L533 1350L514 1380H413L391 1349Z" fill="#747e6b" stroke="#a1ac96" stroke-width="2"/>
+  <circle cx="465" cy="1230" r="23" fill="#838c73" stroke="#a1ac96" stroke-width="2"/>
+  <path d="M436 1380L429 1422M489 1380L506 1422" stroke="#747e6b" stroke-width="27"/>
+  <path d="M481 1274L535 1243L568 1252" fill="none" stroke="#1a2428" stroke-width="12"/>
+  <circle cx="520" cy="1179" r="15" fill="none" stroke="#dfd7a0" stroke-width="2"/>
+  <path d="M520 1152V1160M520 1198V1206M493 1179H501M539 1179H547" stroke="#dfd7a0" stroke-width="2"/>
+
+  <rect x="350" y="980" width="340" height="42" fill="#142025" fill-opacity="0.9" stroke="#6f807c"/>
+  <text x="372" y="1007" class="label">A 2 : 1 B</text><text x="490" y="1007" class="h accent">04:32</text><text x="588" y="1007" class="small">ROUND 4</text>
+  <rect x="804" y="979" width="140" height="82" fill="#142025" fill-opacity="0.9" stroke="#6f807c"/>
+  <text x="825" y="1007" class="label">W · N · E</text><text x="821" y="1040" class="small">MARKET</text>
+  <rect x="94" y="1320" width="218" height="72" fill="#142025" fill-opacity="0.9" stroke="#6f807c"/>
+  <text x="111" y="1348" class="label">RIFLE · AUTO</text><text x="111" y="1378" class="h accent">24 / 90</text><text x="222" y="1378" class="small">STAND</text>
+  <rect x="752" y="1298" width="192" height="94" fill="#142025" fill-opacity="0.9" stroke="#6f807c"/>
+  <text x="769" y="1326" class="label">TEAM A · 3 ALIVE</text><text x="769" y="1352" class="small">● YOU   ● TWO   ● THREE</text><text x="769" y="1377" class="small">× FOUR   × FIVE</text>
+
+  <text x="1016" y="990" class="h">Quiet, readable feedback</text>
+  <text x="1016" y="1030" class="sub"><tspan x="1016">Top center: clock and round score.</tspan><tspan x="1016" dy="27">Top right: direction and landmark.</tspan><tspan x="1016" dy="27">Bottom left: weapon and stance.</tspan><tspan x="1016" dy="27">Bottom right: team survival.</tspan></text>
+  <path d="M1016 1140H1392" stroke="#3d4b52"/>
+  <text x="1016" y="1176" class="label accent">Physical weapon, honest reticle</text>
+  <text x="1016" y="1207" class="sub"><tspan x="1016">Camera finds the aim point.</tspan><tspan x="1016" dy="25">Muzzle determines the actual hit.</tspan><tspan x="1016" dy="25">Show when nearby cover blocks fire.</tspan></text>
+  <text x="1016" y="1320" class="small"><tspan x="1016">On death: label the watched teammate.</tspan><tspan x="1016" dy="25">No enemy-follow or free camera.</tspan><tspan x="1016" dy="25">HUD remains readable at low world resolution.</tspan></text>
+  <text x="48" y="1457" class="tiny">PLANNING ARTIFACT • All dimensions and timings are proposed • See DESIGN.md and PROTOTYPE_PLAN.md for implementation and acceptance criteria</text>
+</svg>

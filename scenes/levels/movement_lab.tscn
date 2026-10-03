@@ -1,0 +1,1607 @@
+[gd_scene load_steps=131 format=3]
+
+[ext_resource type="Shader" path="res://shaders/graybox.gdshader" id="1"]
+[ext_resource type="Script" path="res://scripts/combat/range_target.gd" id="2"]
+
+[sub_resource type="ShaderMaterial" id="Mat_ground"]
+shader = ExtResource("1")
+shader_parameter/tint = Color(0.49, 0.48, 0.42, 1)
+shader_parameter/grid_strength = 0.11
+
+[sub_resource type="ShaderMaterial" id="Mat_wall"]
+shader = ExtResource("1")
+shader_parameter/tint = Color(0.63, 0.6, 0.49, 1)
+shader_parameter/grid_strength = 0.045
+
+[sub_resource type="ShaderMaterial" id="Mat_light"]
+shader = ExtResource("1")
+shader_parameter/tint = Color(0.73, 0.71, 0.61, 1)
+shader_parameter/grid_strength = 0.045
+
+[sub_resource type="ShaderMaterial" id="Mat_dark"]
+shader = ExtResource("1")
+shader_parameter/tint = Color(0.32, 0.36, 0.34, 1)
+shader_parameter/grid_strength = 0.045
+
+[sub_resource type="ShaderMaterial" id="Mat_trim"]
+shader = ExtResource("1")
+shader_parameter/tint = Color(0.47, 0.48, 0.4, 1)
+shader_parameter/grid_strength = 0.045
+
+[sub_resource type="ShaderMaterial" id="Mat_wood"]
+shader = ExtResource("1")
+shader_parameter/tint = Color(0.38, 0.32, 0.23, 1)
+shader_parameter/grid_strength = 0.045
+
+[sub_resource type="ShaderMaterial" id="Mat_teal"]
+shader = ExtResource("1")
+shader_parameter/tint = Color(0.28, 0.47, 0.45, 1)
+shader_parameter/grid_strength = 0.045
+
+[sub_resource type="ShaderMaterial" id="Mat_gold"]
+shader = ExtResource("1")
+shader_parameter/tint = Color(0.63, 0.49, 0.27, 1)
+shader_parameter/grid_strength = 0.045
+
+[sub_resource type="ShaderMaterial" id="Mat_window"]
+shader = ExtResource("1")
+shader_parameter/tint = Color(0.15, 0.2, 0.21, 1)
+shader_parameter/grid_strength = 0.045
+
+[sub_resource type="ShaderMaterial" id="Mat_canopy"]
+shader = ExtResource("1")
+shader_parameter/tint = Color(0.49, 0.46, 0.28, 1)
+shader_parameter/grid_strength = 0.045
+
+[sub_resource type="BoxMesh" id="Mesh_0"]
+size = Vector3(80.00000, 1.00000, 100.00000)
+
+[sub_resource type="BoxShape3D" id="Shape_0"]
+size = Vector3(80.00000, 1.00000, 100.00000)
+
+[sub_resource type="BoxMesh" id="Mesh_1"]
+size = Vector3(0.50000, 5.00000, 100.00000)
+
+[sub_resource type="BoxShape3D" id="Shape_1"]
+size = Vector3(0.50000, 5.00000, 100.00000)
+
+[sub_resource type="BoxMesh" id="Mesh_2"]
+size = Vector3(80.00000, 5.00000, 0.50000)
+
+[sub_resource type="BoxShape3D" id="Shape_2"]
+size = Vector3(80.00000, 5.00000, 0.50000)
+
+[sub_resource type="BoxMesh" id="Mesh_3"]
+size = Vector3(4.00000, 0.05000, 3.00000)
+
+[sub_resource type="BoxMesh" id="Mesh_4"]
+size = Vector3(3.00000, 0.02400, 0.08000)
+
+[sub_resource type="BoxMesh" id="Mesh_5"]
+size = Vector3(0.70000, 2.80000, 0.80000)
+
+[sub_resource type="BoxShape3D" id="Shape_3"]
+size = Vector3(0.70000, 2.80000, 0.80000)
+
+[sub_resource type="BoxMesh" id="Mesh_6"]
+size = Vector3(2.60000, 0.60000, 0.80000)
+
+[sub_resource type="BoxShape3D" id="Shape_4"]
+size = Vector3(2.60000, 0.60000, 0.80000)
+
+[sub_resource type="BoxMesh" id="Mesh_7"]
+size = Vector3(3.20000, 0.60000, 0.80000)
+
+[sub_resource type="BoxShape3D" id="Shape_5"]
+size = Vector3(3.20000, 0.60000, 0.80000)
+
+[sub_resource type="BoxMesh" id="Mesh_8"]
+size = Vector3(5.00000, 0.25000, 6.00000)
+
+[sub_resource type="BoxShape3D" id="Shape_6"]
+size = Vector3(5.00000, 0.25000, 6.00000)
+
+[sub_resource type="BoxMesh" id="Mesh_9"]
+size = Vector3(0.30000, 1.60000, 6.00000)
+
+[sub_resource type="BoxShape3D" id="Shape_7"]
+size = Vector3(0.30000, 1.60000, 6.00000)
+
+[sub_resource type="BoxMesh" id="Mesh_10"]
+size = Vector3(5.00000, 0.25000, 5.00000)
+
+[sub_resource type="BoxShape3D" id="Shape_8"]
+size = Vector3(5.00000, 0.25000, 5.00000)
+
+[sub_resource type="BoxMesh" id="Mesh_11"]
+size = Vector3(3.00000, 0.90000, 0.70000)
+
+[sub_resource type="BoxShape3D" id="Shape_9"]
+size = Vector3(3.00000, 0.90000, 0.70000)
+
+[sub_resource type="BoxMesh" id="Mesh_12"]
+size = Vector3(3.00000, 1.10000, 0.70000)
+
+[sub_resource type="BoxShape3D" id="Shape_10"]
+size = Vector3(3.00000, 1.10000, 0.70000)
+
+[sub_resource type="BoxMesh" id="Mesh_13"]
+size = Vector3(3.00000, 2.20000, 0.70000)
+
+[sub_resource type="BoxShape3D" id="Shape_11"]
+size = Vector3(3.00000, 2.20000, 0.70000)
+
+[sub_resource type="BoxMesh" id="Mesh_14"]
+size = Vector3(4.00000, 0.10048, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_15"]
+size = Vector3(4.00000, 0.20096, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_16"]
+size = Vector3(4.00000, 0.30144, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_17"]
+size = Vector3(4.00000, 0.40192, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_18"]
+size = Vector3(4.00000, 0.50240, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_19"]
+size = Vector3(4.00000, 0.60289, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_20"]
+size = Vector3(4.00000, 0.70337, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_21"]
+size = Vector3(4.00000, 0.80385, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_22"]
+size = Vector3(4.00000, 0.90433, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_23"]
+size = Vector3(4.00000, 1.00481, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_24"]
+size = Vector3(4.00000, 1.10529, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_25"]
+size = Vector3(4.00000, 1.20577, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_26"]
+size = Vector3(4.00000, 1.30625, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_27"]
+size = Vector3(4.00000, 1.40673, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_28"]
+size = Vector3(4.00000, 1.50721, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_29"]
+size = Vector3(4.00000, 1.60770, 0.37500)
+
+[sub_resource type="ConvexPolygonShape3D" id="Ramp_40"]
+points = PackedVector3Array(-32.0, 0, -13, -28.0, 0, -13, -32.0, 0, -19.0, -28.0, 0, -19.0, -32.0, 1.6076951545867362, -19.0, -28.0, 1.6076951545867362, -19.0)
+
+[sub_resource type="BoxMesh" id="Mesh_30"]
+size = Vector3(4.00000, 0.02000, 6.21166)
+
+[sub_resource type="BoxMesh" id="Mesh_31"]
+size = Vector3(4.00000, 0.30000, 3.00000)
+
+[sub_resource type="BoxShape3D" id="Shape_12"]
+size = Vector3(4.00000, 0.30000, 3.00000)
+
+[sub_resource type="BoxMesh" id="Mesh_32"]
+size = Vector3(4.00000, 0.21651, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_33"]
+size = Vector3(4.00000, 0.43301, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_34"]
+size = Vector3(4.00000, 0.64952, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_35"]
+size = Vector3(4.00000, 0.86603, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_36"]
+size = Vector3(4.00000, 1.08253, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_37"]
+size = Vector3(4.00000, 1.29904, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_38"]
+size = Vector3(4.00000, 1.51554, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_39"]
+size = Vector3(4.00000, 1.73205, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_40"]
+size = Vector3(4.00000, 1.94856, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_41"]
+size = Vector3(4.00000, 2.16506, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_42"]
+size = Vector3(4.00000, 2.38157, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_43"]
+size = Vector3(4.00000, 2.59808, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_44"]
+size = Vector3(4.00000, 2.81458, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_45"]
+size = Vector3(4.00000, 3.03109, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_46"]
+size = Vector3(4.00000, 3.24760, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_47"]
+size = Vector3(4.00000, 3.46410, 0.37500)
+
+[sub_resource type="ConvexPolygonShape3D" id="Ramp_58"]
+points = PackedVector3Array(-24.0, 0, -13, -20.0, 0, -13, -24.0, 0, -19.0, -20.0, 0, -19.0, -24.0, 3.4641016151377535, -19.0, -20.0, 3.4641016151377535, -19.0)
+
+[sub_resource type="BoxMesh" id="Mesh_48"]
+size = Vector3(4.00000, 0.02000, 6.92820)
+
+[sub_resource type="BoxMesh" id="Mesh_49"]
+size = Vector3(4.00000, 0.37500, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_50"]
+size = Vector3(4.00000, 0.75000, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_51"]
+size = Vector3(4.00000, 1.12500, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_52"]
+size = Vector3(4.00000, 1.50000, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_53"]
+size = Vector3(4.00000, 1.87500, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_54"]
+size = Vector3(4.00000, 2.25000, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_55"]
+size = Vector3(4.00000, 2.62500, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_56"]
+size = Vector3(4.00000, 3.00000, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_57"]
+size = Vector3(4.00000, 3.37500, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_58"]
+size = Vector3(4.00000, 3.75000, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_59"]
+size = Vector3(4.00000, 4.12500, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_60"]
+size = Vector3(4.00000, 4.50000, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_61"]
+size = Vector3(4.00000, 4.87500, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_62"]
+size = Vector3(4.00000, 5.25000, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_63"]
+size = Vector3(4.00000, 5.62500, 0.37500)
+
+[sub_resource type="BoxMesh" id="Mesh_64"]
+size = Vector3(4.00000, 6.00000, 0.37500)
+
+[sub_resource type="ConvexPolygonShape3D" id="Ramp_76"]
+points = PackedVector3Array(-16.0, 0, -13, -12.0, 0, -13, -16.0, 0, -19.0, -12.0, 0, -19.0, -16.0, 5.999999999999999, -19.0, -12.0, 5.999999999999999, -19.0)
+
+[sub_resource type="BoxMesh" id="Mesh_65"]
+size = Vector3(4.00000, 0.02000, 8.48528)
+
+[sub_resource type="BoxMesh" id="Mesh_66"]
+size = Vector3(2.40000, 0.20000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_67"]
+size = Vector3(2.40000, 0.40000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_68"]
+size = Vector3(2.40000, 0.60000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_69"]
+size = Vector3(2.40000, 0.80000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_70"]
+size = Vector3(2.40000, 1.00000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_71"]
+size = Vector3(2.40000, 1.20000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_72"]
+size = Vector3(2.40000, 1.40000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_73"]
+size = Vector3(2.40000, 1.60000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_74"]
+size = Vector3(2.40000, 1.80000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_75"]
+size = Vector3(2.40000, 2.00000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_76"]
+size = Vector3(2.40000, 2.20000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_77"]
+size = Vector3(2.40000, 2.40000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_78"]
+size = Vector3(2.40000, 2.60000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_79"]
+size = Vector3(2.40000, 2.80000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_80"]
+size = Vector3(2.40000, 3.00000, 0.45000)
+
+[sub_resource type="BoxMesh" id="Mesh_81"]
+size = Vector3(2.40000, 3.20000, 0.45000)
+
+[sub_resource type="ConvexPolygonShape3D" id="Ramp_94"]
+points = PackedVector3Array(-28.2, 0, 17, -25.8, 0, 17, -28.2, 0, 9.8, -25.8, 0, 9.8, -28.2, 3.2, 9.8, -25.8, 3.2, 9.8)
+
+[sub_resource type="BoxMesh" id="Mesh_82"]
+size = Vector3(5.00000, 0.30000, 3.60000)
+
+[sub_resource type="BoxShape3D" id="Shape_13"]
+size = Vector3(5.00000, 0.30000, 3.60000)
+
+[sub_resource type="BoxMesh" id="Mesh_83"]
+size = Vector3(5.50000, 3.00000, 0.30000)
+
+[sub_resource type="BoxShape3D" id="Shape_14"]
+size = Vector3(5.50000, 3.00000, 0.30000)
+
+[sub_resource type="BoxMesh" id="Mesh_84"]
+size = Vector3(5.00000, 3.60000, 0.40000)
+
+[sub_resource type="BoxShape3D" id="Shape_15"]
+size = Vector3(5.00000, 3.60000, 0.40000)
+
+[sub_resource type="BoxMesh" id="Mesh_85"]
+size = Vector3(0.40000, 3.60000, 5.00000)
+
+[sub_resource type="BoxShape3D" id="Shape_16"]
+size = Vector3(0.40000, 3.60000, 5.00000)
+
+[sub_resource type="BoxMesh" id="Mesh_86"]
+size = Vector3(4.00000, 0.03000, 2.00000)
+
+[sub_resource type="BoxShape3D" id="TargetShapeTarget10"]
+size = Vector3(0.65, 1.5, 0.12)
+
+[sub_resource type="BoxMesh" id="TargetShapeTarget10Mesh"]
+size = Vector3(0.65, 1.5, 0.12)
+
+[sub_resource type="BoxShape3D" id="TargetShapeTarget25"]
+size = Vector3(0.65, 1.5, 0.12)
+
+[sub_resource type="BoxMesh" id="TargetShapeTarget25Mesh"]
+size = Vector3(0.65, 1.5, 0.12)
+
+[sub_resource type="BoxShape3D" id="TargetShapeTarget50"]
+size = Vector3(0.65, 1.5, 0.12)
+
+[sub_resource type="BoxMesh" id="TargetShapeTarget50Mesh"]
+size = Vector3(0.65, 1.5, 0.12)
+
+[sub_resource type="BoxShape3D" id="TargetShapeMovingTarget"]
+size = Vector3(0.65, 1.5, 0.12)
+
+[sub_resource type="BoxMesh" id="TargetShapeMovingTargetMesh"]
+size = Vector3(0.65, 1.5, 0.12)
+
+[sub_resource type="BoxMesh" id="Mesh_87"]
+size = Vector3(20.00000, 6.00000, 1.00000)
+
+[sub_resource type="BoxShape3D" id="Shape_17"]
+size = Vector3(20.00000, 6.00000, 1.00000)
+
+[node name="MovementLab" type="Node3D"]
+
+[node name="Architecture" type="Node3D" parent="."]
+
+[node name="Cover" type="Node3D" parent="."]
+
+[node name="Landmarks" type="Node3D" parent="."]
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="Locations" type="Node3D" parent="."]
+
+[node name="Targets" type="Node3D" parent="."]
+
+[node name="Ground_1" type="StaticBody3D" parent="Architecture"]
+position = Vector3(0.00000, -0.50000, -10.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Ground_1"]
+mesh = SubResource("Mesh_0")
+material_override = SubResource("Mat_ground")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/Ground_1"]
+shape = SubResource("Shape_0")
+
+[node name="Boundary_2" type="StaticBody3D" parent="Architecture"]
+position = Vector3(-40.00000, 2.50000, -10.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Boundary_2"]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat_dark")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/Boundary_2"]
+shape = SubResource("Shape_1")
+
+[node name="Boundary_3" type="StaticBody3D" parent="Architecture"]
+position = Vector3(40.00000, 2.50000, -10.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Boundary_3"]
+mesh = SubResource("Mesh_1")
+material_override = SubResource("Mat_dark")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/Boundary_3"]
+shape = SubResource("Shape_1")
+
+[node name="Boundary_4" type="StaticBody3D" parent="Architecture"]
+position = Vector3(0.00000, 2.50000, -60.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Boundary_4"]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat_dark")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/Boundary_4"]
+shape = SubResource("Shape_2")
+
+[node name="Boundary_5" type="StaticBody3D" parent="Architecture"]
+position = Vector3(0.00000, 2.50000, 40.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Boundary_5"]
+mesh = SubResource("Mesh_2")
+material_override = SubResource("Mat_dark")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/Boundary_5"]
+shape = SubResource("Shape_2")
+
+[node name="Start" type="Marker3D" parent="Spawns"]
+position = Vector3(0.00000, 0.10000, 26.00000)
+rotation = Vector3(0, 0, 0)
+
+[node name="Range" type="Marker3D" parent="Spawns"]
+position = Vector3(26.00000, 0.10000, 5.00000)
+rotation = Vector3(0, 0, 0)
+
+[node name="Stairs" type="Marker3D" parent="Spawns"]
+position = Vector3(-27.00000, 0.10000, 19.00000)
+rotation = Vector3(0, 0, 0)
+
+[node name="StartPad_6" type="Node3D" parent="Landmarks"]
+position = Vector3(0.00000, 0.02500, 25.00000)
+
+[node name="Mesh" type="MeshInstance3D" parent="Landmarks/StartPad_6"]
+mesh = SubResource("Mesh_3")
+material_override = SubResource("Mat_teal")
+
+[node name="Title" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(0.00000, 4.00000, 28.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "MOVEMENT LAB"
+font_size = 88
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="LaneTitle" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(0.00000, 2.00000, -3.00000)
+billboard = 1
+modulate = Color(0.43000000000000005, 0.62, 0.6, 1)
+text = "25 m / MOVEMENT"
+font_size = 64
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="LaneStripe_7" type="Node3D" parent="Landmarks"]
+position = Vector3(0.00000, 0.01200, 25.00000)
+
+[node name="Mesh" type="MeshInstance3D" parent="Landmarks/LaneStripe_7"]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_light")
+
+[node name="Meter0" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(2.50000, 0.35000, 25.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "0 m"
+font_size = 32
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="LaneStripe_8" type="Node3D" parent="Landmarks"]
+position = Vector3(0.00000, 0.01200, 20.00000)
+
+[node name="Mesh" type="MeshInstance3D" parent="Landmarks/LaneStripe_8"]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_light")
+
+[node name="Meter5" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(2.50000, 0.35000, 20.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "5 m"
+font_size = 32
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="LaneStripe_9" type="Node3D" parent="Landmarks"]
+position = Vector3(0.00000, 0.01200, 15.00000)
+
+[node name="Mesh" type="MeshInstance3D" parent="Landmarks/LaneStripe_9"]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_light")
+
+[node name="Meter10" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(2.50000, 0.35000, 15.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "10 m"
+font_size = 32
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="LaneStripe_10" type="Node3D" parent="Landmarks"]
+position = Vector3(0.00000, 0.01200, 10.00000)
+
+[node name="Mesh" type="MeshInstance3D" parent="Landmarks/LaneStripe_10"]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_light")
+
+[node name="Meter15" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(2.50000, 0.35000, 10.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "15 m"
+font_size = 32
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="LaneStripe_11" type="Node3D" parent="Landmarks"]
+position = Vector3(0.00000, 0.01200, 5.00000)
+
+[node name="Mesh" type="MeshInstance3D" parent="Landmarks/LaneStripe_11"]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_light")
+
+[node name="Meter20" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(2.50000, 0.35000, 5.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "20 m"
+font_size = 32
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="LaneStripe_12" type="Node3D" parent="Landmarks"]
+position = Vector3(0.00000, 0.01200, 0.00000)
+
+[node name="Mesh" type="MeshInstance3D" parent="Landmarks/LaneStripe_12"]
+mesh = SubResource("Mesh_4")
+material_override = SubResource("Mat_light")
+
+[node name="Meter25" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(2.50000, 0.35000, 0.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "25 m"
+font_size = 32
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="DoorPost_13" type="StaticBody3D" parent="Architecture"]
+position = Vector3(-9.95000, 1.40000, 14.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/DoorPost_13"]
+mesh = SubResource("Mesh_5")
+material_override = SubResource("Mat_light")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/DoorPost_13"]
+shape = SubResource("Shape_3")
+
+[node name="DoorPost_14" type="StaticBody3D" parent="Architecture"]
+position = Vector3(-8.05000, 1.40000, 14.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/DoorPost_14"]
+mesh = SubResource("Mesh_5")
+material_override = SubResource("Mat_light")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/DoorPost_14"]
+shape = SubResource("Shape_3")
+
+[node name="DoorLintel_15" type="StaticBody3D" parent="Architecture"]
+position = Vector3(-9.00000, 2.50000, 14.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/DoorLintel_15"]
+mesh = SubResource("Mesh_6")
+material_override = SubResource("Mat_light")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/DoorLintel_15"]
+shape = SubResource("Shape_4")
+
+[node name="DoorN9" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(-9.00000, 3.30000, 14.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "1.2 m DOOR"
+font_size = 40
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="DoorPost_16" type="StaticBody3D" parent="Architecture"]
+position = Vector3(7.75000, 1.40000, 14.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/DoorPost_16"]
+mesh = SubResource("Mesh_5")
+material_override = SubResource("Mat_light")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/DoorPost_16"]
+shape = SubResource("Shape_3")
+
+[node name="DoorPost_17" type="StaticBody3D" parent="Architecture"]
+position = Vector3(10.25000, 1.40000, 14.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/DoorPost_17"]
+mesh = SubResource("Mesh_5")
+material_override = SubResource("Mat_light")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/DoorPost_17"]
+shape = SubResource("Shape_3")
+
+[node name="DoorLintel_18" type="StaticBody3D" parent="Architecture"]
+position = Vector3(9.00000, 2.50000, 14.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/DoorLintel_18"]
+mesh = SubResource("Mesh_7")
+material_override = SubResource("Mat_light")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/DoorLintel_18"]
+shape = SubResource("Shape_5")
+
+[node name="Door9" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(9.00000, 3.30000, 14.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "1.8 m DOOR"
+font_size = 40
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="CrouchCeiling_19" type="StaticBody3D" parent="Architecture"]
+position = Vector3(-10.00000, 1.52000, 2.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/CrouchCeiling_19"]
+mesh = SubResource("Mesh_8")
+material_override = SubResource("Mat_gold")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/CrouchCeiling_19"]
+shape = SubResource("Shape_6")
+
+[node name="CrouchWall_20" type="StaticBody3D" parent="Architecture"]
+position = Vector3(-12.65000, 0.80000, 2.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/CrouchWall_20"]
+mesh = SubResource("Mesh_9")
+material_override = SubResource("Mat_dark")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/CrouchWall_20"]
+shape = SubResource("Shape_7")
+
+[node name="CrouchLabel" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(-10.00000, 2.50000, 2.00000)
+billboard = 1
+modulate = Color(0.78, 0.64, 0.42000000000000004, 1)
+text = "1.4 m / CROUCH"
+font_size = 44
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="ProneCeiling_21" type="StaticBody3D" parent="Architecture"]
+position = Vector3(-10.00000, 0.84000, -7.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/ProneCeiling_21"]
+mesh = SubResource("Mesh_10")
+material_override = SubResource("Mat_gold")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/ProneCeiling_21"]
+shape = SubResource("Shape_8")
+
+[node name="ProneLabel" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(-10.00000, 2.20000, -7.00000)
+billboard = 1
+modulate = Color(0.78, 0.64, 0.42000000000000004, 1)
+text = "0.7 m / PRONE"
+font_size = 44
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="CoverHeight_22" type="StaticBody3D" parent="Cover"]
+position = Vector3(8.00000, 0.45000, -6.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Cover/CoverHeight_22"]
+mesh = SubResource("Mesh_11")
+material_override = SubResource("Mat_trim")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover/CoverHeight_22"]
+shape = SubResource("Shape_9")
+
+[node name="Cover8" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(8.00000, 1.60000, -6.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "0.9 m"
+font_size = 38
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="CoverHeight_23" type="StaticBody3D" parent="Cover"]
+position = Vector3(13.00000, 0.55000, -6.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Cover/CoverHeight_23"]
+mesh = SubResource("Mesh_12")
+material_override = SubResource("Mat_trim")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover/CoverHeight_23"]
+shape = SubResource("Shape_10")
+
+[node name="Cover13" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(13.00000, 1.80000, -6.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "1.1 m"
+font_size = 38
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="CoverHeight_24" type="StaticBody3D" parent="Cover"]
+position = Vector3(18.00000, 1.10000, -6.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Cover/CoverHeight_24"]
+mesh = SubResource("Mesh_13")
+material_override = SubResource("Mat_trim")
+
+[node name="Collision" type="CollisionShape3D" parent="Cover/CoverHeight_24"]
+shape = SubResource("Shape_11")
+
+[node name="Cover18" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(18.00000, 2.90000, -6.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "2.2 m"
+font_size = 38
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="Slope15Tread_25" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.05024, -13.18750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_25"]
+mesh = SubResource("Mesh_14")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_26" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.10048, -13.56250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_26"]
+mesh = SubResource("Mesh_15")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_27" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.15072, -13.93750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_27"]
+mesh = SubResource("Mesh_16")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_28" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.20096, -14.31250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_28"]
+mesh = SubResource("Mesh_17")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_29" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.25120, -14.68750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_29"]
+mesh = SubResource("Mesh_18")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_30" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.30144, -15.06250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_30"]
+mesh = SubResource("Mesh_19")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_31" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.35168, -15.43750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_31"]
+mesh = SubResource("Mesh_20")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_32" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.40192, -15.81250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_32"]
+mesh = SubResource("Mesh_21")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_33" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.45216, -16.18750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_33"]
+mesh = SubResource("Mesh_22")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_34" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.50240, -16.56250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_34"]
+mesh = SubResource("Mesh_23")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_35" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.55265, -16.93750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_35"]
+mesh = SubResource("Mesh_24")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_36" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.60289, -17.31250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_36"]
+mesh = SubResource("Mesh_25")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_37" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.65313, -17.68750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_37"]
+mesh = SubResource("Mesh_26")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_38" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.70337, -18.06250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_38"]
+mesh = SubResource("Mesh_27")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_39" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.75361, -18.43750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_39"]
+mesh = SubResource("Mesh_28")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Tread_40" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.80385, -18.81250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope15Tread_40"]
+mesh = SubResource("Mesh_29")
+material_override = SubResource("Mat_light")
+
+[node name="Slope15Ramp" type="StaticBody3D" parent="Architecture"]
+collision_layer = 1
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/Slope15Ramp"]
+shape = SubResource("Ramp_40")
+
+[node name="RampSurface_41" type="Node3D" parent="Architecture"]
+position = Vector3(-30.00000, 0.81585, -16.00000)
+rotation = Vector3(0.26180, 0.00000, 0.00000)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/RampSurface_41"]
+mesh = SubResource("Mesh_30")
+material_override = SubResource("Mat_teal")
+
+[node name="RampLanding_42" type="StaticBody3D" parent="Architecture"]
+position = Vector3(-30.00000, 1.45770, -20.50000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/RampLanding_42"]
+mesh = SubResource("Mesh_31")
+material_override = SubResource("Mat_light")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/RampLanding_42"]
+shape = SubResource("Shape_12")
+
+[node name="Slope15Label" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(-30.00000, 1.00000, -11.00000)
+billboard = 1
+modulate = Color(0.43000000000000005, 0.62, 0.6, 1)
+text = "15° SLOPE"
+font_size = 42
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="Slope30Tread_43" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 0.10825, -13.18750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_43"]
+mesh = SubResource("Mesh_32")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_44" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 0.21651, -13.56250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_44"]
+mesh = SubResource("Mesh_33")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_45" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 0.32476, -13.93750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_45"]
+mesh = SubResource("Mesh_34")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_46" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 0.43301, -14.31250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_46"]
+mesh = SubResource("Mesh_35")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_47" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 0.54127, -14.68750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_47"]
+mesh = SubResource("Mesh_36")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_48" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 0.64952, -15.06250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_48"]
+mesh = SubResource("Mesh_37")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_49" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 0.75777, -15.43750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_49"]
+mesh = SubResource("Mesh_38")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_50" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 0.86603, -15.81250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_50"]
+mesh = SubResource("Mesh_39")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_51" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 0.97428, -16.18750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_51"]
+mesh = SubResource("Mesh_40")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_52" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 1.08253, -16.56250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_52"]
+mesh = SubResource("Mesh_41")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_53" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 1.19078, -16.93750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_53"]
+mesh = SubResource("Mesh_42")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_54" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 1.29904, -17.31250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_54"]
+mesh = SubResource("Mesh_43")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_55" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 1.40729, -17.68750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_55"]
+mesh = SubResource("Mesh_44")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_56" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 1.51554, -18.06250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_56"]
+mesh = SubResource("Mesh_45")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_57" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 1.62380, -18.43750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_57"]
+mesh = SubResource("Mesh_46")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Tread_58" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 1.73205, -18.81250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope30Tread_58"]
+mesh = SubResource("Mesh_47")
+material_override = SubResource("Mat_light")
+
+[node name="Slope30Ramp" type="StaticBody3D" parent="Architecture"]
+collision_layer = 1
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/Slope30Ramp"]
+shape = SubResource("Ramp_58")
+
+[node name="RampSurface_59" type="Node3D" parent="Architecture"]
+position = Vector3(-22.00000, 1.74405, -16.00000)
+rotation = Vector3(0.52360, 0.00000, 0.00000)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/RampSurface_59"]
+mesh = SubResource("Mesh_48")
+material_override = SubResource("Mat_teal")
+
+[node name="RampLanding_60" type="StaticBody3D" parent="Architecture"]
+position = Vector3(-22.00000, 3.31410, -20.50000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/RampLanding_60"]
+mesh = SubResource("Mesh_31")
+material_override = SubResource("Mat_light")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/RampLanding_60"]
+shape = SubResource("Shape_12")
+
+[node name="Slope30Label" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(-22.00000, 1.00000, -11.00000)
+billboard = 1
+modulate = Color(0.43000000000000005, 0.62, 0.6, 1)
+text = "30° SLOPE"
+font_size = 42
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="Slope45Tread_61" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 0.18750, -13.18750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_61"]
+mesh = SubResource("Mesh_49")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_62" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 0.37500, -13.56250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_62"]
+mesh = SubResource("Mesh_50")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_63" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 0.56250, -13.93750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_63"]
+mesh = SubResource("Mesh_51")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_64" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 0.75000, -14.31250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_64"]
+mesh = SubResource("Mesh_52")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_65" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 0.93750, -14.68750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_65"]
+mesh = SubResource("Mesh_53")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_66" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 1.12500, -15.06250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_66"]
+mesh = SubResource("Mesh_54")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_67" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 1.31250, -15.43750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_67"]
+mesh = SubResource("Mesh_55")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_68" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 1.50000, -15.81250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_68"]
+mesh = SubResource("Mesh_56")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_69" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 1.68750, -16.18750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_69"]
+mesh = SubResource("Mesh_57")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_70" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 1.87500, -16.56250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_70"]
+mesh = SubResource("Mesh_58")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_71" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 2.06250, -16.93750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_71"]
+mesh = SubResource("Mesh_59")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_72" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 2.25000, -17.31250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_72"]
+mesh = SubResource("Mesh_60")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_73" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 2.43750, -17.68750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_73"]
+mesh = SubResource("Mesh_61")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_74" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 2.62500, -18.06250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_74"]
+mesh = SubResource("Mesh_62")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_75" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 2.81250, -18.43750)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_75"]
+mesh = SubResource("Mesh_63")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Tread_76" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 3.00000, -18.81250)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/Slope45Tread_76"]
+mesh = SubResource("Mesh_64")
+material_override = SubResource("Mat_light")
+
+[node name="Slope45Ramp" type="StaticBody3D" parent="Architecture"]
+collision_layer = 1
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/Slope45Ramp"]
+shape = SubResource("Ramp_76")
+
+[node name="RampSurface_77" type="Node3D" parent="Architecture"]
+position = Vector3(-14.00000, 3.01200, -16.00000)
+rotation = Vector3(0.78540, 0.00000, 0.00000)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/RampSurface_77"]
+mesh = SubResource("Mesh_65")
+material_override = SubResource("Mat_teal")
+
+[node name="RampLanding_78" type="StaticBody3D" parent="Architecture"]
+position = Vector3(-14.00000, 5.85000, -20.50000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/RampLanding_78"]
+mesh = SubResource("Mesh_31")
+material_override = SubResource("Mat_light")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/RampLanding_78"]
+shape = SubResource("Shape_12")
+
+[node name="Slope45Label" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(-14.00000, 1.00000, -11.00000)
+billboard = 1
+modulate = Color(0.43000000000000005, 0.62, 0.6, 1)
+text = "45° SLOPE"
+font_size = 42
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="TestStairsTread_79" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 0.10000, 16.77500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_79"]
+mesh = SubResource("Mesh_66")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_80" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 0.20000, 16.32500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_80"]
+mesh = SubResource("Mesh_67")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_81" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 0.30000, 15.87500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_81"]
+mesh = SubResource("Mesh_68")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_82" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 0.40000, 15.42500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_82"]
+mesh = SubResource("Mesh_69")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_83" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 0.50000, 14.97500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_83"]
+mesh = SubResource("Mesh_70")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_84" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 0.60000, 14.52500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_84"]
+mesh = SubResource("Mesh_71")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_85" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 0.70000, 14.07500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_85"]
+mesh = SubResource("Mesh_72")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_86" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 0.80000, 13.62500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_86"]
+mesh = SubResource("Mesh_73")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_87" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 0.90000, 13.17500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_87"]
+mesh = SubResource("Mesh_74")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_88" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 1.00000, 12.72500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_88"]
+mesh = SubResource("Mesh_75")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_89" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 1.10000, 12.27500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_89"]
+mesh = SubResource("Mesh_76")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_90" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 1.20000, 11.82500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_90"]
+mesh = SubResource("Mesh_77")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_91" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 1.30000, 11.37500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_91"]
+mesh = SubResource("Mesh_78")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_92" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 1.40000, 10.92500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_92"]
+mesh = SubResource("Mesh_79")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_93" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 1.50000, 10.47500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_93"]
+mesh = SubResource("Mesh_80")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsTread_94" type="Node3D" parent="Architecture"]
+position = Vector3(-27.00000, 1.60000, 10.02500)
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/TestStairsTread_94"]
+mesh = SubResource("Mesh_81")
+material_override = SubResource("Mat_light")
+
+[node name="TestStairsRamp" type="StaticBody3D" parent="Architecture"]
+collision_layer = 1
+collision_mask = 2
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/TestStairsRamp"]
+shape = SubResource("Ramp_94")
+
+[node name="StairLanding_95" type="StaticBody3D" parent="Architecture"]
+position = Vector3(-27.00000, 3.05000, 8.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/StairLanding_95"]
+mesh = SubResource("Mesh_82")
+material_override = SubResource("Mat_light")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/StairLanding_95"]
+shape = SubResource("Shape_13")
+
+[node name="StairBackWall_96" type="StaticBody3D" parent="Architecture"]
+position = Vector3(-27.00000, 4.60000, 6.10000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/StairBackWall_96"]
+mesh = SubResource("Mesh_83")
+material_override = SubResource("Mat_wall")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/StairBackWall_96"]
+shape = SubResource("Shape_14")
+
+[node name="StairLabel" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(-27.00000, 5.00000, 11.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "STAIRS / CAMERA"
+font_size = 46
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="CornerWall_97" type="StaticBody3D" parent="Architecture"]
+position = Vector3(9.00000, 1.80000, 23.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/CornerWall_97"]
+mesh = SubResource("Mesh_84")
+material_override = SubResource("Mat_wall")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/CornerWall_97"]
+shape = SubResource("Shape_15")
+
+[node name="CornerReturn_98" type="StaticBody3D" parent="Architecture"]
+position = Vector3(11.30000, 1.80000, 25.50000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/CornerReturn_98"]
+mesh = SubResource("Mesh_85")
+material_override = SubResource("Mat_wall")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/CornerReturn_98"]
+shape = SubResource("Shape_16")
+
+[node name="CornerLabel" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(10.00000, 4.30000, 23.00000)
+billboard = 1
+modulate = Color(0.88, 0.86, 0.76, 1)
+text = "LEAN / CORNER"
+font_size = 42
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="RangePad_99" type="Node3D" parent="Landmarks"]
+position = Vector3(26.00000, 0.01500, 5.00000)
+
+[node name="Mesh" type="MeshInstance3D" parent="Landmarks/RangePad_99"]
+mesh = SubResource("Mesh_86")
+material_override = SubResource("Mat_gold")
+
+[node name="RangeLabel" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(27.00000, 3.00000, 7.00000)
+billboard = 1
+modulate = Color(0.78, 0.64, 0.42000000000000004, 1)
+text = "RIFLE RANGE / R TO RELOAD"
+font_size = 45
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="Target10" type="StaticBody3D" parent="Targets" groups=["range_targets"]]
+position = Vector3(23, 1.05, -5)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2")
+travel = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Targets/Target10"]
+mesh = SubResource("TargetShapeTarget10Mesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/Target10"]
+shape = SubResource("TargetShapeTarget10")
+
+[node name="TargetLabel10" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(23.00000, 2.70000, -5.00000)
+billboard = 1
+modulate = Color(0.78, 0.64, 0.42000000000000004, 1)
+text = "10 m"
+font_size = 40
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="Target25" type="StaticBody3D" parent="Targets" groups=["range_targets"]]
+position = Vector3(27, 1.05, -20)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2")
+travel = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Targets/Target25"]
+mesh = SubResource("TargetShapeTarget25Mesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/Target25"]
+shape = SubResource("TargetShapeTarget25")
+
+[node name="TargetLabel25" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(27.00000, 2.70000, -20.00000)
+billboard = 1
+modulate = Color(0.78, 0.64, 0.42000000000000004, 1)
+text = "25 m"
+font_size = 40
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="Target50" type="StaticBody3D" parent="Targets" groups=["range_targets"]]
+position = Vector3(32, 1.05, -45)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2")
+travel = 0.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Targets/Target50"]
+mesh = SubResource("TargetShapeTarget50Mesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/Target50"]
+shape = SubResource("TargetShapeTarget50")
+
+[node name="TargetLabel50" type="Label3D" parent="Landmarks" groups=["guide"]]
+position = Vector3(32.00000, 2.70000, -45.00000)
+billboard = 1
+modulate = Color(0.78, 0.64, 0.42000000000000004, 1)
+text = "50 m"
+font_size = 40
+pixel_size = 0.009
+outline_size = 8
+visibility_range_end = 65.0
+
+[node name="MovingTarget" type="StaticBody3D" parent="Targets" groups=["range_targets"]]
+position = Vector3(25, 1.05, -30)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2")
+travel = 2.5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Targets/MovingTarget"]
+mesh = SubResource("TargetShapeMovingTargetMesh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Targets/MovingTarget"]
+shape = SubResource("TargetShapeMovingTarget")
+
+[node name="RangeBackstop_100" type="StaticBody3D" parent="Architecture"]
+position = Vector3(27.00000, 3.00000, -49.00000)
+collision_layer = 1
+collision_mask = 2
+
+[node name="Mesh" type="MeshInstance3D" parent="Architecture/RangeBackstop_100"]
+mesh = SubResource("Mesh_87")
+material_override = SubResource("Mat_dark")
+
+[node name="Collision" type="CollisionShape3D" parent="Architecture/RangeBackstop_100"]
+shape = SubResource("Shape_17")
+
+[node name="MOVEMENTLANE" type="Marker3D" parent="Locations"]
+position = Vector3(0.00000, 0.00000, 15.00000)
+metadata/title = "MOVEMENT LANE"
+metadata/radius = 14
+
+[node name="CLEARANCE" type="Marker3D" parent="Locations"]
+position = Vector3(-10.00000, 0.00000, 0.00000)
+metadata/title = "CLEARANCE"
+metadata/radius = 14
+
+[node name="RIFLERANGE" type="Marker3D" parent="Locations"]
+position = Vector3(27.00000, 0.00000, -10.00000)
+metadata/title = "RIFLE RANGE"
+metadata/radius = 14
+
+[node name="SLOPES" type="Marker3D" parent="Locations"]
+position = Vector3(-23.00000, 0.00000, -16.00000)
+metadata/title = "SLOPES"
+metadata/radius = 14
+
+[node name="STAIRS" type="Marker3D" parent="Locations"]
+position = Vector3(-27.00000, 0.00000, 13.00000)
+metadata/title = "STAIRS"
+metadata/radius = 14

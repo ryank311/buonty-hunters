@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="WeaponProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/weapon_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "SERVICE PISTOL"
+automatic = false
+magazine_size = 12
+starting_reserve = 36
+rounds_per_minute = 360.0
+reload_seconds = 1.65
+draw_seconds = 0.25
+range_metres = 80.0
+impact_diameter = 0.08
+vertical_kick = 0.95
+horizontal_kick = 0.22
+recovery_delay = 0.12
+recovery_speed = 11.0
+max_climb = 7.0
+base_spread = 0.30
+walk_spread = 1.0
+run_spread = 6.0
+spread_per_shot = 0.45
+max_bloom = 3.0
+weapon_kick = 1.3

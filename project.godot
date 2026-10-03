@@ -1,0 +1,42 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="SOCOM"
+run/main_scene="res://scenes/main.tscn"
+config/features=PackedStringArray("4.7", "Mobile")
+config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1280
+window/size/window_height_override=720
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/size/min_width=960
+window/size/min_height=540
+
+[layer_names]
+
+3d_physics/layer_1="World"
+3d_physics/layer_2="Actors"
+3d_physics/layer_3="Targets"
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="mobile"
