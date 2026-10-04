@@ -70,19 +70,25 @@ func _run() -> void:
 	var rig := player.camera_rig
 	var reticle: Control = session.hud.crosshair
 	# Real window stretch transforms, not just project-settings string assertions.
-	for output: Vector2i in [Vector2i(1024,768),Vector2i(1600,900),Vector2i(1920,1080),Vector2i(2560,1080),Vector2i(800,600)]:
+	var center_ray := rig.camera.project_ray_normal(Vector2(320,240))
+	var corner_ray := rig.camera.project_ray_normal(Vector2(0,0))
+	for output: Vector2i in [Vector2i(1024,768),Vector2i(1600,900),Vector2i(1920,1080),Vector2i(2560,1080),Vector2i(800,600),Vector2i(800,1000),Vector2i(3840,2160)]:
 		root.size = output
 		await frames(3)
 		var logical := root.get_visible_rect().size
 		var transform := root.get_final_transform()
 		var content := Rect2(transform.origin,logical * transform.get_scale())
+		check(logical.is_equal_approx(Vector2(640,480)),"%s keeps the full frame at exactly 640x480" % output)
+		check(root.get_texture().get_size().is_equal_approx(Vector2(640,480)),"%s keeps the render texture at 640x480 rather than the window resolution" % output)
 		check(is_equal_approx(logical.x/logical.y,4.0/3.0) and absf(transform.x.length()-transform.y.length()) < 0.001,"%s preserves 4:3 without stretching" % output)
-		check(absf(content.position.x-(output.x-content.size.x)*0.5) < 1.0 and absf(content.size.y-output.y) < 1.0,"%s centers the content between equal side bars" % output)
-		check(reticle.center_ring.position.is_equal_approx(logical*0.5),"%s keeps idle aim at exact viewport center" % output)
+		var expected_scale := minf(output.x/640.0,output.y/480.0)
+		check(content.position.distance_to((Vector2(output)-content.size)*0.5) < 1.0 and content.size.distance_to(Vector2(640,480)*expected_scale) < 1.0,"%s fits the whole image between equal black bars" % output)
+		check((reticle.get_global_transform()*reticle.center_ring.position).is_equal_approx(logical*0.5),"%s keeps idle aim at exact viewport center" % output)
+		check(center_ray.is_equal_approx(rig.camera.project_ray_normal(Vector2(320,240))) and corner_ray.is_equal_approx(rig.camera.project_ray_normal(Vector2.ZERO)),"%s shows the same world and aim direction" % output)
 	root.size = Vector2i(1024,768)
 	await frames(10)
 	var head := rig.camera.unproject_position(player.soldier.parts.Helmet.global_position)
-	check(head.y > 768*0.60 and head.y < 768*0.75 and absf(head.x-512) < 35,"Elevated centered camera frames the soldier below the reticle (%s)" % head)
+	check(head.y > 480*0.60 and head.y < 480*0.75 and absf(head.x-320) < 22,"Elevated centered camera frames the soldier below the reticle (%s)" % head)
 	# Motion, stance, lean and camera pitch never add a cosmetic reticle offset.
 	var stays_centered := true
 	for stance: int in [0,1,2]:
@@ -103,7 +109,7 @@ func _run() -> void:
 		rig.pitch = pitch
 		rig.set_recoil(Vector2(deg_to_rad(8.0),0.005))
 		var projected := rig.camera.unproject_position(rig.camera.global_position + rig.aim_direction()*50)
-		var indicated := reticle.size*0.5 + rig.reticle_offset(reticle.size)
+		var indicated := reticle.get_global_transform()*(reticle.size*0.5 + rig.reticle_offset(reticle.size))
 		var result := player.weapon.query_aim()
 		projection_agrees = projection_agrees and projected.distance_to(indicated) < 0.01 and not result.is_empty() and rig.camera.unproject_position(result.position).distance_to(indicated) < 0.1
 	check(projection_agrees,"Recoil reticle and actual muzzle hitscan agree through different look angles")

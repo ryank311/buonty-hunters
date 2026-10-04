@@ -8,3 +8,6 @@
 
 # Personal Claude Code settings
 .claude/settings.local.json
+
+# Blender backup files
+*.blend1

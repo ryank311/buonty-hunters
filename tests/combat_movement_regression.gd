@@ -223,6 +223,41 @@ func _run() -> void:
 	check(extended,"Dive stretches the arms forward into the airborne pose")
 	check(locked_fire and player.can_fire(),"Firing is blocked in flight/recovery and restored after settling")
 	check(player.stance.current == 2 and not player.diving,"Holding through landing never retriggers a dive or stands the player up")
+	# A strafe dive leaves sideways with the carried momentum, pushes faster, and keeps the aim.
+	await place()
+	player.test_command = {"move":Vector2.RIGHT}
+	await frames(40)
+	var carried := Vector2(player.velocity.x,player.velocity.z).length()
+	button(JOY_BUTTON_B,true)
+	var side_launch := Vector3.ZERO
+	var side_landing := Vector3.ZERO
+	var fastest := 0.0
+	var banked := false
+	for i: int in range(100):
+		await frames(1)
+		if player.diving:
+			if side_launch == Vector3.ZERO:
+				side_launch = player.position
+			fastest = maxf(fastest,Vector2(player.velocity.x,player.velocity.z).length())
+			banked = banked or player.soldier.basis.x.y < -0.3
+		elif side_launch != Vector3.ZERO and side_landing == Vector3.ZERO:
+			side_landing = player.position
+			player.test_command = {}
+	button(JOY_BUTTON_B,false)
+	await frames(3)
+	var side_travel := side_landing - side_launch
+	check(side_landing != Vector3.ZERO and side_travel.x > 1.3 and absf(side_travel.z) < 0.15 and absf(player.rotation.y) < 0.001,"Strafing plus a hold dives sideways while the body keeps facing the aim (%.2f m)" % side_travel.x)
+	check(fastest > carried * 1.2,"The dive pushes past the strafe speed it carried in (%.2f -> %.2f m/s)" % [carried,fastest])
+	check(banked and player.stance.current == 2,"A side dive banks the body into its travel and lands prone")
+	await place()
+	player.test_command = {"move":Vector2.DOWN}
+	await frames(40)
+	button(JOY_BUTTON_B,true)
+	await frames(25)
+	button(JOY_BUTTON_B,false)
+	player.test_command = {}
+	check(player.stance.current == 2 and not player.diving and player.dive_recovery == 0,"Backpedaling plus a hold lowers into prone instead of diving backward")
+	await frames(3)
 	# A thin wall must stop the dive; nearby space must be checked before committing.
 	await place()
 	var blocker := box_at(Vector3(0,1.5,23.5),Vector3(5,3,0.2))

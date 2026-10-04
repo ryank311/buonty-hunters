@@ -8,7 +8,9 @@ extends Resource
 @export var prone_strafe_seconds: float = 1.15
 @export var prone_turn_speed: float = 1.2
 @export var dive_speed: float = 5.6
-@export var dive_lift: float = 3.0
+## Launch push over the speed carried into the dive.
+@export var dive_boost: float = 1.3
+@export var dive_lift: float = 4.0
 @export var dive_recovery_seconds: float = 0.45
 @export var acceleration: float = 18.0
 @export var braking: float = 24.0

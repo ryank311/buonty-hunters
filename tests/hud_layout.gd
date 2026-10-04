@@ -97,9 +97,13 @@ func _run() -> void:
 	await settle()
 	check(hud.health_bar.value == 100 and hud.ammo_label.text == "30 / 90", "Reset restores health and ammo readouts")
 	check(hud.squad_rows.size() == 5 and labels_in(hud.hud_panels.Squad).any(func(label: Label) -> bool: return label.text == "05  OPEN SLOT"), "Squad panel contains the player and four explicitly open slots")
-	session.set_retro(true)
+	# A saved comparison option from older builds must not alter the fixed buffer.
+	var legacy := ConfigFile.new()
+	legacy.set_value("display", "retro", true)
+	session.apply_settings_config(legacy)
 	await settle()
-	check(hud.root.size.is_equal_approx(root.get_visible_rect().size), "Half-resolution world rendering leaves the HUD at full layout resolution")
+	check(is_equal_approx(root.scaling_3d_scale,1.0) and root.get_visible_rect().size == Vector2(640,480), "Older half-resolution settings cannot change the shared 640x480 frame")
+	check(hud.root.get_global_rect().size.is_equal_approx(root.get_visible_rect().size), "HUD and world occupy the same fixed-resolution frame")
 	root.size = Vector2i(960,540)
 	session.set_modal(true)
 	for page: int in range(hud.pages.size()):

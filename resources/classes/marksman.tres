@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/soldier_class.gd" id="script"]
+[ext_resource type="Resource" path="res://resources/weapons/sniper.tres" id="sniper"]
+[ext_resource type="Resource" path="res://resources/weapons/auto_pistol.tres" id="auto_pistol"]
+[ext_resource type="Resource" path="res://resources/weapons/claymore.tres" id="claymore"]
+[ext_resource type="Resource" path="res://resources/weapons/smoke.tres" id="smoke"]
+
+[resource]
+script = ExtResource("script")
+display_name = "MARKSMAN"
+summary = "Scoped sniper rifle and machine pistol. Claymore and smoke."
+primary = ExtResource("sniper")
+secondary = ExtResource("auto_pistol")
+equipment = Array[Resource]([ExtResource("claymore"), ExtResource("smoke")])

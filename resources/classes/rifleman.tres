@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/soldier_class.gd" id="script"]
+[ext_resource type="Resource" path="res://resources/weapons/rifle.tres" id="rifle"]
+[ext_resource type="Resource" path="res://resources/weapons/pistol.tres" id="pistol"]
+[ext_resource type="Resource" path="res://resources/weapons/frag.tres" id="frag"]
+[ext_resource type="Resource" path="res://resources/weapons/smoke.tres" id="smoke"]
+
+[resource]
+script = ExtResource("script")
+display_name = "RIFLEMAN"
+summary = "Field rifle and 9 mm pistol. Frag and smoke."
+primary = ExtResource("rifle")
+secondary = ExtResource("pistol")
+equipment = Array[Resource]([ExtResource("frag"), ExtResource("smoke")])

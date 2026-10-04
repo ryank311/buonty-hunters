@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/soldier_class.gd" id="script"]
+[ext_resource type="Resource" path="res://resources/weapons/shotgun.tres" id="shotgun"]
+[ext_resource type="Resource" path="res://resources/weapons/heavy_pistol.tres" id="heavy_pistol"]
+[ext_resource type="Resource" path="res://resources/weapons/flash.tres" id="flash"]
+[ext_resource type="Resource" path="res://resources/weapons/frag.tres" id="frag"]
+
+[resource]
+script = ExtResource("script")
+display_name = "BREACHER"
+summary = "Shotgun and heavy pistol. Flashbang and frag."
+primary = ExtResource("shotgun")
+secondary = ExtResource("heavy_pistol")
+equipment = Array[Resource]([ExtResource("flash"), ExtResource("frag")])

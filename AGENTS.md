@@ -9,9 +9,10 @@ A third-person tactical shooter prototype in Godot 4.7: GDScript, Jolt physics, 
 | `scripts/` | Gameplay code: `player/`, `combat/`, `levels/` (session and level switching), `ui/`, `resources/` (tuning profile classes) |
 | `scenes/` | `main.tscn`, `actors/player.tscn`, `levels/old_quarter.tscn`, `levels/movement_lab.tscn` |
 | `resources/` | Default tuning values (`.tres`) for movement, camera, and weapons |
+| `art/` | `blender/` holds model sources (`.blend`, hidden from Godot); `models/` holds the exported `.glb` files the game loads; `decals/` |
 | `tests/` | Headless regression suites, one `SceneTree` script each |
-| `tools/dev` | The single command for checking, testing, and capturing the game |
-| `tools/agent/` | What `tools/dev` and the MCP server run: Godot wrapper, MCP launcher, scenario harness, capture and check scripts |
+| `tools/dev` | The single command for checking, testing, and capturing the game, and for the Blender asset pipeline |
+| `tools/agent/` | What `tools/dev` and the MCP servers run: Godot wrapper, MCP launchers, scenario harness, capture and check scripts, Blender export and preview scripts |
 | `.agents/skills/` | Skills for this project (`.claude/skills` links here) |
 
 ## Verify every change
@@ -26,10 +27,14 @@ Say what you ran and what it showed. A change that was not checked is not done.
 
 - `godot-dev-loop`: the check, test, look loop with `tools/dev`, the Godot pitfalls that cost time here, and how to write a regression suite.
 - `godot-playtest`: driving the running game through the `godot` MCP server and the scenario harness: any level, spawn, stance, weapon, or menu state; tick-exact input; state digests; screenshots.
+- `blender-modeling`: building models and level objects through the `blender` MCP server, then exporting, previewing, and placing them in the game with `tools/dev blender`.
 
 ## MCP
 
-The `godot` server (godot-mcp-runtime) is registered for Claude Code in `.mcp.json` and for Codex in `.codex/config.toml`. Both run `tools/agent/mcp`, which pins the server version and points it at the Godot wrapper. `tools/dev mcp-smoke` tests it end to end.
+Two servers are registered for Claude Code in `.mcp.json` and for Codex in `.codex/config.toml`:
+
+- `godot` (godot-mcp-runtime) runs `tools/agent/mcp`, which pins the server version and points it at the Godot wrapper. `tools/dev mcp-smoke` tests it end to end.
+- `blender` (mcp-for-blender) runs `tools/agent/blender-mcp.mjs`, which starts a Blender instance for the agent at the first tool call: Claude Code's on port 9886, Codex's on 9887. `tools/dev blender smoke` tests it end to end.
 
 ## Rules
 
@@ -38,4 +43,6 @@ The `godot` server (godot-mcp-runtime) is registered for Claude Code in `.mcp.js
 - Keep each `.gd.uid` file with its script when moving, renaming, or deleting.
 - Do not edit `.godot/`, `.mcp/`, or `.agent/`, and do not run `tools/build_graybox.py` unless asked (it overwrites the level scenes).
 - Start Godot only through `tools/dev` or the MCP server, and launch MCP game sessions with `background: true`. A bare launch takes the user's keyboard focus and mouse.
+- Use Blender only through the `blender` MCP server and `tools/dev blender`. The user's own Blender, its preferences, and its files are not yours to touch.
+- A model is a `.blend` in `art/blender/` plus its exported `.glb` in `art/models/`. Change the source and re-export; never edit a `.glb` or its `.import` file by hand.
 - This checkout is shared with a person in the Godot editor and with other agents. Leave Godot processes you did not start, re-read a file before editing it, and report unexpected changes or failures in files you did not touch instead of reverting them.

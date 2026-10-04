@@ -58,3 +58,40 @@ approval_mode = "approve"
 
 [mcp_servers.godot.tools.simulate_input]
 approval_mode = "approve"
+
+# Blender MCP server (mcp-for-blender) through the project proxy, which starts this
+# agent's own Blender on demand. Codex uses port 9887; Claude Code uses 9886.
+# The asset-library and AI-generation tools are left out: docs/DESIGN.md asks for
+# original assets, and they need accounts. Add names to enabled_tools to bring them back.
+[mcp_servers.blender]
+command = "sh"
+args = ["-c", "PATH=\"$PATH:/usr/local/bin:/opt/homebrew/bin\" exec node \"$(git rev-parse --show-toplevel 2>/dev/null || pwd)/tools/agent/blender-mcp.mjs\" 9887"]
+startup_timeout_sec = 120
+tool_timeout_sec = 180
+enabled_tools = [
+  "get_addon_status",
+  "get_scene_info",
+  "get_object_info",
+  "get_viewport_screenshot",
+  "execute_blender_code",
+  "bpy_api_lookup",
+  "describe_node_type",
+]
+
+[mcp_servers.blender.tools.get_addon_status]
+approval_mode = "approve"
+
+[mcp_servers.blender.tools.get_scene_info]
+approval_mode = "approve"
+
+[mcp_servers.blender.tools.get_object_info]
+approval_mode = "approve"
+
+[mcp_servers.blender.tools.get_viewport_screenshot]
+approval_mode = "approve"
+
+[mcp_servers.blender.tools.bpy_api_lookup]
+approval_mode = "approve"
+
+[mcp_servers.blender.tools.describe_node_type]
+approval_mode = "approve"

@@ -5,6 +5,9 @@ const INK := Color("dce3d2")
 const MUTED := Color("a6b4ad")
 const GOLD := Color("d5bd7f")
 const MAP_SCRIPT := preload("res://scripts/ui/tactical_map.gd")
+# Preserve the authored HUD proportions while rasterizing the entire game at
+# 640x480. The window upscales this finished frame, including all UI.
+const LAYOUT_SIZE := Vector2(1024, 768)
 var minimap: Control
 var session: Node3D
 var root := Control.new()
@@ -35,7 +38,6 @@ var menu_box: VBoxContainer
 var sliders: Dictionary = {}
 var values: Dictionary = {}
 var invert_toggle: CheckButton
-var retro_toggle: CheckButton
 var notice_time: float = 0.0
 var pages: Array[VBoxContainer] = []
 var page_buttons: Array[Button] = []
@@ -48,7 +50,8 @@ var slider_parent: VBoxContainer
 func initialize(owner_session: Node3D) -> void:
 	session = owner_session
 	add_child(root)
-	root.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	root.size = LAYOUT_SIZE
+	root.scale = get_viewport().get_visible_rect().size / LAYOUT_SIZE
 	root.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var theme := Theme.new()
 	theme.default_font_size = 16
@@ -314,12 +317,7 @@ func _build_menu() -> void:
 	_slider("height_offset", "Camera height above stance (m)", 0.0, 1.4, 0.05)
 	_slider("mouse_sensitivity", "Mouse sensitivity", 0.001, 0.006, 0.0001)
 	_slider("hud_opacity", "HUD backing opacity", 0.0, 0.5, 0.02)
-	retro_toggle = CheckButton.new()
-	slider_parent.add_child(retro_toggle)
-	retro_toggle.text = "Half-resolution 3D"
-	retro_toggle.toggled.connect(func(value: bool) -> void: session.set_retro(value))
-	_bind_focus(retro_toggle)
-	page_controls.back().append(retro_toggle)
+	_label(slider_parent, "Fixed 640 × 480 / 4:3 · Window size only scales the image", Vector2.ZERO, 14, MUTED)
 	_page("Controller response")
 	_slider("pad_sensitivity", "Look speed (rad/s)", 1.0, 5.0, 0.1)
 	_slider("pad_deadzone", "Stick dead zone", 0.05, 0.35, 0.01)
@@ -393,7 +391,6 @@ func refresh_settings() -> void:
 		sliders[key].set_value_no_signal(value)
 		values[key].text = "%.4f" % value if key == "mouse_sensitivity" else "%.2f" % value
 	invert_toggle.set_pressed_no_signal(session.player.camera_settings.invert_y)
-	retro_toggle.set_pressed_no_signal(session.retro_enabled)
 
 func show_page(index: int, focus: bool = true) -> void:
 	current_page = posmod(index, pages.size())

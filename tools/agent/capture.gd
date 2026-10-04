@@ -3,8 +3,15 @@ extends SceneTree
 ## Run it through `tools/dev shot`. User arguments (after `--`):
 ##   <scenario>...        names from harness.gd SCENARIOS
 ##   --all                every scenario
-##   --spec=<json>        an ad-hoc apply() spec, saved as custom.png
-##   --step=<json>        {"frames": N, ...step input} run after each scenario is applied
+##   key=value            an apply() key, e.g. level=lab pos=0,0.1,20 stance=prone ammo=0.
+##                        With scenarios it overrides them; alone it is saved as custom.png
+##   step.key=value       a step() key run after each state is applied, e.g.
+##                        step.frames=45 step.forward=1 step.hold=fire
+##   --model=<name>       place art/models/<name>.glb in the level (repeatable); with no
+##                        level chosen it is shown on the Movement Lab start line
+##   --at=x,y,z --yaw=n   where the first model goes (default 1.5,0,20) and its heading
+##   --spec=<json>        a whole apply() spec as JSON, for nested keys such as tuning
+##   --step=<json>        a whole step() input as JSON, including "frames"
 ##   --out=<dir>          output directory (default .agent/shots)
 ##   --sheet              also save sheet-N.png contact sheets, six scenarios each
 ##   --full               keep the native frame instead of fitting within 960x720
@@ -24,6 +31,11 @@ func _run() -> void:
 	var out := ProjectSettings.globalize_path("res://.agent/shots")
 	var spec_json := ""
 	var step_json := ""
+	var overrides: Dictionary = {}
+	var step_keys: Dictionary = {}
+	var models: Array[String] = []
+	var model_at := Vector3(1.5, 0.0, 20.0)
+	var model_yaw := 0.0
 	for arg: String in OS.get_cmdline_user_args():
 		if arg.begins_with("--out="):
 			out = arg.trim_prefix("--out=")
@@ -31,8 +43,19 @@ func _run() -> void:
 			spec_json = arg.trim_prefix("--spec=")
 		elif arg.begins_with("--step="):
 			step_json = arg.trim_prefix("--step=")
+		elif arg.begins_with("--model="):
+			models.append(arg.trim_prefix("--model="))
+		elif arg.begins_with("--at="):
+			model_at = H._vec(_value(arg.trim_prefix("--at=")))
+		elif arg.begins_with("--yaw="):
+			model_yaw = arg.trim_prefix("--yaw=").to_float()
 		elif arg.begins_with("--"):
 			flags[arg.trim_prefix("--")] = true
+		elif arg.begins_with("step.") and "=" in arg:
+			var step_key := arg.get_slice("=", 0).trim_prefix("step.")
+			step_keys[step_key] = _value(arg.get_slice("=", 1), step_key in ["hold", "tap"])
+		elif "=" in arg:
+			overrides[arg.get_slice("=", 0)] = _value(arg.get_slice("=", 1), arg.get_slice("=", 0) == "hold")
 		else:
 			names.append(arg)
 	if flags.has("all"):
@@ -43,6 +66,19 @@ func _run() -> void:
 		printerr("capture: --spec and --step take a JSON object")
 		quit(2)
 		return
+	if not step_keys.is_empty():
+		step = step_keys.merged(step if step != null else {})
+	if not models.is_empty():
+		var placed: Array = []
+		for index: int in range(models.size()):
+			var scene := models[index] if models[index].begins_with("res://") else "res://art/models/%s.glb" % models[index].trim_suffix(".glb")
+			# Several models stand in a row, 2.5 m apart.
+			placed.append({"scene": scene, "pos": [model_at.x + 2.5 * index, model_at.y, model_at.z], "yaw": model_yaw})
+		overrides["place"] = placed
+		if names.is_empty() and spec == null and not overrides.has("level"):
+			overrides.merge({"level": "lab", "spawn": "Start"})
+	if not overrides.is_empty() and names.is_empty():
+		spec = overrides.merged(spec if spec != null else {})
 	for title: String in names:
 		if not H.SCENARIOS.has(title):
 			printerr("capture: unknown scenario '%s'. Known: %s" % [title, ", ".join(H.SCENARIOS.keys())])
@@ -69,9 +105,12 @@ func _run() -> void:
 		if job[1] != null:
 			result = await H.apply(self, job[1])
 		else:
-			result = await H.scenario(self, job[0])
+			result = await H.scenario(self, job[0], overrides)
 		if step != null and not result.has("error"):
-			result = await H.step(self, int(step.get("frames", 60)), step)
+			var stepped: Dictionary = await H.step(self, int(step.get("frames", 60)), step)
+			if result.has("notes"):
+				stepped["notes"] = result.notes
+			result = stepped
 		var image := await _grab()
 		if not flags.has("full"):
 			var ratio := minf(960.0 / image.get_width(), 720.0 / image.get_height())
@@ -103,6 +142,21 @@ func _run() -> void:
 		var order: Array = jobs.slice(first, first + count).map(func(job: Array) -> String: return job[0])
 		print("SHEET ", JSON.stringify({"png": sheet_path, "left_to_right_top_to_bottom": order}))
 	quit(0)
+
+# Reads a command-line value: true/false, a number, text, or a comma-separated list.
+func _value(text: String, as_list: bool = false) -> Variant:
+	if "," in text or as_list:
+		var items: Array = []
+		for part: String in text.split(","):
+			items.append(_value(part))
+		return items if items.size() > 1 or as_list else items[0]
+	if text in ["true", "false"]:
+		return text == "true"
+	if text.is_valid_int():
+		return text.to_int()
+	if text.is_valid_float():
+		return text.to_float()
+	return text
 
 func _grab() -> Image:
 	# A hidden macOS window is occluded, so the engine stops drawing it; render one

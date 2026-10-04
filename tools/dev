@@ -16,20 +16,28 @@ Usage: tools/dev <command>
                         errors and broken references as file:line. Takes about 2 s.
   test [suite...]       Run the headless regression suites in tests/ in parallel
                         (all of them, or the ones named, e.g. `test hud_layout`).
-  shot [options] [scenario...]
+  shot [options] [scenario...] [key=value...]
                         Render scenarios to PNG in a hidden window. No arguments lists
-                        the scenarios. Options: --all, --sheet, --state, --full, --show,
-                        --spec='<json>', --step='<json>', --out=<dir>.
+                        the scenarios. key=value sets any harness state (level=lab
+                        stance=prone ammo=0); step.key=value plays input first
+                        (step.frames=45 step.forward=1); --model=<name> stands a model
+                        from art/models in the level. Options: --all, --sheet, --state,
+                        --full, --show, --at=x,y,z, --yaw=n, --spec='<json>',
+                        --step='<json>', --out=<dir>.
   import                Re-import assets and rebuild the global class cache. Needed
                         after adding an asset or a new `class_name`.
+  blender <command>     The agents' Blender and the .blend -> .glb pipeline: status,
+                        start, stop, export, preview. `tools/dev blender help` lists them.
   doctor                Check the toolchain, the MCP setup, and who else is using the project.
-  mcp-smoke             Drive the MCP server end to end against this project.
+  mcp-smoke             Drive the Godot MCP server end to end against this project.
   godot [args...]       Run Godot through the project wrapper.
 EOF
 }
 
 # Each invocation writes to its own directory, so agents sharing this checkout never
-# read each other's logs or frames. Anything older than an hour is pruned.
+# read each other's logs or frames. Anything older than an hour is pruned. Godot's own
+# log file goes there too (--log-file): a sandboxed agent cannot write to the engine's
+# default user:// log folder, and the engine crashes when that write fails.
 new_run() {
 	local base="$out/$1" run
 	mkdir -p "$base"
@@ -64,7 +72,7 @@ cmd_check() {
 	local run log status problems summary
 	run="$(new_run logs)"
 	log="$run/check.log"
-	"$godot" --headless --path "$root" --script res://tools/agent/check.gd >"$log" 2>&1
+	"$godot" --headless --path "$root" --log-file "$run/godot.log" --script res://tools/agent/check.gd >"$log" 2>&1
 	status=$?
 	problems="$(format_errors <"$log")"
 	[[ -n "$problems" ]] && echo "$problems"
@@ -87,7 +95,7 @@ cmd_check() {
 
 run_suite() {
 	local name="$1" log="$2/$1.log" limit="${SOCOM_TEST_TIMEOUT:-240}" started=$SECONDS
-	"$godot" --headless --path "$root" --fixed-fps 60 --script "res://tests/$name.gd" -- --qa >"$log" 2>&1 &
+	"$godot" --headless --path "$root" --log-file "$2/$name.godot.log" --fixed-fps 60 --script "res://tests/$name.gd" -- --qa >"$log" 2>&1 &
 	local pid=$!
 	# A suite whose script fails to compile never reaches quit(); do not wait forever.
 	# The watchdog gives up its output streams so a caller piping ours is not kept waiting.
@@ -171,11 +179,23 @@ cmd_shot() {
 	fi
 	run="$(new_run logs)"
 	log="$run/shot.log"
-	SOCOM_AGENT_SHOW=$show "$godot" --path "$root" --script res://tools/agent/capture.gd -- --qa "${args[@]}" >"$log" 2>&1
+	SOCOM_AGENT_SHOW=$show "$godot" --path "$root" --log-file "$run/godot.log" --script res://tools/agent/capture.gd -- --qa "${args[@]}" >"$log" 2>&1 &
+	local pid=$! limit="${SOCOM_SHOT_TIMEOUT:-120}"
+	# A script error leaves the capture window running with nothing to do; end it.
+	( sleep "$limit"; kill "$pid" 2>/dev/null ) </dev/null >/dev/null 2>&1 &
+	local watchdog=$!
+	wait "$pid" 2>/dev/null
 	status=$?
+	pkill -P "$watchdog" 2>/dev/null
+	kill "$watchdog" 2>/dev/null
+	wait "$watchdog" 2>/dev/null
 	grep -E '^(SHOT|SHEET|Scenarios:|capture:) ?' "$log"
 	format_errors <"$log" | head -12
 	rmdir "$shots" 2>/dev/null
+	if [[ $status -eq 143 || $status -eq 137 ]]; then
+		echo "SHOT: TIMEOUT after ${limit}s. Log: ${log#"$root"/}"
+		return 1
+	fi
 	if [[ $status -ne 0 ]]; then
 		echo "SHOT: FAIL (exit $status). Log: ${log#"$root"/}"
 		return 1
@@ -187,9 +207,10 @@ cmd_import() {
 	local run log status
 	run="$(new_run logs)"
 	log="$run/import.log"
-	"$godot" --headless --path "$root" --import >"$log" 2>&1
+	"$godot" --headless --path "$root" --log-file "$run/godot.log" --import >"$log" 2>&1
 	status=$?
-	format_errors <"$log" | head -20
+	# A sandboxed agent cannot save Godot's editor settings; that does not affect the import.
+	format_errors <"$log" | grep -v 'editor.settings' | head -20
 	if [[ $status -ne 0 ]]; then
 		echo "IMPORT: FAIL (exit $status). Log: ${log#"$root"/}"
 		return 1
@@ -246,6 +267,34 @@ cmd_doctor() {
 	else
 		echo "ok    global class cache is current"
 	fi
+	source "$root/tools/agent/blender/commands.sh"
+	local blender
+	if blender="$(find_blender 2>/dev/null)"; then
+		echo "ok    $("$blender" --version 2>/dev/null | head -1)"
+		if command -v uvx >/dev/null 2>&1; then
+			echo "ok    uv $(uv --version 2>/dev/null | awk '{print $2}') (runs the Blender MCP server)"
+			# A cold package cache means a download and a native build at the next start,
+			# which is slower than an agent waits for an MCP server.
+			if ! DISABLE_TELEMETRY=true uvx --offline --python 3.11 "mcp-for-blender@$(cat "$blender_dir/mcp-version")" --help >/dev/null 2>&1; then
+				echo "WARN  the Blender MCP package is not cached; run tools/dev blender smoke once to fetch and build it"
+			fi
+		else
+			echo "FAIL  uvx not found; the Blender MCP server cannot start (install uv: https://docs.astral.sh/uv/)"
+			problems=1
+		fi
+		for config in .mcp.json .codex/config.toml; do
+			if grep -q 'tools/agent/blender-mcp.mjs' "$root/$config" 2>/dev/null; then
+				echo "ok    $config registers the blender MCP server"
+			else
+				echo "WARN  $config does not register the blender MCP server"
+			fi
+		done
+		local instances
+		instances="$(blender_status)"
+		[[ "$instances" == port* ]] && echo "$instances" | sed 's/^/note  agent Blender: /'
+	else
+		echo "WARN  Blender not found; modelling tools are unavailable (set BLENDER_BIN)"
+	fi
 	local others
 	others="$(pgrep -fl "Godot.*--path $root" 2>/dev/null | sed -E 's/^([0-9]+) .*Godot /\1 /' | cut -c1-110)"
 	if [[ -n "$others" ]]; then
@@ -263,6 +312,9 @@ case "$command" in
 	shot) cmd_shot "$@" ;;
 	import) cmd_import ;;
 	doctor) cmd_doctor ;;
+	blender)
+		source "$root/tools/agent/blender/commands.sh"
+		cmd_blender "$@" ;;
 	mcp-smoke) exec node "$root/tools/agent/mcp_smoke.mjs" "$@" ;;
 	godot) exec "$godot" "$@" ;;
 	help|-h|--help) usage ;;

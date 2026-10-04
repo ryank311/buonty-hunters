@@ -134,13 +134,13 @@ Do not add several polished maps before this network milestone. That would make 
 
 ## Rendering integration
 
-Keep the existing Mobile renderer for M0. An explicit world-resolution option belongs to the later visual sample. `canvas_items` stretching alone does not provide a fixed low-resolution 3D look. Godot documents separate 3D resolution scaling and viewport stretch choices. [Godot multiple resolutions documentation](https://docs.godotengine.org/en/stable/tutorials/rendering/multiple_resolutions.html).
+Keep the existing Mobile renderer for M0. Render the entire game at 640×480 using `viewport` stretch mode and `keep` aspect. Scale the completed frame to the window, with equal black bars where needed. The framebuffer, field of view, HUD proportions, and visible world stay identical across monitor sizes and aspect ratios. [Godot multiple resolutions documentation](https://docs.godotengine.org/en/stable/tutorials/rendering/multiple_resolutions.html).
 
-For a precisely fixed world buffer with independent HUD, evaluate a `SubViewport` feeding a full-window display control, with the HUD outside that buffer. Test aspect fitting, mouse sensitivity, and reticle projection before adopting it. Keep native-resolution mode for comparison and accessibility. Do not force renderer changes merely to obtain a retro appearance.
+HUD controls retain their authored 1024×768 coordinate layout, uniformly scaled into the 640×480 render target before the final image is enlarged. This keeps the existing composition and menu hitboxes intact. The old half-resolution comparison toggle and its saved preference are retired. Verify native framebuffer dimensions, menu bounds, mouse sensitivity, and reticle-to-hitscan projection when changing presentation.
 
 ## Review procedure and decision log
 
-For each playable increment, capture a repeatable 90-second route: spawn, Arch approach, Market low cover, Courtyard, Balcony, Stair House, Service Passage, and reset. Include 16:9 and 4:3 camera comparisons when presentation controls exist. Record version, movement/camera resource values, route times, and known issues beside the capture. Change one major variable per comparison.
+For each playable increment, capture a repeatable 90-second route: spawn, Arch approach, Market low cover, Courtyard, Balcony, Stair House, Service Passage, and reset. Check the same 4:3 composition in a native 4:3 window and a wider window with side bars. Record version, movement/camera resource values, route times, and known issues beside the capture. Change one major variable per comparison.
 
 Initial decisions are provisional: SOCOM II-led mechanics; 5v5; original town; near-centered camera; no separate sprint; first-to-six; shared-bomb Demolition; no regeneration; modern remappable inputs. The first play review should decide camera distance/offset, movement responsiveness, and whether the map feels too empty at five players per side. Slow prone crawling and a running dive are now implemented for feel testing, including collision and a committed landing recovery. Later reviews can settle first-person views, magazine persistence, equipment quantities, and team weapon differences.
 

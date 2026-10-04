@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="WeaponProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/weapon_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "CLAYMORE"
+kind = "claymore"
+hold = "pistol"
+automatic = false
+magazine_size = 2
+starting_reserve = 0
+rounds_per_minute = 40.0
+draw_seconds = 0.4
+damage = 170.0
+fuse_seconds = 1.0
+effect_radius = 9.0

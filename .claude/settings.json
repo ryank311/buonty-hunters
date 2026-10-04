@@ -29,7 +29,20 @@
       "mcp__godot__simulate_input",
       "mcp__godot__profile_project",
       "mcp__godot__start_profiler",
-      "mcp__godot__stop_profiler"
+      "mcp__godot__stop_profiler",
+      "Bash(tools/dev blender status)",
+      "Bash(tools/dev blender help)",
+      "Bash(tools/dev blender start)",
+      "Bash(tools/dev blender export)",
+      "Bash(tools/dev blender export *)",
+      "Bash(tools/dev blender preview *)",
+      "Bash(tools/dev import)",
+      "mcp__blender__get_addon_status",
+      "mcp__blender__get_scene_info",
+      "mcp__blender__get_object_info",
+      "mcp__blender__get_viewport_screenshot",
+      "mcp__blender__bpy_api_lookup",
+      "mcp__blender__describe_node_type"
     ]
   }
 }

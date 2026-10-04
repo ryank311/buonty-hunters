@@ -83,7 +83,7 @@ Several harness calls can share one `run_script` body; return the last digest or
 - One live session per MCP server. The MCP's scene-editing tools refuse to run while it is live.
 - Leave `launch_editor` and `attach_project` alone unless asked. The user runs their own editor, and an agent cannot see an editor window.
 - The session edits `project.godot` (a temporary `McpBridge` autoload) and restores it on stop. If `tools/dev doctor` reports a leftover line, delete it.
-- Without the MCP, `tools/dev shot --spec=... --step=... --state` covers single-shot captures (see the `godot-dev-loop` skill).
+- Without the MCP, `tools/dev shot` with `key=value` and `step.key=value` arguments covers single-shot captures (see the `godot-dev-loop` skill).
 
 ## Troubleshooting
 

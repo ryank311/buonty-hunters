@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="WeaponProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/weapon_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "FRAG GRENADE"
+kind = "frag"
+hold = "pistol"
+automatic = false
+magazine_size = 2
+starting_reserve = 0
+rounds_per_minute = 50.0
+draw_seconds = 0.3
+damage = 160.0
+throw_speed = 15.0
+fuse_seconds = 3.5
+effect_radius = 8.0

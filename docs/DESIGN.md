@@ -87,20 +87,20 @@ Use simple ramps beneath visible stair meshes initially. Add genuine step traver
 
 ## Third-person camera and aiming
 
-Begin with a trailing, near-centered camera showing the head, torso, and enough legs to read stance and motion. Use a slight horizontal offset only after comparing both corner approaches. Fixed shoulder switching is not part of M0; it changes available information and needs a deliberate balance decision.
+Use an elevated, centered trailing camera with the soldier's head in the lower third of the frame, leaving the central aim point clear. This framing follows the supplied 4:3 gameplay references. Fixed shoulder switching is not part of M0; it changes available information and needs a deliberate balance decision.
 
 | Parameter | Starting value |
 | --- | --- |
 | Vertical FOV | 60°, adjustable 50–75° |
-| Standing pivot | 1.45 m above ground |
-| Crouch / prone pivot | 0.95 / 0.45 m above ground |
+| Standing pivot | 2.30 m above ground in open space |
+| Crouch / prone pivot | 1.80 / 1.30 m above ground; ceiling clearance can lower these |
 | Trailing distance | 3.0 m, tune within 2.5–3.5 m |
-| Horizontal offset | 0.20 m, compare against centered |
+| Horizontal offset | 0.0 m; centered behind the player |
 | Pitch range | Approximately 65° upward and 50° downward |
 | Focus aim | 50° vertical FOV and 2.3 m distance |
 | Lean | Up to 0.25 m lateral displacement, reduced by obstruction |
 
-Vertical FOV is specified to avoid aspect-ratio ambiguity. Test both 16:9 and optional 4:3 presentation. Mouse rotation has no acceleration or heavy smoothing by default; gamepad has a tunable response curve. Camera position may ease when returning from an obstruction, but it must retract promptly when a wall intervenes. Match stance changes smoothly without delaying input or making the aim wander.
+Vertical FOV is specified to avoid aspect-ratio ambiguity. The world and HUD use a fixed 4:3 presentation, with equal black side bars on wider displays. Mouse rotation has no acceleration or heavy smoothing by default; gamepad has a tunable response curve. Camera position may ease when returning from an obstruction, but it must retract promptly when a wall intervenes. Sweep from the stance eye to the elevated pivot so low ceilings cannot be bypassed. Match stance changes smoothly without delaying input or making the aim wander.
 
 The camera must collide with world geometry and exclude its owning body. Check both the trailing arm and any lateral pivot displacement: a spring arm alone does not establish that a lean origin is clear. Fade the local mesh when the camera gets too close. Prevent seeing through roofs, underside faces, and thin walls. Ordinary third-person visibility around an edge is part of this proposal; exposing enemy outlines through solids is not.
 
@@ -113,7 +113,7 @@ M0 can display a debug aim ray without weapon damage. M1 must use this sequence:
 3. Cast from that valid origin toward the aim point. The first obstruction determines the hit.
 4. Show a blocked-fire cue when the camera sees a target that the weapon cannot reach. Effects and damage use the same result.
 
-A target visible above a crate must not take damage if the muzzle is below the crate's edge. Lean moves the relevant weapon and exposure volumes along with the visual pose. The reticle has a fixed, semi-transparent charcoal circle and pale center dot. Four independent cardinal marks move outward with actual angular spread and ease inward as accuracy recovers. Optional first-person and scope views reuse the same weapon simulation later.
+A target visible above a crate must not take damage if the muzzle is below the crate's edge. Lean moves the relevant weapon and exposure volumes along with the visual pose. The reticle has a fixed-size, semi-transparent charcoal circle and pale center dot. Its aim point stays dead center until recoil lifts it; the real hitscan ray projects to that raised point. The camera follows 35% of vertical kick, with the remaining 65% visible as reticle climb. Four independent cardinal marks move outward with actual angular spread and ease inward as accuracy recovers. Optional first-person and scope views reuse the same weapon simulation later.
 
 ## Combat for M1
 
@@ -214,7 +214,7 @@ Use original assets and a distinct eventual public identity; SOCOM remains the i
 
 Proposed asset budgets: a 2,000–4,000 triangle soldier, a 300–800 triangle weapon, 100–600 triangle common props, mostly 128–256 px tiling textures, and selective 512 px character sheets. These are working production limits, not historical specifications. Use simple diffuse materials, modest specularity, restrained shadows, a sky backdrop, and distance haze. Keep collision simpler than the visible meshes.
 
-Prototype native-resolution rendering first. Later compare a 640 × 360 widescreen world render and an optional 640 × 480 4:3 world render, with a separately readable HUD. Compare mild filtering with nearest sampling before choosing a look. PS1-style vertex wobble, extreme affine distortion, and heavy CRT effects are not default requirements for this PS2 target. Preserve a 60 FPS control and rendering target on the development machine; nostalgia does not require input lag.
+Render the whole game, including HUD and menus, at a fixed 640 × 480. Scale that 4:3 frame uniformly to fit each window, with black bars filling unused space. Every monitor shows the same world, field of view, image detail, and HUD proportions; larger displays only enlarge the image. PS1-style vertex wobble, extreme affine distortion, and heavy CRT effects are not default requirements for this PS2 target. Preserve a 60 FPS control and rendering target on the development machine; nostalgia does not require input lag.
 
 The character needs recognizable stance silhouettes, a held rifle, directional locomotion, and a restrained transition into prone. A rigged final character can replace a procedural proxy after the camera is accepted. Avoid animation-driven movement in the first controller so animation iteration does not change route timing.
 
@@ -226,7 +226,7 @@ The [HUD wireframe](wireframes.svg) shows the intended information hierarchy. M0
 
 For rounds: timer and round score at top center; compact compass/location at top right; ammunition and weapon bottom left; team alive status bottom right; interaction prompt near the reticle only when relevant. Indicate teammates with names or symbols that do not rely on color alone. An optional small tactical map shows permitted friendly/objective information; no omniscient enemy dots.
 
-Use compact translucent panels and restrained typography. Keep text readable at normal output resolution, offer HUD scaling, and use at least 5% edge-safe margins. Results explain why the round ended. Spectator mode is visually explicit. A future lobby prioritizes map, mode, rules, roster, loadout, and Ready; no shop or progression screen intervenes in the play loop.
+Use compact translucent panels and restrained typography. Keep text readable within the fixed 640 × 480 frame, preserve HUD proportions across displays, and use at least 5% edge-safe margins. Results explain why the round ended. Spectator mode is visually explicit. A future lobby prioritizes map, mode, rules, roster, loadout, and Ready; no shop or progression screen intervenes in the play loop.
 
 ## How we judge success
 

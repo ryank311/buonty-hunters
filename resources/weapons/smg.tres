@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="WeaponProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/weapon_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "SUBMACHINE GUN"
+automatic = true
+magazine_size = 30
+starting_reserve = 120
+rounds_per_minute = 800.0
+reload_seconds = 2.1
+draw_seconds = 0.28
+range_metres = 90.0
+impact_diameter = 0.08
+vertical_kick = 0.42
+horizontal_kick = 0.2
+recovery_delay = 0.1
+recovery_speed = 11.0
+max_climb = 6.0
+base_spread = 0.45
+walk_spread = 0.7
+run_spread = 3.6
+spread_per_shot = 0.28
+max_bloom = 3.0
+weapon_kick = 0.7
+damage = 22.0
+falloff_start = 15.0
+falloff_end = 45.0
+minimum_damage = 0.45
+muzzle_length = 0.4
+visual_scale = Vector3(1, 1, 0.78)
+sound_pitch = 1.15

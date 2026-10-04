@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="WeaponProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/weapon_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "SNIPER RIFLE"
+automatic = false
+magazine_size = 5
+starting_reserve = 20
+rounds_per_minute = 42.0
+reload_seconds = 3.4
+draw_seconds = 0.6
+range_metres = 400.0
+impact_diameter = 0.13
+vertical_kick = 3.2
+horizontal_kick = 0.3
+recovery_delay = 0.3
+recovery_speed = 5.0
+max_climb = 9.0
+base_spread = 0.04
+walk_spread = 2.5
+run_spread = 9.0
+spread_per_shot = 0.2
+max_bloom = 1.5
+weapon_kick = 2.2
+unaimed_spread = 3.0
+damage = 95.0
+falloff_start = 250.0
+falloff_end = 400.0
+minimum_damage = 0.8
+muzzle_velocity = 380.0
+bullet_gravity = 9.8
+scope_fovs = PackedFloat32Array(20.0, 10.0, 5.0)
+muzzle_length = 0.74
+visual_scale = Vector3(0.9, 0.95, 1.38)
+sound_pitch = 0.6

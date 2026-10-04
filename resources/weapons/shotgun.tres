@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="WeaponProfile" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/weapon_profile.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+display_name = "COMBAT SHOTGUN"
+automatic = false
+magazine_size = 6
+starting_reserve = 24
+rounds_per_minute = 70.0
+reload_seconds = 3.2
+draw_seconds = 0.4
+range_metres = 45.0
+impact_diameter = 0.07
+vertical_kick = 2.6
+horizontal_kick = 0.5
+recovery_delay = 0.2
+recovery_speed = 7.0
+max_climb = 10.0
+base_spread = 0.6
+walk_spread = 0.8
+run_spread = 3.0
+spread_per_shot = 0.6
+max_bloom = 2.0
+weapon_kick = 2.0
+damage = 14.0
+falloff_start = 6.0
+falloff_end = 25.0
+minimum_damage = 0.2
+pellets = 9
+pellet_spread = 4.5
+muzzle_length = 0.56
+visual_scale = Vector3(1.15, 1, 1.05)
+sound_pitch = 0.72

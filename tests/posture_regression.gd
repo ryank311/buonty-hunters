@@ -38,6 +38,30 @@ func _run() -> void:
 	check(soldier.torso_pitch < -0.15 and soldier.torso_pitch > -0.21, "Jog keeps the upper body upright with a modest forward hinge")
 	settle(1)
 	check(soldier.pose_points.head.y < 1.0 and soldier.pose_points.chest.z < -0.17, "Crouch folds the torso over the hips within low-cover height")
+	var front: Array = soldier.leg_joints.L
+	var rear: Array = soldier.leg_joints.R
+	var front_flex := 180.0 - rad_to_deg((front[0] - front[1]).angle_to(front[2] - front[1]))
+	check(rear[1].y < 0.12 and rear[2].z > rear[0].z + 0.15, "A stopped crouch rests the right knee on the floor with its foot tucked behind")
+	check(front_flex > 70.0 and front_flex < 115.0 and front[2].z < front[0].z - 0.3 and absf(soldier.foot_samples.L.pitch) < 0.001, "The left foot plants flat ahead under a roughly square knee")
+	var heel_kick := 0.0
+	var flight := false
+	for tick: int in range(120):
+		soldier.pose(0, 4.5, Vector2.UP, 0, 0, 1.0/60.0)
+		flight = flight or not (soldier.foot_samples.L.contact or soldier.foot_samples.R.contact)
+		for side: String in ["L", "R"]:
+			var leg: Array = soldier.leg_joints[side]
+			if leg[2].z > leg[0].z:
+				heel_kick = maxf(heel_kick, leg[2].y)
+	check(heel_kick > 0.3 and flight, "Jog folds the heel up behind the hip and has a flight phase (heel %.2f m)" % heel_kick)
+	settle(1, 2.5)
+	var lowest_knee := INF
+	var highest_head := 0.0
+	for tick: int in range(120):
+		soldier.pose(1, 2.5, Vector2.UP, 0, 0, 1.0/60.0)
+		highest_head = maxf(highest_head, soldier.pose_points.head.y)
+		for side: String in ["L", "R"]:
+			lowest_knee = minf(lowest_knee, soldier.leg_joints[side][1].y)
+	check(lowest_knee > 0.2 and highest_head < 1.08, "Crouch walk steps with bent knees clear of the floor, head within crouch height (knee %.2f m, head %.2f m)" % [lowest_knee, highest_head])
 	var mesh_ends := true
 	var leg_lengths := true
 	var arm_lengths := true

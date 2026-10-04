@@ -22,5 +22,40 @@ extends Resource
 @export var spread_per_shot: float = 0.35
 @export var max_bloom: float = 3.5
 @export var weapon_kick: float = 1.0
+# Cone added while firing without focus aim; keeps scoped weapons honest from the hip.
+@export var unaimed_spread: float = 0.0
+
+@export_group("Damage")
+# Torso damage per projectile; head and limb hits scale it (see combat.gd).
+@export var damage: float = 34.0
+# Full damage out to falloff_start metres, easing to minimum_damage (a fraction) at falloff_end.
+@export var falloff_start: float = 60.0
+@export var falloff_end: float = 150.0
+@export_range(0.0, 1.0) var minimum_damage: float = 0.7
+@export var pellets: int = 1
+# Extra cone half-angle in degrees shared by every pellet of one shell.
+@export var pellet_spread: float = 0.0
+
+@export_group("Ballistics")
+# Above zero the weapon fires a travelling bullet instead of an instant hitscan ray.
+@export var muzzle_velocity: float = 0.0
+@export var bullet_gravity: float = 9.8
+# Vertical field of view at each scope zoom step; empty means no scope.
+@export var scope_fovs: PackedFloat32Array = PackedFloat32Array()
+
+@export_group("Carry")
+@export_enum("firearm", "frag", "smoke", "flash", "claymore") var kind: String = "firearm"
+@export_enum("long", "pistol") var hold: String = "long"
+# Metres from the weapon pivot to the muzzle, and a stretch applied to the stand-in mesh.
+@export var muzzle_length: float = 0.52
+@export var visual_scale := Vector3.ONE
+@export var sound_pitch: float = 1.0
+
+@export_group("Equipment")
+# Thrown and placed items: magazine_size is how many are carried.
+@export var throw_speed: float = 15.0
+@export var fuse_seconds: float = 3.5
+@export var effect_radius: float = 8.0
+@export var effect_seconds: float = 0.0
 
 const TUNING_KEYS: Array[String] = ["vertical_kick", "horizontal_kick", "recovery_delay", "recovery_speed", "max_climb", "spread_per_shot", "weapon_kick", "walk_spread", "run_spread", "max_bloom"]

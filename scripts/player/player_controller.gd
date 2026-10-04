@@ -25,6 +25,8 @@ var diving: bool = false
 var dive_time: float = 0.0
 var dive_recovery: float = 0.0
 var dive_direction := Vector3.FORWARD
+var dive_carry: float = 0.0
+var dive_launch: float = 0.0
 var prone_strafe_phase: float = 0.0
 var prone_strafe_amount: float = 0.0
 var test_command: Dictionary = {}
@@ -81,8 +83,13 @@ func begin_dive() -> bool:
 		return false
 	diving = true
 	dive_time = 0.0
-	dive_direction = -global_basis.z
-	velocity = dive_direction * movement.dive_speed + Vector3.UP * movement.dive_lift
+	# Dive along the travel direction (forward, sideways or diagonal), keeping the
+	# speed carried into it and pushing past it off the planted foot.
+	var travel := Vector3(velocity.x,0,velocity.z)
+	dive_direction = travel.normalized() if travel.length() > 0.5 else -global_basis.z
+	dive_carry = travel.length()
+	dive_launch = maxf(movement.dive_speed,dive_carry * movement.dive_boost)
+	velocity = dive_direction * dive_carry + Vector3.UP * movement.dive_lift
 	# Let gravity and swept CharacterBody motion finish the dive, without floor snap
 	# pulling the airborne body down early or a teleport passing through nearby cover.
 	floor_snap_length = 0.0
@@ -92,8 +99,10 @@ func begin_dive() -> bool:
 	return true
 
 func _hold_prone() -> void:
-	var forward_speed := Vector3(velocity.x,0,velocity.z).dot(-global_basis.z)
-	if stance.current == StanceController.Stance.STAND and forward_speed >= movement.run_speed * 0.78:
+	var travel := Vector3(velocity.x,0,velocity.z)
+	var backward := travel.dot(global_basis.z)
+	# Running or strafing dives; backpedaling and walking lower into prone instead.
+	if stance.current == StanceController.Stance.STAND and travel.length() >= movement.run_speed * 0.78 and backward < travel.length() * 0.3:
 		begin_dive()
 	else:
 		request_stance(0 if stance.current == 2 else 2)
@@ -164,9 +173,11 @@ func _physics_process(delta: float) -> void:
 		horizontal = desired
 	if diving:
 		dive_time += delta
-		horizontal = dive_direction * maxf(0.0,movement.dive_speed - dive_time * 0.6)
+		var push := lerpf(dive_carry,dive_launch,smoothstep(0.0,0.12,dive_time))
+		horizontal = dive_direction * maxf(0.0,push - dive_time * 0.6)
 	elif dive_recovery > 0:
-		horizontal = before_horizontal.move_toward(Vector3.ZERO,movement.braking * delta)
+		# A short belly skid bleeds off the landing speed.
+		horizontal = before_horizontal.move_toward(Vector3.ZERO,9.0 * delta)
 	velocity.x = horizontal.x
 	velocity.z = horizontal.z
 	local_acceleration = basis.inverse() * (horizontal - before_horizontal) / delta
@@ -189,8 +200,8 @@ func _physics_process(delta: float) -> void:
 		if diving:
 			diving = false
 			dive_recovery = movement.dive_recovery_seconds
-			velocity.x *= 0.15
-			velocity.z *= 0.15
+			velocity.x *= 0.35
+			velocity.z *= 0.35
 			floor_snap_length = 0.25
 		if impact_speed > 3.0:
 			PlayerInput.vibrate(camera_settings.vibration * 0.45, 0.10)
@@ -198,7 +209,7 @@ func _physics_process(delta: float) -> void:
 	camera_rig.update_view(self, StanceController.EYE_HEIGHTS[stance.current], lean, aiming, delta)
 	var speed_now := Vector2(velocity.x, velocity.z).length()
 	var local_velocity := basis.inverse() * Vector3(velocity.x, 0, velocity.z)
-	soldier.pose(stance.current, speed_now, Vector2(local_velocity.x, local_velocity.z), camera_rig.aim_pitch(), camera_rig.actual_lean, delta, movement.body_weight, local_acceleration, is_on_floor(), weapon.recoil.visual_kick, weapon.draw_remaining / weapon.profile.draw_seconds, aiming, 1.0 if diving else 0.0, prone_strafe_phase, prone_strafe_amount)
+	soldier.pose(stance.current, speed_now, Vector2(local_velocity.x, local_velocity.z), camera_rig.aim_pitch(), camera_rig.actual_lean, delta, movement.body_weight, local_acceleration, is_on_floor(), weapon.recoil.visual_kick, weapon.draw_remaining / weapon.profile.draw_seconds, aiming, 1.0 if diving else 0.0, prone_strafe_phase, prone_strafe_amount, clampf((movement.dive_lift - velocity.y) / (2.0 * movement.dive_lift),0.0,1.0))
 	soldier.set_close_fade(camera_rig.arm.get_hit_length() < 0.70)
 	weapon.tick(delta, Input.is_action_pressed("fire"), Input.is_action_just_pressed("reload"))
 	if is_on_floor() and speed_now > 0.25 and stance.current != StanceController.Stance.PRONE:
@@ -240,6 +251,8 @@ func reset_at(spawn_transform: Transform3D) -> void:
 	diving = false
 	dive_time = 0.0
 	dive_recovery = 0.0
+	dive_carry = 0.0
+	dive_launch = 0.0
 	prone_strafe_phase = 0.0
 	prone_strafe_amount = 0.0
 	floor_snap_length = 0.25

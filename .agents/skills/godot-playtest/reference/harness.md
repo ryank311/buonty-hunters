@@ -1,6 +1,6 @@
 # Harness reference
 
-Source: `tools/agent/harness.gd`. Load it with `const H = preload("res://tools/agent/harness.gd")`. Every function takes the `SceneTree` first. The same keys work on the command line as `tools/dev shot --spec='<json>'` (apply) and `--step='<json>'` (step, plus `"frames"`).
+Source: `tools/agent/harness.gd`. Load it with `const H = preload("res://tools/agent/harness.gd")`. Every function takes the `SceneTree` first. The same keys work on the command line: `tools/dev shot level=lab stance=prone step.frames=30 step.forward=1`, or as JSON with `--spec='<json>'` and `--step='<json>'`.
 
 Units: positions are metres `[x, y, z]`; angles are degrees (yaw 0 faces -Z and positive turns left; positive pitch looks up); a frame is one physics tick of 1/60 s.
 
@@ -43,6 +43,7 @@ Applied in this order; every key is optional. Returns the state digest, plus `no
 | `ammo`, `reserve` | int | Rounds in the active weapon's magazine / reserve. |
 | `health` | float | Player health. |
 | `tuning` | `{"movement"\|"camera"\|"weapon": {property: value}}` | Set profile properties for this run (see `scripts/resources/*_profile.gd`). `weapon` is the active one. |
+| `place` | `[{"scene": "res://art/models/crate.glb", "pos": [x, y, z], "yaw": deg, "scale": n}]` | Drop scenes into the level for a look: a model fresh out of Blender, a prop in context. They collide like any level object, last until the next `reset` or level change, and are never saved. |
 | `look_at` | `[x, y, z]` or level node path | Put the crosshair on a point, e.g. `"Targets/Target25"`. |
 | `hold` | `["aim", ...]` | Keep actions pressed until the next harness call. |
 | `debug` | bool | Toggle the diagnostic overlay. |
@@ -93,6 +94,7 @@ Walks `[[x, z], ...]` in order: faces each point and holds forward until within 
 - `camera.arm` shrinks below the tuned distance when geometry pushes the camera in.
 - `weapon.spread` is the current shot cone half-angle in degrees.
 - `targets` appears on the Movement Lab; `lit` is true briefly after a hit.
+- `placed` lists the scenes added with `place`, when there are any.
 - `notice` is the HUD message currently shown; `notes` lists requests that could not be honoured.
 - `tick` is the engine's tick counter and keeps counting while frozen.
 

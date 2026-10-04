@@ -15,7 +15,6 @@ var lap_running: bool = false
 var last_lap: float = 0.0
 var lap_start := Vector3.ZERO
 var debug_visible: bool = false
-var retro_enabled: bool = false
 var qa_mode: bool = "--qa" in OS.get_cmdline_user_args() or "--capture" in OS.get_cmdline_user_args()
 
 func _enter_tree() -> void:
@@ -141,16 +140,11 @@ func location_name() -> String:
 			best = distance
 	return result
 
-func set_retro(enabled: bool) -> void:
-	retro_enabled = enabled
-	get_viewport().scaling_3d_scale = 0.5 if enabled else 1.0
-
 func reset_tuning() -> void:
 	player.movement = load("res://resources/movement/default_movement.tres").duplicate()
 	player.camera_settings = load("res://resources/camera/default_camera.tres").duplicate()
 	player.camera_rig.profile = player.camera_settings
 	player.weapon.reset_profiles()
-	set_retro(false)
 	hud.refresh_settings()
 
 func _save_settings() -> void:
@@ -170,7 +164,6 @@ func settings_config() -> ConfigFile:
 	for slot: int in range(2):
 		for key: String in WeaponProfile.TUNING_KEYS:
 			config.set_value("weapon_%d" % slot, key, player.weapon.profiles[slot].get(key))
-	config.set_value("display", "retro", retro_enabled)
 	return config
 
 func _load_settings() -> void:
@@ -198,7 +191,6 @@ func apply_settings_config(config: ConfigFile) -> void:
 			if config.get_value("meta", "version", 1) < 3 and key in ["spread_per_shot", "max_climb", "max_bloom", "vertical_kick"]:
 				continue
 			settings.set(key, config.get_value("weapon_%d" % slot, key, settings.get(key)))
-	set_retro(config.get_value("display", "retro", false))
 
 func _capture_preview() -> void:
 	# Engine-rendered screenshots for visual QA; invoked explicitly by CLI only.

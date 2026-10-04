@@ -70,6 +70,12 @@ func _run() -> void:
 	check(walked.walk.arrived and not walked.menu, "walk_to follows waypoints (%.1f simulated seconds)" % walked.walk.seconds)
 	var wrong: Dictionary = await H.apply(self, {"level": "moon", "stance": "fly", "weapon": "bow"})
 	check(wrong.get("notes", []).size() == 3, "Requests that cannot be honoured are reported in notes")
+	# The reference crate is 1 m wide with a collision box; walking into it must stop the player.
+	await H.scenario(self, "lab_start", {"place": [{"scene": "res://art/models/crate.glb", "pos": [0.0, 0.0, 23.0]}]})
+	var bumped: Dictionary = await H.step(self, 120, {"forward": 1.0})
+	check(bumped.get("placed", []).size() == 1 and bumped.player.pos[2] > 23.7, "A placed model appears in the level and blocks the player (stopped at z=%.2f)" % bumped.player.pos[2])
+	var cleared: Dictionary = await H.scenario(self, "lab_start")
+	check(not cleared.has("placed"), "A fresh scenario removes placed models")
 	print("\nRESULT: %d failure(s)" % failures.size())
 	session.queue_free()
 	await physics_frame

@@ -2,7 +2,17 @@
   "mcpServers": {
     "godot": {
       "command": "sh",
-      "args": ["-c", "exec \"$(git rev-parse --show-toplevel 2>/dev/null || pwd)/tools/agent/mcp\""]
+      "args": [
+        "-c",
+        "exec \"$(git rev-parse --show-toplevel 2>/dev/null || pwd)/tools/agent/mcp\""
+      ]
+    },
+    "blender": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "PATH=\"$PATH:/usr/local/bin:/opt/homebrew/bin\" exec node \"$(git rev-parse --show-toplevel 2>/dev/null || pwd)/tools/agent/blender-mcp.mjs\" 9886"
+      ]
     }
   }
 }

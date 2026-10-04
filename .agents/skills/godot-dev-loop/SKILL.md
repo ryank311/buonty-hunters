@@ -48,13 +48,17 @@ tools/dev shot                       # list scenarios
 tools/dev shot lab_range town_market # one PNG each, paths printed as SHOT {...}
 tools/dev shot --all --sheet         # contact sheets, six scenarios per image
 tools/dev shot lab_range --state     # add the state digest (positions, ammo, aim target)
-tools/dev shot --spec='{"level":"lab","pos":[0,0.1,20],"stance":"prone","yaw":90}'
-tools/dev shot lab_start --step='{"frames":45,"forward":1}'   # capture mid-run
+tools/dev shot lab_range ammo=0 stance=crouch                 # a scenario with overrides
+tools/dev shot level=lab pos=0,0.1,20 stance=prone yaw=90     # any state, saved as custom.png
+tools/dev shot lab_start step.frames=45 step.forward=1        # capture mid-run
+tools/dev shot --model=crate                                  # a model from art/models in the lab
 ```
+
+`key=value` arguments are the harness `apply` keys and `step.key=value` the `step` keys; lists are comma-separated (`hold=aim,fire`). Nested keys such as `tuning` need the JSON forms `--spec='{...}'` and `--step='{...}'`, which an auto-approved command cannot carry, so expect a permission prompt for those.
 
 Read the printed PNG path to see the frame. Prefer `--state` when a number answers the question (did the shot hit, where is the player, is the menu open); it costs far less than an image. Use `--sheet` when comparing many places at once, for example after a lighting or HUD change.
 
-Scenarios and the `--spec` / `--step` keys are defined in `tools/agent/harness.gd`. To drive the game interactively (several inputs, reproduce a bug, tune values live), use the `godot-playtest` skill.
+Scenarios and the keys are defined in `tools/agent/harness.gd`. To drive the game interactively (several inputs, reproduce a bug, tune values live), use the `godot-playtest` skill. To build or change a 3D model, use the `blender-modeling` skill.
 
 ## Godot rules that cost time when missed
 

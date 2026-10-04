@@ -17,6 +17,7 @@ extends RefCounted
 const STANCES: Array[String] = ["stand", "crouch", "prone"]
 const WEAPONS: Array[String] = ["rifle", "pistol"]
 const HELD_META := &"agent_held_actions"
+const PLACED_GROUP := &"agent_placed"
 const READY_META := &"agent_ready"
 const MAX_STEP_FRAMES := 3600  # one simulated minute
 const BASE_TICKS := 60
@@ -69,6 +70,7 @@ static func scenario(tree: SceneTree, title: String, overrides: Dictionary = {})
 ##   stance "stand"|"crouch"|"prone"      weapon "rifle"|"pistol", ammo int, reserve int
 ##   health float                         hold ["aim", ...] (kept down until the next call)
 ##   tuning {"movement"|"camera"|"weapon": {property: value}}
+##   place [{"scene": "res://art/models/crate.glb", "pos": [x,y,z], "yaw": deg, "scale": n}]
 ##   menu bool|page index, debug bool     settle frames (default 8), freeze bool
 static func apply(tree: SceneTree, spec: Dictionary) -> Dictionary:
 	var s := session(tree)
@@ -88,6 +90,8 @@ static func apply(tree: SceneTree, spec: Dictionary) -> Dictionary:
 	if reset:
 		# A clean slate includes tuning, or one experiment would skew the next.
 		s.reset_tuning()
+		for placed: Node in tree.get_nodes_in_group(PLACED_GROUP):
+			placed.queue_free()
 	if spec.has("level"):
 		var wanted := str(spec.level)
 		if wanted not in ["town", "lab"]:
@@ -104,6 +108,20 @@ static func apply(tree: SceneTree, spec: Dictionary) -> Dictionary:
 			s.reset_player()
 	elif reset:
 		s.reset_player()
+	# Scenes dropped into the level for a look: a model fresh out of Blender, a prop in
+	# context. They last until the next reset or level change and are never saved.
+	for item: Dictionary in spec.get("place", []):
+		var packed := load(str(item.get("scene", ""))) as PackedScene
+		if packed == null:
+			notes.append("cannot load scene '%s' (exported and imported? tools/dev import)" % str(item.get("scene", "")))
+			continue
+		var placed := packed.instantiate()
+		placed.add_to_group(PLACED_GROUP)
+		s.level.add_child(placed)
+		if placed is Node3D:
+			placed.global_position = _vec(item.get("pos", [0.0, 0.0, 0.0]))
+			placed.rotation.y = deg_to_rad(float(item.get("yaw", 0.0)))
+			placed.scale = Vector3.ONE * float(item.get("scale", 1.0))
 	if spec.has("at"):
 		var marker := s.level.get_node_or_null(str(spec.at)) as Node3D
 		if marker == null:
@@ -317,6 +335,9 @@ static func state(tree: SceneTree) -> Dictionary:
 	}
 	if not targets.is_empty():
 		result["targets"] = targets
+	var placed: Array = tree.get_nodes_in_group(PLACED_GROUP).filter(func(node: Node) -> bool: return not node.is_queued_for_deletion())
+	if not placed.is_empty():
+		result["placed"] = placed.map(func(node: Node) -> String: return str(node.name))
 	var notice: Variant = s.hud.get("notice_label")
 	if notice is Label and notice.visible and notice.text != "":
 		result["notice"] = notice.text
