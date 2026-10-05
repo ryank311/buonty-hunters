@@ -1,0 +1,71 @@
+{
+  "recipe": "tools/recovery/prepare_flashbang_audio.ts",
+  "decoder": "previous/recovery/research/socom-unzipped/web/redotcom/packages/sound/src",
+  "note": "Dry mono 48 kHz PCM. The report keeps the bank gain with three deterministic sequencer choices; the ringing loop is the event steady tail from 14 s, folded seamless (6 s, 0.5 s crossfade) and raised to peak 0.5; its authored 11 s swell is not used. No PS2 room reverb. How long the original rang is not decoded; the game sets it.",
+  "report": {
+    "sound": ".MARK_141_FLASH",
+    "source": "previous/recovery/native/audio/disc/BNKSTORE.ZAR-06e793c85d/00053-MP2_fx.bnk.bin",
+    "sha256": "8044041d14b277c083682d054d5ab728ace9b2ba270f237aed01156552182b15",
+    "index": 13,
+    "files": [
+      {
+        "choice": 0.1,
+        "sample_offsets": [
+          131856,
+          131856,
+          172464,
+          516928,
+          516928
+        ],
+        "path": "res://audio/flashbang/mark141_flash_1.wav",
+        "seconds": 2.974833333333333,
+        "peak": 0.3663099408149719,
+        "sha256": "7caba735a846740088d5edf8b447b5460667b0b42c20396d2dbe88c735c959d0"
+      },
+      {
+        "choice": 0.5,
+        "sample_offsets": [
+          131856,
+          131856,
+          172464,
+          516928,
+          516928
+        ],
+        "path": "res://audio/flashbang/mark141_flash_2.wav",
+        "seconds": 2.7121666666666666,
+        "peak": 0.36716338992118835,
+        "sha256": "d569e8838dcc9bc2d6c42430b8b08a451b649e410f4d548ae52bf78ce4af8f66"
+      },
+      {
+        "choice": 0.9,
+        "sample_offsets": [
+          131856,
+          131856,
+          172464,
+          516928,
+          516928
+        ],
+        "path": "res://audio/flashbang/mark141_flash_3.wav",
+        "seconds": 2.590875,
+        "peak": 0.36689937114715576,
+        "sha256": "3caa35bc17b33aba9dfbe2963be6f20c6bb0d94bfccaff24f9cbfff2e2aeb173"
+      }
+    ]
+  },
+  "ringing": {
+    "sound": ".RINGING_EARS",
+    "source": "previous/recovery/native/audio/disc/BNKSTORE.ZAR-06e793c85d/00052-MP2_am.bnk.bin",
+    "sha256": "154710afc49fcc878d34ebe27b03e79277ebe9a0c0675b7530d027145c9e706b",
+    "index": 35,
+    "sample_offsets": [
+      438880
+    ],
+    "settled_from_seconds": 14,
+    "source_peak": 0.0015075055416673422,
+    "gain": 331.67373928654774,
+    "loop": true,
+    "path": "res://audio/flashbang/ringing_ears.wav",
+    "seconds": 6,
+    "peak": 0.5
+  }
+}

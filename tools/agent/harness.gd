@@ -484,6 +484,9 @@ static func _release_held(s: Node) -> void:
 	s.set_meta(HELD_META, [])
 
 static func _teleport(p: CharacterBody3D, position: Vector3, yaw: float) -> void:
+	# A soldier on a ladder is held to it; a teleport takes them off.
+	if p.has_method("leave_ladder"):
+		p.leave_ladder()
 	p.global_position = position
 	p.rotation.y = yaw
 	p.velocity = Vector3.ZERO

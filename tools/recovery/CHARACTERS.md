@@ -2,7 +2,7 @@
 
 ## Play and inspect
 
-Restart the game with Godot's Stop and Play buttons. The playable character is now the recovered **seal_A_cqb**, using its original proportions, skin weights and 26-part rig. **[ / ]** cycles through all 202 character variants in either direction. Selection survives respawn and level changes during the current run; restarting selects CQB again.
+Restart the game with Godot's Stop and Play buttons. The playable character is now the recovered **seal_A_cqb**, using its original proportions, skin weights and 26-part rig. **[ / ]** cycles through the 106 full-detail character variants in either direction. Selection survives respawn and level changes during the current run; restarting selects CQB again.
 
 Open **Cmd+1 / F1 → Recovery Lab**, then press **Tab**. Search the characters and 402 motion clips, or filter clips by category. The left display shows the selected recovered character; the right shows your current playable character. Both sample the same native clip at the same time. Pause, scrub, advance one original 30 Hz frame, or turn the models to inspect them. **Use selected character for player** makes the selected model playable without resetting position, health or ammunition. Tab, Escape or Close returns to walking.
 
@@ -15,6 +15,8 @@ The player uses native standing, walking, running, backpedaling, strafing, crouc
 | 560 character occurrences | 202 distinct textured, rigged models, including variants and LODs |
 | 1,178 animation occurrences | 402 distinct original clips |
 | Original character rigs | 26 native parts; no mapping to the retired prototype skeleton |
+
+Only 106 full-detail bodies appear in the Loadout picker, Recovery Lab picker and bracket cycling. The 96 lower-detail exports remain preserved in the raw catalogue but are excluded from selection. Godot-generated distance LODs are disabled for the selectable bodies.
 
 Characters are deduplicated by geometry, influences, bind transforms and texture content; motions by full track data. Every occurrence remains in `resources/recovered/catalogue.json`. All models use **0.1 metres per source unit**, without individual normalization. The largest measured influence bind-position discrepancy in the glTF conversion was **0.102 mm**. All positive weights are retained, up to Godot's eight-influence limit; larger counts are rejected.
 
@@ -40,7 +42,7 @@ Horizontal root travel is held at the character's native bind X/Z for controller
 
 Diving follows `seal_dive2prone` through its last authored frame before blending into prone, retaining its authored root height. The decoder appends a copy of frame zero at `frameCount`; one-shot playback must stop before this wrap sample. Side dives also have a small controller-driven bank.
 
-The recovered M4 follows the native right-hand `rifle` track. Other long-gun classes currently share this M4 visual; pistols and equipment still use placeholders. Dedicated weapon models, precise sockets and remaining action/event layers are follow-up work. Clips using the older `weapon` attachment name are supported alongside `rifle` and `pistol`. Ragdolls inherit the selected character and initial native pose, but use the prototype physics bodies.
+Recovered firearms use their selected source models and native right-hand tracks. Inactive rifles and pistols use the separate original back/thigh offsets. Character gear follows the final animated bones; [OUTFITS.md](OUTFITS.md) describes source presets, full-detail selection and the debug fitting controls. Clips using the older `weapon` attachment name are supported alongside `rifle` and `pistol`. Ragdolls inherit the selected character and initial native pose, but use the prototype physics bodies.
 
 ## Idle, aiming and gunplay
 

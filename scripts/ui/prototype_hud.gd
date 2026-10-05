@@ -43,6 +43,7 @@ var focus_order: Array[Control] = []
 var current_page: int = 0
 var slider_parent: VBoxContainer
 var loadout_menu: VBoxContainer
+var outfit_menu: VBoxContainer
 var weapon_tuning_menu: VBoxContainer
 
 func initialize(owner_session: Node3D) -> void:
@@ -206,7 +207,9 @@ func _set_card_rect(id: String, position: Vector2, size: Vector2) -> void:
 func _draw_weapon_icon() -> void:
 	var color := Color("d9dfce")
 	var kind: String = session.player.weapon.profile.kind
-	if kind == "claymore":
+	if kind == "smoke":
+		weapon_icon.draw_texture_rect(preload("res://art/ui/recovered/hudw/grenade_smoke_icon.png"), Rect2(41, 0, 42, 42), false, color)
+	elif kind == "claymore":
 		weapon_icon.draw_rect(Rect2(34, 9, 56, 20), color)
 		weapon_icon.draw_line(Vector2(45, 29), Vector2(39, 41), color, 3)
 		weapon_icon.draw_line(Vector2(79, 29), Vector2(85, 41), color, 3)
@@ -288,7 +291,7 @@ func _build_menu() -> void:
 	_label(menu_box, "Paused · LB / RB change page · ↑ / ↓ select · ← / → adjust · A confirm · B back", Vector2.ZERO, 13, MUTED)
 	var tabs := HBoxContainer.new()
 	menu_box.add_child(tabs)
-	for title: String in ["Movement", "Camera", "Controller", "Debug tuning", "Maps", "Loadout"]:
+	for title: String in ["Movement", "Camera", "Controller", "Debug tuning", "Maps", "Outfit", "Loadout"]:
 		var index := page_buttons.size()
 		page_buttons.append(_button(tabs, title, func() -> void: show_page(index)))
 	_page("Grounded movement")
@@ -322,6 +325,10 @@ func _build_menu() -> void:
 	slider_parent.add_child(weapon_tuning_menu)
 	weapon_tuning_menu.initialize(self)
 	_build_map_page()
+	_page("Character outfit · recovered gear and attachments")
+	outfit_menu = preload("res://scripts/ui/debug_outfit.gd").new()
+	slider_parent.add_child(outfit_menu)
+	outfit_menu.initialize(self)
 	_page("Loadout & character · A / click opens a list")
 	loadout_menu = preload("res://scripts/ui/debug_loadout.gd").new()
 	slider_parent.add_child(loadout_menu)
@@ -395,6 +402,8 @@ func _slider(key: String, title: String, minimum: float, maximum: float, step: f
 	)
 
 func refresh_settings() -> void:
+	if outfit_menu != null:
+		outfit_menu.refresh()
 	for key: String in sliders:
 		var value: float = _settings_for(key).get(key.get_slice("/", 1) if "/" in key else key)
 		sliders[key].set_value_no_signal(value)
@@ -407,6 +416,8 @@ func refresh_settings() -> void:
 
 func show_page(index: int, focus: bool = true) -> void:
 	close_menu_popup()
+	if outfit_menu != null:
+		outfit_menu.refresh()
 	if loadout_menu != null:
 		loadout_menu.refresh()
 	if weapon_tuning_menu != null:
@@ -495,10 +506,10 @@ func update_display(delta: float) -> void:
 	hud_panels.Notice.modulate.a = minf(notice_time, 1.0)
 	hud_panels.Diagnostics.visible = session.debug_visible and not session.modal
 	debug_label.text = "%.0f FPS\nPosition  %.1f / %.1f / %.1f\nCamera  %.2f m  |  FOV %.0f°\nGrounded  %s\nR3 / %s  Hide diagnostics" % [Engine.get_frames_per_second(), player.position.x, player.position.y, player.position.z, player.camera_rig.arm.get_hit_length(), player.camera_rig.camera.fov, player.is_on_floor(), PlayerInput.function_key_hint(3)]
-	_layout_hud()
-	minimap.refresh()
 	if session.lap_running or session.last_lap > 0.0:
 		debug_label.text += "\nLAP  %.2f s" % (session.lap_time if session.lap_running else session.last_lap)
+	_layout_hud()
+	minimap.refresh()
 	weapon_icon.queue_redraw()
 	crosshair.update_weapon(player.weapon, delta, session.modal)
 	context_hud.update_actions(player.interactions, delta)

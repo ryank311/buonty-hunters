@@ -30,7 +30,8 @@ func _run() -> void:
 	check(skeleton.get_bone_count() == 26, "All 26 recovered skeleton parts survived import")
 	var textured := 0
 	var worst_weight_error := 0.0
-	for node: Node in lab.character.find_children("*", "MeshInstance3D", true, false):
+	# Worn accessories are rigid meshes; this check audits the skinned body only.
+	for node: Node in lab.character.model.find_children("*", "MeshInstance3D", true, false):
 		var mesh := node as MeshInstance3D
 		for surface: int in range(mesh.mesh.get_surface_count()):
 			var material := mesh.get_active_material(surface) as StandardMaterial3D

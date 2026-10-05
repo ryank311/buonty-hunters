@@ -42,6 +42,7 @@ func initialize(parent: Node3D) -> void:
 	poly.polyphony = 24
 	shot_output.stream = poly
 	for output: AudioStreamPlayer3D in [shot_output, reload_output]:
+		output.bus = &"World"
 		output.volume_db = 0.0
 		output.unit_size = 8.0
 		output.max_distance = 120.0

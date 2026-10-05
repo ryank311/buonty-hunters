@@ -1,0 +1,519 @@
+{
+ "source": "ZWEAPON.ZAR zweapon.rdr FireAnimName -> CZANIM.ZAR Anim_Sets/common",
+ "flashes": {
+  "flash_fire_med": {
+   "model": "muzzle_flash_m4",
+   "rolls": [
+    -2.3562,
+    -1.5708,
+    -0.7854,
+    0.0,
+    0.7854,
+    1.5708,
+    2.3562,
+    3.1416
+   ],
+   "sizes": [
+    0.6,
+    0.4,
+    0.8
+   ],
+   "grow_seconds": 0.05,
+   "light": {
+    "color": [
+     0.7,
+     0.53,
+     0.27
+    ],
+    "strength": 0.5,
+    "seconds": 0.07,
+    "range_m": [
+     1.0,
+     3.0
+    ]
+   }
+  },
+  "flash_fire_hider": {
+   "model": "muzzle_flash_hider",
+   "rolls": [
+    -0.7854,
+    -0.3927,
+    0.0,
+    0.3927,
+    0.7854,
+    1.3526
+   ],
+   "sizes": [
+    1.2,
+    0.9,
+    1.3
+   ],
+   "grow_seconds": 0.05,
+   "light": {
+    "color": [
+     0.8,
+     0.68,
+     0.47
+    ],
+    "strength": 0.175,
+    "seconds": 0.07,
+    "range_m": [
+     5.0,
+     10.0
+    ]
+   }
+  },
+  "flash_fire_small": {
+   "model": "muzzle_flash_m4",
+   "rolls": [
+    -2.3562,
+    -1.5708,
+    -0.7854,
+    0.0,
+    0.7854,
+    1.5708,
+    2.3562,
+    3.1416
+   ],
+   "sizes": [
+    0.3,
+    0.4,
+    0.2
+   ],
+   "grow_seconds": 0.05,
+   "light": {
+    "color": [
+     0.8,
+     0.67,
+     0.47
+    ],
+    "strength": 0.5,
+    "seconds": 0.07,
+    "range_m": [
+     2.0,
+     4.0
+    ]
+   }
+  },
+  "shotgun_fire": {
+   "model": "muzzle_flash_m4",
+   "rolls": [
+    -1.5708,
+    -0.7854,
+    0.0,
+    0.7854,
+    1.5708,
+    2.3562
+   ],
+   "sizes": [
+    0.6,
+    1.0,
+    0.8
+   ],
+   "grow_seconds": 0.05,
+   "light": {
+    "color": [
+     0.8,
+     0.73,
+     0.57
+    ],
+    "strength": 0.3,
+    "seconds": 0.07,
+    "range_m": [
+     3.0,
+     6.0
+    ]
+   }
+  },
+  "flash_fire_break_big": {
+   "model": "muzzle_flash_break",
+   "rolls": [
+    0.0
+   ],
+   "sizes": [
+    1.1,
+    0.9,
+    1.2
+   ],
+   "grow_seconds": 0.05,
+   "light": {
+    "color": [
+     0.8,
+     0.68,
+     0.47
+    ],
+    "strength": 0.4,
+    "seconds": 0.1,
+    "range_m": [
+     1.5,
+     6.0
+    ]
+   }
+  },
+  "flash_fire_big": {
+   "model": "muzzle_flash_m4",
+   "rolls": [
+    -2.3562,
+    -1.5708,
+    -0.7854,
+    0.0,
+    0.7854,
+    1.5708,
+    2.3562,
+    3.1416
+   ],
+   "sizes": [
+    1.8,
+    0.9,
+    1.3
+   ],
+   "grow_seconds": 0.05,
+   "light": {
+    "color": [
+     0.8,
+     0.68,
+     0.47
+    ],
+    "strength": 0.5,
+    "seconds": 0.07,
+    "range_m": [
+     5.0,
+     10.0
+    ]
+   }
+  }
+ },
+ "weapons": {
+  "glock18": [
+   {
+    "weapon": "9x19P",
+    "fire_anim": "muzzle_glock",
+    "flash": "flash_fire_med"
+   }
+  ],
+  "a_mark23": [
+   {
+    "weapon": "Mark 23",
+    "fire_anim": "muzzle_mark23",
+    "flash": "flash_fire_med"
+   }
+  ],
+  "fiveseven": [
+   {
+    "weapon": "F57",
+    "fire_anim": "muzzle_fiveseven",
+    "flash": "flash_fire_med"
+   }
+  ],
+  "desert_eagle": [
+   {
+    "weapon": "DE .50",
+    "fire_anim": "muzzle_deserteagle",
+    "flash": "flash_fire_hider"
+   }
+  ],
+  "baretta_m9": [
+   {
+    "weapon": "M9",
+    "fire_anim": "muzzle_Beretta_M9",
+    "flash": "flash_fire_small"
+   }
+  ],
+  "sig226": [
+   {
+    "weapon": "226",
+    "fire_anim": "muzzle_p226",
+    "flash": "flash_fire_small"
+   },
+   {
+    "weapon": "SR-1 Gyurza",
+    "fire_anim": "muzzle_p226",
+    "flash": "flash_fire_small"
+   }
+  ],
+  "a_mark23sd": [
+   {
+    "weapon": "Mark 23SD",
+    "fire_anim": "muzzle_mark23_sd",
+    "flash": null
+   }
+  ],
+  "hkp9s": [
+   {
+    "weapon": "9mm Pistol",
+    "fire_anim": "muzzle_H&K_P9S",
+    "flash": null
+   }
+  ],
+  "m11_p228": [
+   {
+    "weapon": "P228",
+    "fire_anim": "muzzle_p226",
+    "flash": "flash_fire_small"
+   }
+  ],
+  "spas12": [
+   {
+    "weapon": "Spas 12",
+    "fire_anim": "muzzle_shotgun",
+    "flash": "shotgun_fire"
+   }
+  ],
+  "jackhammer": [
+   {
+    "weapon": "JACKHAMMER",
+    "fire_anim": "muzzle_shotgun",
+    "flash": "shotgun_fire"
+   }
+  ],
+  "remington870": [
+   {
+    "weapon": "870",
+    "fire_anim": "muzzle_shotgun",
+    "flash": "shotgun_fire"
+   }
+  ],
+  "m16a2": [
+   {
+    "weapon": "M16A2",
+    "fire_anim": "muzzle_M16A2",
+    "flash": "flash_fire_hider"
+   }
+  ],
+  "m16_m203": [
+   {
+    "weapon": "M16A2-M203",
+    "fire_anim": "muzzle_M16A2",
+    "flash": "flash_fire_hider"
+   }
+  ],
+  "m4acarbine": [
+   {
+    "weapon": "M4A1",
+    "fire_anim": "muzzle_m4",
+    "flash": "flash_fire_hider"
+   }
+  ],
+  "m4acarbine_sd": [
+   {
+    "weapon": "M4A1 SD",
+    "fire_anim": "muzzle_m4SD",
+    "flash": null
+   }
+  ],
+  "m4acarbine_203": [
+   {
+    "weapon": "M4A1-M203",
+    "fire_anim": "muzzle_m4",
+    "flash": "flash_fire_hider"
+   }
+  ],
+  "sig_commando": [
+   {
+    "weapon": "552",
+    "fire_anim": "muzzle_sigcom",
+    "flash": "flash_fire_hider"
+   },
+   {
+    "weapon": "552SD",
+    "fire_anim": "muzzle_m4SD",
+    "flash": null
+   }
+  ],
+  "ak47": [
+   {
+    "weapon": "AK-47",
+    "fire_anim": "muzzle_ak47",
+    "flash": "flash_fire_break_big"
+   }
+  ],
+  "aks74": [
+   {
+    "weapon": "AKS-74",
+    "fire_anim": "muzzle_aks74",
+    "flash": "flash_fire_break_big"
+   }
+  ],
+  "m14_gun": [
+   {
+    "weapon": "M14",
+    "fire_anim": "muzzle_M14",
+    "flash": "flash_fire_hider"
+   }
+  ],
+  "bmmg_f2k": [
+   {
+    "weapon": "F2000",
+    "fire_anim": "muzzle_m4",
+    "flash": "flash_fire_hider"
+   }
+  ],
+  "iw80a2": [
+   {
+    "weapon": "SA-80 A2",
+    "fire_anim": "muzzle_m4",
+    "flash": "flash_fire_hider"
+   }
+  ],
+  "ak105": [
+   {
+    "weapon": "AK-105",
+    "fire_anim": "muzzle_aks74",
+    "flash": "flash_fire_break_big"
+   }
+  ],
+  "ra14_groza": [
+   {
+    "weapon": "KBP OTs-14 Groza",
+    "fire_anim": "muzzle_aks74",
+    "flash": "flash_fire_break_big"
+   }
+  ],
+  "m60e": [
+   {
+    "weapon": "M60E3",
+    "fire_anim": "muzzle_rifle_m60",
+    "flash": "flash_fire_hider"
+   }
+  ],
+  "stoner_m63a": [
+   {
+    "weapon": "M63A",
+    "fire_anim": "muzzle_rifle_stoner",
+    "flash": "flash_fire_hider"
+   },
+   {
+    "weapon": ".PKM",
+    "fire_anim": "muzzle_rifle_stoner",
+    "flash": "flash_fire_hider"
+   },
+   {
+    "weapon": "PKM TURRET",
+    "fire_anim": "muzzle_turret_RMG",
+    "flash": null
+   },
+   {
+    "weapon": "LMG TURRET",
+    "fire_anim": "muzzle_turret_LMG",
+    "flash": null
+   }
+  ],
+  "mp5": [
+   {
+    "weapon": "HK5",
+    "fire_anim": "muzzle_mp5",
+    "flash": "flash_fire_med"
+   }
+  ],
+  "mp5sd": [
+   {
+    "weapon": "HK5SD",
+    "fire_anim": "muzzle_mp5sd",
+    "flash": null
+   }
+  ],
+  "fnp90": [
+   {
+    "weapon": "F90",
+    "fire_anim": "muzzle_mp5",
+    "flash": "flash_fire_med"
+   }
+  ],
+  "uzi": [
+   {
+    "weapon": "9mm Sub",
+    "fire_anim": "muzzle_uzi",
+    "flash": "flash_fire_med"
+   }
+  ],
+  "steyr_aug9": [
+   {
+    "weapon": "Steyr Aug",
+    "fire_anim": "muzzle_uzi",
+    "flash": "flash_fire_med"
+   }
+  ],
+  "hk5k": [
+   {
+    "weapon": "MP5K",
+    "fire_anim": "muzzle_uzi",
+    "flash": "flash_fire_med"
+   }
+  ],
+  "barretm82a1": [
+   {
+    "weapon": "M82A1A",
+    "fire_anim": "muzzle_Barret-M82a1",
+    "flash": "flash_fire_hider"
+   }
+  ],
+  "remington700": [
+   {
+    "weapon": "M40A1",
+    "fire_anim": "muzzle_rifle_model_700",
+    "flash": "flash_fire_big"
+   }
+  ],
+  "mcmillanm87": [
+   {
+    "weapon": "M87ELR",
+    "fire_anim": "muzzle_McMillan",
+    "flash": "flash_fire_big"
+   }
+  ],
+  "stoner_sr25": [
+   {
+    "weapon": "SR-25 SD",
+    "fire_anim": "muzzle_stoner_SR25SD",
+    "flash": null
+   },
+   {
+    "weapon": "SR-25",
+    "fire_anim": "muzzle_stoner_SR25",
+    "flash": null
+   }
+  ],
+  "dragunov": [
+   {
+    "weapon": "Dragunov",
+    "fire_anim": "muzzle_rifle_dragunov",
+    "flash": "flash_fire_big"
+   }
+  ],
+  "(null)": [
+   {
+    "weapon": "M203",
+    "fire_anim": "muzzle_m203",
+    "flash": null
+   }
+  ],
+  "mglmk1": [
+   {
+    "weapon": "MGL",
+    "fire_anim": "muzzle_m203",
+    "flash": null
+   }
+  ],
+  "m79": [
+   {
+    "weapon": "M79",
+    "fire_anim": "muzzle_m203",
+    "flash": null
+   }
+  ],
+  "at4": [
+   {
+    "weapon": "LAW",
+    "fire_anim": "muzzle_law",
+    "flash": null
+   }
+  ],
+  "rpg7": [
+   {
+    "weapon": "RPG LAUNCHER",
+    "fire_anim": "muzzle_RPG",
+    "flash": null
+   }
+  ]
+ }
+}

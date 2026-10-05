@@ -1,8 +1,16 @@
 extends Control
-## CZActionBitmap: original 50x50 icons at (306,365), 62-pixel neighbors,
-## available blue/grey palettes and a triangle pulse at five units per second.
+## CZActionBitmap: original 50x50 icons at (306,365), 62-pixel neighbors and the
+## available blue/grey palettes. The original pulsed at five units a second; this
+## breathes slower and fainter, and the icons sit more transparently over the view.
+## The recovered action bitmaps decode bottom-up, so they are drawn flipped.
 const SOURCE := Vector2(640, 448)
 const FALLBACK = preload("res://art/ui/recovered/hud/action_x.png")
+## Pulse units a second (one breath is two units) and how much of the original
+## brightening it keeps; the selected and other icons' opacity.
+const PULSE_RATE := 1.4
+const PULSE_DEPTH := 0.4
+const SELECTED_ALPHA := 0.7
+const OTHER_ALPHA := 0.4
 var icons: Dictionary = {}
 var entries: Array[Dictionary] = []
 var selected: int = 0
@@ -27,7 +35,7 @@ func update_actions(actions: Node, delta: float) -> void:
 	visible = actions.available() and not actions.offers.is_empty() and not actions.player.weapon.scoped
 	entries = actions.offers.duplicate()
 	selected = actions.selected
-	pulse = fposmod(pulse + delta * 5.0, 2.0)
+	pulse = fposmod(pulse + delta * PULSE_RATE, 2.0)
 	icon_rects.clear()
 	if visible:
 		var offer: Dictionary = entries[selected]
@@ -52,12 +60,15 @@ func _draw() -> void:
 		var path: String = "res://art/ui/recovered/hud/" + entry.icon
 		if not icons.has(path):
 			icons[path] = load(path) if ResourceLoader.exists(path) else FALLBACK
-		var amount := 1.0 - absf(pulse - 1.0)
+		var amount := smoothstep(0.0, 1.0, 1.0 - absf(pulse - 1.0)) * PULSE_DEPTH
 		var base := Vector3(20, 50, 60) if entry.enabled else Vector3(42, 42, 42)
 		var change := Vector3(35, 80, 80) if entry.enabled else Vector3(8, 8, 8)
 		var color := (base + change * amount) / 128.0
-		var tint := Color(color.x, color.y, color.z, 1.0 if slot == 0 else 0.65)
+		var tint := Color(color.x, color.y, color.z, SELECTED_ALPHA if slot == 0 else OTHER_ALPHA)
 		var x: float = 306.0 + [0.0, -62.0, 62.0][slot]
 		var rect := Rect2(Vector2(x - 25.0, 365.0) * scale, Vector2(50, 50) * scale)
 		icon_rects.append(rect)
+		# Flip about the icon's horizontal centre line.
+		draw_set_transform(Vector2(0.0, rect.position.y * 2.0 + rect.size.y), 0.0, Vector2(1.0, -1.0))
 		draw_texture_rect(icons[path], rect, false, tint)
+		draw_set_transform(Vector2.ZERO)

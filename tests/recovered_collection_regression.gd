@@ -61,7 +61,7 @@ func _run() -> void:
 		if not valid:
 			broken.append(entry.name)
 		model.free()
-	check(broken.is_empty(), "All 202 exports retain their skeleton, normalized weights and texture bindings: %s" % broken)
+	check(broken.is_empty(), "All 202 exports retain their skeleton, normalized weights and texture bindings: %s" % [broken])
 	var session: Node = load("res://scenes/main.tscn").instantiate()
 	root.add_child(session)
 	await frames(12)
@@ -106,7 +106,7 @@ func _run() -> void:
 	lab.set_clip(lab.animation_names.find("seal_walk"))
 	lab.browser.model_search.text = "SAS_01"
 	lab.browser.model_search.text_changed.emit("SAS_01")
-	check(lab.browser.model_picker.item_count == 2, "Character filter finds both SAS detail variants")
+	check(lab.browser.model_picker.item_count == 1, "Character filter offers only the full-detail SAS model")
 	var selected: int = lab.browser.model_picker.get_item_id(0)
 	lab.browser.model_picker.item_selected.emit(0)
 	await frames()
@@ -116,7 +116,7 @@ func _run() -> void:
 	for button: Button in lab.browser.panel.find_children("*", "Button", true, false):
 		if button.text == "Use selected character for player":
 			button.pressed.emit()
-	check(session.player.soldier.soldier_skin.model_path == data.characters[selected].path and session.player.position == position and session.player.weapon.ammo == ammo, "Use selected character changes the playable model without resetting position or ammunition")
+	check(session.player.soldier.soldier_skin.model_path == session.recovered_characters[selected].path and session.player.position == position and session.player.weapon.ammo == ammo, "Use selected character changes the playable model without resetting position or ammunition")
 	lab.browser.motion_search.text = "reload"
 	lab.browser.motion_search.text_changed.emit("reload")
 	check(lab.browser.visible_motions.size() > 10 and lab.browser.visible_motions.all(func(name: String) -> bool: return name.contains("reload")), "Motion search finds rifle, pistol and equipment reloads")
@@ -126,7 +126,7 @@ func _run() -> void:
 	await tap(KEY_TAB)
 	await H.scenario(self, "lab_start")
 	check(session.player.controls_enabled and session.hud.root.visible and session.player.soldier.visible, "Leaving the lab with its browser open restores the player and HUD")
-	check(skin.model_path == data.characters[selected].path, "Character choice survives level changes and respawn")
+	check(skin.model_path == session.recovered_characters[selected].path, "Character choice survives level changes and respawn")
 	await H.step(self, 45, {"forward": 1})
 	check(skin.driver.active_clip == "seal_run" and session.player.is_on_floor(), "The playable original character uses full-body recovered running on the existing controller")
 	check(skin.skeleton.get_bone_count() == 26 and skin.model.scale.is_equal_approx(Vector3.ONE), "Gameplay keeps original rig proportions without rescaling the character")
@@ -142,11 +142,11 @@ func _run() -> void:
 	await tap(KEY_BRACKETLEFT)
 	check(skin.model_path == original_path, "Left bracket switches back to the previous character")
 	var all_playable := true
-	for index: int in range(data.characters.size()):
+	for index: int in range(session.recovered_characters.size()):
 		session.set_player_character(index)
 		session.player.soldier.pose(0, 0, Vector2.ZERO, 0, 0, 1.0 / 60.0)
 		all_playable = all_playable and skin.skeleton.get_bone_count() == 26 and skin.motion.current_animation == "seal_stand"
-	check(all_playable, "Every recovered character can replace the player and use its original animation rig")
+	check(all_playable, "Every selectable full-detail character can replace the player and use its original animation rig")
 	print("\nRESULT: %d failure(s)" % failures.size())
 	session.queue_free()
 	await frames()

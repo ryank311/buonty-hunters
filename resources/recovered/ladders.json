@@ -1,0 +1,892 @@
+{
+ "source": "converted/levels/<map>/collision.json.gz: the polygons whose m_appflags is 2 (research 86-traversal.md, section 2)",
+ "scale": 0.1,
+ "maps": {
+  "MP10": [
+   {
+    "path": "worldmodel/myladder",
+    "centre": [
+     -78.6843,
+     39.8382
+    ],
+    "bottom": 2.8394,
+    "top": 12.8394,
+    "cap_top": 13.8394,
+    "normal": [
+     -1.0,
+     0.00045
+    ],
+    "half_width": 0.2726,
+    "sided": true,
+    "source": {
+     "x": 676.4,
+     "z": 1682.3,
+     "bottom": 28.4,
+     "top": 128.4
+    }
+   },
+   {
+    "path": "worldmodel/myladder",
+    "centre": [
+     62.0446,
+     40.7229
+    ],
+    "bottom": 3.082,
+    "top": 9.082,
+    "cap_top": 10.082,
+    "normal": [
+     -1.0,
+     0.0
+    ],
+    "half_width": 0.2721,
+    "sided": true,
+    "source": {
+     "x": 2083.7,
+     "z": 1691.2,
+     "bottom": 30.8,
+     "top": 90.8
+    }
+   },
+   {
+    "path": "worldmodel/myladder_1",
+    "centre": [
+     -11.1117,
+     -7.2932
+    ],
+    "bottom": 2.8394,
+    "top": 12.8394,
+    "cap_top": 13.8394,
+    "normal": [
+     -1.0,
+     0.00045
+    ],
+    "half_width": 0.2726,
+    "sided": true,
+    "source": {
+     "x": 1352.2,
+     "z": 1211.0,
+     "bottom": 28.4,
+     "top": 128.4
+    }
+   }
+  ],
+  "MP2": [
+   {
+    "path": "worldmodel/ladsnipe/ladderdown",
+    "centre": [
+     -39.3625,
+     2.1562
+    ],
+    "bottom": 10.0,
+    "top": 16.0,
+    "cap_top": 16.9904,
+    "normal": [
+     0.0,
+     1.0
+    ],
+    "half_width": 0.4,
+    "sided": true,
+    "source": {
+     "x": 547.5,
+     "z": 854.4,
+     "bottom": 100.0,
+     "top": 160.0
+    }
+   },
+   {
+    "path": "worldmodel/lad1/ladderdown_1",
+    "centre": [
+     -15.7845,
+     -46.9103
+    ],
+    "bottom": 9.9875,
+    "top": 15.5217,
+    "cap_top": 16.4781,
+    "normal": [
+     0.86603,
+     -0.5
+    ],
+    "half_width": 0.3646,
+    "sided": true,
+    "source": {
+     "x": 783.3,
+     "z": 363.7,
+     "bottom": 99.9,
+     "top": 155.2
+    }
+   },
+   {
+    "path": "worldmodel/lad2/ladderdown",
+    "centre": [
+     -44.4405,
+     -23.6585
+    ],
+    "bottom": 9.9875,
+    "top": 15.5217,
+    "cap_top": 16.4781,
+    "normal": [
+     -0.86603,
+     0.5
+    ],
+    "half_width": 0.3646,
+    "sided": true,
+    "source": {
+     "x": 496.7,
+     "z": 596.3,
+     "bottom": 99.9,
+     "top": 155.2
+    }
+   },
+   {
+    "path": "worldmodel/ldr/ladderdown",
+    "centre": [
+     4.7875,
+     -21.5777
+    ],
+    "bottom": 10.252,
+    "top": 15.2644,
+    "cap_top": 16.2522,
+    "normal": [
+     0.0,
+     1.0
+    ],
+    "half_width": 0.4,
+    "sided": true,
+    "source": {
+     "x": 989.0,
+     "z": 617.1,
+     "bottom": 102.5,
+     "top": 152.6
+    }
+   },
+   {
+    "path": "worldmodel/laddrilltower/ladddown",
+    "centre": [
+     -78.2625,
+     8.0156
+    ],
+    "bottom": 10.0,
+    "top": 15.68,
+    "cap_top": 16.7426,
+    "normal": [
+     -1.0,
+     0.0
+    ],
+    "half_width": 0.4,
+    "sided": true,
+    "source": {
+     "x": 158.5,
+     "z": 913.0,
+     "bottom": 100.0,
+     "top": 156.8
+    }
+   }
+  ],
+  "MP5": [
+   {
+    "path": "worldmodel/myladder",
+    "centre": [
+     -8.1524,
+     18.5689
+    ],
+    "bottom": 2.05,
+    "top": 8.622,
+    "cap_top": 9.622,
+    "normal": [
+     -1.0,
+     0.0
+    ],
+    "half_width": 0.4447,
+    "sided": true,
+    "source": {
+     "x": 990.6,
+     "z": 1565.7,
+     "bottom": 20.5,
+     "top": 86.2
+    }
+   }
+  ],
+  "MP53": [
+   {
+    "path": "worldmodel/ladder",
+    "centre": [
+     70.9451,
+     33.2971
+    ],
+    "bottom": 8.0817,
+    "top": 16.5817,
+    "cap_top": 17.6317,
+    "normal": [
+     0.0,
+     -1.0
+    ],
+    "half_width": 0.4568,
+    "sided": true,
+    "source": {
+     "x": 3009.5,
+     "z": 3246.5,
+     "bottom": 80.8,
+     "top": 165.8
+    }
+   }
+  ],
+  "MP6": [
+   {
+    "path": "worldmodel/g40",
+    "centre": [
+     6.5751,
+     -30.1731
+    ],
+    "bottom": -0.0,
+    "top": 6.1,
+    "cap_top": 7.0509,
+    "normal": [
+     0.0,
+     1.0
+    ],
+    "half_width": 0.28,
+    "sided": true,
+    "source": {
+     "x": 2065.8,
+     "z": 1983.3,
+     "bottom": -0.0,
+     "top": 61.0
+    }
+   }
+  ],
+  "MP61": [
+   {
+    "path": "worldmodel/ladder_astrike2/ladder",
+    "centre": [
+     10.7648,
+     61.111
+    ],
+    "bottom": -0.3717,
+    "top": 4.8802,
+    "cap_top": 5.8802,
+    "normal": [
+     0.0,
+     1.0
+    ],
+    "half_width": 0.3391,
+    "sided": true,
+    "source": {
+     "x": 905.6,
+     "z": 1891.1,
+     "bottom": -3.7,
+     "top": 48.8
+    }
+   },
+   {
+    "path": "worldmodel/ladder",
+    "centre": [
+     13.9406,
+     -29.3965
+    ],
+    "bottom": 3.9429,
+    "top": 9.1948,
+    "cap_top": 10.1948,
+    "normal": [
+     0.0,
+     -1.0
+    ],
+    "half_width": 0.3391,
+    "sided": true,
+    "source": {
+     "x": 937.4,
+     "z": 986.0,
+     "bottom": 39.4,
+     "top": 91.9
+    }
+   },
+   {
+    "path": "worldmodel/ladder",
+    "centre": [
+     21.4234,
+     49.0161
+    ],
+    "bottom": -0.3717,
+    "top": 4.8802,
+    "cap_top": 5.8802,
+    "normal": [
+     1.0,
+     0.0
+    ],
+    "half_width": 0.3391,
+    "sided": true,
+    "source": {
+     "x": 1012.2,
+     "z": 1770.2,
+     "bottom": -3.7,
+     "top": 48.8
+    }
+   },
+   {
+    "path": "worldmodel/ladder",
+    "centre": [
+     -36.383,
+     16.8781
+    ],
+    "bottom": -0.1717,
+    "top": 5.0802,
+    "cap_top": 6.0802,
+    "normal": [
+     1.0,
+     0.0
+    ],
+    "half_width": 0.3391,
+    "sided": true,
+    "source": {
+     "x": 434.2,
+     "z": 1448.8,
+     "bottom": -1.7,
+     "top": 50.8
+    }
+   },
+   {
+    "path": "worldmodel/g1902/di_ladder01",
+    "centre": [
+     1.5016,
+     19.1862
+    ],
+    "bottom": -0.0058,
+    "top": 5.0,
+    "cap_top": 5.98,
+    "normal": [
+     0.0,
+     1.0
+    ],
+    "half_width": 0.25,
+    "sided": true,
+    "source": {
+     "x": 813.0,
+     "z": 1471.9,
+     "bottom": -0.1,
+     "top": 50.0
+    }
+   }
+  ],
+  "MP62": [
+   {
+    "path": "worldmodel/g253/climbme",
+    "centre": [
+     1.4735,
+     46.1924
+    ],
+    "bottom": 20.0447,
+    "top": 27.5742,
+    "cap_top": 28.5692,
+    "normal": [
+     1.0,
+     0.00287
+    ],
+    "half_width": 0.4,
+    "sided": true,
+    "source": {
+     "x": 1692.2,
+     "z": 1901.9,
+     "bottom": 200.4,
+     "top": 275.7
+    }
+   },
+   {
+    "path": "worldmodel/g253/climbme",
+    "centre": [
+     -32.8509,
+     -4.4369
+    ],
+    "bottom": 20.1286,
+    "top": 27.6581,
+    "cap_top": 28.6531,
+    "normal": [
+     1.0,
+     0.00287
+    ],
+    "half_width": 0.4,
+    "sided": true,
+    "source": {
+     "x": 1349.0,
+     "z": 1395.6,
+     "bottom": 201.3,
+     "top": 276.6
+    }
+   },
+   {
+    "path": "worldmodel/g253/climbme",
+    "centre": [
+     95.1491,
+     -4.6046
+    ],
+    "bottom": 20.5267,
+    "top": 28.0563,
+    "cap_top": 29.0513,
+    "normal": [
+     1.0,
+     0.0029
+    ],
+    "half_width": 0.4,
+    "sided": true,
+    "source": {
+     "x": 2629.0,
+     "z": 1394.0,
+     "bottom": 205.3,
+     "top": 280.6
+    }
+   },
+   {
+    "path": "worldmodel/g253/climbme",
+    "centre": [
+     17.7304,
+     -33.6336
+    ],
+    "bottom": 17.4889,
+    "top": 25.5185,
+    "cap_top": 26.5135,
+    "normal": [
+     0.00287,
+     1.0
+    ],
+    "half_width": 0.4,
+    "sided": true,
+    "source": {
+     "x": 1854.8,
+     "z": 1103.7,
+     "bottom": 174.9,
+     "top": 255.2
+    }
+   }
+  ],
+  "MP64": [
+   {
+    "path": "worldmodel/towerladder_di",
+    "centre": [
+     -42.4513,
+     111.1296
+    ],
+    "bottom": 4.8851,
+    "top": 9.8851,
+    "cap_top": 10.8851,
+    "normal": [
+     -0.41937,
+     0.90782
+    ],
+    "half_width": 0.2745,
+    "sided": true,
+    "source": {
+     "x": 563.7,
+     "z": 2628.6,
+     "bottom": 48.9,
+     "top": 98.9
+    }
+   },
+   {
+    "path": "worldmodel/towerladder_di",
+    "centre": [
+     82.2235,
+     24.0249
+    ],
+    "bottom": 9.3427,
+    "top": 14.3427,
+    "cap_top": 15.3427,
+    "normal": [
+     1.0,
+     -0.00027
+    ],
+    "half_width": 0.2745,
+    "sided": true,
+    "source": {
+     "x": 1810.5,
+     "z": 1757.6,
+     "bottom": 93.4,
+     "top": 143.4
+    }
+   }
+  ],
+  "MP71": [
+   {
+    "path": "worldmodel/ladder01/di_ladder1",
+    "centre": [
+     27.2099,
+     -9.0757
+    ],
+    "bottom": 13.9201,
+    "top": 17.9201,
+    "cap_top": 18.9055,
+    "normal": [
+     -1.0,
+     0.0
+    ],
+    "half_width": 0.25,
+    "sided": true,
+    "source": {
+     "x": 1952.1,
+     "z": 1092.7,
+     "bottom": 139.2,
+     "top": 179.2
+    }
+   },
+   {
+    "path": "worldmodel/ladder02/di_ladder1_1",
+    "centre": [
+     64.9415,
+     -37.3697
+    ],
+    "bottom": 18.2038,
+    "top": 22.2038,
+    "cap_top": 23.1891,
+    "normal": [
+     0.0,
+     -1.0
+    ],
+    "half_width": 0.25,
+    "sided": true,
+    "source": {
+     "x": 2329.4,
+     "z": 809.8,
+     "bottom": 182.0,
+     "top": 222.0
+    }
+   }
+  ],
+  "MP72": [
+   {
+    "path": "worldmodel/tower/di_ladder",
+    "centre": [
+     23.4395,
+     -11.454
+    ],
+    "bottom": 11.925,
+    "top": 21.925,
+    "cap_top": 22.915,
+    "normal": [
+     0.0,
+     1.0
+    ],
+    "half_width": 0.25,
+    "sided": true,
+    "source": {
+     "x": 1557.4,
+     "z": 1330.7,
+     "bottom": 119.3,
+     "top": 219.3
+    }
+   }
+  ],
+  "MP73": [
+   {
+    "path": "worldmodel/g5213/ladder35",
+    "centre": [
+     -86.8719,
+     -25.7687
+    ],
+    "bottom": 11.0,
+    "top": 14.5,
+    "cap_top": 15.4383,
+    "normal": [
+     0.0,
+     1.0
+    ],
+    "half_width": 0.28,
+    "sided": true,
+    "source": {
+     "x": 810.0,
+     "z": 1196.0,
+     "bottom": 110.0,
+     "top": 145.0
+    }
+   },
+   {
+    "path": "worldmodel/g5213_1/ladder42",
+    "centre": [
+     -89.6719,
+     -53.0598
+    ],
+    "bottom": 6.6,
+    "top": 10.8,
+    "cap_top": 11.7383,
+    "normal": [
+     1.0,
+     0.0
+    ],
+    "half_width": 0.28,
+    "sided": true,
+    "source": {
+     "x": 782.0,
+     "z": 923.1,
+     "bottom": 66.0,
+     "top": 108.0
+    }
+   },
+   {
+    "path": "worldmodel/ladder_tower/ladder50",
+    "centre": [
+     -56.9719,
+     -43.3488
+    ],
+    "bottom": 6.0,
+    "top": 13.0,
+    "cap_top": 13.9383,
+    "normal": [
+     -1.0,
+     0.0
+    ],
+    "half_width": 0.2527,
+    "sided": true,
+    "source": {
+     "x": 1109.0,
+     "z": 1020.2,
+     "bottom": 60.0,
+     "top": 130.0
+    }
+   },
+   {
+    "path": "worldmodel/ladder_tower/ladder50",
+    "centre": [
+     -83.9811,
+     0.5836
+    ],
+    "bottom": 6.0,
+    "top": 13.0,
+    "cap_top": 13.9383,
+    "normal": [
+     -0.71907,
+     -0.69494
+    ],
+    "half_width": 0.2527,
+    "sided": true,
+    "source": {
+     "x": 838.9,
+     "z": 1459.5,
+     "bottom": 60.0,
+     "top": 130.0
+    }
+   }
+  ],
+  "MP8": [
+   {
+    "path": "worldmodel/climb01",
+    "centre": [
+     5.0628,
+     -21.1616
+    ],
+    "bottom": 9.1693,
+    "top": 14.9193,
+    "cap_top": 15.9193,
+    "normal": [
+     0.59123,
+     -0.8065
+    ],
+    "half_width": 0.9503,
+    "sided": true,
+    "source": {
+     "x": 1330.0,
+     "z": 616.2,
+     "bottom": 91.7,
+     "top": 149.2
+    }
+   },
+   {
+    "path": "worldmodel/climb05",
+    "centre": [
+     -41.0837,
+     58.369
+    ],
+    "bottom": 10.4256,
+    "top": 16.1756,
+    "cap_top": 17.1756,
+    "normal": [
+     0.99907,
+     -0.04322
+    ],
+    "half_width": 0.9503,
+    "sided": true,
+    "source": {
+     "x": 868.6,
+     "z": 1411.5,
+     "bottom": 104.3,
+     "top": 161.8
+    }
+   }
+  ],
+  "MP81": [
+   {
+    "path": "worldmodel/ladders",
+    "centre": [
+     -0.682,
+     -14.7834
+    ],
+    "bottom": 2.2928,
+    "top": 12.0428,
+    "cap_top": 13.0428,
+    "normal": [
+     0.42114,
+     0.907
+    ],
+    "half_width": 0.3003,
+    "sided": true,
+    "source": {
+     "x": 1288.2,
+     "z": 1557.2,
+     "bottom": 22.9,
+     "top": 120.4
+    }
+   },
+   {
+    "path": "worldmodel/di_ladder",
+    "centre": [
+     -11.1116,
+     -72.0589
+    ],
+    "bottom": 0.5,
+    "top": 5.75,
+    "cap_top": 6.75,
+    "normal": [
+     0.0,
+     -1.0
+    ],
+    "half_width": 0.3,
+    "sided": true,
+    "source": {
+     "x": 1183.9,
+     "z": 984.4,
+     "bottom": 5.0,
+     "top": 57.5
+    }
+   },
+   {
+    "path": "worldmodel/di_ladder",
+    "centre": [
+     -1.5116,
+     -72.0589
+    ],
+    "bottom": 0.5,
+    "top": 5.75,
+    "cap_top": 6.75,
+    "normal": [
+     0.0,
+     -1.0
+    ],
+    "half_width": 0.3,
+    "sided": true,
+    "source": {
+     "x": 1279.9,
+     "z": 984.4,
+     "bottom": 5.0,
+     "top": 57.5
+    }
+   },
+   {
+    "path": "worldmodel/di_ladder",
+    "centre": [
+     8.5884,
+     -72.0589
+    ],
+    "bottom": 0.5,
+    "top": 5.75,
+    "cap_top": 6.75,
+    "normal": [
+     0.0,
+     -1.0
+    ],
+    "half_width": 0.3,
+    "sided": true,
+    "source": {
+     "x": 1380.9,
+     "z": 984.4,
+     "bottom": 5.0,
+     "top": 57.5
+    }
+   },
+   {
+    "path": "worldmodel/di_ladder",
+    "centre": [
+     -15.3052,
+     -63.5325
+    ],
+    "bottom": 12.0,
+    "top": 24.75,
+    "cap_top": 25.75,
+    "normal": [
+     0.0,
+     1.0
+    ],
+    "half_width": 0.3,
+    "sided": true,
+    "source": {
+     "x": 1141.9,
+     "z": 1069.7,
+     "bottom": 120.0,
+     "top": 247.5
+    }
+   },
+   {
+    "path": "worldmodel/di_ladder_2",
+    "centre": [
+     12.3052,
+     -63.5325
+    ],
+    "bottom": 12.0,
+    "top": 24.75,
+    "cap_top": 25.75,
+    "normal": [
+     0.0,
+     1.0
+    ],
+    "half_width": 0.3,
+    "sided": true,
+    "source": {
+     "x": 1418.1,
+     "z": 1069.7,
+     "bottom": 120.0,
+     "top": 247.5
+    }
+   }
+  ],
+  "MP82": [
+   {
+    "path": "worldmodel/ladder_hit/ladder_guardtower1=ladder_guardtower1/down",
+    "centre": [
+     -70.9937,
+     -105.4606
+    ],
+    "bottom": -3.9958,
+    "top": 1.0519,
+    "cap_top": 2.0519,
+    "normal": [
+     -1.0,
+     0.0
+    ],
+    "half_width": 0.25,
+    "sided": true,
+    "source": {
+     "x": 650.1,
+     "z": 425.4,
+     "bottom": -40.0,
+     "top": 10.5
+    }
+   },
+   {
+    "path": "worldmodel/ladder_static/ladder_guardtower1=ladder_guardtower1/down",
+    "centre": [
+     80.8219,
+     61.8626
+    ],
+    "bottom": 4.7571,
+    "top": 9.8048,
+    "cap_top": 10.8048,
+    "normal": [
+     1.0,
+     0.0
+    ],
+    "half_width": 0.25,
+    "sided": true,
+    "source": {
+     "x": 2168.2,
+     "z": 2098.6,
+     "bottom": 47.6,
+     "top": 98.0
+    }
+   }
+  ]
+ }
+}

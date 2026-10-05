@@ -68,6 +68,8 @@ var scoped: bool = false
 var zoom_index: int = 0
 var scope_camera := Camera3D.new()
 var held_item := MeshInstance3D.new()
+var item_mesh := SphereMesh.new()
+var smoke_model: Node3D
 var item_paint := StandardMaterial3D.new()
 var director: Node
 var pad_cycle: bool = false
@@ -92,7 +94,6 @@ func initialize(owner_player: PrototypePlayer) -> void:
 	scope_camera.top_level = true
 	scope_camera.near = 0.05
 	add_child(scope_camera)
-	var item_mesh := SphereMesh.new()
 	item_mesh.radius = 0.07
 	item_mesh.height = 0.15
 	item_mesh.radial_segments = 8
@@ -101,6 +102,9 @@ func initialize(owner_player: PrototypePlayer) -> void:
 	held_item.material_override = item_paint
 	held_item.position = Vector3(0.0, 0.0, -0.06)
 	player.soldier.weapon_pivot.add_child(held_item)
+	smoke_model = preload("res://art/models/recovered_smoke_grenade.glb").instantiate()
+	held_item.add_child(smoke_model)
+	smoke_model.hide()
 	throw_arc = THROW_ARC.new()
 	add_child(throw_arc)
 	director = DIRECTOR.new()
@@ -237,6 +241,8 @@ func _show_weapon() -> void:
 		soldier.pistol_mesh.scale = Vector3.ONE if long_gun else profile.visual_scale
 		soldier.muzzle.position.z = -profile.muzzle_length
 	held_item.visible = not firearm and ammo > 0
+	held_item.mesh = null if profile.kind == "smoke" else item_mesh
+	smoke_model.visible = profile.kind == "smoke"
 	if not firearm:
 		item_paint.albedo_color = ITEM_COLOURS.get(profile.kind, Color.DIM_GRAY)
 	if soldier.soldier_skin != null and draw_remaining > 0.0 and draw_from != null:
@@ -367,6 +373,7 @@ func tick(delta: float, fire: bool, reload_requested: bool) -> void:
 	draw_remaining = maxf(0.0, draw_remaining - delta)
 	hit_flash = maxf(0.0, hit_flash - delta)
 	muzzle_timer = maxf(0.0, muzzle_timer - delta)
+	player.soldier.flash.advance(delta)
 	recoil.tick(delta, profile)
 	if native_accuracy():
 		var look := Vector2(player.rotation.y, player.camera_rig.pitch)
@@ -378,7 +385,6 @@ func tick(delta: float, fire: bool, reload_requested: bool) -> void:
 		player.camera_rig.set_recoil(Vector2.ZERO)
 	else:
 		player.camera_rig.set_recoil(recoil.offset)
-	player.soldier.flash.visible = muzzle_timer > 0.0
 	if not fire:
 		require_trigger_release = false
 		rounds_in_pull = 0
@@ -431,7 +437,7 @@ func shoot(result: Dictionary) -> void:
 	cooldown = fire_interval() + minf(cooldown, 0.0)
 	muzzle_timer = 0.045
 	weapon_audio.fire(profile)
-	player.soldier.flash.visible = true
+	player.soldier.flash.fire(profile.recovered_model)
 	if profile.muzzle_velocity > 0.0:
 		_fire_bullet(result)
 	else:

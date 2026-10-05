@@ -18,6 +18,10 @@ func frames(count: int = 4) -> void:
 		await physics_frame
 		await process_frame
 
+func relative_to_bone(skin: SoldierSkin, node: Node3D, bone: String) -> Transform3D:
+	var body := skin.skeleton.global_transform * skin.skeleton.get_bone_global_pose(skin.skeleton.find_bone(bone))
+	return body.affine_inverse() * node.global_transform
+
 func choose(slot: int, key: String, value: Variant) -> void:
 	for index: int in range(page.choices[slot].size()):
 		if page.choices[slot][index].get(key) == value:
@@ -45,6 +49,30 @@ func _run() -> void:
 	page = hud.loadout_menu
 	var w: PracticeWeapon = session.player.weapon
 	var skin: SoldierSkin = session.player.soldier.soldier_skin
+	check(skin.outfit.pieces.any(func(piece: Dictionary) -> bool: return piece.id == "flak_helmet") and skin.outfit.grenades.size() == 3, "CQB restores its source helmet and shows only carried grenade supply")
+	check(skin.outfit.stowed.pistol.visible and not skin.outfit.stowed.long.visible, "The inactive pistol is holstered without duplicating the held rifle")
+	# Guard the reported floating-gear bug against the rendered skeleton, including
+	# body translation, rotation and stance changes, not just source pose arrays.
+	var attachments: Array = skin.outfit.pieces.duplicate()
+	attachments.append({"node": skin.outfit.stowed.long, "bone": "spinelo"})
+	attachments.append({"node": skin.outfit.stowed.pistol, "bone": "rthigh"})
+	for grenade: Dictionary in skin.outfit.grenades:
+		attachments.append({"node": grenade.node, "bone": "hips"})
+	var offsets: Array[Transform3D] = []
+	for piece: Dictionary in attachments:
+		offsets.append(relative_to_bone(skin, piece.node, piece.bone))
+	var attached := true
+	for stance: String in ["stand", "crouch", "prone"]:
+		await H.apply(self, {"stance": stance})
+		await H.step(self, 24, {"forward": 0.7, "turn": 40})
+		for index: int in range(attachments.size()):
+			var piece: Dictionary = attachments[index]
+			var actual := relative_to_bone(skin, piece.node, piece.bone)
+			attached = attached and actual.origin.distance_to(offsets[index].origin) < 0.0002
+			for axis: int in range(3):
+				attached = attached and actual.basis[axis].distance_to(offsets[index].basis[axis]) < 0.0002
+	check(attached, "Hats, holstered guns and grenades stay fixed to animated bones through movement, turns and every stance")
+	await H.scenario(self, "lab_start", {"roster": false})
 	session.set_modal(true)
 	var tab := hud.page_buttons.size() - 1
 	hud.page_buttons[tab].pressed.emit()
@@ -75,7 +103,7 @@ func _run() -> void:
 	w._commit_throw()
 	choose(2, "kind", "smoke")
 	check(w.throw_release < 0 and w.throw_charge < 0 and not session.player.soldier.throwing() and w.ammo == 1 and w.profile.kind == "smoke", "Replacing a grenade during its wind-up cancels the old throw without inflating the new supply")
-	check(page.character_picker.item_count == 202, "Character selector contains every recovered model")
+	check(page.character_picker.item_count == 106 and session.recovered_characters.all(func(entry: Dictionary) -> bool: return entry.triangles >= 1000), "Character selector contains only the 106 full-detail recovered models")
 	var old_path: String = skin.model_path
 	page.character_search.text = "scuba"
 	page.character_search.text_changed.emit(page.character_search.text)

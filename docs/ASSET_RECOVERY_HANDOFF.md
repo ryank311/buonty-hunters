@@ -65,6 +65,8 @@ The established conversion is **0.1 metres per source unit**, Y-up in Godot, can
 
 Every installed model needs its `.blend` in `art/blender/` and an export via `tools/dev blender export <name>`. Never hand-edit a final GLB or its `.import`. Copy required textures into the source texture tree, use relative paths, and keep duplicates content-addressed where practical. Materials currently approximate base color, cutouts and roughness. PS2 blending, vertex lighting, original normals, animated materials and billboards need further work; do not claim a pixel-exact reconstruction.
 
+**Muzzle flashes are the originals.** Each weapon record's `FireAnimName` (zweapon.rdr) names a zAnim sequence in `CZANIM.ZAR` that spawns a `flash_fire_*` effect: one of three flame models (`muzzle_flash_m4`, `_hider`, `_break`, now `art/blender/recovered_muzzle_flash.blend`), a random roll and one of three sizes, and a warm 0.07 s muzzle light. `tools/recovery/prepare_muzzle_flashes.py` decodes those opcodes into `resources/recovered/muzzle_flashes.json`; `scripts/combat/muzzle_flash.gd` plays it at the soldier's muzzle, keyed by the profile's `recovered_model`. Suppressed guns have no flash. Not yet ported: shell ejection and muzzle smoke (same sequences), tracers, and the `_zoom` variants seen through a scope. `muzzle_flash_regression` covers it.
+
 ### Levels
 
 The extraction's assembled OBJ is a recovery representation, not a ready-to-play map: it can contain LOD branches, alternate/destroyed states and clutter together. Use the scene graph and placement matrices to select branches and preserve reusable object instances. The Crossroads pilot demonstrates a deliberate crop, source origin and collision filters; its filters are not universal for other maps.

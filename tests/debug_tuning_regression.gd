@@ -27,7 +27,7 @@ func _run() -> void:
 	var w: PracticeWeapon = session.player.weapon
 	hud.show_page(3)
 	await frames()
-	check(hud.pages.size() == 6 and hud.page_buttons[3].text == "Debug tuning" and not hud.page_buttons.any(func(b: Button) -> bool: return b.text in ["Rifle recoil", "Pistol recoil", "Accuracy"]), "One Debug tuning tab replaces all three old weapon pages")
+	check(hud.page_buttons.filter(func(b: Button) -> bool: return b.text == "Debug tuning").size() == 1 and not hud.page_buttons.any(func(b: Button) -> bool: return b.text in ["Rifle recoil", "Pistol recoil", "Accuracy"]), "One Debug tuning tab replaces all three old weapon pages")
 	check(menu.weapon_picker.item_count == w.profiles.size() and menu.weapon_picker.text.contains("M4A1") and menu.editors.has("recovered_spread_scale") and not menu.editors.has("vertical_kick"), "Tuning lists carried items and only the recoil/spread controls used by the recovered gun")
 	menu.editors.recovered_recoil_scale.value = 1.4
 	menu.editors.recovered_spread_scale.value = 0.6

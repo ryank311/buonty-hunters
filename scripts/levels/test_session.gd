@@ -24,7 +24,7 @@ func _enter_tree() -> void:
 	PlayerInput.setup()
 
 func _ready() -> void:
-	recovered_characters = preload("res://scripts/levels/recovery_library.gd").catalogue().characters
+	recovered_characters = preload("res://scripts/levels/recovery_library.gd").selectable_characters()
 	_load_settings()
 	hud.initialize(self)
 	player.message.connect(hud.notify)

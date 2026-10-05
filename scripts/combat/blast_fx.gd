@@ -12,18 +12,20 @@ var light := OmniLight3D.new()
 var material := StandardMaterial3D.new()
 var sound := AudioStreamPlayer3D.new()
 
-## `pitch` sets the character of the noise: low for an explosion, higher for a flashbang.
-func start(colour: Color, radius: float, duration: float, pitch: float = 0.38) -> void:
+## `pitch` sets the character of the noise: low for an explosion. A recovered `report`
+## plays as authored.
+func start(colour: Color, radius: float, duration: float, pitch: float = 0.38, report: AudioStream = REPORT) -> void:
 	reach = radius
 	seconds = duration
-	sound.stream = REPORT
+	sound.stream = report
 	sound.pitch_scale = pitch
 	sound.volume_db = -3.0
 	sound.max_distance = 160.0
+	sound.bus = &"World"
 	add_child(sound)
 	sound.play()
 	# Outlive the light by as long as the noise takes to finish.
-	lifetime = maxf(seconds, REPORT.get_length() / pitch + 0.1)
+	lifetime = maxf(seconds, report.get_length() / pitch + 0.1)
 	var sphere := SphereMesh.new()
 	sphere.radius = 1.0
 	sphere.height = 2.0

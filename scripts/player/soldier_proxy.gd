@@ -16,7 +16,7 @@ enum Throw { LOB, SIDEARM, OVERHAND, FULL }
 var parts: Dictionary = {}
 var weapon_pivot: Node3D
 var muzzle: Marker3D
-var flash: MeshInstance3D
+var flash: RecoveredMuzzleFlash
 var rifle_mesh: Node3D
 var pistol_mesh: Node3D
 var weapon_slot: int = 0
@@ -145,17 +145,7 @@ func _ready() -> void:
 	muzzle = Marker3D.new()
 	muzzle.position = Vector3(0, 0.015, -0.52)
 	weapon_pivot.add_child(muzzle)
-	flash = MeshInstance3D.new()
-	var flash_mesh := SphereMesh.new()
-	flash_mesh.radius = 0.09
-	flash_mesh.height = 0.18
-	flash_mesh.radial_segments = 6
-	flash_mesh.rings = 3
-	flash.mesh = flash_mesh
-	var glow := _material(Color("fff0a1"))
-	glow.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	flash.material_override = glow
-	flash.visible = false
+	flash = RecoveredMuzzleFlash.new()
 	muzzle.add_child(flash)
 	set_weapon(0)
 	soldier_skin = SoldierSkin.wear(self)
@@ -204,7 +194,6 @@ func reset_pose() -> void:
 	lean_shift = 0.0
 	lean_roll = 0.0
 	focus_blend = 0.0
-	soldier_skin.driver.grenade.hold(style, get_parent().stance.current)
 	locomotion_yaw = 0.0
 	torso_yaw = 0.0
 	gait_direction = Vector3.FORWARD
@@ -215,6 +204,7 @@ func reset_pose() -> void:
 ## Draws back for (and holds) a throw of `style` while the throw button is held.
 func hold_throw(style: int) -> void:
 	throw_hold_style = style
+	soldier_skin.driver.grenade.hold(style, get_parent().stance.current)
 
 ## Starts the throwing motion. Returns the seconds until the hand lets go.
 func begin_throw(style: int) -> float:

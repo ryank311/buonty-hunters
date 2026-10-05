@@ -74,7 +74,7 @@ func initialize(owner_hud: Node) -> void:
 	hud.page_controls.back().append(character_picker)
 	character_search = LineEdit.new()
 	add_child(character_search)
-	character_search.placeholder_text = "Find character… (%d recovered models)" % hud.session.recovered_characters.size()
+	character_search.placeholder_text = "Find character… (%d full-detail models)" % hud.session.recovered_characters.size()
 	character_search.custom_minimum_size.y = 30
 	character_search.text_changed.connect(func(_text: String) -> void: _filter_characters())
 	hud._bind_focus(character_search)

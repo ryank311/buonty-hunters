@@ -65,6 +65,7 @@ func _play(output: AudioStreamPlayer3D, speed: float, run_speed: float, stance: 
 			var stream := AudioStreamPolyphonic.new()
 			stream.polyphony = 4
 			output.stream = stream
+			output.bus = &"World"
 			output.volume_db = 0.0
 			output.pitch_scale = 1.0
 		if not output.playing:

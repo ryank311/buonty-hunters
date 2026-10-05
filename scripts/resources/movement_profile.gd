@@ -36,6 +36,9 @@ extends Resource
 @export var high_climb_height: float = 2.65
 ## dynamics.rdr min_stand_height: headroom needed on top of a ledge to climb onto it.
 @export var climb_headroom: float = 1.0
+## Climbing a ladder at a full stick. The original's "Climb ladder" rate works out at
+## 7.59 source units a second.
+@export var ladder_speed: float = 0.759
 ## Sideways and backward speed as a share of forward speed, in each stance. The original
 ## ran 6.5 m/s sideways and 3.7 back, crouch-walked 1.5 and 1.35, and crawled 0.55 and 1.1.
 @export var strafe_multiplier: float = 1.0

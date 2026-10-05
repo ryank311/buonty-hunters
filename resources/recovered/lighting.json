@@ -1,0 +1,4591 @@
+{
+ "version": 1,
+ "maps": {
+  "MP1": {
+   "name": "Blizzard",
+   "source": "archives/MP1/RUN/MP/MP1/MP1_GEO.ZED",
+   "lights": [
+    {
+     "path": "worldmodel/dredge/alaska4d_dredge=/alaska4d_dredge/alarmhorn=/alarmhorn/hornlight",
+     "position": [
+      -24.05598,
+      22.07595,
+      -86.24194
+     ],
+     "color": [
+      0.917647,
+      0.258824,
+      0.141176
+     ],
+     "range": 8.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 29808
+    },
+    {
+     "path": "worldmodel/comshack/alaska4d_outbuilding02=/alaska4d_outbuilding02/shack_good/ls11",
+     "position": [
+      46.25993,
+      27.91667,
+      106.87472
+     ],
+     "color": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "range": 1.0,
+     "inner_range": 0.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 138960
+    },
+    {
+     "path": "worldmodel/comshack/alaska4d_outbuilding02=/alaska4d_outbuilding02/shack_good/ls11_1",
+     "position": [
+      48.35958,
+      27.91667,
+      101.7433
+     ],
+     "color": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "range": 1.0,
+     "inner_range": 0.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 139104
+    },
+    {
+     "path": "worldmodel/comshack/alaska4d_outbuilding02=/alaska4d_outbuilding02/shack_good/ls11_2",
+     "position": [
+      40.89743,
+      27.91667,
+      104.09198
+     ],
+     "color": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "range": 1.0,
+     "inner_range": 0.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 139248
+    },
+    {
+     "path": "worldmodel/stat_lites33/ls1",
+     "position": [
+      34.91736,
+      11.517,
+      48.62026
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 546608
+    },
+    {
+     "path": "worldmodel/stat_lites32/ls2",
+     "position": [
+      3.74557,
+      15.44457,
+      13.974
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 546848
+    },
+    {
+     "path": "worldmodel/stat_lites31/ls2_1",
+     "position": [
+      21.36614,
+      9.74627,
+      24.58457
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 547088
+    },
+    {
+     "path": "worldmodel/stat_lites30/ls2_2",
+     "position": [
+      23.5667,
+      9.81884,
+      39.37393
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 547328
+    },
+    {
+     "path": "worldmodel/stat_lites29/ls2_3",
+     "position": [
+      28.20339,
+      31.7264,
+      93.65701
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 547568
+    },
+    {
+     "path": "worldmodel/stat_lites28/ls2_4",
+     "position": [
+      20.07908,
+      24.99071,
+      125.60334
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 547808
+    },
+    {
+     "path": "worldmodel/stat_lites27/ls2_5",
+     "position": [
+      35.61797,
+      29.14897,
+      107.87107
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 548048
+    },
+    {
+     "path": "worldmodel/stat_lites26/ls2_6",
+     "position": [
+      49.58396,
+      28.46304,
+      93.04456
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 548288
+    },
+    {
+     "path": "worldmodel/stat_lites25/ls2_7",
+     "position": [
+      59.99023,
+      14.62369,
+      49.97893
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 548528
+    },
+    {
+     "path": "worldmodel/stat_lites24/ls2_8",
+     "position": [
+      60.88521,
+      26.68008,
+      96.63132
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 548768
+    },
+    {
+     "path": "worldmodel/stat_lites23/ls2_9",
+     "position": [
+      61.9804,
+      25.20987,
+      112.70977
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 549008
+    },
+    {
+     "path": "worldmodel/stat_lites22/ls2_10",
+     "position": [
+      -13.3537,
+      16.0382,
+      13.56558
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 549248
+    },
+    {
+     "path": "worldmodel/stat_lites21/ls2_11",
+     "position": [
+      59.68137,
+      28.02398,
+      82.60364
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 549488
+    },
+    {
+     "path": "worldmodel/stat_lites20/ls2_12",
+     "position": [
+      56.40828,
+      29.63116,
+      66.17197
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 549728
+    },
+    {
+     "path": "worldmodel/stat_lites19/ls2_13",
+     "position": [
+      -76.73706,
+      6.70611,
+      -72.3068
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 549968
+    },
+    {
+     "path": "worldmodel/stat_lites18/ls2_14",
+     "position": [
+      -72.16727,
+      5.23188,
+      -105.02797
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 550208
+    },
+    {
+     "path": "worldmodel/stat_lites17/ls2_15",
+     "position": [
+      -78.01472,
+      6.45684,
+      -89.63086
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 550448
+    },
+    {
+     "path": "worldmodel/stat_lites16/ls2_16",
+     "position": [
+      10.12141,
+      10.34117,
+      -98.82377
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 550688
+    },
+    {
+     "path": "worldmodel/stat_lites15/ls2_17",
+     "position": [
+      -63.29735,
+      8.0884,
+      -59.63303
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 550928
+    },
+    {
+     "path": "worldmodel/stat_lites14/ls2_18",
+     "position": [
+      -50.80363,
+      10.61757,
+      -50.66289
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 551168
+    },
+    {
+     "path": "worldmodel/stat_lites13/ls2_19",
+     "position": [
+      -35.2916,
+      6.23275,
+      -70.58096
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 551408
+    },
+    {
+     "path": "worldmodel/stat_lites12/ls2_20",
+     "position": [
+      -40.5422,
+      10.23093,
+      -38.01338
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 551648
+    },
+    {
+     "path": "worldmodel/stat_lites11/ls2_21",
+     "position": [
+      -12.28875,
+      6.5467,
+      -69.56924
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 551888
+    },
+    {
+     "path": "worldmodel/stat_lites10/ls2_22",
+     "position": [
+      -51.95924,
+      6.8686,
+      -70.76527
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 552128
+    },
+    {
+     "path": "worldmodel/stat_lites9/ls2_23",
+     "position": [
+      4.19703,
+      11.19935,
+      -86.25338
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 552368
+    },
+    {
+     "path": "worldmodel/stat_lites8/ls2_24",
+     "position": [
+      -24.83105,
+      8.3586,
+      -21.97483
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 552608
+    },
+    {
+     "path": "worldmodel/stat_lites7/ls2_25",
+     "position": [
+      -18.18076,
+      10.81791,
+      -5.12893
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 552848
+    },
+    {
+     "path": "worldmodel/stat_lites6/ls2_26",
+     "position": [
+      83.28677,
+      17.87348,
+      61.43066
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 553088
+    },
+    {
+     "path": "worldmodel/stat_lites5/ls2_27",
+     "position": [
+      73.71118,
+      26.0445,
+      74.63921
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 553328
+    },
+    {
+     "path": "worldmodel/stat_lites4/ls2_28",
+     "position": [
+      -46.03291,
+      11.8743,
+      -83.15603
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 553568
+    },
+    {
+     "path": "worldmodel/stat_lites3/ls2_29",
+     "position": [
+      -36.65222,
+      11.77487,
+      -89.63096
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 553808
+    },
+    {
+     "path": "worldmodel/stat_lites2/ls2_30",
+     "position": [
+      43.73406,
+      28.31299,
+      101.14783
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 554048
+    },
+    {
+     "path": "worldmodel/stat_lites1/ls2_31",
+     "position": [
+      45.27339,
+      28.2972,
+      104.72598
+     ],
+     "color": [
+      0.741176,
+      0.658824,
+      0.482353
+     ],
+     "range": 5.2,
+     "inner_range": 3.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 554288
+    }
+   ]
+  },
+  "MP10": {
+   "name": "Blood Lake",
+   "source": "archives/MP10/RUN/MP/MP10/MP10_GEO.ZED",
+   "lights": []
+  },
+  "MP11": {
+   "name": "Death Trap",
+   "source": "archives/MP11/RUN/MP/MP11/MP11_GEO.ZED",
+   "lights": [
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      0.0,
+      -10.99773,
+      -63.79161
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    },
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      -20.7965,
+      -10.99772,
+      -59.54373
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    },
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      -35.0174,
+      -3.93691,
+      -47.44777
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    },
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      26.41412,
+      -10.99773,
+      -64.24942
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    },
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      50.12341,
+      -10.99773,
+      -27.02241
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    },
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      34.39178,
+      -7.79773,
+      -75.97715
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    },
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      50.24199,
+      -10.99773,
+      -80.08316
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    },
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      49.73667,
+      -10.99773,
+      -52.89676
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    },
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      35.88567,
+      -6.99773,
+      -52.37556
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    },
+    {
+     "path": "worldmodel/light_entrance=/light_entrance/lightsource",
+     "position": [
+      73.56641,
+      0.46906,
+      -78.0648
+     ],
+     "color": [
+      0.67451,
+      0.635294,
+      0.54902
+     ],
+     "range": 6.0,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 3488
+    },
+    {
+     "path": "worldmodel/biglight=/biglight/ls1",
+     "position": [
+      28.53903,
+      -8.93205,
+      -30.7998
+     ],
+     "color": [
+      0.937255,
+      0.933333,
+      0.772549
+     ],
+     "range": 10.0,
+     "inner_range": 7.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 3728
+    },
+    {
+     "path": "worldmodel/biglight=/biglight/ls1",
+     "position": [
+      50.89136,
+      -4.29856,
+      -63.17437
+     ],
+     "color": [
+      0.937255,
+      0.933333,
+      0.772549
+     ],
+     "range": 10.0,
+     "inner_range": 7.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 3728
+    },
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      19.28334,
+      -5.19869,
+      -58.99769
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    },
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      16.85278,
+      -2.18799,
+      -39.8217
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    },
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      50.70884,
+      -3.99773,
+      -78.65214
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    },
+    {
+     "path": "worldmodel/light_bulb=/light_bulb/lightsource",
+     "position": [
+      69.36959,
+      -1.21572,
+      -62.91267
+     ],
+     "color": [
+      0.858824,
+      0.870588,
+      0.603922
+     ],
+     "range": 6.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 320
+    }
+   ]
+  },
+  "MP12": {
+   "name": "The Ruins",
+   "source": "archives/MP12/RUN/MP/MP12/MP12_GEO.ZED",
+   "lights": []
+  },
+  "MP2": {
+   "name": "Frostfire",
+   "source": "archives/MP2/RUN/MP/MP2/MP2_GEO.ZED",
+   "lights": [
+    {
+     "path": "worldmodel/warehouse/light02=/light02/ls3",
+     "position": [
+      -11.09011,
+      15.06645,
+      0.12254
+     ],
+     "color": [
+      0.941176,
+      0.988235,
+      0.992157
+     ],
+     "range": 7.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 11072
+    },
+    {
+     "path": "worldmodel/warehouse/light02=/light02/ls3",
+     "position": [
+      -2.09011,
+      15.06645,
+      0.12254
+     ],
+     "color": [
+      0.941176,
+      0.988235,
+      0.992157
+     ],
+     "range": 7.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 11072
+    },
+    {
+     "path": "worldmodel/warehouse/light02=/light02/ls3",
+     "position": [
+      -11.09011,
+      15.06645,
+      6.12254
+     ],
+     "color": [
+      0.941176,
+      0.988235,
+      0.992157
+     ],
+     "range": 7.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 11072
+    },
+    {
+     "path": "worldmodel/warehouse/light02=/light02/ls3",
+     "position": [
+      -2.09011,
+      15.06645,
+      6.12254
+     ],
+     "color": [
+      0.941176,
+      0.988235,
+      0.992157
+     ],
+     "range": 7.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 11072
+    },
+    {
+     "path": "worldmodel/warehouse/light02=/light02/ls3",
+     "position": [
+      -11.09011,
+      15.06645,
+      12.12254
+     ],
+     "color": [
+      0.941176,
+      0.988235,
+      0.992157
+     ],
+     "range": 7.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 11072
+    },
+    {
+     "path": "worldmodel/warehouse/light02=/light02/ls3",
+     "position": [
+      -2.09011,
+      15.06645,
+      12.12254
+     ],
+     "color": [
+      0.941176,
+      0.988235,
+      0.992157
+     ],
+     "range": 7.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 11072
+    },
+    {
+     "path": "worldmodel/tun1_1/lightcage=/lightcage/wirelite",
+     "position": [
+      -72.86154,
+      6.71062,
+      -15.47658
+     ],
+     "color": [
+      0.737255,
+      0.729412,
+      0.678431
+     ],
+     "range": 4.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 32496
+    },
+    {
+     "path": "worldmodel/tun1_2/lightcage=/lightcage/wirelite",
+     "position": [
+      -72.86154,
+      6.71062,
+      -0.49217
+     ],
+     "color": [
+      0.737255,
+      0.729412,
+      0.678431
+     ],
+     "range": 4.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 32496
+    },
+    {
+     "path": "worldmodel/tun1_3/lightcage=/lightcage/wirelite",
+     "position": [
+      -72.86154,
+      6.71062,
+      15.37342
+     ],
+     "color": [
+      0.737255,
+      0.729412,
+      0.678431
+     ],
+     "range": 4.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 32496
+    },
+    {
+     "path": "worldmodel/tun1_4/lightcage=/lightcage/wirelite",
+     "position": [
+      -54.66464,
+      6.71062,
+      14.41562
+     ],
+     "color": [
+      0.737255,
+      0.729412,
+      0.678431
+     ],
+     "range": 4.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 32496
+    },
+    {
+     "path": "worldmodel/tun1_4/lightcage=/lightcage/wirelite",
+     "position": [
+      -50.38707,
+      6.71062,
+      19.46563
+     ],
+     "color": [
+      0.737255,
+      0.729412,
+      0.678431
+     ],
+     "range": 4.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 32496
+    },
+    {
+     "path": "worldmodel/tun1_6/lightcage=/lightcage/wirelite",
+     "position": [
+      -42.5547,
+      7.95097,
+      15.36466
+     ],
+     "color": [
+      0.737255,
+      0.729412,
+      0.678431
+     ],
+     "range": 4.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 32496
+    },
+    {
+     "path": "worldmodel/t2_1/lightcage=/lightcage/wirelite",
+     "position": [
+      20.4906,
+      6.71062,
+      7.91562
+     ],
+     "color": [
+      0.737255,
+      0.729412,
+      0.678431
+     ],
+     "range": 4.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 32496
+    },
+    {
+     "path": "worldmodel/t2_3/lightcage=/lightcage/wirelite",
+     "position": [
+      -1.4125,
+      6.71062,
+      8.458
+     ],
+     "color": [
+      0.737255,
+      0.729412,
+      0.678431
+     ],
+     "range": 4.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 32496
+    },
+    {
+     "path": "worldmodel/t2_4/lightcage=/lightcage/wirelite",
+     "position": [
+      -0.5094,
+      6.71062,
+      -12.58438
+     ],
+     "color": [
+      0.737255,
+      0.729412,
+      0.678431
+     ],
+     "range": 4.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 32496
+    },
+    {
+     "path": "worldmodel/t2_5/lightcage=/lightcage/wirelite",
+     "position": [
+      -17.4125,
+      6.71062,
+      -12.092
+     ],
+     "color": [
+      0.737255,
+      0.729412,
+      0.678431
+     ],
+     "range": 4.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 32496
+    },
+    {
+     "path": "worldmodel/t2_6/lightcage=/lightcage/wirelite",
+     "position": [
+      -26.6625,
+      6.71062,
+      -0.88747
+     ],
+     "color": [
+      0.737255,
+      0.729412,
+      0.678431
+     ],
+     "range": 4.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 32496
+    },
+    {
+     "path": "worldmodel/t2_6/lightcage=/lightcage/wirelite",
+     "position": [
+      -15.8125,
+      6.71062,
+      -0.80133
+     ],
+     "color": [
+      0.737255,
+      0.729412,
+      0.678431
+     ],
+     "range": 4.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 32496
+    },
+    {
+     "path": "worldmodel/light01=/light01/forklight",
+     "position": [
+      -66.15032,
+      15.89442,
+      15.72413
+     ],
+     "color": [
+      1.0,
+      1.0,
+      0.87451
+     ],
+     "range": 7.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 33632
+    },
+    {
+     "path": "worldmodel/light01=/light01/forklight",
+     "position": [
+      -70.11224,
+      19.69493,
+      -3.88374
+     ],
+     "color": [
+      1.0,
+      1.0,
+      0.87451
+     ],
+     "range": 7.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 33632
+    },
+    {
+     "path": "worldmodel/light01=/light01/forklight",
+     "position": [
+      -12.1125,
+      16.0,
+      -12.28438
+     ],
+     "color": [
+      1.0,
+      1.0,
+      0.87451
+     ],
+     "range": 7.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 33632
+    },
+    {
+     "path": "worldmodel/light01=/light01/forklight",
+     "position": [
+      -0.1125,
+      16.3,
+      -12.28438
+     ],
+     "color": [
+      1.0,
+      1.0,
+      0.87451
+     ],
+     "range": 7.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 33632
+    },
+    {
+     "path": "worldmodel/light01=/light01/forklight",
+     "position": [
+      -60.6125,
+      16.8,
+      25.71563
+     ],
+     "color": [
+      1.0,
+      1.0,
+      0.87451
+     ],
+     "range": 7.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 33632
+    },
+    {
+     "path": "worldmodel/light01=/light01/forklight",
+     "position": [
+      -28.30453,
+      16.1,
+      27.1503
+     ],
+     "color": [
+      1.0,
+      1.0,
+      0.87451
+     ],
+     "range": 7.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 33632
+    },
+    {
+     "path": "worldmodel/light01=/light01/forklight",
+     "position": [
+      -34.68037,
+      16.37324,
+      -14.28438
+     ],
+     "color": [
+      1.0,
+      1.0,
+      0.87451
+     ],
+     "range": 7.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 33632
+    },
+    {
+     "path": "worldmodel/lightbox=/lightbox/lightboxlight",
+     "position": [
+      -28.6125,
+      17.4,
+      3.71562
+     ],
+     "color": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "range": 5.5,
+     "inner_range": 1.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 35424
+    },
+    {
+     "path": "worldmodel/lightbox=/lightbox/lightboxlight",
+     "position": [
+      -35.88596,
+      18.62937,
+      29.84094
+     ],
+     "color": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "range": 5.5,
+     "inner_range": 1.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 35424
+    },
+    {
+     "path": "worldmodel/lightbox=/lightbox/lightboxlight",
+     "position": [
+      -5.0125,
+      14.42937,
+      17.84094
+     ],
+     "color": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "range": 5.5,
+     "inner_range": 1.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 35424
+    },
+    {
+     "path": "worldmodel/lightbox=/lightbox/lightboxlight",
+     "position": [
+      -19.23781,
+      18.62937,
+      15.16562
+     ],
+     "color": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "range": 5.5,
+     "inner_range": 1.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 35424
+    },
+    {
+     "path": "worldmodel/light02b=/light02b/lite",
+     "position": [
+      -33.66998,
+      17.57447,
+      19.17925
+     ],
+     "color": [
+      0.94902,
+      0.890196,
+      0.776471
+     ],
+     "range": 3.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 8816
+    },
+    {
+     "path": "worldmodel/light02b=/light02b/lite",
+     "position": [
+      -36.54042,
+      17.57447,
+      25.30457
+     ],
+     "color": [
+      0.94902,
+      0.890196,
+      0.776471
+     ],
+     "range": 3.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 8816
+    },
+    {
+     "path": "worldmodel/light02b=/light02b/lite",
+     "position": [
+      -39.42988,
+      17.57447,
+      25.30586
+     ],
+     "color": [
+      0.94902,
+      0.890196,
+      0.776471
+     ],
+     "range": 3.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 8816
+    },
+    {
+     "path": "worldmodel/light02b=/light02b/lite",
+     "position": [
+      -39.43319,
+      17.57447,
+      17.13584
+     ],
+     "color": [
+      0.94902,
+      0.890196,
+      0.776471
+     ],
+     "range": 3.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 8816
+    },
+    {
+     "path": "worldmodel/light02b=/light02b/lite",
+     "position": [
+      -28.84637,
+      17.57447,
+      8.97893
+     ],
+     "color": [
+      0.94902,
+      0.890196,
+      0.776471
+     ],
+     "range": 3.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 8816
+    },
+    {
+     "path": "worldmodel/light02b=/light02b/lite",
+     "position": [
+      -28.84233,
+      17.57447,
+      13.06076
+     ],
+     "color": [
+      0.94902,
+      0.890196,
+      0.776471
+     ],
+     "range": 3.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 8816
+    }
+   ]
+  },
+  "MP5": {
+   "name": "Abandoned",
+   "source": "archives/MP5/RUN/MP/MP5/MP5_GEO.ZED",
+   "lights": []
+  },
+  "MP51": {
+   "name": "Vigilance",
+   "source": "archives/MP51/RUN/MP/MP51/MP51_GEO.ZED",
+   "lights": []
+  },
+  "MP52": {
+   "name": "The Mixer",
+   "source": "archives/MP52/RUN/MP/MP52/MP52_GEO.ZED",
+   "lights": []
+  },
+  "MP53": {
+   "name": "Foxhunt",
+   "source": "archives/MP53/RUN/MP/MP53/MP53_GEO.ZED",
+   "lights": []
+  },
+  "MP6": {
+   "name": "Desert Glory",
+   "source": "archives/MP6/RUN/MP/MP6/MP6_GEO.ZED",
+   "lights": [
+    {
+     "path": "worldmodel/lightbulb3/lightbulb=/lightbulb/lightsource",
+     "position": [
+      2.69688,
+      3.13,
+      -49.15312
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 4.4,
+     "inner_range": 2.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 43872
+    }
+   ]
+  },
+  "MP61": {
+   "name": "Sujo",
+   "source": "archives/MP61/RUN/MP/MP61/MP61_GEO.ZED",
+   "lights": [
+    {
+     "path": "worldmodel/mp61 {mp61}=/mp61/mp61_terrain=/mp61_terrain/ls2_48",
+     "position": [
+      -13.29825,
+      1.7054,
+      111.58638
+     ],
+     "color": [
+      0.823529,
+      0.741176,
+      0.34902
+     ],
+     "range": 3.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 69184
+    },
+    {
+     "path": "worldmodel/mp61 {mp61}=/mp61/mp61_terrain=/mp61_terrain/ls2_49",
+     "position": [
+      -22.58317,
+      1.66586,
+      94.0321
+     ],
+     "color": [
+      0.823529,
+      0.741176,
+      0.34902
+     ],
+     "range": 3.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 69328
+    },
+    {
+     "path": "worldmodel/mp61 {mp61}=/mp61/mp61_terrain=/mp61_terrain/ls2_3",
+     "position": [
+      -11.14884,
+      11.01028,
+      -27.57661
+     ],
+     "color": [
+      0.823529,
+      0.741176,
+      0.34902
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 69472
+    },
+    {
+     "path": "worldmodel/mp61 {mp61}=/mp61/mp61_terrain=/mp61_terrain/ls2_9",
+     "position": [
+      -17.58956,
+      5.99162,
+      37.65371
+     ],
+     "color": [
+      0.823529,
+      0.741176,
+      0.34902
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 69616
+    },
+    {
+     "path": "worldmodel/mp61 {mp61}=/mp61/mp61_terrain=/mp61_terrain/ls2_4",
+     "position": [
+      -15.94865,
+      18.07539,
+      -91.34449
+     ],
+     "color": [
+      0.823529,
+      0.741176,
+      0.34902
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 69760
+    },
+    {
+     "path": "worldmodel/mp61 {mp61}=/mp61/mp61_terrain=/mp61_terrain/ls2_22",
+     "position": [
+      5.23458,
+      20.13388,
+      -118.22686
+     ],
+     "color": [
+      0.823529,
+      0.741176,
+      0.34902
+     ],
+     "range": 3.0,
+     "inner_range": 1.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 69904
+    },
+    {
+     "path": "worldmodel/mp61 {mp61}=/mp61/mp61_terrain=/mp61_terrain/ls2_5",
+     "position": [
+      4.03773,
+      18.3019,
+      -88.93934
+     ],
+     "color": [
+      0.823529,
+      0.741176,
+      0.34902
+     ],
+     "range": 5.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 70048
+    },
+    {
+     "path": "worldmodel/mp61 {mp61}=/mp61/mp61_terrain=/mp61_terrain/ls2_7",
+     "position": [
+      -1.19894,
+      10.08418,
+      -32.60338
+     ],
+     "color": [
+      0.823529,
+      0.741176,
+      0.34902
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 70192
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      14.94156,
+      17.63369,
+      -94.50728
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      15.7202,
+      14.67288,
+      -68.66996
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -16.13213,
+      17.56604,
+      -92.11418
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -47.11353,
+      9.89987,
+      -0.02647
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -29.17353,
+      11.96678,
+      -40.31365
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -21.52353,
+      12.35142,
+      -61.53647
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      15.8851,
+      11.34612,
+      -39.10355
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      18.92072,
+      5.21538,
+      -13.28605
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -17.71101,
+      6.03137,
+      15.53314
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      16.51341,
+      5.90883,
+      32.51578
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -33.09609,
+      4.87028,
+      32.17647
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -7.71108,
+      3.69242,
+      47.91739
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -13.19822,
+      1.79727,
+      112.20775
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -21.23241,
+      1.70585,
+      97.87321
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -13.2889,
+      -1.74643,
+      97.66637
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -7.32022,
+      0.48273,
+      88.1215
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -28.77762,
+      -0.05963,
+      82.12153
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -13.61316,
+      1.70585,
+      97.07169
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    },
+    {
+     "path": "worldmodel/light_round=/light_round/lightsource",
+     "position": [
+      -14.24272,
+      -0.9239,
+      71.98593
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12976
+    }
+   ]
+  },
+  "MP62": {
+   "name": "Enowapi",
+   "source": "archives/MP62/RUN/MP/MP62/MP62_GEO.ZED",
+   "lights": [
+    {
+     "path": "worldmodel/plateau=/plateau/light_round=/light_round/lightsource",
+     "position": [
+      7.67931,
+      32.97157,
+      -41.80188
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 5.5,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 7392
+    },
+    {
+     "path": "worldmodel/drug_bulb04/light_round=/light_round/lightsource",
+     "position": [
+      14.23262,
+      21.02463,
+      2.58837
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 5.5,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 7392
+    },
+    {
+     "path": "worldmodel/drug_bulb05/light_round=/light_round/lightsource",
+     "position": [
+      17.64751,
+      21.02463,
+      -28.75593
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 5.5,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 7392
+    },
+    {
+     "path": "worldmodel/drug_bulb06/light_round=/light_round/lightsource",
+     "position": [
+      16.71549,
+      20.52463,
+      -10.84749
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 5.5,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 7392
+    },
+    {
+     "path": "worldmodel/drug_bulb01/light_round=/light_round/lightsource",
+     "position": [
+      -3.54848,
+      20.52463,
+      -9.51133
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 5.5,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 7392
+    },
+    {
+     "path": "worldmodel/g79/light_round=/light_round/lightsource",
+     "position": [
+      -50.82554,
+      8.78618,
+      59.01575
+     ],
+     "color": [
+      0.811765,
+      0.741176,
+      0.396078
+     ],
+     "range": 5.5,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 7392
+    }
+   ]
+  },
+  "MP64": {
+   "name": "Shadow Falls",
+   "source": "archives/MP64/RUN/MP/MP64/MP64_GEO.ZED",
+   "lights": [
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -59.58109,
+      12.49773,
+      -94.01259
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -66.45993,
+      12.59186,
+      -80.8193
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -49.02948,
+      5.8935,
+      -53.10153
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -41.10809,
+      7.73913,
+      -94.46359
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -70.18204,
+      15.29417,
+      -55.73438
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -80.00869,
+      10.38545,
+      -4.50267
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -88.0566,
+      13.08659,
+      -31.92944
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      84.61632,
+      11.84273,
+      28.18386
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      9.71432,
+      15.39466,
+      -11.41376
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -12.43174,
+      15.64276,
+      -6.72764
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -83.7247,
+      4.25763,
+      39.72894
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -50.68368,
+      11.87788,
+      -9.24784
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      22.29113,
+      13.39071,
+      -5.76738
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      1.40782,
+      4.2,
+      -36.21202
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -55.39151,
+      4.90627,
+      50.18693
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      85.84629,
+      11.84273,
+      47.97454
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      75.76445,
+      9.75844,
+      8.776
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -6.53876,
+      4.32822,
+      29.06196
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      11.77787,
+      7.0,
+      16.11907
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      12.17925,
+      15.67282,
+      -4.1222
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      65.74401,
+      4.56527,
+      -7.20382
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      66.8485,
+      4.76927,
+      42.6063
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      64.39268,
+      7.72387,
+      30.70084
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      52.3749,
+      4.18989,
+      81.55237
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -8.91721,
+      5.37315,
+      -112.98738
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -2.75109,
+      8.45718,
+      -106.12415
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    },
+    {
+     "path": "worldmodel/torch=/torch/litesource_1",
+     "position": [
+      -2.63049,
+      15.34475,
+      -98.23939
+     ],
+     "color": [
+      0.47451,
+      0.45098,
+      0.282353
+     ],
+     "range": 5.0,
+     "inner_range": 3.0,
+     "kind": "fire",
+     "evidence": "native",
+     "nparams_offset": 68272
+    }
+   ]
+  },
+  "MP7": {
+   "name": "Night Stalker",
+   "source": "archives/MP7/RUN/MP/MP7/MP7_GEO.ZED",
+   "lights": [
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9",
+     "position": [
+      79.00181,
+      31.60363,
+      -52.81366
+     ],
+     "color": [
+      0.870588,
+      0.886275,
+      0.894118
+     ],
+     "range": 11.4,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 92208
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_1",
+     "position": [
+      94.31174,
+      24.22077,
+      -47.52236
+     ],
+     "color": [
+      0.870588,
+      0.886275,
+      0.894118
+     ],
+     "range": 11.4,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 92352
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_6",
+     "position": [
+      55.32056,
+      18.83967,
+      16.84852
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 20.0,
+     "inner_range": 8.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 92496
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_13",
+     "position": [
+      6.225,
+      16.1,
+      -9.53461
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 11.4,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 92640
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_16",
+     "position": [
+      -29.23615,
+      16.35095,
+      5.94182
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 20.0,
+     "inner_range": 8.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 92784
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_30",
+     "position": [
+      14.15504,
+      21.9,
+      -36.81211
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 20.0,
+     "inner_range": 8.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 92928
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_33",
+     "position": [
+      32.46422,
+      15.9,
+      -32.32529
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 8.4,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 93072
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_40",
+     "position": [
+      53.30422,
+      36.7,
+      -57.7078
+     ],
+     "color": [
+      0.870588,
+      0.886275,
+      0.894118
+     ],
+     "range": 20.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 93216
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_43",
+     "position": [
+      33.59514,
+      33.4,
+      -58.95667
+     ],
+     "color": [
+      0.870588,
+      0.886275,
+      0.894118
+     ],
+     "range": 14.0,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 93360
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_60",
+     "position": [
+      27.44413,
+      19.42544,
+      5.23595
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 32.0,
+     "inner_range": 13.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 93504
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_62",
+     "position": [
+      -26.77318,
+      20.47085,
+      -26.90958
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 20.0,
+     "inner_range": 8.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 93648
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_20",
+     "position": [
+      -52.19921,
+      24.52517,
+      1.06528
+     ],
+     "color": [
+      0.870588,
+      0.886275,
+      0.894118
+     ],
+     "range": 16.0,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 93792
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_21",
+     "position": [
+      -52.275,
+      23.9,
+      54.48438
+     ],
+     "color": [
+      0.870588,
+      0.886275,
+      0.894118
+     ],
+     "range": 18.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 93936
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_22",
+     "position": [
+      -13.98005,
+      25.9,
+      62.63652
+     ],
+     "color": [
+      0.870588,
+      0.886275,
+      0.894118
+     ],
+     "range": 18.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 94080
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_23",
+     "position": [
+      16.725,
+      25.9,
+      63.48438
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 12.4,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 94224
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_25",
+     "position": [
+      -34.93558,
+      31.22442,
+      59.76104
+     ],
+     "color": [
+      0.870588,
+      0.886275,
+      0.894118
+     ],
+     "range": 18.0,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 94368
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_44",
+     "position": [
+      1.61816,
+      33.4,
+      -59.75796
+     ],
+     "color": [
+      0.870588,
+      0.886275,
+      0.894118
+     ],
+     "range": 9.4,
+     "inner_range": 3.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 94512
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_37",
+     "position": [
+      0.47216,
+      23.1504,
+      41.99045
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 20.0,
+     "inner_range": 8.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 94656
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_38",
+     "position": [
+      -40.99332,
+      15.9,
+      38.68796
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 6.4,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 94800
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_41",
+     "position": [
+      -63.78707,
+      14.7818,
+      24.6073
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 20.0,
+     "inner_range": 8.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 94944
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_19",
+     "position": [
+      35.9748,
+      17.52475,
+      28.1084
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 17.4,
+     "inner_range": 5.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 95088
+    },
+    {
+     "path": "worldmodel/mp7 {mp7}=/mp7/ls9_7",
+     "position": [
+      66.11904,
+      19.85108,
+      -18.93484
+     ],
+     "color": [
+      0.227451,
+      0.27451,
+      0.294118
+     ],
+     "range": 20.0,
+     "inner_range": 8.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 95232
+    },
+    {
+     "path": "worldmodel/lamp/seal_lamp_light=/seal_lamp_light/lightsource",
+     "position": [
+      -87.62402,
+      11.45,
+      -27.3162
+     ],
+     "color": [
+      0.717647,
+      0.717647,
+      0.643137
+     ],
+     "range": 7.0,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 10336
+    }
+   ]
+  },
+  "MP71": {
+   "name": "Fish Hook",
+   "source": "archives/MP71/RUN/MP/MP71/MP71_GEO.ZED",
+   "lights": []
+  },
+  "MP72": {
+   "name": "Crossroads",
+   "source": "archives/MP72/RUN/MP/MP72/MP72_GEO.ZED",
+   "lights": []
+  },
+  "MP73": {
+   "name": "Sandstorm",
+   "source": "archives/MP73/RUN/MP/MP73/MP73_GEO.ZED",
+   "lights": [
+    {
+     "path": "worldmodel/comm_hi/room_lite5=/bulbandsocket01/lightsource",
+     "position": [
+      -73.87188,
+      8.8,
+      -28.46875
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 6.4,
+     "inner_range": 2.6,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 36752
+    },
+    {
+     "path": "worldmodel/wall_breaker/stay/room_lite1=/bulbandsocket01/lightsource",
+     "position": [
+      -77.62188,
+      12.85,
+      -30.51875
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 6.4,
+     "inner_range": 2.6,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 36752
+    },
+    {
+     "path": "worldmodel/mywc10/street_lite=/bulbandsocket02/lightsource",
+     "position": [
+      -65.14606,
+      10.55,
+      -41.67307
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 11.0,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 84208
+    },
+    {
+     "path": "worldmodel/mywc20/room_lite2=/bulbandsocket01/lightsource",
+     "position": [
+      -55.12188,
+      8.66204,
+      -26.21875
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 6.4,
+     "inner_range": 2.6,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 36752
+    },
+    {
+     "path": "worldmodel/twr/radiotower_light",
+     "position": [
+      -2.52727,
+      40.81159,
+      -75.54233
+     ],
+     "color": [
+      0.921569,
+      0.019608,
+      0.086275
+     ],
+     "range": 11.0,
+     "inner_range": 4.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 1028688
+    }
+   ]
+  },
+  "MP8": {
+   "name": "Rat's Nest",
+   "source": "archives/MP8/RUN/MP/MP8/MP8_GEO.ZED",
+   "lights": [
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_9",
+     "position": [
+      -18.9524,
+      9.24612,
+      -45.63342
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 96
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_26",
+     "position": [
+      8.13116,
+      15.82708,
+      -36.78148
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 240
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_10",
+     "position": [
+      -18.86942,
+      10.93013,
+      -17.84484
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 384
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_8",
+     "position": [
+      -4.99264,
+      16.80366,
+      47.87021
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 528
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_7",
+     "position": [
+      -11.40107,
+      16.84209,
+      57.14116
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 672
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_5",
+     "position": [
+      -37.45255,
+      18.09167,
+      54.75586
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 816
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_4",
+     "position": [
+      -54.58087,
+      17.28567,
+      51.13015
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 960
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_6",
+     "position": [
+      -69.73843,
+      17.93405,
+      51.11958
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 1104
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_13",
+     "position": [
+      -91.79717,
+      20.42308,
+      34.5635
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 1248
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_15",
+     "position": [
+      -99.53079,
+      22.53959,
+      21.15396
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 1392
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_11",
+     "position": [
+      -104.58161,
+      20.22348,
+      2.16257
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 1536
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_12",
+     "position": [
+      -91.7366,
+      19.35952,
+      -11.79505
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 1680
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922",
+     "position": [
+      -84.16125,
+      15.71426,
+      -53.71921
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 1824
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_1",
+     "position": [
+      -74.68573,
+      16.42176,
+      -39.91439
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 1968
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_2",
+     "position": [
+      -55.2527,
+      15.41505,
+      -69.81161
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 2112
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_3",
+     "position": [
+      -67.48627,
+      14.19496,
+      -23.16726
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 2256
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_14",
+     "position": [
+      -120.44296,
+      31.07401,
+      24.07173
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 2400
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_16",
+     "position": [
+      -20.44492,
+      11.97666,
+      8.00042
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 2544
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_18",
+     "position": [
+      -44.5832,
+      11.97343,
+      8.00397
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 2688
+    },
+    {
+     "path": "worldmodel/mp8 {mp8}=/mp8/ls922_25",
+     "position": [
+      -56.23113,
+      18.71671,
+      26.98491
+     ],
+     "color": [
+      0.654902,
+      0.580392,
+      0.427451
+     ],
+     "range": 8.0,
+     "inner_range": 6.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 2832
+    }
+   ]
+  },
+  "MP81": {
+   "name": "Chain Reaction",
+   "source": "archives/MP81/RUN/MP/MP81/MP81_GEO.ZED",
+   "lights": []
+  },
+  "MP82": {
+   "name": "Guidance",
+   "source": "archives/MP82/RUN/MP/MP82/MP82_GEO.ZED",
+   "lights": [
+    {
+     "path": "worldmodel/wc/streetlite_wallmount=/streetlite_wallmount/ls3",
+     "position": [
+      78.70643,
+      7.07031,
+      104.24315
+     ],
+     "color": [
+      0.941176,
+      0.784314,
+      0.431373
+     ],
+     "range": 3.5,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 40624
+    },
+    {
+     "path": "worldmodel/wc/streetlite_wallmount=/streetlite_wallmount/ls3",
+     "position": [
+      71.50414,
+      7.07031,
+      80.3167
+     ],
+     "color": [
+      0.941176,
+      0.784314,
+      0.431373
+     ],
+     "range": 3.5,
+     "inner_range": 2.0,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 40624
+    }
+   ]
+  },
+  "MP83": {
+   "name": "Requiem",
+   "source": "archives/MP83/RUN/MP/MP83/MP83_GEO.ZED",
+   "lights": [
+    {
+     "path": "worldmodel/light_wall01=/light_wall01/lightsource",
+     "position": [
+      -23.4085,
+      15.5823,
+      -82.92338
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 6.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 6608
+    },
+    {
+     "path": "worldmodel/light_wall01=/light_wall01/lightsource",
+     "position": [
+      -34.87213,
+      15.5823,
+      -82.92338
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 6.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 6608
+    },
+    {
+     "path": "worldmodel/light_wall01=/light_wall01/lightsource",
+     "position": [
+      -34.87213,
+      15.5823,
+      -91.72142
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 6.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 6608
+    },
+    {
+     "path": "worldmodel/light_wall01=/light_wall01/lightsource",
+     "position": [
+      -23.4085,
+      15.5823,
+      -90.34095
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 6.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 6608
+    },
+    {
+     "path": "worldmodel/light_overhead_med=/light_overhead_med/lightsource_2",
+     "position": [
+      16.18165,
+      13.83605,
+      -92.09729
+     ],
+     "color": [
+      0.721569,
+      0.870588,
+      0.858824
+     ],
+     "range": 6.5,
+     "inner_range": 1.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 7328
+    },
+    {
+     "path": "worldmodel/light_overhead_med=/light_overhead_med/lightsource_2",
+     "position": [
+      6.61116,
+      13.83605,
+      -92.07691
+     ],
+     "color": [
+      0.721569,
+      0.870588,
+      0.858824
+     ],
+     "range": 6.5,
+     "inner_range": 1.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 7328
+    },
+    {
+     "path": "worldmodel/light_overhead_med=/light_overhead_med/lightsource_2",
+     "position": [
+      10.10359,
+      13.83605,
+      -100.48193
+     ],
+     "color": [
+      0.721569,
+      0.870588,
+      0.858824
+     ],
+     "range": 6.5,
+     "inner_range": 1.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 7328
+    },
+    {
+     "path": "worldmodel/light_wall02=/light_wall02/lightsource",
+     "position": [
+      13.19952,
+      17.77856,
+      -105.60835
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 4.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 8896
+    },
+    {
+     "path": "worldmodel/light_wall01=/light_wall01/lightsource",
+     "position": [
+      73.92579,
+      23.1,
+      94.09272
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 6.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 6608
+    },
+    {
+     "path": "worldmodel/light_wall01=/light_wall01/lightsource",
+     "position": [
+      83.58623,
+      23.10011,
+      102.3344
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 6.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 6608
+    },
+    {
+     "path": "worldmodel/light_wall01_low=/light_wall01_low/lightsource",
+     "position": [
+      73.48448,
+      21.98237,
+      85.59233
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 3.2,
+     "inner_range": 0.7,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 11568
+    },
+    {
+     "path": "worldmodel/light_wall_low=/light_wall_low/lightsource",
+     "position": [
+      33.27261,
+      17.79619,
+      65.26797
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 2.2,
+     "inner_range": 0.7,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12944
+    },
+    {
+     "path": "worldmodel/light_wall_low=/light_wall_low/lightsource",
+     "position": [
+      52.34517,
+      17.79619,
+      64.94883
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 2.2,
+     "inner_range": 0.7,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12944
+    },
+    {
+     "path": "worldmodel/light_wall_low=/light_wall_low/lightsource",
+     "position": [
+      52.34526,
+      17.7962,
+      74.0333
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 2.2,
+     "inner_range": 0.7,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12944
+    },
+    {
+     "path": "worldmodel/light_wall_low=/light_wall_low/lightsource",
+     "position": [
+      52.34553,
+      17.79619,
+      90.58286
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 2.2,
+     "inner_range": 0.7,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 12944
+    },
+    {
+     "path": "worldmodel/light_wall02=/light_wall02/lightsource",
+     "position": [
+      27.29307,
+      14.60002,
+      82.71731
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 4.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 8896
+    },
+    {
+     "path": "worldmodel/light_wall02=/light_wall02/lightsource",
+     "position": [
+      27.29307,
+      14.60002,
+      73.81902
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 4.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 8896
+    },
+    {
+     "path": "worldmodel/light_wall02=/light_wall02/lightsource",
+     "position": [
+      15.19307,
+      14.60002,
+      73.81902
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 4.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 8896
+    },
+    {
+     "path": "worldmodel/light_wall02=/light_wall02/lightsource",
+     "position": [
+      -21.73513,
+      16.6,
+      85.36731
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 4.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 8896
+    },
+    {
+     "path": "worldmodel/light_overhead_med=/light_overhead_med/lightsource_2",
+     "position": [
+      -22.25988,
+      16.01658,
+      96.76802
+     ],
+     "color": [
+      0.721569,
+      0.870588,
+      0.858824
+     ],
+     "range": 6.5,
+     "inner_range": 1.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 7328
+    },
+    {
+     "path": "worldmodel/light_maptable=/light_maptable/lightsource_2",
+     "position": [
+      -14.84282,
+      14.3,
+      94.43164
+     ],
+     "color": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "range": 4.0,
+     "inner_range": 0.7,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 17344
+    },
+    {
+     "path": "worldmodel/light_overhead_med=/light_overhead_med/lightsource_2",
+     "position": [
+      -5.60363,
+      15.97953,
+      92.61653
+     ],
+     "color": [
+      0.721569,
+      0.870588,
+      0.858824
+     ],
+     "range": 6.5,
+     "inner_range": 1.2,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 7328
+    },
+    {
+     "path": "worldmodel/light_wall02=/light_wall02/lightsource",
+     "position": [
+      -1.03944,
+      16.6,
+      93.52588
+     ],
+     "color": [
+      0.709804,
+      0.647059,
+      0.517647
+     ],
+     "range": 4.5,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 8896
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      -46.04376,
+      12.89831,
+      -60.69375
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      -55.04376,
+      12.89831,
+      -60.69526
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      -46.0378,
+      13.01344,
+      -42.59375
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      -46.0378,
+      13.51344,
+      -24.59375
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      -37.63795,
+      13.01344,
+      -42.59375
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      -37.6382,
+      12.8981,
+      -60.69375
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      -19.64376,
+      12.86952,
+      -69.70322
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      -1.64376,
+      12.88808,
+      -69.71907
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      16.25212,
+      12.79366,
+      -74.11756
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      43.35685,
+      12.83923,
+      -74.25294
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      61.3578,
+      12.87208,
+      -74.27022
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      25.96005,
+      13.51348,
+      17.61206
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      14.22122,
+      12.93548,
+      57.64043
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      2.41434,
+      12.93548,
+      71.1196
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      -14.13707,
+      12.93548,
+      74.949
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      -36.64377,
+      12.93548,
+      74.95037
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/streetlight=/streetlight/ls1",
+     "position": [
+      -36.64377,
+      14.89223,
+      92.90625
+     ],
+     "color": [
+      0.709804,
+      0.658824,
+      0.541176
+     ],
+     "range": 9.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 21856
+    },
+    {
+     "path": "worldmodel/catacomb_light=/catacomb_light/lightsource",
+     "position": [
+      -42.39291,
+      5.88229,
+      -10.12103
+     ],
+     "color": [
+      0.768627,
+      0.776471,
+      0.607843
+     ],
+     "range": 5.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 19136
+    },
+    {
+     "path": "worldmodel/catacomb_light=/catacomb_light/lightsource",
+     "position": [
+      -43.29341,
+      5.8823,
+      4.22764
+     ],
+     "color": [
+      0.768627,
+      0.776471,
+      0.607843
+     ],
+     "range": 5.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 19136
+    },
+    {
+     "path": "worldmodel/catacomb_light=/catacomb_light/lightsource",
+     "position": [
+      -26.63158,
+      3.91489,
+      10.10628
+     ],
+     "color": [
+      0.768627,
+      0.776471,
+      0.607843
+     ],
+     "range": 5.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 19136
+    },
+    {
+     "path": "worldmodel/catacomb_light=/catacomb_light/lightsource",
+     "position": [
+      -7.76077,
+      1.6823,
+      -6.05859
+     ],
+     "color": [
+      0.768627,
+      0.776471,
+      0.607843
+     ],
+     "range": 5.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 19136
+    },
+    {
+     "path": "worldmodel/catacomb_light=/catacomb_light/lightsource",
+     "position": [
+      13.99895,
+      3.92833,
+      -22.71366
+     ],
+     "color": [
+      0.768627,
+      0.776471,
+      0.607843
+     ],
+     "range": 5.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 19136
+    },
+    {
+     "path": "worldmodel/catacomb_light=/catacomb_light/lightsource",
+     "position": [
+      -34.89885,
+      5.88231,
+      10.80439
+     ],
+     "color": [
+      0.768627,
+      0.776471,
+      0.607843
+     ],
+     "range": 5.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 19136
+    },
+    {
+     "path": "worldmodel/catacomb_light=/catacomb_light/lightsource",
+     "position": [
+      21.17356,
+      3.88587,
+      -8.4627
+     ],
+     "color": [
+      0.768627,
+      0.776471,
+      0.607843
+     ],
+     "range": 5.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 19136
+    },
+    {
+     "path": "worldmodel/catacomb_light=/catacomb_light/lightsource",
+     "position": [
+      30.7491,
+      5.88229,
+      -16.49308
+     ],
+     "color": [
+      0.768627,
+      0.776471,
+      0.607843
+     ],
+     "range": 5.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 19136
+    },
+    {
+     "path": "worldmodel/catacomb_light=/catacomb_light/lightsource",
+     "position": [
+      30.06453,
+      5.88229,
+      -1.27001
+     ],
+     "color": [
+      0.768627,
+      0.776471,
+      0.607843
+     ],
+     "range": 5.0,
+     "inner_range": 1.5,
+     "kind": "lamp",
+     "evidence": "native",
+     "nparams_offset": 19136
+    }
+   ]
+  },
+  "MP9": {
+   "name": "Bitter Jungle",
+   "source": "archives/MP9/RUN/MP/MP9/MP9_GEO.ZED",
+   "lights": []
+  }
+ }
+}

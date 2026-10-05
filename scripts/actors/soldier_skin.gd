@@ -12,6 +12,7 @@ var model_path: String = MODEL
 var skeleton: Skeleton3D
 var motion: Node
 var driver: RefCounted
+var outfit: Node3D
 var bone: Dictionary = {}
 var carried: Array = []
 var weapon_ids := {"long": "", "pistol": ""}
@@ -60,6 +61,11 @@ func set_model_path(path: String) -> void:
 	driver = preload("res://scripts/actors/recovered_locomotion.gd").new()
 	motion.play("seal_stand")
 	motion.seek(0)
+	if outfit == null:
+		outfit = preload("res://scripts/actors/recovered_outfit.gd").new()
+		outfit.skin = self
+		add_child(outfit)
+	outfit.rebuild()
 	set_process(false)
 
 static func prepare_materials(root: Node) -> void:
@@ -101,6 +107,7 @@ func place_weapon(proxy: SoldierProxy, clip: String, seconds: float, socket: Var
 	if weapon != null and weapon.held_item.visible:
 		var hand: Transform3D = motion.native_worlds[motion.rig.names.find("rhand")]
 		weapon.held_item.transform = proxy.weapon_pivot.transform.affine_inverse() * hand
+	outfit.update_equipment(proxy, weapon)
 
 func tint(colour: Color, amount: float) -> void:
 	# Keep recovered face textures intact; a modest gear tint identifies teams.
@@ -137,6 +144,8 @@ static func limp(from: SoldierSkin, ragdoll: Node3D, bodies: Dictionary) -> Sold
 	skin.name = "Skin"
 	ragdoll.add_child(skin)
 	skin.set_model_path(from.model_path)
+	skin.outfit.overrides = from.outfit.overrides.duplicate()
+	skin.outfit.rebuild()
 	skin.global_transform = from.global_transform
 	for index: int in range(skin.skeleton.get_bone_count()):
 		skin.skeleton.set_bone_pose(index, from.skeleton.get_bone_pose(index))
@@ -157,4 +166,5 @@ func _process(_delta: float) -> void:
 			return
 		moving = moving or not body.freeze
 		skeleton.set_bone_global_pose(entry[0], inverse * body.global_transform * entry[2])
+	outfit.update_pose()
 	set_process(moving)

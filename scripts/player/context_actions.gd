@@ -2,6 +2,7 @@ extends Node
 ## One selection drives both the original action icons and the action button.
 ## Revalidate on press: stale prompts can never operate an out-of-reach target.
 const Combat = preload("res://scripts/combat/combat.gd")
+const Ladder = preload("res://scripts/levels/ladder.gd")
 var player: PrototypePlayer
 var offers: Array[Dictionary] = []
 var selected: int = 0
@@ -12,13 +13,20 @@ func _physics_process(_delta: float) -> void:
 
 func available() -> bool:
 	var director: Node = player.weapon.director
-	return player.controls_enabled and player.health > 0 and not player.get_parent().modal and not director.loot_open and not director.class_open and not player.traversal.active and not player.diving and player.dive_recovery <= 0.0 and player.is_on_floor()
+	return player.controls_enabled and player.health > 0 and not player.get_parent().modal and not director.loot_open and not director.class_open and not player.traversal.active and not player.diving and player.dive_recovery <= 0.0 and (player.is_on_floor() or player.ladder.active)
 
 func refresh() -> void:
 	offers.clear()
 	if not available():
 		chosen_id = ""
 		selected = 0
+		return
+	if player.ladder.active:
+		# On a ladder the action button lets go and slides down it.
+		if player.ladder.can_slide():
+			offers.append({"kind": "slide", "target": player.ladder.ladder, "label": "LADDER SLIDE", "icon": "action_slide.png", "enabled": true, "reason": ""})
+		selected = 0
+		chosen_id = "" if offers.is_empty() else _id(offers[0])
 		return
 	var camera := player.camera_rig.camera
 	var center := player.get_viewport().get_visible_rect().size * 0.5
@@ -38,6 +46,12 @@ func refresh() -> void:
 		if not ledge.is_empty():
 			var room: bool = player.traversal.landing_stance(player, player.stance, ledge) >= 0
 			offers.append({"kind": "climb", "label": "CLIMB", "icon": "action_climb.png", "enabled": room, "reason": "NO ROOM ABOVE" if not room else ""})
+	if player.stance.current != StanceController.Stance.PRONE:
+		for ladder: Node3D in player.get_tree().get_nodes_in_group(Ladder.GROUP):
+			var end: String = ladder.end_near(player.global_position, -player.global_basis.z)
+			if end != "":
+				offers.append({"kind": "ladder", "target": ladder, "label": "CLIMB LADDER" if end == "foot" else "CLIMB DOWN", "icon": "action_climb.png", "enabled": true, "reason": ""})
+				break
 	selected = 0
 	for index: int in range(offers.size()):
 		if _id(offers[index]) == chosen_id:
@@ -84,6 +98,10 @@ func activate() -> bool:
 			return true
 		"climb":
 			return player.try_climb()
+		"ladder":
+			return player.try_ladder(offer.target)
+		"slide":
+			return player.ladder.slide()
 	return false
 
 func button_hint() -> String:

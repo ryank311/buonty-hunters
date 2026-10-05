@@ -143,6 +143,7 @@ func die() -> void:
 ## Called by the weapon whenever the player is reset: the next round starts alive.
 func on_reset() -> void:
 	close_menus()
+	overlay.clear_flash()
 	player.set_meta(&"alive", true)
 	# A level that has just loaded gets its stand-in soldiers here.
 	var owner_session := session()

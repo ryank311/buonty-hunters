@@ -6,6 +6,11 @@ extends Node3D
 var profile: CameraProfile
 var pitch: float = -0.10
 var actual_lean: float = 0.0
+## The eye height and lean the camera has eased to. Stance and lean changes move the
+## view smoothly; only a ceiling or wall in the way pulls it in at once.
+var view_eye: float = 1.45
+var view_lean: float = 0.0
+const VIEW_EASE := 9.0
 var recoil_offset := Vector2.ZERO
 # Most of the kick lifts the weapon/reticle within the view; a smaller part lifts
 # the camera. The total firing angle stays equal to the weapon's tuned recoil.
@@ -25,6 +30,8 @@ func reset_view() -> void:
 	pitch = -0.10
 	recoil_offset = Vector2.ZERO
 	actual_lean = 0.0
+	view_eye = 1.45
+	view_lean = 0.0
 	# Start at the eye; update_view safely raises the framing pivot below ceilings.
 	position = Vector3(0.0, 1.45, 0.0)
 	rotation = Vector3(pitch, 0.0, 0.0)
@@ -56,7 +63,10 @@ func reticle_offset(view_size: Vector2) -> Vector2:
 	var angle := aim_pitch() - rotation.x
 	return Vector2(0.0, -tan(angle) * view_size.y * 0.5 / tan(deg_to_rad(camera.fov * 0.5)))
 
-func update_view(body: CharacterBody3D, eye_height: float, lean: float, aiming: bool, delta: float) -> void:
+func update_view(body: CharacterBody3D, target_eye: float, lean: float, aiming: bool, delta: float) -> void:
+	var ease := 1.0 - exp(-VIEW_EASE * delta)
+	view_eye = lerpf(view_eye, target_eye, ease)
+	var eye_height := view_eye
 	var center := body.global_position + Vector3.UP * eye_height
 	var space := body.get_world_3d().direct_space_state
 	# Sweep upward from the stance eye so the elevated camera cannot start above
@@ -79,7 +89,8 @@ func update_view(body: CharacterBody3D, eye_height: float, lean: float, aiming: 
 	lean_query.exclude = [body.get_rid()]
 	var lean_fraction: float = 0.0 if not space.intersect_shape(lean_query, 1).is_empty() else space.cast_motion(lean_query)[0]
 	actual_lean = lean * lean_fraction
-	var desired := profile.shoulder_offset + actual_lean * 0.25
+	view_lean = lerpf(view_lean, actual_lean, ease)
+	var desired := profile.shoulder_offset + view_lean * 0.25
 	var query := PhysicsShapeQueryParameters3D.new()
 	query.shape = probe
 	query.transform = Transform3D(Basis.IDENTITY, center)
@@ -88,12 +99,16 @@ func update_view(body: CharacterBody3D, eye_height: float, lean: float, aiming: 
 	query.exclude = [body.get_rid()]
 	var fraction: float = 0.0 if not space.intersect_shape(query, 1).is_empty() else space.cast_motion(query)[0]
 	var safe_offset := desired * fraction
-	# Retract immediately; ease only when extending into known-clear space.
-	if absf(safe_offset) < absf(position.x) or signf(safe_offset) != signf(position.x):
+	# A wall in the way pulls the camera in at once so it never clips; otherwise it eases.
+	if fraction < 1.0 and absf(safe_offset) < absf(position.x) and signf(safe_offset) == signf(position.x):
 		position.x = safe_offset
 	else:
 		position.x = lerpf(position.x, safe_offset, 1.0 - exp(-18.0 * delta))
-	position.y = minf(position.y, safe_height) if safe_height < position.y else lerpf(position.y, safe_height, 1.0 - exp(-18.0 * delta))
+	# Likewise a ceiling; a lower stance's eye is already eased in view_eye.
+	if height_fraction < 1.0 and safe_height < position.y:
+		position.y = safe_height
+	else:
+		position.y = lerpf(position.y, safe_height, 1.0 - exp(-18.0 * delta))
 	set_recoil(recoil_offset)
 	var target_length := minf(profile.distance, 2.3) if aiming else profile.distance
 	arm.spring_length = lerpf(arm.spring_length, target_length, 1.0 - exp(-12.0 * delta))

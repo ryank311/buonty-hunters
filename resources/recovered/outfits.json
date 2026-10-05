@@ -1,0 +1,3466 @@
+{
+  "reader": "native/scripts/disc/READERC.ZAR-1b7df1c973/00005-character.rdr.json",
+  "characters": {
+    "res://art/models/recovered_char_afg_taliban03_mp.glb": {
+      "name": "afg_taliban03_mp",
+      "triangles": 2045,
+      "context": "MP6",
+      "preset": "mp6_terror1",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_afg_taliban04_mp.glb": {
+      "name": "afg_taliban04_mp",
+      "triangles": 2027,
+      "context": "MP6",
+      "preset": "mp6_terror3",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_afg_taliban05_mp.glb": {
+      "name": "afg_taliban05_mp",
+      "triangles": 1980,
+      "context": "MP6",
+      "preset": "mp6_terror4",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_afg_ter02_mp.glb": {
+      "name": "afg_ter02_mp",
+      "triangles": 2049,
+      "context": "MP6",
+      "preset": "mp6_terror2",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_al_arctic02.glb": {
+      "name": "al_arctic02",
+      "triangles": 1691,
+      "context": "MP1",
+      "preset": "mp1_terror1",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_al_captain.glb": {
+      "name": "al_captain",
+      "triangles": 1651,
+      "context": "MP2",
+      "preset": "mp2_terror4",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_al_gman01.glb": {
+      "name": "al_gman01",
+      "triangles": 1774,
+      "context": "MP1",
+      "preset": "mp1_terror2",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_al_gman02.glb": {
+      "name": "al_gman02",
+      "triangles": 1721,
+      "context": "MP1",
+      "preset": "mp1_terror4",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_al_kola.glb": {
+      "name": "al_kola",
+      "triangles": 1719,
+      "context": "MP1",
+      "preset": "mp1_terror3",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_al_leader.glb": {
+      "name": "al_leader",
+      "triangles": 1871,
+      "context": "MP2",
+      "preset": "mp2_terror3",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alban_castrioti.glb": {
+      "name": "alban_Castrioti",
+      "triangles": 1772,
+      "context": "M53",
+      "preset": "m53_Castrioti",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alban_foreman.glb": {
+      "name": "alban_foreman",
+      "triangles": 1702,
+      "context": "M51",
+      "preset": "m51_foreman",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alban_informant.glb": {
+      "name": "alban_informant",
+      "triangles": 1664,
+      "context": "M51",
+      "preset": "albanian_informant",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alban_leader02.glb": {
+      "name": "alban_leader02",
+      "triangles": 2016,
+      "context": "M53",
+      "preset": "m53_Aide",
+      "gear": [
+        "left_eye_female",
+        "right_eye_female",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alban_pius.glb": {
+      "name": "alban_Pius",
+      "triangles": 1828,
+      "context": "M53",
+      "preset": "m53_Pius",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alban_rugova.glb": {
+      "name": "alban_Rugova",
+      "triangles": 1965,
+      "context": "M52",
+      "preset": "m52_Rugova",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alban_ter01.glb": {
+      "name": "alban_ter01",
+      "triangles": 1562,
+      "context": "M51",
+      "preset": "m51_terror01",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "cigarette",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alban_ter02.glb": {
+      "name": "alban_ter02",
+      "triangles": 1616,
+      "context": "M51",
+      "preset": "m51_sniper",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alban_ter03.glb": {
+      "name": "alban_ter03",
+      "triangles": 1700,
+      "context": "M53",
+      "preset": "m53_terror01",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alg_businessman.glb": {
+      "name": "alg_businessman",
+      "triangles": 1798,
+      "context": "M73",
+      "preset": "algerian_businessman",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alg_juki.glb": {
+      "name": "alg_Juki",
+      "triangles": 2092,
+      "context": "M73",
+      "preset": "algerian_Juki",
+      "gear": [
+        "left_eye_female",
+        "right_eye_female",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alg_officer.glb": {
+      "name": "alg_officer",
+      "triangles": 2028,
+      "context": "M72",
+      "preset": "m72_officer",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "cigarette",
+        "handheld",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alg_ter01.glb": {
+      "name": "alg_ter01",
+      "triangles": 1821,
+      "context": "M71",
+      "preset": "m71_sniper01",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "cigarette",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alg_ter02.glb": {
+      "name": "alg_ter02",
+      "triangles": 2042,
+      "context": "M71",
+      "preset": "m71_terror02",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "cigarette",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alg_ter03.glb": {
+      "name": "alg_ter03",
+      "triangles": 1947,
+      "context": "M72",
+      "preset": "m72_sniper01",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alg_un01.glb": {
+      "name": "alg_UN01",
+      "triangles": 1925,
+      "context": "M72",
+      "preset": "m72_CHA",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "cigarette",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alg_un02.glb": {
+      "name": "alg_UN02",
+      "triangles": 1669,
+      "context": "M72",
+      "preset": "m72_CHA2",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "cigarette",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_alg_unworker.glb": {
+      "name": "alg_UNworker",
+      "triangles": 2000,
+      "context": "M71",
+      "preset": "algerian_UNworker",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_braz_butcher.glb": {
+      "name": "braz_butcher",
+      "triangles": 1967,
+      "context": "M61",
+      "preset": "m61_chef",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_braz_coke01.glb": {
+      "name": "braz_coke01",
+      "triangles": 1966,
+      "context": "M62",
+      "preset": "m62_terror02",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_braz_damworker01.glb": {
+      "name": "braz_damworker01",
+      "triangles": 2033,
+      "context": "M63",
+      "preset": "brazilian_damworker01",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_braz_dweller01.glb": {
+      "name": "braz_dweller01",
+      "triangles": 1870,
+      "context": "M62",
+      "preset": "m62_terror03",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "cigarette",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_braz_felix.glb": {
+      "name": "braz_Felix",
+      "triangles": 1859,
+      "context": "M61",
+      "preset": "brazilian_Felix",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_braz_hooker.glb": {
+      "name": "braz_hooker",
+      "triangles": 1990,
+      "context": "M61",
+      "preset": "m61_hooker",
+      "gear": [
+        "left_eye_female",
+        "right_eye_female",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_braz_leader.glb": {
+      "name": "braz_leader",
+      "triangles": 2282,
+      "context": "M61",
+      "preset": "m61_leader2",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "handheld"
+      ]
+    },
+    "res://art/models/recovered_char_braz_llucas.glb": {
+      "name": "braz_Llucas",
+      "triangles": 1964,
+      "context": "M61",
+      "preset": "m61_kid",
+      "gear": [
+        "left_eye_female",
+        "right_eye_female",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_braz_lucimar.glb": {
+      "name": "braz_Lucimar",
+      "triangles": 2022,
+      "context": "M61",
+      "preset": "m61_leader",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_braz_ter01.glb": {
+      "name": "braz_ter01",
+      "triangles": 1850,
+      "context": "M61",
+      "preset": "m61_sniper01",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_braz_ter02.glb": {
+      "name": "braz_ter02",
+      "triangles": 2065,
+      "context": "M61",
+      "preset": "m61_terror02",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_braz_ter03.glb": {
+      "name": "braz_ter03",
+      "triangles": 2059,
+      "context": "M61",
+      "preset": "m61_terror03",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "cigarette",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_con_cook.glb": {
+      "name": "con_cook",
+      "triangles": 2224,
+      "context": "MP10",
+      "preset": "mp10_terror2",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_con_leader.glb": {
+      "name": "con_leader",
+      "triangles": 2249,
+      "context": "MP10",
+      "preset": "mp10_terror3",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_con_merc03.glb": {
+      "name": "con_merc03",
+      "triangles": 2011,
+      "context": "MP10",
+      "preset": "mp10_terror1",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_con_pow01.glb": {
+      "name": "con_pow01",
+      "triangles": 1779,
+      "context": "MP10",
+      "preset": "mp_pow1",
+      "gear": [
+        "right_eye",
+        "left_eye"
+      ]
+    },
+    "res://art/models/recovered_char_con_pow02.glb": {
+      "name": "con_pow02",
+      "triangles": 1876,
+      "context": "MP10",
+      "preset": "mp_pow2",
+      "gear": [
+        "right_eye",
+        "left_eye"
+      ]
+    },
+    "res://art/models/recovered_char_con_torturer_mp.glb": {
+      "name": "con_torturer_mp",
+      "triangles": 2173,
+      "context": "MP10",
+      "preset": "mp10_terror4",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_rus_arjan.glb": {
+      "name": "rus_Arjan",
+      "triangles": 2086,
+      "context": "M83",
+      "preset": "russian_Arjan",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_rus_escort01.glb": {
+      "name": "rus_escort01",
+      "triangles": 1830,
+      "context": "MP82",
+      "preset": "mp_vip1",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye"
+      ]
+    },
+    "res://art/models/recovered_char_rus_escort03.glb": {
+      "name": "rus_escort03",
+      "triangles": 1826,
+      "context": "MP82",
+      "preset": "mp_vip2",
+      "gear": [
+        "right_eye_blue",
+        "left_eye_blue"
+      ]
+    },
+    "res://art/models/recovered_char_rus_leader.glb": {
+      "name": "rus_leader",
+      "triangles": 2259,
+      "context": "M83",
+      "preset": "m83_officer",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_rus_snowter01.glb": {
+      "name": "rus_snowter01",
+      "triangles": 2119,
+      "context": "M81",
+      "preset": "m81_terror01",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_rus_snowter02.glb": {
+      "name": "rus_snowter02",
+      "triangles": 1921,
+      "context": "M81",
+      "preset": "m81_officer",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_rus_snowter03.glb": {
+      "name": "rus_snowter03",
+      "triangles": 2128,
+      "context": "M82",
+      "preset": "m82_officer",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_rus_specialist.glb": {
+      "name": "rus_specialist",
+      "triangles": 1966,
+      "context": "M82",
+      "preset": "mp81_seal4",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_rus_ter01.glb": {
+      "name": "rus_ter01",
+      "triangles": 2225,
+      "context": "M81",
+      "preset": "m81_sniper01",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_rus_ter02.glb": {
+      "name": "rus_ter02",
+      "triangles": 2093,
+      "context": "M83",
+      "preset": "m83_sniper01",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_rus_valeska.glb": {
+      "name": "rus_Valeska",
+      "triangles": 2002,
+      "context": "M83",
+      "preset": "m83_valeska",
+      "gear": [
+        "right_eye_blue",
+        "left_eye_blue",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_sas_01.glb": {
+      "name": "SAS_01",
+      "triangles": 2117,
+      "context": "M52",
+      "preset": "SAS_A",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_holster",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_a.glb": {
+      "name": "seal_A",
+      "triangles": 2310,
+      "context": "MP10",
+      "preset": "mp10_seal1",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_hat",
+        "seal_holster",
+        "seal_aslt_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_a_arc.glb": {
+      "name": "seal_A_arc",
+      "triangles": 2020,
+      "context": "M81",
+      "preset": "arctic_A",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_a_cqb.glb": {
+      "name": "seal_A_cqb",
+      "triangles": 1828,
+      "context": "M52",
+      "preset": "M63_cqb_A",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_holster",
+        "flak_helmet"
+      ]
+    },
+    "res://art/models/recovered_char_seal_a_des.glb": {
+      "name": "seal_A_des",
+      "triangles": 2046,
+      "context": "M71",
+      "preset": "desert_A",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_des_hat",
+        "seal_holster",
+        "seal_d_hp",
+        "seal_d_ch_front",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_a_desert_lo.glb": {
+      "name": "seal_A_desert_LO",
+      "triangles": 1979,
+      "context": "M72",
+      "preset": "desert_A72",
+      "gear": [
+        "maya_right_eye",
+        "maya_left_eye",
+        "seal_des_hat",
+        "seal_holster",
+        "seal_d_hp",
+        "seal_d_ch_front",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_a_scuba.glb": {
+      "name": "seal_A_scuba",
+      "triangles": 1523,
+      "context": "M83",
+      "preset": "mp2_seal1",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_holster",
+        "seal_scuba_aslt_gear",
+        "seal_scuba_knife",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_a_tiger_jungle.glb": {
+      "name": "seal_A_tiger_jungle",
+      "triangles": 2051,
+      "context": "M61",
+      "preset": "jungle_A61",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "black_battle_helmet",
+        "seal_goggles",
+        "seal_holster",
+        "seal_woodland_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_a_tiger_jungle_lo.glb": {
+      "name": "seal_A_tiger_jungle_LO",
+      "triangles": 2051,
+      "context": "M53",
+      "preset": "jungle_A_tiger_LO",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "black_battle_helmet",
+        "seal_goggles",
+        "seal_holster",
+        "seal_woodland_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_a_woodland_lo.glb": {
+      "name": "seal_A_woodland_LO",
+      "triangles": 1980,
+      "context": "M51",
+      "preset": "jungle_A51",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_black_hat",
+        "seal_goggles",
+        "seal_holster",
+        "seal_woodland_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_b_des.glb": {
+      "name": "seal_B_des",
+      "triangles": 2138,
+      "context": "M71",
+      "preset": "desert_B",
+      "gear": [
+        "seal_B_right_eye",
+        "seal_B_left_eye",
+        "seal_des_hat",
+        "seal_holster",
+        "seal_d_hp",
+        "gear_m60_ammo",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_b_desert_lo.glb": {
+      "name": "seal_B_desert_LO",
+      "triangles": 2071,
+      "context": "M72",
+      "preset": "desert_B72",
+      "gear": [
+        "maya_right_eye",
+        "maya_left_eye",
+        "seal_des_hat",
+        "seal_holster",
+        "seal_d_hp",
+        "gear_m60_ammo",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_b_scuba.glb": {
+      "name": "seal_B_scuba",
+      "triangles": 1523,
+      "context": "M83",
+      "preset": "scuba_B",
+      "gear": [
+        "maya_right_eye",
+        "maya_left_eye",
+        "seal_holster",
+        "seal_scuba_aslt_gear",
+        "seal_scuba_knife"
+      ]
+    },
+    "res://art/models/recovered_char_seal_b_tiger_jungle.glb": {
+      "name": "seal_B_tiger_jungle",
+      "triangles": 2036,
+      "context": "M61",
+      "preset": "jungle_B61",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_hat_tiger",
+        "seal_holster",
+        "seal_scuba_aslt_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_b_tiger_jungle_lo.glb": {
+      "name": "seal_B_tiger_jungle_LO",
+      "triangles": 2036,
+      "context": "M53",
+      "preset": "jungle_B_tiger_LO",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_hat_tiger",
+        "seal_holster",
+        "seal_scuba_aslt_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_b_woodland.glb": {
+      "name": "seal_B_woodland",
+      "triangles": 1981,
+      "context": "MP51",
+      "preset": "mp51_seal1",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_black_hat",
+        "seal_holster",
+        "seal_woodland_gear",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_b_woodland_lo.glb": {
+      "name": "seal_B_woodland_LO",
+      "triangles": 1981,
+      "context": "M51",
+      "preset": "jungle_B51",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_black_hat",
+        "seal_goggles",
+        "seal_holster",
+        "seal_woodland_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_c.glb": {
+      "name": "seal_C",
+      "triangles": 2326,
+      "context": "MP10",
+      "preset": "mp10_seal3",
+      "gear": [
+        "seal_C_right_eye",
+        "seal_C_left_eye",
+        "black_battle_helmet",
+        "seal_holster",
+        "seal_woodland_gear",
+        "seal_goggles",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_c_des.glb": {
+      "name": "seal_C_des",
+      "triangles": 2032,
+      "context": "M71",
+      "preset": "desert_D",
+      "gear": [
+        "seal_C_right_eye",
+        "seal_C_left_eye",
+        "seal_des_hat",
+        "seal_holster",
+        "seal_d_hp",
+        "gear_m60_ammo",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_c_des_flak.glb": {
+      "name": "seal_C_des_flak",
+      "triangles": 2147,
+      "context": "MP6",
+      "preset": "mp6_seal3",
+      "gear": [
+        "seal_C_right_eye",
+        "seal_C_left_eye",
+        "seal_goggles",
+        "black_battle_helmet",
+        "seal_holster",
+        "seal_d_hp",
+        "seal_d_ch_front",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_c_desert_lo.glb": {
+      "name": "seal_C_desert_LO",
+      "triangles": 1965,
+      "context": "M72",
+      "preset": "desert_D72",
+      "gear": [
+        "maya_right_eye",
+        "maya_left_eye",
+        "seal_des_hat",
+        "seal_holster",
+        "seal_d_hp",
+        "gear_m60_ammo",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_c_scuba.glb": {
+      "name": "seal_C_scuba",
+      "triangles": 1586,
+      "context": "M83",
+      "preset": "mp2_seal4",
+      "gear": [
+        "seal_C_right_eye",
+        "seal_C_left_eye",
+        "seal_holster",
+        "seal_scuba_aslt_gear",
+        "seal_scuba_knife",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_c_tiger_jungle.glb": {
+      "name": "seal_C_tiger_jungle",
+      "triangles": 2046,
+      "context": "MP61",
+      "preset": "mp61_seal3",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "black_battle_helmet",
+        "seal_holster",
+        "seal_goggles",
+        "seal_aslt_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_c_woodland.glb": {
+      "name": "seal_C_woodland",
+      "triangles": 1969,
+      "context": "MP51",
+      "preset": "mp51_seal3",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_black_hat",
+        "seal_holster",
+        "seal_goggles",
+        "seal_woodland_gear",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_c_woodland_lo.glb": {
+      "name": "seal_C_woodland_LO",
+      "triangles": 1969,
+      "context": "MP53",
+      "preset": "mp53_seal3",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_black_hat",
+        "seal_holster",
+        "seal_goggles",
+        "seal_woodland_gear",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_d.glb": {
+      "name": "seal_D",
+      "triangles": 2318,
+      "context": "MP10",
+      "preset": "mp10_seal4",
+      "gear": [
+        "seal_D_right_eye",
+        "seal_D_left_eye",
+        "seal_hat",
+        "seal_holster",
+        "seal_aslt_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_d_des.glb": {
+      "name": "seal_D_des",
+      "triangles": 2138,
+      "context": "MP6",
+      "preset": "mp6_seal4",
+      "gear": [
+        "seal_D_right_eye",
+        "seal_D_left_eye",
+        "seal_des_hat",
+        "seal_holster",
+        "seal_d_hp",
+        "seal_d_ch_front",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_d_des_flak.glb": {
+      "name": "seal_D_des_flak",
+      "triangles": 2143,
+      "context": "MP71",
+      "preset": "mp71_seal3",
+      "gear": [
+        "seal_D_right_eye",
+        "seal_D_left_eye",
+        "seal_holster",
+        "seal_goggles",
+        "black_battle_helmet",
+        "seal_aslt_gear",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_d_scuba.glb": {
+      "name": "seal_D_scuba",
+      "triangles": 1523,
+      "context": "MP2",
+      "preset": "mp2_seal3",
+      "gear": [
+        "seal_D_right_eye",
+        "seal_D_left_eye",
+        "seal_holster",
+        "seal_goggles",
+        "seal_scuba_aslt_gear",
+        "seal_scuba_knife",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_d_tiger_jungle.glb": {
+      "name": "seal_D_tiger_jungle",
+      "triangles": 2048,
+      "context": "M61",
+      "preset": "jungle_D61",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_hat_tiger",
+        "seal_holster",
+        "seal_woodland_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_e_arctic.glb": {
+      "name": "seal_E_arctic",
+      "triangles": 2018,
+      "context": "MP1",
+      "preset": "mp1_seal2",
+      "gear": [
+        "maya_right_eye",
+        "maya_left_eye",
+        "seal_holster",
+        "seal_scuba_aslt_gear",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_e_cqb.glb": {
+      "name": "seal_E_cqb",
+      "triangles": 1828,
+      "context": "M63",
+      "preset": "M63_cqb_C",
+      "gear": [
+        "maya_right_eye",
+        "maya_left_eye",
+        "seal_holster",
+        "flak_helmet"
+      ]
+    },
+    "res://art/models/recovered_char_seal_e_desert.glb": {
+      "name": "seal_E_desert",
+      "triangles": 2042,
+      "context": "M71",
+      "preset": "desert_C71",
+      "gear": [
+        "maya_right_eye",
+        "maya_left_eye",
+        "seal_des_hat",
+        "seal_holster",
+        "seal_d_hp",
+        "gear_m60_ammo",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_e_desert_flak.glb": {
+      "name": "seal_E_desert_flak",
+      "triangles": 2129,
+      "context": "MP6",
+      "preset": "mp6_seal2",
+      "gear": [
+        "maya_right_eye",
+        "maya_left_eye",
+        "seal_woodland_gear",
+        "black_battle_helmet",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_e_desert_lo.glb": {
+      "name": "seal_E_desert_LO",
+      "triangles": 1975,
+      "context": "M72",
+      "preset": "desert_C72",
+      "gear": [
+        "maya_right_eye",
+        "maya_left_eye",
+        "seal_des_hat",
+        "seal_holster",
+        "seal_d_hp",
+        "gear_m60_ammo",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_e_jungle_flak.glb": {
+      "name": "seal_E_jungle_flak",
+      "triangles": 2139,
+      "context": "MP10",
+      "preset": "mp10_seal2",
+      "gear": [
+        "maya_right_eye",
+        "maya_left_eye",
+        "seal_hat",
+        "seal_holster",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_e_scuba.glb": {
+      "name": "seal_E_scuba",
+      "triangles": 1531,
+      "context": "M83",
+      "preset": "mp2_seal2",
+      "gear": [
+        "maya_right_eye",
+        "maya_left_eye",
+        "seal_holster",
+        "seal_scuba_aslt_gear",
+        "seal_scuba_knife",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_e_tiger_jungle.glb": {
+      "name": "seal_E_tiger_jungle",
+      "triangles": 2058,
+      "context": "M61",
+      "preset": "jungle_C61",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_hat_tiger",
+        "seal_holster",
+        "seal_woodland_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_e_woodland.glb": {
+      "name": "seal_E_woodland",
+      "triangles": 1995,
+      "context": "MP51",
+      "preset": "mp51_seal2",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "black_battle_helmet",
+        "seal_holster",
+        "seal_scuba_aslt_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_e_woodland_lo.glb": {
+      "name": "seal_E_woodland_LO",
+      "triangles": 1995,
+      "context": "M51",
+      "preset": "jungle_C51",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "black_battle_helmet",
+        "seal_holster",
+        "seal_scuba_aslt_gear",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_seal_marcela.glb": {
+      "name": "seal_Marcela",
+      "triangles": 2342,
+      "context": "MP61",
+      "preset": "mp61_seal4",
+      "gear": [
+        "right_eye_blue",
+        "left_eye_blue",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_spetsnaz.glb": {
+      "name": "Spetsnaz",
+      "triangles": 2281,
+      "context": "M81",
+      "preset": "arctic_C81",
+      "gear": [
+        "seal_A_right_eye",
+        "seal_A_left_eye",
+        "seal_holster",
+        "gear_mag01",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_thai_adv02.glb": {
+      "name": "thai_adv02",
+      "triangles": 1976,
+      "context": "MP12",
+      "preset": "mp12_terror3",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_thai_biologist01.glb": {
+      "name": "thai_biologist01",
+      "triangles": 2140,
+      "context": "MP6",
+      "preset": "mp_fem1",
+      "gear": [
+        "right_eye",
+        "left_eye"
+      ]
+    },
+    "res://art/models/recovered_char_thai_biologist02.glb": {
+      "name": "thai_biologist02",
+      "triangles": 2118,
+      "context": "MP6",
+      "preset": "mp_fem2",
+      "gear": [
+        "right_eye",
+        "left_eye"
+      ]
+    },
+    "res://art/models/recovered_char_thai_leader.glb": {
+      "name": "thai_leader",
+      "triangles": 1957,
+      "context": "MP12",
+      "preset": "mp12_terror4",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_thai_terrorist01.glb": {
+      "name": "thai_terrorist01",
+      "triangles": 1911,
+      "context": "MP12",
+      "preset": "mp12_terror2",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_thai_terrorist02.glb": {
+      "name": "thai_terrorist02",
+      "triangles": 2050,
+      "context": "MP12",
+      "preset": "mp12_terror1",
+      "gear": [
+        "right_eye",
+        "left_eye",
+        "seal_holster",
+        "Satchel"
+      ]
+    },
+    "res://art/models/recovered_char_thai_wife.glb": {
+      "name": "thai_wife",
+      "triangles": 2264,
+      "context": "MP6",
+      "preset": "mp_fem3",
+      "gear": [
+        "right_eye",
+        "left_eye"
+      ]
+    }
+  },
+  "excluded": [
+    {
+      "name": "afg_taliban03_mp_1",
+      "triangles": 650,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "afg_taliban03_mp_2",
+      "triangles": 296,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "afg_taliban04_mp_1",
+      "triangles": 650,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "afg_taliban04_mp_2",
+      "triangles": 296,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "afg_taliban05_mp_1",
+      "triangles": 649,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "afg_taliban05_mp_2",
+      "triangles": 296,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "afg_ter02_mp_1",
+      "triangles": 668,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "afg_ter02_mp_2",
+      "triangles": 336,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "al_arctic02_1",
+      "triangles": 630,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "al_arctic02_2",
+      "triangles": 274,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "al_captain_1",
+      "triangles": 690,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "al_gman01_1",
+      "triangles": 596,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "al_gman01_2",
+      "triangles": 276,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "al_gman02_1",
+      "triangles": 622,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "al_gman02_2",
+      "triangles": 288,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "al_kola_1",
+      "triangles": 622,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "al_kola_2",
+      "triangles": 288,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "al_leader_1",
+      "triangles": 586,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "al_leader_2",
+      "triangles": 268,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "alban_Castrioti_1",
+      "triangles": 352,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "alban_foreman_1",
+      "triangles": 340,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "alban_informant_1",
+      "triangles": 393,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "alban_Pius_1",
+      "triangles": 274,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "alban_Rugova_1",
+      "triangles": 339,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "alban_ter01_1",
+      "triangles": 316,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "alban_ter02_1",
+      "triangles": 351,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "alban_ter03_1",
+      "triangles": 380,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "alg_officer_1",
+      "triangles": 382,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "alg_ter01_1",
+      "triangles": 322,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "alg_ter02_1",
+      "triangles": 368,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "alg_ter03_1",
+      "triangles": 332,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "braz_butcher_1",
+      "triangles": 348,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "braz_dweller01_1",
+      "triangles": 372,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "braz_hooker_1",
+      "triangles": 347,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "braz_leader_1",
+      "triangles": 378,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "braz_Lucimar_1",
+      "triangles": 381,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "braz_ter01_1",
+      "triangles": 270,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "braz_ter02_1",
+      "triangles": 386,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "braz_ter03_1",
+      "triangles": 338,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "con_cook_1",
+      "triangles": 628,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "con_leader_1",
+      "triangles": 680,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "con_merc03_1",
+      "triangles": 580,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "con_merc03_2",
+      "triangles": 286,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "con_pow01_2",
+      "triangles": 280,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "con_pow02_2",
+      "triangles": 292,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "con_torturer_mp_1",
+      "triangles": 650,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "con_torturer_mp_2",
+      "triangles": 303,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "rus_leader_1",
+      "triangles": 393,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "rus_snowter01_1",
+      "triangles": 347,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "rus_snowter02_1",
+      "triangles": 348,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "rus_snowter03_1",
+      "triangles": 344,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "rus_ter01_1",
+      "triangles": 331,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "rus_ter02_1",
+      "triangles": 309,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "rus_Valeska_1",
+      "triangles": 386,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "SAS_01_1",
+      "triangles": 292,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_1",
+      "triangles": 711,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_2",
+      "triangles": 230,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_arc_1",
+      "triangles": 575,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_arc_2",
+      "triangles": 336,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_cqb_1",
+      "triangles": 292,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_des_1",
+      "triangles": 549,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_des_1_LO",
+      "triangles": 549,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_des_2",
+      "triangles": 242,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_des_2_LO",
+      "triangles": 242,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_des_flak_1",
+      "triangles": 761,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_des_flak_2",
+      "triangles": 274,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_flak_1",
+      "triangles": 761,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_flak_2",
+      "triangles": 274,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_scuba_1",
+      "triangles": 549,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_scuba_2",
+      "triangles": 281,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_woodland_1",
+      "triangles": 348,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_A_woodland_1_LO",
+      "triangles": 348,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_B_woodland_1",
+      "triangles": 443,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_B_woodland_1_LO",
+      "triangles": 443,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_C_1",
+      "triangles": 568,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_C_des_1",
+      "triangles": 549,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_C_des_1_LO",
+      "triangles": 549,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_D_1",
+      "triangles": 568,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_D_tiger_1",
+      "triangles": 318,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_D_tiger_1_LO",
+      "triangles": 318,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "seal_Marcela_1",
+      "triangles": 331,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "Spetsnaz_1",
+      "triangles": 285,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_adv02_1",
+      "triangles": 649,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_adv02_2",
+      "triangles": 341,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_biologist01_1",
+      "triangles": 577,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_biologist01_2",
+      "triangles": 340,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_biologist02_1",
+      "triangles": 659,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_biologist02_2",
+      "triangles": 342,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_leader_1",
+      "triangles": 539,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_leader_2",
+      "triangles": 291,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_terrorist01_1",
+      "triangles": 650,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_terrorist01_2",
+      "triangles": 338,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_terrorist02_1",
+      "triangles": 653,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_terrorist02_2",
+      "triangles": 365,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_wife_1",
+      "triangles": 634,
+      "reason": "character.rdr lods"
+    },
+    {
+      "name": "thai_wife_2",
+      "triangles": 340,
+      "reason": "character.rdr lods"
+    }
+  ],
+  "gear": {
+    "seal_hat": {
+      "bone": "head",
+      "translation": [
+        0.1168,
+        0.0352,
+        0.001
+      ],
+      "rotation": [
+        44.8,
+        90.0,
+        -44.8
+      ],
+      "group": "headwear",
+      "path": "res://art/models/recovered_gear_seal_hat_d1f281b69643.glb",
+      "models": {
+        "MP10": "res://art/models/recovered_gear_seal_hat_d1f281b69643.glb",
+        "MP11": "res://art/models/recovered_gear_seal_hat_d1f281b69643.glb",
+        "MP12": "res://art/models/recovered_gear_seal_hat_d1f281b69643.glb",
+        "MP5": "res://art/models/recovered_gear_seal_hat_d1f281b69643.glb",
+        "MP9": "res://art/models/recovered_gear_seal_hat_d1f281b69643.glb"
+      }
+    },
+    "seal_black_hat": {
+      "bone": "head",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        -179.0,
+        89.7,
+        90.91
+      ],
+      "group": "headwear",
+      "path": "res://art/models/recovered_gear_seal_black_hat_9628317e57ab.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_seal_black_hat_9628317e57ab.glb",
+        "MP51": "res://art/models/recovered_gear_seal_black_hat_9628317e57ab.glb",
+        "MP52": "res://art/models/recovered_gear_seal_black_hat_9628317e57ab.glb",
+        "MP53": "res://art/models/recovered_gear_seal_black_hat_9628317e57ab.glb"
+      }
+    },
+    "seal_des_hat": {
+      "bone": "head",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        44.8,
+        90.0,
+        -44.8
+      ],
+      "group": "headwear",
+      "path": "res://art/models/recovered_gear_seal_des_hat_59dc6d68b83f.glb",
+      "models": {
+        "M71": "res://art/models/recovered_gear_seal_des_hat_59dc6d68b83f.glb",
+        "M72": "res://art/models/recovered_gear_seal_des_hat_59dc6d68b83f.glb",
+        "M73": "res://art/models/recovered_gear_seal_des_hat_59dc6d68b83f.glb",
+        "MP6": "res://art/models/recovered_gear_seal_des_hat_59dc6d68b83f.glb",
+        "MP7": "res://art/models/recovered_gear_seal_des_hat_59dc6d68b83f.glb",
+        "MP71": "res://art/models/recovered_gear_seal_des_hat_59dc6d68b83f.glb",
+        "MP72": "res://art/models/recovered_gear_seal_des_hat_59dc6d68b83f.glb",
+        "MP73": "res://art/models/recovered_gear_seal_des_hat_59dc6d68b83f.glb",
+        "MP8": "res://art/models/recovered_gear_seal_des_hat_59dc6d68b83f.glb"
+      }
+    },
+    "flak_helmet": {
+      "bone": "head",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        44.8,
+        90.0,
+        -44.8
+      ],
+      "group": "headwear",
+      "path": "res://art/models/recovered_gear_flak_helmet_maya_7ae6f682822d.glb",
+      "models": {
+        "M52": "res://art/models/recovered_gear_flak_helmet_maya_7ae6f682822d.glb",
+        "M63": "res://art/models/recovered_gear_flak_helmet_maya_7ae6f682822d.glb"
+      }
+    },
+    "seal_hat_tiger": {
+      "bone": "head",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        -179.0,
+        89.7,
+        90.91
+      ],
+      "group": "headwear",
+      "path": "res://art/models/recovered_gear_seal_hat_tiger_cd77f3df0ed1.glb",
+      "models": {
+        "M53": "res://art/models/recovered_gear_seal_hat_tiger_cd77f3df0ed1.glb",
+        "M61": "res://art/models/recovered_gear_seal_hat_tiger_cd77f3df0ed1.glb",
+        "M62": "res://art/models/recovered_gear_seal_hat_tiger_cd77f3df0ed1.glb",
+        "MP61": "res://art/models/recovered_gear_seal_hat_tiger_cd77f3df0ed1.glb",
+        "MP62": "res://art/models/recovered_gear_seal_hat_tiger_cd77f3df0ed1.glb",
+        "MP64": "res://art/models/recovered_gear_seal_hat_tiger_cd77f3df0ed1.glb"
+      }
+    },
+    "black_battle_helmet": {
+      "bone": "head",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        44.8,
+        90.0,
+        -44.8
+      ],
+      "group": "headwear",
+      "path": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "M53": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "M61": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "M62": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP10": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP11": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP12": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP5": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP51": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP52": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP53": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP6": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP61": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP62": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP64": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP7": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP71": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP72": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP73": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP8": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+        "MP9": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb"
+      }
+    },
+    "seal_goggles": {
+      "bone": "head",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        -179.0,
+        89.7,
+        90.91
+      ],
+      "group": "eyewear",
+      "path": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "M53": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "M61": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "M62": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP1": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP10": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP11": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP12": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP2": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP5": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP51": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP52": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP53": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP6": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP61": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP62": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP64": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP7": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP71": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP72": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP73": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP8": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+        "MP9": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb"
+      }
+    },
+    "seal_holster": {
+      "bone": "rthigh",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        -82.47,
+        84.57,
+        14.08
+      ],
+      "group": "holster",
+      "path": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "M52": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "M53": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "M61": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "M62": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "M63": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "M71": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "M72": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "M73": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "M81": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "M82": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "M83": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP1": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP10": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP11": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP12": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP2": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP5": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP51": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP52": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP53": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP6": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP61": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP62": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP64": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP7": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP71": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP72": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP73": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP8": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP81": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP82": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP83": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+        "MP9": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb"
+      }
+    },
+    "seal_aslt_gear": {
+      "bone": "hips",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "group": "belt",
+      "path": "res://art/models/recovered_gear_seal_aslt_gear_c8ade8432358.glb",
+      "models": {
+        "MP10": "res://art/models/recovered_gear_seal_aslt_gear_c8ade8432358.glb",
+        "MP11": "res://art/models/recovered_gear_seal_aslt_gear_c8ade8432358.glb",
+        "MP12": "res://art/models/recovered_gear_seal_aslt_gear_c8ade8432358.glb",
+        "MP5": "res://art/models/recovered_gear_seal_aslt_gear_defa6841755e.glb",
+        "MP61": "res://art/models/recovered_gear_seal_aslt_gear_c8ade8432358.glb",
+        "MP62": "res://art/models/recovered_gear_seal_aslt_gear_c8ade8432358.glb",
+        "MP64": "res://art/models/recovered_gear_seal_aslt_gear_c8ade8432358.glb",
+        "MP71": "res://art/models/recovered_gear_seal_aslt_gear_c8ade8432358.glb",
+        "MP72": "res://art/models/recovered_gear_seal_aslt_gear_c8ade8432358.glb",
+        "MP73": "res://art/models/recovered_gear_seal_aslt_gear_defa6841755e.glb",
+        "MP9": "res://art/models/recovered_gear_seal_aslt_gear_c8ade8432358.glb"
+      }
+    },
+    "seal_woodland_gear": {
+      "bone": "hips",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        -1.185,
+        0.0,
+        0.0
+      ],
+      "group": "belt",
+      "path": "res://art/models/recovered_gear_seal_woodland_gear_83a71f77248f.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_seal_woodland_gear_83a71f77248f.glb",
+        "M53": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "M61": "res://art/models/recovered_gear_seal_woodland_gear_83a71f77248f.glb",
+        "M62": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP10": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP11": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP12": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP5": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP51": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP52": "res://art/models/recovered_gear_seal_woodland_gear_83a71f77248f.glb",
+        "MP53": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP6": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP61": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP62": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP64": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP7": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP71": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP72": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP73": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP8": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+        "MP9": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb"
+      }
+    },
+    "gear_mag01": {
+      "bone": "lthigh",
+      "translation": [
+        0.1511,
+        -0.031,
+        0.0953
+      ],
+      "rotation": [
+        -82.3,
+        95.5,
+        14.2
+      ],
+      "group": "other",
+      "path": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "M52": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "M53": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "M61": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "M62": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "M81": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "M82": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP10": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP11": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP12": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP5": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP51": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP52": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP53": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP61": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP62": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP64": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP71": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP72": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP73": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+        "MP9": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb"
+      }
+    },
+    "seal_d_hp": {
+      "bone": "hips",
+      "translation": [
+        0.007000000000000001,
+        0.06999999999999999,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "group": "belt",
+      "path": "res://art/models/recovered_gear_seal_d_hp_19c5c568dc64.glb",
+      "models": {
+        "M71": "res://art/models/recovered_gear_seal_d_hp_19c5c568dc64.glb",
+        "M72": "res://art/models/recovered_gear_seal_d_hp_19c5c568dc64.glb",
+        "M73": "res://art/models/recovered_gear_seal_d_hp_19c5c568dc64.glb",
+        "MP6": "res://art/models/recovered_gear_seal_d_hp_19c5c568dc64.glb",
+        "MP7": "res://art/models/recovered_gear_seal_d_hp_19c5c568dc64.glb",
+        "MP8": "res://art/models/recovered_gear_seal_d_hp_19c5c568dc64.glb"
+      }
+    },
+    "seal_d_ch_front": {
+      "bone": "spinehi",
+      "translation": [
+        0.020000000000000004,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        45.2,
+        90.0,
+        -45.2
+      ],
+      "group": "vest",
+      "path": "res://art/models/recovered_gear_seal_d_ch_front_fb39cabbc0db.glb",
+      "models": {
+        "M71": "res://art/models/recovered_gear_seal_d_ch_front_fb39cabbc0db.glb",
+        "M72": "res://art/models/recovered_gear_seal_d_ch_front_fb39cabbc0db.glb",
+        "M73": "res://art/models/recovered_gear_seal_d_ch_front_fb39cabbc0db.glb",
+        "MP6": "res://art/models/recovered_gear_seal_d_ch_front_fb39cabbc0db.glb",
+        "MP7": "res://art/models/recovered_gear_seal_d_ch_front_fb39cabbc0db.glb",
+        "MP8": "res://art/models/recovered_gear_seal_d_ch_front_fb39cabbc0db.glb"
+      }
+    },
+    "gear_m60_ammo": {
+      "bone": "spinehi",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        45.2,
+        90.0,
+        -45.2
+      ],
+      "group": "vest",
+      "path": "res://art/models/recovered_gear_gear_m60_ammo_be1590fe89da.glb",
+      "models": {
+        "M71": "res://art/models/recovered_gear_gear_m60_ammo_be1590fe89da.glb",
+        "M72": "res://art/models/recovered_gear_gear_m60_ammo_be1590fe89da.glb",
+        "M73": "res://art/models/recovered_gear_gear_m60_ammo_be1590fe89da.glb"
+      }
+    },
+    "seal_scuba_aslt_gear": {
+      "bone": "hips",
+      "translation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "rotation": [
+        0.0,
+        0.1,
+        0.0
+      ],
+      "group": "belt",
+      "path": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_seal_scuba_aslt_gear_48f08f1eb91f.glb",
+        "M53": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+        "M61": "res://art/models/recovered_gear_seal_scuba_aslt_gear_fef2f906ef2a.glb",
+        "M62": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+        "M83": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+        "MP1": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+        "MP2": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+        "MP51": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+        "MP52": "res://art/models/recovered_gear_seal_scuba_aslt_gear_48f08f1eb91f.glb",
+        "MP53": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+        "MP61": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+        "MP62": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+        "MP64": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+        "MP81": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+        "MP82": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+        "MP83": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb"
+      }
+    },
+    "seal_scuba_knife": {
+      "bone": "rcalf",
+      "translation": [
+        0.16100000000000003,
+        0.0388,
+        -0.09300000000000001
+      ],
+      "rotation": [
+        -82.4,
+        84.57,
+        -6.51
+      ],
+      "group": "knife",
+      "path": "res://art/models/recovered_gear_seal_scuba_knife_681594a7745f.glb",
+      "models": {
+        "M83": "res://art/models/recovered_gear_seal_scuba_knife_681594a7745f.glb",
+        "MP2": "res://art/models/recovered_gear_seal_scuba_knife_681594a7745f.glb",
+        "MP81": "res://art/models/recovered_gear_seal_scuba_knife_681594a7745f.glb"
+      }
+    },
+    "cinema_knife": {
+      "bone": "hips",
+      "translation": [
+        -0.1774,
+        -0.019000000000000003,
+        -0.1145
+      ],
+      "rotation": [
+        -141.537,
+        18.928,
+        -192.483
+      ],
+      "group": "knife",
+      "path": "res://art/models/recovered_gear_seal_scuba_knife_681594a7745f.glb",
+      "models": {
+        "M83": "res://art/models/recovered_gear_seal_scuba_knife_681594a7745f.glb",
+        "MP2": "res://art/models/recovered_gear_seal_scuba_knife_681594a7745f.glb",
+        "MP81": "res://art/models/recovered_gear_seal_scuba_knife_681594a7745f.glb"
+      }
+    },
+    "Satchel": {
+      "bone": "spinehi",
+      "translation": [
+        -0.1287,
+        -0.1333,
+        0.0
+      ],
+      "rotation": [
+        45.2,
+        90.0,
+        -45.2
+      ],
+      "group": "pack",
+      "path": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "M52": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "M53": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "M61": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "M62": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "M63": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "M71": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "M72": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "M73": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "M81": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "M82": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "M83": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP1": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP10": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP11": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP12": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP2": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP5": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP51": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP52": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP53": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP6": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP61": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP62": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP64": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP7": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP71": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP72": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP73": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP8": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP81": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP82": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP83": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+        "MP9": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb"
+      }
+    },
+    "cigarette": {
+      "bone": "lhand",
+      "translation": [
+        0.17500000000000002,
+        -0.012,
+        -0.033
+      ],
+      "rotation": [
+        2.93,
+        -132.2,
+        159.5
+      ],
+      "group": "other",
+      "path": "res://art/models/recovered_gear_cigarette_c6e9a16700bd.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_cigarette_c6e9a16700bd.glb",
+        "M52": "res://art/models/recovered_gear_cigarette_c6e9a16700bd.glb",
+        "M53": "res://art/models/recovered_gear_cigarette_c6e9a16700bd.glb",
+        "M61": "res://art/models/recovered_gear_cigarette_c6e9a16700bd.glb",
+        "M62": "res://art/models/recovered_gear_cigarette_c6e9a16700bd.glb",
+        "M63": "res://art/models/recovered_gear_cigarette_c6e9a16700bd.glb",
+        "M71": "res://art/models/recovered_gear_cigarette_c6e9a16700bd.glb",
+        "M72": "res://art/models/recovered_gear_cigarette_c6e9a16700bd.glb",
+        "M73": "res://art/models/recovered_gear_cigarette_c6e9a16700bd.glb"
+      }
+    },
+    "handheld": {
+      "bone": "lhand",
+      "translation": [
+        0.05610000000000001,
+        -0.009800000000000001,
+        0.040400000000000005
+      ],
+      "rotation": [
+        4.7,
+        195.3,
+        -17.25
+      ],
+      "group": "other",
+      "path": "res://art/models/recovered_gear_handheld_7aeba4dff16d.glb",
+      "models": {
+        "M61": "res://art/models/recovered_gear_handheld_7aeba4dff16d.glb",
+        "M63": "res://art/models/recovered_gear_handheld_7aeba4dff16d.glb",
+        "M72": "res://art/models/recovered_gear_handheld_7aeba4dff16d.glb"
+      }
+    },
+    "seal_A_left_eye": {
+      "bone": "head",
+      "translation": [
+        0.053020000000000005,
+        0.10131,
+        0.03343
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M63": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP1": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP10": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP11": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP12": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP2": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP5": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP6": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP64": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP7": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP8": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP9": "res://art/models/recovered_gear_left_eye_7395d9202732.glb"
+      }
+    },
+    "seal_A_right_eye": {
+      "bone": "head",
+      "translation": [
+        0.05406,
+        0.1014,
+        -0.0359
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M63": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP1": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP10": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP11": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP12": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP2": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP5": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP6": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP64": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP7": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP8": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP9": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb"
+      }
+    },
+    "seal_B_left_eye": {
+      "bone": "head",
+      "translation": [
+        0.05146,
+        0.08908,
+        0.033600000000000005
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M63": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP1": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP10": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP11": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP12": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP2": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP5": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP6": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP64": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP7": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP8": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP9": "res://art/models/recovered_gear_left_eye_7395d9202732.glb"
+      }
+    },
+    "seal_B_right_eye": {
+      "bone": "head",
+      "translation": [
+        0.05146,
+        0.08908,
+        -0.03433
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M63": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP1": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP10": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP11": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP12": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP2": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP5": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP6": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP64": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP7": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP8": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP9": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb"
+      }
+    },
+    "seal_C_left_eye": {
+      "bone": "head",
+      "translation": [
+        0.05473,
+        0.10104,
+        0.03273
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M63": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP1": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP10": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP11": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP12": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP2": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP5": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP6": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP64": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP7": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP8": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP9": "res://art/models/recovered_gear_left_eye_7395d9202732.glb"
+      }
+    },
+    "seal_C_right_eye": {
+      "bone": "head",
+      "translation": [
+        0.05456,
+        0.10095000000000001,
+        -0.03433
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M63": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP1": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP10": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP11": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP12": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP2": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP5": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP6": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP64": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP7": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP8": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP9": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb"
+      }
+    },
+    "seal_D_left_eye": {
+      "bone": "head",
+      "translation": [
+        0.05396,
+        0.09685,
+        0.03212
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M63": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP1": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP10": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP11": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP12": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP2": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP5": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP6": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP64": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP7": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP8": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP9": "res://art/models/recovered_gear_left_eye_7395d9202732.glb"
+      }
+    },
+    "seal_D_right_eye": {
+      "bone": "head",
+      "translation": [
+        0.05438,
+        0.09634000000000001,
+        -0.033350000000000005
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M63": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP1": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP10": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP11": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP12": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP2": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP5": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP6": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP64": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP7": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP8": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP9": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb"
+      }
+    },
+    "torturer_left_eye": {
+      "bone": "head",
+      "translation": [
+        0.051480000000000005,
+        0.09329,
+        0.039400000000000004
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M63": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP1": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP10": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP11": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP12": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP2": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP5": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP6": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP64": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP7": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP8": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP9": "res://art/models/recovered_gear_left_eye_7395d9202732.glb"
+      }
+    },
+    "torturer_right_eye": {
+      "bone": "head",
+      "translation": [
+        0.051480000000000005,
+        0.09329,
+        -0.039400000000000004
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M63": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP1": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP10": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP11": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP12": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP2": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP5": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP6": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP64": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP7": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP8": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP9": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb"
+      }
+    },
+    "left_eye": {
+      "bone": "head",
+      "translation": [
+        0.05146,
+        0.08908,
+        0.033600000000000005
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M63": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP1": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP10": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP11": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP12": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP2": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP5": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP6": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP64": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP7": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP8": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP9": "res://art/models/recovered_gear_left_eye_7395d9202732.glb"
+      }
+    },
+    "right_eye": {
+      "bone": "head",
+      "translation": [
+        0.05146,
+        0.08908,
+        -0.03433
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M63": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP1": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP10": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP11": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP12": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP2": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP5": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP6": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP64": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP7": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP8": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP9": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb"
+      }
+    },
+    "maya_left_eye": {
+      "bone": "head",
+      "translation": [
+        0.053020000000000005,
+        0.10131,
+        0.03343
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M63": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "M83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP1": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP10": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP11": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP12": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP2": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP5": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP51": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP52": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP53": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP6": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP61": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP62": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP64": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP7": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP71": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP72": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP73": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP8": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP81": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP82": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP83": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+        "MP9": "res://art/models/recovered_gear_left_eye_7395d9202732.glb"
+      }
+    },
+    "maya_right_eye": {
+      "bone": "head",
+      "translation": [
+        0.05406,
+        0.1014,
+        -0.0359
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+      "models": {
+        "M51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M63": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "M83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP1": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP10": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP11": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP12": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP2": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP5": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP51": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP52": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP53": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP6": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP61": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP62": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP64": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP7": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP71": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP72": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP73": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP8": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP81": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP82": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP83": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+        "MP9": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb"
+      }
+    },
+    "left_eye_blue": {
+      "bone": "head",
+      "translation": [
+        0.053020000000000005,
+        0.10131,
+        0.03343
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_left_eye_blue_958e453286f6.glb",
+      "models": {
+        "M83": "res://art/models/recovered_gear_left_eye_blue_958e453286f6.glb",
+        "MP61": "res://art/models/recovered_gear_left_eye_blue_958e453286f6.glb",
+        "MP62": "res://art/models/recovered_gear_left_eye_blue_958e453286f6.glb",
+        "MP64": "res://art/models/recovered_gear_left_eye_blue_958e453286f6.glb",
+        "MP81": "res://art/models/recovered_gear_left_eye_blue_958e453286f6.glb",
+        "MP82": "res://art/models/recovered_gear_left_eye_blue_958e453286f6.glb",
+        "MP83": "res://art/models/recovered_gear_left_eye_blue_958e453286f6.glb"
+      }
+    },
+    "right_eye_blue": {
+      "bone": "head",
+      "translation": [
+        0.05406,
+        0.1014,
+        -0.0359
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_right_eye_blue_36491cc0a2f2.glb",
+      "models": {
+        "M83": "res://art/models/recovered_gear_right_eye_blue_36491cc0a2f2.glb",
+        "MP61": "res://art/models/recovered_gear_right_eye_blue_36491cc0a2f2.glb",
+        "MP62": "res://art/models/recovered_gear_right_eye_blue_36491cc0a2f2.glb",
+        "MP64": "res://art/models/recovered_gear_right_eye_blue_36491cc0a2f2.glb",
+        "MP81": "res://art/models/recovered_gear_right_eye_blue_36491cc0a2f2.glb",
+        "MP82": "res://art/models/recovered_gear_right_eye_blue_36491cc0a2f2.glb",
+        "MP83": "res://art/models/recovered_gear_right_eye_blue_36491cc0a2f2.glb"
+      }
+    },
+    "left_eye_female": {
+      "bone": "head",
+      "translation": [
+        0.053020000000000005,
+        0.10131,
+        0.03343
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_left_eye_brown_large_9169ee1fd487.glb",
+      "models": {
+        "M53": "res://art/models/recovered_gear_left_eye_brown_large_9169ee1fd487.glb",
+        "M61": "res://art/models/recovered_gear_left_eye_brown_large_9169ee1fd487.glb",
+        "M73": "res://art/models/recovered_gear_left_eye_brown_large_9169ee1fd487.glb"
+      }
+    },
+    "right_eye_female": {
+      "bone": "head",
+      "translation": [
+        0.05406,
+        0.1014,
+        -0.0359
+      ],
+      "rotation": [
+        45.1331,
+        90.0,
+        -45.1331
+      ],
+      "group": "face",
+      "path": "res://art/models/recovered_gear_right_eye_brown_large_6a5d0f315ce3.glb",
+      "models": {
+        "M53": "res://art/models/recovered_gear_right_eye_brown_large_6a5d0f315ce3.glb",
+        "M61": "res://art/models/recovered_gear_right_eye_brown_large_6a5d0f315ce3.glb",
+        "M73": "res://art/models/recovered_gear_right_eye_brown_large_6a5d0f315ce3.glb"
+      }
+    }
+  },
+  "missing_gear": [
+    "seal_headset",
+    "seal_d_ch_back",
+    "al_terror_pack",
+    "upper_teeth",
+    "lower_teeth",
+    "vidonia_lower_teeth",
+    "valeska_upper_teeth",
+    "valeska_lower_teeth"
+  ],
+  "weapon_sockets": {
+    "rifle": {
+      "bone": "spinelo",
+      "translation": [
+        0.010000000000000002,
+        -0.13899999999999998,
+        -0.066
+      ],
+      "rotation": [
+        48.0,
+        112.9,
+        -33.98
+      ]
+    },
+    "pistol": {
+      "bone": "rthigh",
+      "translation": [
+        0.10300000000000001,
+        -0.023000000000000003,
+        -0.10300000000000001
+      ],
+      "rotation": [
+        -9.9,
+        -186.5,
+        197.07
+      ]
+    },
+    "launcher": {
+      "bone": "spinehi",
+      "translation": [
+        0.0,
+        -0.16100000000000003,
+        -0.15000000000000002
+      ],
+      "rotation": [
+        463.68,
+        190.57,
+        181.51
+      ]
+    }
+  },
+  "grenades": {
+    "frag": "res://art/models/recovered_gear_grenade_808334717219.glb",
+    "flash": "res://art/models/recovered_gear_flashbang_dde2c43502bc.glb",
+    "smoke": "res://art/models/recovered_gear_a_smoke_grenade_2ea67a028caa.glb"
+  },
+  "assets": [
+    {
+      "path": "res://art/models/recovered_gear_seal_hat_d1f281b69643.glb",
+      "source": "converted/models/equipment/MP10/FLIB_MDL-19f7a147fd/seal_hat.obj",
+      "triangles": 86,
+      "sha256": "d1f281b69643"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_black_hat_9628317e57ab.glb",
+      "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/seal_black_hat.obj",
+      "triangles": 120,
+      "sha256": "9628317e57ab"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_des_hat_59dc6d68b83f.glb",
+      "source": "converted/models/equipment/M71/FLIB_MDL-ef3b75b531/seal_des_hat.obj",
+      "triangles": 86,
+      "sha256": "59dc6d68b83f"
+    },
+    {
+      "path": "res://art/models/recovered_gear_flak_helmet_maya_7ae6f682822d.glb",
+      "source": "converted/models/equipment/M52/FLIB_MDL-186b2dfc6b/flak_helmet_maya.obj",
+      "triangles": 132,
+      "sha256": "7ae6f682822d"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_hat_tiger_cd77f3df0ed1.glb",
+      "source": "converted/models/equipment/M53/FLIB_MDL-38ce11a086/seal_hat_tiger.obj",
+      "triangles": 86,
+      "sha256": "cd77f3df0ed1"
+    },
+    {
+      "path": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+      "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/black_battle_helmet.obj",
+      "triangles": 212,
+      "sha256": "7c8c1ec2063c"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+      "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/seal_goggles.obj",
+      "triangles": 84,
+      "sha256": "bc123d927c4b"
+    },
+    {
+      "path": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+      "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/gear_holster.obj",
+      "triangles": 46,
+      "sha256": "73d46ff40505"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_aslt_gear_c8ade8432358.glb",
+      "source": "converted/models/equipment/MP10/FLIB_MDL-19f7a147fd/seal_aslt_gear.obj",
+      "triangles": 246,
+      "sha256": "c8ade8432358"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_aslt_gear_defa6841755e.glb",
+      "source": "converted/models/equipment/MP5/FLIB_MDL-55b460823d/seal_aslt_gear.obj",
+      "triangles": 246,
+      "sha256": "defa6841755e"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_woodland_gear_83a71f77248f.glb",
+      "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/seal_woodland_gear.obj",
+      "triangles": 242,
+      "sha256": "83a71f77248f"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+      "source": "converted/models/equipment/M53/FLIB_MDL-38ce11a086/seal_woodland_gear.obj",
+      "triangles": 242,
+      "sha256": "393f770051af"
+    },
+    {
+      "path": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+      "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/gear_mag01.obj",
+      "triangles": 36,
+      "sha256": "f7c4577bbb05"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_d_hp_19c5c568dc64.glb",
+      "source": "converted/models/equipment/M71/FLIB_MDL-ef3b75b531/seal_d_hp.obj",
+      "triangles": 162,
+      "sha256": "19c5c568dc64"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_d_ch_front_fb39cabbc0db.glb",
+      "source": "converted/models/equipment/M71/FLIB_MDL-ef3b75b531/seal_d_ch_front.obj",
+      "triangles": 144,
+      "sha256": "fb39cabbc0db"
+    },
+    {
+      "path": "res://art/models/recovered_gear_gear_m60_ammo_be1590fe89da.glb",
+      "source": "converted/models/equipment/M71/FLIB_MDL-ef3b75b531/gear_m60_ammo.obj",
+      "triangles": 112,
+      "sha256": "be1590fe89da"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_scuba_aslt_gear_48f08f1eb91f.glb",
+      "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/seal_scuba_aslt_gear.obj",
+      "triangles": 230,
+      "sha256": "48f08f1eb91f"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+      "source": "converted/models/equipment/M53/FLIB_MDL-38ce11a086/seal_scuba_aslt_gear.obj",
+      "triangles": 230,
+      "sha256": "b5d5fbc9368d"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_scuba_aslt_gear_fef2f906ef2a.glb",
+      "source": "converted/models/equipment/M61/FLIB_MDL-93b387104a/seal_scuba_aslt_gear.obj",
+      "triangles": 230,
+      "sha256": "fef2f906ef2a"
+    },
+    {
+      "path": "res://art/models/recovered_gear_seal_scuba_knife_681594a7745f.glb",
+      "source": "converted/models/equipment/M83/FLIB_MDL-e2aa4f5496/seal_scuba_knife.obj",
+      "triangles": 83,
+      "sha256": "681594a7745f"
+    },
+    {
+      "path": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+      "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/Satchel.obj",
+      "triangles": 76,
+      "sha256": "3e3a968958fb"
+    },
+    {
+      "path": "res://art/models/recovered_gear_cigarette_c6e9a16700bd.glb",
+      "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/cigarette.obj",
+      "triangles": 32,
+      "sha256": "c6e9a16700bd"
+    },
+    {
+      "path": "res://art/models/recovered_gear_handheld_7aeba4dff16d.glb",
+      "source": "converted/models/equipment/M61/FLIB_MDL-93b387104a/handheld.obj",
+      "triangles": 71,
+      "sha256": "7aeba4dff16d"
+    },
+    {
+      "path": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+      "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/left_eye.obj",
+      "triangles": 95,
+      "sha256": "7395d9202732"
+    },
+    {
+      "path": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+      "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/right_eye.obj",
+      "triangles": 95,
+      "sha256": "4d36c6917395"
+    },
+    {
+      "path": "res://art/models/recovered_gear_left_eye_blue_958e453286f6.glb",
+      "source": "converted/models/equipment/M83/FLIB_MDL-e2aa4f5496/left_eye_blue.obj",
+      "triangles": 95,
+      "sha256": "958e453286f6"
+    },
+    {
+      "path": "res://art/models/recovered_gear_right_eye_blue_36491cc0a2f2.glb",
+      "source": "converted/models/equipment/M83/FLIB_MDL-e2aa4f5496/right_eye_blue.obj",
+      "triangles": 95,
+      "sha256": "36491cc0a2f2"
+    },
+    {
+      "path": "res://art/models/recovered_gear_left_eye_brown_large_9169ee1fd487.glb",
+      "source": "converted/models/equipment/M53/FLIB_MDL-38ce11a086/left_eye_brown_large.obj",
+      "triangles": 95,
+      "sha256": "9169ee1fd487"
+    },
+    {
+      "path": "res://art/models/recovered_gear_right_eye_brown_large_6a5d0f315ce3.glb",
+      "source": "converted/models/equipment/M53/FLIB_MDL-38ce11a086/right_eye_brown_large.obj",
+      "triangles": 95,
+      "sha256": "6a5d0f315ce3"
+    },
+    {
+      "path": "res://art/models/recovered_gear_grenade_808334717219.glb",
+      "source": "converted/models/weapons/M51/WEAP_MDL-c1758fb7a5/grenade.obj",
+      "triangles": 82,
+      "sha256": "808334717219"
+    },
+    {
+      "path": "res://art/models/recovered_gear_flashbang_dde2c43502bc.glb",
+      "source": "converted/models/weapons/M51/WEAP_MDL-c1758fb7a5/flashbang.obj",
+      "triangles": 64,
+      "sha256": "dde2c43502bc"
+    },
+    {
+      "path": "res://art/models/recovered_gear_a_smoke_grenade_2ea67a028caa.glb",
+      "source": "converted/models/weapons/M51/WEAP_MDL-c1758fb7a5/a_smoke_grenade.obj",
+      "triangles": 50,
+      "sha256": "2ea67a028caa"
+    }
+  ]
+}

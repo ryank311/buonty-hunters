@@ -1,53 +1,55 @@
 extends Node3D
-## A smoke grenade's cloud: overlapping grey puffs that swell, hang, and thin out.
-## The puffs are plain unshaded spheres drawn from both sides, so the cloud hides what
-## is behind it on every renderer and still looks like smoke from inside.
+## A source-fed volume, rendered by ray integration on the Mobile renderer too.
+## Recovery supplies the canister and puff detail; transport/lifetime are adapted.
 
-const PUFFS := 14
 const GROW_SECONDS := 2.5
-const FADE_SECONDS := 4.0
+const CANISTER := preload("res://art/models/recovered_smoke_grenade.glb")
+const SHADER := preload("res://shaders/smoke_volume.gdshader")
+const NOISE := preload("res://resources/smoke_noise.tres")
+const PUFF := preload("res://art/effects/recovered/cloudpuff01.png")
+## Native cap is 10 cm above the attachment origin, laid on its side at runtime.
+const VENT := Vector3(-0.10, 0.0, 0.0)
 var radius: float = 4.5
 var seconds: float = 18.0
 var age: float = 0.0
-var material := StandardMaterial3D.new()
-var puffs: Array[MeshInstance3D] = []
+var emitter: Node3D
+var material := ShaderMaterial.new()
+var volume := MeshInstance3D.new()
 
-func start(cloud_radius: float, duration: float) -> void:
-	radius = cloud_radius
-	seconds = duration
+func start(cloud_radius: float, duration: float, source_node: Node3D = null) -> void:
+	radius = maxf(cloud_radius, 0.1)
+	seconds = maxf(duration, 0.1)
+	emitter = source_node
 	add_to_group(&"smoke_clouds")
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	material.cull_mode = BaseMaterial3D.CULL_DISABLED
-	material.albedo_color = Color(0.74, 0.75, 0.72, 0.94)
-	var rng := RandomNumberGenerator.new()
-	rng.seed = 7
-	for index: int in range(PUFFS):
-		var puff := MeshInstance3D.new()
-		var sphere := SphereMesh.new()
-		sphere.radius = radius * rng.randf_range(0.42, 0.62)
-		sphere.height = sphere.radius * 2.0
-		sphere.radial_segments = 12
-		sphere.rings = 6
-		puff.mesh = sphere
-		puff.material_override = material
-		puff.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		var angle := TAU * index / PUFFS
-		var spread := radius * rng.randf_range(0.15, 0.6)
-		puff.position = Vector3(cos(angle) * spread, sphere.radius * rng.randf_range(0.5, 1.1), sin(angle) * spread)
-		add_child(puff)
-		puffs.append(puff)
+	if emitter == null:
+		var canister := CANISTER.instantiate() as Node3D
+		add_child(canister)
+		canister.rotation.z = PI * 0.5
+	var box := BoxMesh.new()
+	box.size = Vector3(2.8, 2.0, 2.8) * radius
+	volume.mesh = box
+	volume.position.y = radius * 0.9
+	volume.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	material.shader = SHADER
+	material.set_shader_parameter("billows", NOISE)
+	material.set_shader_parameter("recovered_puff", PUFF)
+	material.set_shader_parameter("radius", radius)
+	material.set_shader_parameter("lifetime", seconds)
+	material.set_shader_parameter("bounds", box.size * 0.5)
+	material.set_shader_parameter("source", VENT - volume.position)
+	volume.material_override = material
+	add_child(volume)
 	_process(0.0)
 
 ## How much of the cloud is there right now, from 0 (gone) to 1 (full).
 func density() -> float:
-	return smoothstep(0.0, GROW_SECONDS, age) * (1.0 - smoothstep(seconds - FADE_SECONDS, seconds, age))
+	return smoothstep(0.0, minf(GROW_SECONDS, seconds * 0.3), age) * (1.0 - smoothstep(seconds * 0.68, seconds, age))
 
 func _process(delta: float) -> void:
 	age += delta
-	var grown := smoothstep(0.0, GROW_SECONDS, age)
-	for puff: MeshInstance3D in puffs:
-		puff.scale = Vector3.ONE * lerpf(0.15, 1.0, grown)
-	material.albedo_color.a = 0.94 * (1.0 - smoothstep(seconds - FADE_SECONDS, seconds, age))
+	if is_instance_valid(emitter):
+		global_position = emitter.global_position
+	material.set_shader_parameter("age", age)
+	volume.visible = age > 0.0 and age < seconds
 	if age >= seconds:
 		queue_free()

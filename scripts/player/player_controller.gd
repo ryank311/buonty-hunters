@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 const RecoveredProne = preload("res://scripts/actors/recovered_prone.gd")
 const FootstepAudio = preload("res://scripts/player/footstep_audio.gd")
+const LadderClimb = preload("res://scripts/player/ladder_climb.gd")
 
 signal message(text: String)
 @export var max_health: float = 100.0
@@ -40,6 +41,7 @@ var input_armed: bool = true
 var local_acceleration := Vector3.ZERO
 var look_scale: float = 1.0 # Below one while a scope is zoomed in, so aim speed tracks the magnification.
 var traversal := Traversal.new()
+var ladder := LadderClimb.new()
 var interactions: Node
 ## Height still to ease out of the soldier after stepping onto a ledge.
 var step_offset: float = 0.0
@@ -63,6 +65,24 @@ func try_climb() -> bool:
 	_climb(0.0)
 	return true
 
+## Steps onto `target` from its foot, or backs down onto it from its head.
+func try_ladder(target: Node3D) -> bool:
+	if not controls_enabled or not is_on_floor() or traversal.active or ladder.active or diving or dive_recovery > 0.0 or stance.current == StanceController.Stance.PRONE:
+		return false
+	if stance.current != StanceController.Stance.STAND and not request_stance(StanceController.Stance.STAND):
+		return false
+	if not ladder.begin(self, target, soldier.soldier_skin.motion, soldier.weapon_slot == 1):
+		return false
+	weapon.reload_remaining = 0.0
+	_on_ladder(0.0)
+	return true
+
+## Drops off a ladder at once, wherever the soldier is on it.
+func leave_ladder() -> void:
+	if ladder.active:
+		ladder.cancel()
+		soldier.traversal_clip = ""
+
 func _unhandled_input(event: InputEvent) -> void:
 	if not controls_enabled:
 		return
@@ -70,7 +90,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		pending_mouse += event.screen_relative
 
 func turn(amount: float) -> bool:
-	if diving:
+	# A soldier on a ladder faces its rungs.
+	if diving or ladder.active:
 		return false
 	if stance.current == StanceController.Stance.PRONE:
 		# Sample the swept angular change so a large mouse event cannot tunnel the long body.
@@ -94,7 +115,7 @@ func request_stance(value: int) -> bool:
 	return false
 
 func can_fire() -> bool:
-	return not diving and dive_recovery <= 0.0
+	return not diving and dive_recovery <= 0.0 and not ladder.active
 
 func begin_dive() -> bool:
 	if not is_on_floor() or diving or dive_recovery > 0 or stance.current != StanceController.Stance.STAND:
@@ -154,6 +175,9 @@ func _physics_process(delta: float) -> void:
 		return
 	if traversal.active:
 		_climb(delta)
+		return
+	if ladder.active:
+		_on_ladder(delta)
 		return
 	# Modified number shortcuts must not also change the equipped weapon.
 	if Input.is_action_just_pressed("equip_rifle", true):
@@ -289,6 +313,24 @@ func _climb(delta: float) -> void:
 	soldier.pose(stance.current, 0.0, Vector2.ZERO, camera_rig.aim_pitch(), 0.0, delta, movement.body_weight, Vector3.ZERO, true)
 	weapon.tick(delta, false, false)
 
+## One tick on a ladder: the stick climbs and descends, the body follows the clips' root,
+## and the skin plays them.
+func _on_ladder(delta: float) -> void:
+	var going: bool = ladder.update(self, soldier.soldier_skin.motion, -move_input.limit_length().y, delta, movement.ladder_speed, movement.gravity, stance)
+	soldier.traversal_clip = ladder.clip if going else ""
+	soldier.traversal_time = ladder.clip_time
+	soldier.traversal_root = ladder.root_height
+	velocity = Vector3.ZERO
+	aiming = false
+	if not going:
+		if stance.current != ladder.end_stance:
+			stance.current = ladder.end_stance
+			stance.apply(collider)
+		apply_floor_snap()
+	camera_rig.update_view(self, StanceController.EYE_HEIGHTS[stance.current], 0.0, false, delta)
+	soldier.pose(stance.current, 0.0, Vector2.ZERO, camera_rig.aim_pitch(), 0.0, delta, movement.body_weight, Vector3.ZERO, true)
+	weapon.tick(delta, false, false)
+
 func _stance_input(delta: float) -> void:
 	var down := Input.is_action_pressed("crouch") or Input.is_action_pressed("pad_stance")
 	if down and not stance_was_down:
@@ -328,6 +370,7 @@ func reset_at(spawn_transform: Transform3D) -> void:
 	prone_strafe_amount = 0.0
 	floor_snap_length = 0.25
 	traversal.active = false
+	ladder.cancel()
 	soldier.traversal_clip = ""
 	step_offset = 0.0
 	soldier.position.y = 0.0

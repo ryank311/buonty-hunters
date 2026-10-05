@@ -34,6 +34,7 @@ func _ready() -> void:
 			# opposite faces, so configure Godot's shape explicitly.
 			shape.shape.backface_collision = true
 	data = Library.catalogue()
+	data.characters = Library.selectable_characters()
 	original_library = load(Library.ORIGINAL)
 	animation = Library.attach(character, original_library)
 	target_animation = Library.attach(retargeted, original_library)
@@ -57,7 +58,7 @@ func _ready() -> void:
 		_box("CropFenceZ%d" % side, Vector3(60, 12, 0.2), Vector3(0, 3, 29.8 * side), Color(0.8, 0.65, 0.25, 0.14))
 		_label("INSPECTION BOUNDARY", Vector3(28.8 * side, 2, 0), 24)
 		_label("INSPECTION BOUNDARY", Vector3(0, 2, 28.8 * side), 24)
-	set_clip(clip_index)
+	set_character(character_index)
 	guns = Guns.catalogue()
 	for index: int in range(guns.size()):
 		if guns[index].id == "m4acarbine":
@@ -98,17 +99,19 @@ func equip_gun(record_id: int = -1) -> void:
 
 func update_player_preview() -> void:
 	var skin: SoldierSkin = get_parent().player.soldier.soldier_skin
-	var scene := load(skin.model_path) as PackedScene
-	var replacement := scene.instantiate() as Node3D
+	var replacement := SoldierSkin.new()
 	replacement.transform = retargeted.transform
 	remove_child(retargeted)
 	retargeted.queue_free()
 	retargeted = replacement
 	add_child(retargeted)
-	_prepare_materials(retargeted)
-	target_animation = Library.attach(retargeted, original_library)
+	replacement.set_model_path(skin.model_path)
+	replacement.outfit.overrides = skin.outfit.overrides.duplicate()
+	replacement.outfit.rebuild()
+	target_animation = replacement.motion
 	target_animation.play(animation_names[clip_index])
 	target_animation.seek(animation.current_animation_position, true)
+	replacement.outfit.update_pose()
 
 func _process(delta: float) -> void:
 	if not playback_paused and animation != null:
@@ -116,15 +119,14 @@ func _process(delta: float) -> void:
 
 func set_character(index: int) -> void:
 	character_index = posmod(index, data.characters.size())
-	var scene := load(data.characters[character_index].path) as PackedScene
-	var replacement := scene.instantiate() as Node3D
+	var replacement := SoldierSkin.new()
 	replacement.transform = character.transform
 	remove_child(character)
 	character.queue_free()
 	character = replacement
 	add_child(character)
-	_prepare_materials(character)
-	animation = Library.attach(character, original_library)
+	replacement.set_model_path(data.characters[character_index].path)
+	animation = replacement.motion
 	set_clip(clip_index)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -154,6 +156,10 @@ func set_clip(index: int) -> void:
 func seek_animation(seconds: float) -> void:
 	animation.seek(seconds, true)
 	target_animation.seek(seconds, true)
+	if character is SoldierSkin:
+		character.outfit.update_pose()
+	if retargeted is SoldierSkin:
+		retargeted.outfit.update_pose()
 
 func set_playback_paused(value: bool) -> void:
 	playback_paused = value

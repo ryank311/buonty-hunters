@@ -192,9 +192,16 @@ func _sniper() -> void:
 func _equipment() -> void:
 	# Frag: thrown, fused, and line-of-sight aware.
 	await scenario("lab_start", {"weapon": "frag"})
-	var thrown: Dictionary = await H.step(self, 30, {"tap": ["fire"]})
-	var grenade: Node3D = get_nodes_in_group(Combat.SPAWNED_GROUP).filter(func(node: Node) -> bool: return node.get("fuse") != null).front()
-	check(thrown.weapon.ammo == 1 and thrown.live.get("throwable", 0) == 1 and grenade.global_position.z < 24.0, "Fire throws the selected grenade down range (%.1f m out after half a second)" % (26.0 - grenade.global_position.z))
+	await H.step(self, 4, {"tap": ["fire"]})
+	# Native throw wind-up varies by clip. Time projectile assertions from release.
+	if weapon.throw_release > 0.0:
+		await H.step(self, ceili(weapon.throw_release * 60.0) + 1)
+	var thrown: Dictionary = await H.step(self, 30)
+	var grenades: Array = get_nodes_in_group(Combat.SPAWNED_GROUP).filter(func(node: Node) -> bool: return node.get("fuse") != null)
+	var grenade: Node3D = null if grenades.is_empty() else grenades.front()
+	check(grenade != null and thrown.get("live", {}).get("throwable", 0) == 1 and thrown.weapon.ammo == 1 and grenade.global_position.z < 24.0, "Fire releases the selected grenade and sends it down range")
+	if grenade == null:
+		return # Report a failed check instead of silently skipping on a script error.
 	var landed: Dictionary = await H.step(self, 150, {})
 	check(landed.live.get("throwable", 0) == 1 and grenade.resting, "It bounces and comes to rest before the fuse runs out (%d bounces)" % grenade.bounces)
 	var after: Dictionary = await H.step(self, 60, {})
@@ -218,11 +225,13 @@ func _equipment() -> void:
 	var smoking: Dictionary = await H.step(self, 300, {"speed": 4})
 	var cloud: Node3D = get_nodes_in_group(&"smoke_clouds").front() if smoking.get("live", {}).get("smoke_cloud", 0) == 1 else null
 	check(cloud != null and cloud.density() > 0.95, "A smoke grenade becomes a full cloud a few seconds after it lands")
+	var canister: Node3D = cloud.emitter if cloud != null else null
+	check(is_instance_valid(canister) and canister.ignited and cloud.global_position.is_equal_approx(canister.global_position), "The smoke's source remains attached to its burning canister")
 	# Not worth sitting through the whole cloud: skip to the end of its life.
 	if cloud != null:
 		cloud.age = cloud.seconds - 0.5
 	var cleared: Dictionary = await H.step(self, 45, {})
-	check(cleared.get("live", {}).get("smoke_cloud", 0) == 0, "The smoke clears when its time is up")
+	check(cleared.get("live", {}).get("smoke_cloud", 0) == 0 and not is_instance_valid(canister), "The smoke clears and its spent canister is cleaned up when its time is up")
 	# Flashbang: blinds who can see it, by distance and facing.
 	await scenario("lab_start", {"class": "breacher", "actors": [{"team": 1, "pos": [0.0, 0.0, 19.0], "yaw": 180.0, "name": "WATCHER"}]})
 	var bang: WeaponProfile = weapon.profiles[2]

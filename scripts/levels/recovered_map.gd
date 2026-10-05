@@ -46,6 +46,7 @@ func _ready() -> void:
 	add_child(model)
 	_prepare_surfaces(model)
 	preload("res://scripts/levels/recovered_actions.gd").new().install(self, model, map_id)
+	preload("res://scripts/levels/ladder.gd").install(self, map_id)
 	for shape: CollisionShape3D in model.find_children("*", "CollisionShape3D", true, false):
 		if shape.shape is ConcavePolygonShape3D:
 			# The original probes accept both polygon orientations (see PILOT.md).
