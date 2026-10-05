@@ -576,6 +576,24 @@
    "texture": "previous/recovery/converted/textures/levels/MP83/MP83_TXR-2f0866aad2-5e44dfd4/shngl10.tif.png"
   }
  },
+ "surfaces": {
+  "asphalt": 1678,
+  "chainlink_fence": 515,
+  "dirt": 25,
+  "glass": 216,
+  "glass_thick": 2,
+  "ice": 251,
+  "invisible_di": 619,
+  "metal_grate": 56,
+  "metal_thick": 1721,
+  "metal_thin": 222,
+  "plaster": 98,
+  "snow": 5339,
+  "snowy_tree": 140,
+  "stone": 3118,
+  "wood_thick": 5095,
+  "wood_thin": 220
+ },
  "counts": {
   "triangles": 65670,
   "sky_triangles": 184,

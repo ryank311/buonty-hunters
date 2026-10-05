@@ -298,8 +298,7 @@ func set_open(value: bool) -> void:
 	session.player.input_armed = false
 	session.player.pending_mouse = Vector2.ZERO
 	session.hud.root.visible = not value
-	if DisplayServer.get_name() != "headless":
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if value else Input.MOUSE_MODE_CAPTURED
+	session.update_mouse_capture()
 	if not value:
 		get_viewport().gui_release_focus()
 

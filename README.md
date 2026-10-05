@@ -32,8 +32,8 @@ The entire game renders at a fixed **640×480 (4:3)**, including the HUD and men
 | Reload | R |
 | Change firing mode | B |
 | Equip primary / pistol | 1 / 2 |
-| Equip equipment (grenades, claymores) | 3 / 4 |
-| Throw a grenade / set a claymore | Left mouse button with it equipped: hold longer to throw further |
+| Equip equipment (grenades, claymores) | 3 / 4; 5 for the claymore remote while one is down |
+| Throw a grenade / set a claymore / fire the claymore remote | Left mouse button with it equipped: hold a grenade longer to throw further |
 | Scope zoom (sniper rifle, while aiming) | Mouse wheel, or = / - |
 | Search a body | F |
 | Choose class | F4 / Cmd+4 |
@@ -99,13 +99,13 @@ Grenades use the recovered standing throw/toss, crouched throw and prone throw/t
 - **Frag grenade.** Thrown where you aim, bounces, and explodes 3.5 seconds later. It does not know who threw it: it kills anyone within about 4 m, you and your teammates included, wounds out to 8 m, and does nothing behind cover. The lightest toss on level ground comes down about 9 m away; aimed at the ground ahead it stops within 4 m.
 - **Smoke grenade.** Starts venting after 2 seconds. Smoke grows from the recovered canister into a dense, pixelated volume about 16 m across, spreading low around the source, then drifts and thins away over the end of its 18-second life. A burning canister still falls and bounces until it settles. The model, HUD icon and puff texture come from the recovery; see [the smoke notes](tools/recovery/SMOKE.md).
 - **Flashbang.** Goes off after 1.8 seconds with the original Mk141 report and whites out the view of anyone within 14 m who can see it, for up to 6 seconds: less with distance and when facing away, and not at all behind cover. The screen holds solid white for the first part before the after-image fades. A flashed player's ears ring (the original ringing loop) for twice as long, and every other sound is muffled and quietened until hearing returns.
-- **Claymore.** Set on the ground a pace ahead, facing the way you face, and armed a second later. You cannot set it off yourself: it fires when an **enemy** walks within 4.5 m of its front. The blast is a cone to the front that hurts anyone in it, including you.
+- **Claymore.** The recovered M18. Stand still and fire: the soldier kneels (the original `seal_p_place_claymore`) and sets it under their hand 1.3 s in, facing the way they face. It has no tripwire; as in the original, it is remote. Once one is down, **CLAYMORE REMOTE** joins your inventory and comes up (key 5, or D-pad right); firing it sets off every claymore of yours within 50 m, then the claymores come back up (the rifle when none are left). Up to four can be down. The blast is a cone out of its face, away from where you knelt, and hurts anyone in it, friend or enemy.
 
 **Elimination.** At zero health you are out for the round and your body stays where it fell. Your view moves to a living teammate; **Q / E** (LB/RB) switch between the remaining teammates and your own body, and the mouse or right stick looks around whichever you are watching. Enemies are never shown. **Backspace** (D-pad down) starts the next round with everyone back up.
 
 **Searching bodies.** Stand at any fallen soldier, enemy or teammate, and press **F** (Y) for a menu offering their primary and their pistol, with the ammunition left in each. Taking one leaves your own weapon of that kind with the body.
 
-**Stand-in soldiers.** Each level starts with two teammates (ALPHA, BRAVO) and four enemies, one of them walking a short patrol to try claymores on. They take damage, fall, and can be searched, but they do not think or shoot, so the quickest way to see the eliminated view is a frag at your own feet. Friendly fire is on. Their places are listed in `scripts/combat/roster.gd`.
+**Stand-in soldiers.** Each level starts with two teammates (ALPHA, BRAVO) and four enemies, one of them walking a short patrol to set a claymore for. They take damage, fall, and can be searched, but they do not think or shoot, so the quickest way to see the eliminated view is a frag at your own feet. Friendly fire is on. Their places are listed in `scripts/combat/roster.gd`.
 
 ## Editing and checks
 

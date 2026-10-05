@@ -342,11 +342,23 @@
    "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/congo_water.tif.png"
   }
  },
+ "surfaces": {
+  "fabric_heavy": 94,
+  "grass": 1179,
+  "invisible_di": 276,
+  "metal_thick": 24,
+  "metal_thin": 50,
+  "sand": 20,
+  "stone": 3211,
+  "underwater": 242,
+  "water": 10,
+  "wood_thick": 3353
+ },
  "counts": {
   "triangles": 60171,
   "sky_triangles": 82,
   "collision_triangles": 8449,
   "dropped_faces": 0,
-  "skipped_collision_polygons": 21
+  "skipped_collision_polygons": 20
  }
 }

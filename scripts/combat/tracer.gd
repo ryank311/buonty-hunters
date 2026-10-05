@@ -10,10 +10,10 @@ const LENGTH := 3.0
 const WIDTH := 0.07
 ## The texture's colours are muted; drawn additively they are brightened to read in daylight.
 const GLOW := 2.2
-## Metres a second the streak's head travels: slower than the round, so it can be seen
-## at the short ranges of these maps. The tracer effects' records carry an 800-1200
-## pair that may be their speed in source units (80-120 m/s); this sits inside it.
-const SPEED := 110.0
+## Visual travel speed in m/s, tuned for a quicker streak at these map distances.
+## The source effects' 800-1200 pair may encode speed (80-120 m/s), but its meaning
+## is unconfirmed; this is a feel setting rather than a recovered ballistic value.
+const SPEED := 140.0
 static var shared_mesh: ArrayMesh
 static var materials: Dictionary = {}
 

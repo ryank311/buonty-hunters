@@ -294,11 +294,22 @@
    "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/mp64_dirtpath.tif.png"
   }
  },
+ "surfaces": {
+  "fabric_heavy": 40,
+  "grass": 688,
+  "invisible_di": 342,
+  "sand": 314,
+  "stone": 5267,
+  "underwater": 1006,
+  "water": 669,
+  "wood_thick": 4285,
+  "wood_thin": 200
+ },
  "counts": {
   "triangles": 83308,
   "sky_triangles": 80,
   "collision_triangles": 12142,
   "dropped_faces": 0,
-  "skipped_collision_polygons": 663
+  "skipped_collision_polygons": 0
  }
 }

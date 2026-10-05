@@ -414,6 +414,22 @@
    "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_wall_top.tif.png"
   }
  },
+ "surfaces": {
+  "asphalt": 2821,
+  "barrel": 96,
+  "fabric_heavy": 10,
+  "gastank": 12,
+  "glass": 172,
+  "invisible_di": 270,
+  "metal_grate": 40,
+  "metal_thick": 50,
+  "metal_thin": 196,
+  "rubber": 4,
+  "sand": 1671,
+  "stone": 1412,
+  "wood_thick": 410,
+  "wood_thin": 369
+ },
  "counts": {
   "triangles": 21410,
   "sky_triangles": 103,

@@ -492,11 +492,27 @@
    "texture": "previous/recovery/converted/textures/levels/MP81/MP81_TXR-5082447127-032e56aa/tex_controlrm2.tif.png"
   }
  },
+ "surfaces": {
+  "barrel": 96,
+  "fabric_heavy": 16,
+  "glass_opaque": 230,
+  "glass_thick": 16,
+  "invisible_di": 765,
+  "metal_grate": 12,
+  "metal_grate_thin": 851,
+  "metal_thick": 3285,
+  "metal_thin": 308,
+  "mud": 42,
+  "stone": 385,
+  "water": 19,
+  "wood_thick": 168,
+  "wood_thin": 36
+ },
  "counts": {
   "triangles": 27299,
   "sky_triangles": 46,
   "collision_triangles": 6210,
   "dropped_faces": 66,
-  "skipped_collision_polygons": 16
+  "skipped_collision_polygons": 12
  }
 }

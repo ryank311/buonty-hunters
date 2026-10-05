@@ -438,11 +438,27 @@
    "texture": "previous/recovery/converted/textures/levels/MP51/MP51_TXR-d636d491f3-d30b043b/ground_grassy.tif.png"
   }
  },
+ "surfaces": {
+  "dirt": 37,
+  "fabric_heavy": 22,
+  "glass": 8,
+  "glass_thick": 4,
+  "grass": 1059,
+  "invisible_di": 133,
+  "metal_thick": 64,
+  "plaster": 1364,
+  "sand": 64,
+  "stone": 4272,
+  "underwater": 29,
+  "water": 12,
+  "wood_thick": 4795,
+  "wood_thin": 12
+ },
  "counts": {
   "triangles": 25414,
   "sky_triangles": 140,
   "collision_triangles": 11863,
   "dropped_faces": 880,
-  "skipped_collision_polygons": 46
+  "skipped_collision_polygons": 39
  }
 }

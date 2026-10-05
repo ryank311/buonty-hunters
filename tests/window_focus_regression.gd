@@ -14,6 +14,7 @@ func check(ok: bool, description: String) -> void:
 func _run() -> void:
 	var session: Node = load("res://scenes/main.tscn").instantiate()
 	root.add_child(session)
+	check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Agent startup leaves the mouse free")
 	await H.scenario(self, "lab_start", {"roster": false})
 	var target: Node3D = session.level.get_node("Targets/MovingTarget")
 	var before := target.position
@@ -26,6 +27,7 @@ func _run() -> void:
 	check(session.elapsed > elapsed and not target.position.is_equal_approx(before), "The world continues advancing while unfocused")
 	root.focus_entered.emit()
 	check(not session.modal, "Returning focus does not open the menu")
+	check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Agent focus events never capture the mouse")
 	var toggle := InputEventAction.new()
 	toggle.action = "tuning"
 	toggle.pressed = true
@@ -35,6 +37,7 @@ func _run() -> void:
 	root.focus_entered.emit()
 	check(session.modal and session.hud.menu_box.is_visible_in_tree(), "Alt-tab preserves an explicitly opened menu")
 	session._input(toggle)
+	check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE, "Closing an agent menu leaves the mouse free")
 	session._controller_connection_changed(0, false)
 	check(not session.modal, "A controller disconnect reports status without opening a menu")
 	print("RESULT: %d failure(s)" % failures.size())

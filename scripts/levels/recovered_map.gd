@@ -52,6 +52,16 @@ func _ready() -> void:
 			# The original probes accept both polygon orientations (see PILOT.md).
 			shape.shape = shape.shape.duplicate()
 			shape.shape.backface_collision = true
+		# Collision is grouped by original surface (<asset>_<surface>); impacts read it.
+		var body := shape.get_parent() as CollisionObject3D
+		if body != null and not body.has_meta(&"surface"):
+			var asset: String = String(data.model).get_file().get_basename()
+			var surface := String(body.name).trim_prefix(asset + "_")
+			body.set_meta(&"surface", surface if surface != String(body.name) else "stone")
+			if surface == "water":
+				# Bullets find water for splashes; nothing walks on or is stopped by it.
+				body.collision_layer = ImpactFX.WATER_LAYER
+				body.collision_mask = 0
 	sky = model.get_node_or_null("Sky")
 	if sky != null:
 		_prepare_sky()

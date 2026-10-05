@@ -282,6 +282,19 @@
    "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/congo4s_concrete_floor02.tif.png"
   }
  },
+ "surfaces": {
+  "asphalt": 979,
+  "chainlink_fence": 24,
+  "dirt": 28,
+  "grass": 934,
+  "invisible_di": 81,
+  "metal_grate": 120,
+  "metal_thick": 606,
+  "metal_thin": 44,
+  "none": 138,
+  "stone": 1165,
+  "wood_thick": 609
+ },
  "counts": {
   "triangles": 27025,
   "sky_triangles": 132,

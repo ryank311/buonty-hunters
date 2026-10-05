@@ -318,11 +318,27 @@
    "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/camonet.tif.png"
   }
  },
+ "surfaces": {
+  "action": 6,
+  "dirt": 172,
+  "fabric_heavy": 8,
+  "grass": 344,
+  "invisible_di": 480,
+  "leaves": 800,
+  "metal_thick": 182,
+  "metal_thin": 72,
+  "rubber": 47,
+  "snow": 94,
+  "stone": 1642,
+  "underwater": 384,
+  "water": 632,
+  "wood_thick": 2685
+ },
  "counts": {
   "triangles": 65625,
   "sky_triangles": 68,
   "collision_triangles": 6916,
   "dropped_faces": 1221,
-  "skipped_collision_polygons": 550
+  "skipped_collision_polygons": 6
  }
 }

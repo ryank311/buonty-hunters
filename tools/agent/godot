@@ -85,6 +85,13 @@ for arg in "$@"; do
 	esac
 done
 
+# Mark background automation before the scene's _ready() can capture the pointer.
+# QA covers scripted captures too, which do not receive the automatic --qa suffix.
+export SOCOM_AGENT_BACKGROUND=0
+if [[ "${SOCOM_AGENT_SHOW:-0}" != "1" ]] && [[ "${MCP_BACKGROUND:-}" == "1" || ( -z "${MCP_BRIDGE_PORT:-}" && "${SOCOM_AGENT_QA:-1}" != "0" ) ]]; then
+	export SOCOM_AGENT_BACKGROUND=1
+fi
+
 if (( windowed )) && [[ "$(uname)" == "Darwin" && "${SOCOM_AGENT_SHOW:-0}" != "1" ]] && command -v lsappinfo >/dev/null 2>&1; then
 	# A session the MCP server started with a visible window was asked for; let it keep focus.
 	if [[ -z "${MCP_BRIDGE_PORT:-}" || "${MCP_BACKGROUND:-}" == "1" ]]; then

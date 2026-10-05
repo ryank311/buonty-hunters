@@ -29,8 +29,7 @@ func _ready() -> void:
 	hud.initialize(self)
 	player.message.connect(hud.notify)
 	load_level(false)
-	if DisplayServer.get_name() != "headless":
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	update_mouse_capture()
 	get_window().focus_exited.connect(_window_focus_exited)
 	get_window().focus_entered.connect(_window_focus_entered)
 	if not qa_mode:
@@ -49,8 +48,14 @@ func _window_focus_exited() -> void:
 
 func _window_focus_entered() -> void:
 	player.pending_mouse = Vector2.ZERO
-	if DisplayServer.get_name() != "headless" and get_window().has_focus():
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if not modal and player.controls_enabled else Input.MOUSE_MODE_VISIBLE
+	update_mouse_capture()
+
+func update_mouse_capture() -> void:
+	if DisplayServer.get_name() == "headless":
+		return
+	var background := OS.get_environment("SOCOM_AGENT_BACKGROUND") == "1" or OS.get_environment("MCP_BACKGROUND") == "1" or OS.get_environment("SOCOM_LIVE_HIDDEN") == "1"
+	var capture := not background and not get_window().unfocusable and get_window().has_focus() and not modal and player.controls_enabled
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if capture else Input.MOUSE_MODE_VISIBLE
 
 func _size_window() -> void:
 	# Open at twice the 640x480 render in screen points, so a Retina display does not
@@ -191,10 +196,7 @@ func set_modal(value: bool) -> void:
 	PlayerInput.stop_vibration()
 	level.process_mode = Node.PROCESS_MODE_DISABLED if value else Node.PROCESS_MODE_INHERIT
 	hud.set_menu(value)
-	if DisplayServer.get_name() != "headless":
-		# A window without focus never takes the cursor: the live link can close the menu
-		# to move things in the world while the player is typing somewhere else.
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if not value and get_window().has_focus() else Input.MOUSE_MODE_VISIBLE
+	update_mouse_capture()
 	if not value:
 		_save_settings()
 

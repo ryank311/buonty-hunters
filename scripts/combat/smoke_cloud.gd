@@ -43,6 +43,14 @@ func start(cloud_radius: float, duration: float, source_node: Node3D = null) -> 
 	add_child(volume)
 	_process(0.0)
 
+## The stretch in front of the third-person camera that stays clear: up to just short of
+## the soldier it follows. A scope or other camera clears nothing.
+func _clear_distance() -> float:
+	var camera := get_viewport().get_camera_3d() if is_inside_tree() else null
+	if camera == null or not camera.get_parent() is SpringArm3D:
+		return 0.0
+	return maxf(0.0, camera.global_position.distance_to(camera.get_parent().global_position) - 0.35)
+
 ## How much of the cloud is there right now, from 0 (gone) to 1 (full).
 func density() -> float:
 	return smoothstep(0.0, minf(GROW_SECONDS, seconds * 0.3), age) * (1.0 - smoothstep(seconds * 0.68, seconds, age))
@@ -52,6 +60,7 @@ func _process(delta: float) -> void:
 	if is_instance_valid(emitter):
 		global_position = emitter.global_position
 	material.set_shader_parameter("age", age)
+	material.set_shader_parameter("clear_distance", _clear_distance())
 	volume.visible = age > 0.0 and age < seconds
 	if age >= seconds:
 		queue_free()

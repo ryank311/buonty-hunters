@@ -431,11 +431,30 @@
    "texture": "previous/recovery/converted/textures/levels/MP71/MP71_TXR-8bd1f86930-903d2b49/sand_beach.tif.png"
   }
  },
+ "surfaces": {
+  "asphalt": 825,
+  "barrel": 224,
+  "chainlink_fence": 161,
+  "dirt": 497,
+  "fabric_heavy": 50,
+  "glass": 16,
+  "grass": 84,
+  "invisible_di": 310,
+  "metal_thick": 72,
+  "metal_thin": 22,
+  "plaster": 4153,
+  "sand": 194,
+  "stone": 2708,
+  "underwater": 171,
+  "water": 19,
+  "wood_thick": 2088,
+  "wood_thin": 12
+ },
  "counts": {
   "triangles": 21593,
   "sky_triangles": 142,
   "collision_triangles": 11587,
   "dropped_faces": 985,
-  "skipped_collision_polygons": 51
+  "skipped_collision_polygons": 44
  }
 }

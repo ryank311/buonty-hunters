@@ -511,6 +511,8 @@ func resolve_hit(result: Dictionary, shot: WeaponProfile, distance: float) -> bo
 	var soldier_struck: bool = target is Node and target.is_in_group(Combat.ACTOR_GROUP)
 	if not soldier_struck:
 		impact_decals.add_impact(result, shot.impact_diameter)
+	# The original's per-surface bullet_hit_* puff, leaning along the round's travel.
+	ImpactFX.play_shot(player, player.soldier.muzzle.global_position, result)
 	if target == null or not (target.has_method("apply_damage") or target.has_method("register_hit")):
 		return false
 	var dealt := Combat.hurt(target, Combat.damage_at(shot, distance), {"position": result.position, "source": player, "weapon": shot.display_name})

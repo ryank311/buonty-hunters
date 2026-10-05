@@ -444,11 +444,24 @@
    "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/rock3.tif.png"
   }
  },
+ "surfaces": {
+  "dirt": 470,
+  "grass": 1538,
+  "invisible_di": 438,
+  "metal_thick": 281,
+  "sand": 108,
+  "stone": 5907,
+  "thatch": 12,
+  "underwater": 19,
+  "water": 15,
+  "wood_thick": 4412,
+  "wood_thin": 52
+ },
  "counts": {
   "triangles": 65622,
   "sky_triangles": 216,
   "collision_triangles": 13237,
   "dropped_faces": 2421,
-  "skipped_collision_polygons": 125
+  "skipped_collision_polygons": 113
  }
 }

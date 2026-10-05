@@ -675,6 +675,25 @@
    "texture": "previous/recovery/converted/textures/shared/MP72/ZM72_TXR-e563342bad-adcf76ae/congo4s_skycap01.tif.png"
   }
  },
+ "surfaces": {
+  "action": 8,
+  "asphalt": 6674,
+  "chainlink_fence": 151,
+  "dirt": 4,
+  "fabric_heavy": 565,
+  "glass": 4,
+  "invisible_di": 902,
+  "leafy_tree": 24,
+  "metal_grate": 8,
+  "metal_thick": 603,
+  "metal_thin": 34,
+  "plaster": 43,
+  "sand": 96,
+  "stone": 354,
+  "thatch": 176,
+  "wood_thick": 3104,
+  "wood_thin": 364
+ },
  "counts": {
   "triangles": 41558,
   "sky_triangles": 144,

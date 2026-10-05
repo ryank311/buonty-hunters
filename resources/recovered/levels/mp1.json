@@ -546,6 +546,17 @@
    "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_snowt_spot01.tif.png"
   }
  },
+ "surfaces": {
+  "fabric_heavy": 2,
+  "glass": 12,
+  "invisible_di": 896,
+  "metal_thick": 789,
+  "metal_thin": 441,
+  "snow": 3068,
+  "stone": 1372,
+  "wood_thick": 2207,
+  "wood_thin": 160
+ },
  "counts": {
   "triangles": 74540,
   "sky_triangles": 116,

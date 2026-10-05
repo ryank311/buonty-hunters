@@ -442,6 +442,24 @@
    "texture": "previous/recovery/converted/textures/levels/MP82/MP82_TXR-963ba1fe0d-0287a4e2/road_worn1.tif.png"
   }
  },
+ "surfaces": {
+  "action": 2,
+  "chainlink_fence": 64,
+  "dirt": 778,
+  "glass_thick": 292,
+  "ice": 301,
+  "invisible_di": 386,
+  "metal_grate": 8,
+  "metal_grate_thin": 72,
+  "metal_thick": 2484,
+  "metal_thin": 126,
+  "plaster": 584,
+  "sand": 32,
+  "snow": 4309,
+  "stone": 6320,
+  "wood_thick": 5122,
+  "wood_thin": 228
+ },
  "counts": {
   "triangles": 67772,
   "sky_triangles": 264,

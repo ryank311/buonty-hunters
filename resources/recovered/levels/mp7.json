@@ -354,11 +354,24 @@
    "texture": "previous/recovery/converted/textures/levels/MP7/MP7_TXR-b853247141-fecd383a/afghan2r_shadow_soft.tif.png"
   }
  },
+ "surfaces": {
+  "fabric_heavy": 78,
+  "invisible_di": 106,
+  "metal_thick": 88,
+  "metal_thin": 22,
+  "sand": 2693,
+  "stone": 4834,
+  "thatch": 651,
+  "underwater": 61,
+  "water": 99,
+  "wood_thick": 370,
+  "wood_thin": 132
+ },
  "counts": {
   "triangles": 19514,
   "sky_triangles": 108,
   "collision_triangles": 9035,
   "dropped_faces": 843,
-  "skipped_collision_polygons": 129
+  "skipped_collision_polygons": 68
  }
 }

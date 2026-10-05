@@ -1,0 +1,5864 @@
+{
+ "source": "materials.rdr SOILS (collision id = index + 2; 0 = the map DefaultMaterial), MZANIM.ZAR Anim_Sets/mission bullet_hit_*",
+ "surfaces": {
+  "action": {
+   "id": 2,
+   "effect": null,
+   "sound": null
+  },
+  "invisible_di": {
+   "id": 3,
+   "effect": null,
+   "sound": null
+  },
+  "grass": {
+   "id": 4,
+   "effect": "bullet_hit_grass",
+   "sound": ".BUL_GRASS"
+  },
+  "sand": {
+   "id": 5,
+   "effect": "bullet_hit_sand",
+   "sound": ".BUL_SAND"
+  },
+  "mud": {
+   "id": 6,
+   "effect": "bullet_hit_mud",
+   "sound": ".BUL_MUD"
+  },
+  "stone": {
+   "id": 7,
+   "effect": "bullet_hit_stone",
+   "sound": ".BUL_STONE"
+  },
+  "dirt": {
+   "id": 8,
+   "effect": "bullet_hit_dirt",
+   "sound": ".BUL_DIRT"
+  },
+  "glass": {
+   "id": 9,
+   "effect": "bullet_hit_stone",
+   "sound": ".BUL_STONE"
+  },
+  "glass_thick": {
+   "id": 10,
+   "effect": "bullet_hit_stone",
+   "sound": ".BUL_STONE"
+  },
+  "water": {
+   "id": 11,
+   "effect": "bullet_hit_water",
+   "sound": ".BUL_WATER"
+  },
+  "underwater": {
+   "id": 12,
+   "effect": "bullet_hit_water",
+   "sound": ".BUL_WATER"
+  },
+  "person": {
+   "id": 13,
+   "effect": "bullet_hit_person",
+   "sound": ".BUL_INTO_BODY"
+  },
+  "broken_glass": {
+   "id": 14,
+   "effect": "bullet_hit_stone",
+   "sound": ".BUL_STONE"
+  },
+  "leaves": {
+   "id": 15,
+   "effect": "bullet_hit_leaves",
+   "sound": ".BUL_LEAVES"
+  },
+  "ice": {
+   "id": 16,
+   "effect": "bullet_hit_ice",
+   "sound": ".BUL_ICE"
+  },
+  "snow": {
+   "id": 17,
+   "effect": "bullet_hit_snow",
+   "sound": ".BUL_SNOW"
+  },
+  "gravel": {
+   "id": 18,
+   "effect": "bullet_hit_gravel",
+   "sound": ".BUL_GRAVEL"
+  },
+  "wood_thick": {
+   "id": 19,
+   "effect": "bullet_hit_wood_thick",
+   "sound": ".BUL_WOOD_L_SPL"
+  },
+  "wood_thin": {
+   "id": 20,
+   "effect": "bullet_hit_wood_thin",
+   "sound": ".BUL_WOOD_SMALL"
+  },
+  "rubber": {
+   "id": 21,
+   "effect": "bullet_hit_rubber",
+   "sound": ".BUL_RUBBER"
+  },
+  "asphalt": {
+   "id": 22,
+   "effect": "bullet_hit_stone",
+   "sound": null
+  },
+  "leafy_tree": {
+   "id": 23,
+   "effect": "bullet_hit_leafy_tree",
+   "sound": ".BUL_LEAVES"
+  },
+  "snowy_tree": {
+   "id": 24,
+   "effect": "bullet_hit_snow",
+   "sound": ".BUL_SNOW"
+  },
+  "metal_thick": {
+   "id": 25,
+   "effect": "bullet_hit_metal_thick",
+   "sound": ".BUL_METAL"
+  },
+  "metal_thin": {
+   "id": 26,
+   "effect": "bullet_hit_metal_thin",
+   "sound": ".BUL_TIN"
+  },
+  "metal_railing": {
+   "id": 27,
+   "effect": "bullet_hit_metal_thin",
+   "sound": ".BUL_TIN"
+  },
+  "metal_grate": {
+   "id": 28,
+   "effect": "bullet_hit_metal_thick",
+   "sound": ".BUL_METAL"
+  },
+  "metal_grate_thin": {
+   "id": 29,
+   "effect": "bullet_hit_metal_thin",
+   "sound": ".BUL_TIN"
+  },
+  "fabric_heavy": {
+   "id": 30,
+   "effect": "bullet_hit_fabric_heavy",
+   "sound": ".BUL_FABRIC"
+  },
+  "pipe_steam": {
+   "id": 31,
+   "effect": "bullet_hit_pipe_steam",
+   "sound": ".BUL_BARREL"
+  },
+  "gastank": {
+   "id": 32,
+   "effect": "bullet_hit_gastank",
+   "sound": ".BUL_BARREL"
+  },
+  "item": {
+   "id": 33,
+   "effect": "bullet_hit_wood_thin",
+   "sound": ".BUL_WOOD_SMALL"
+  },
+  "camo_net": {
+   "id": 34,
+   "effect": "bullet_hit_fabric_heavy",
+   "sound": ".BUL_FABRIC"
+  },
+  "thatch": {
+   "id": 35,
+   "effect": "bullet_hit_thatch",
+   "sound": ".BUL_WOOD_L_SPL"
+  },
+  "chainlink_fence": {
+   "id": 36,
+   "effect": "bullet_hit_metal_thin",
+   "sound": ".BUL_TIN"
+  },
+  "leather": {
+   "id": 37,
+   "effect": "bullet_hit_leather",
+   "sound": ".BUL_WOOD_SMALL"
+  },
+  "barrel": {
+   "id": 38,
+   "effect": "bullet_hit_barrel",
+   "sound": ".BUL_BARREL"
+  },
+  "plaster": {
+   "id": 39,
+   "effect": "bullet_hit_stone",
+   "sound": ".BUL_PLASTER"
+  },
+  "carpet": {
+   "id": 40,
+   "effect": "bullet_hit_stone",
+   "sound": ".BUL_PLASTER"
+  },
+  "grass_vol": {
+   "id": 41,
+   "effect": "bullet_hit_grass",
+   "sound": ".BUL_GRASS"
+  },
+  "bush_vol": {
+   "id": 42,
+   "effect": "bullet_hit_leaves",
+   "sound": ".BUL_LEAVES"
+  },
+  "snowy_grass_vol": {
+   "id": 43,
+   "effect": "bullet_hit_snow",
+   "sound": ".BUL_SNOW"
+  },
+  "glass_opaque": {
+   "id": 44,
+   "effect": "bullet_hit_stone",
+   "sound": ".BUL_STONE"
+  },
+  "glass_medium": {
+   "id": 45,
+   "effect": "bullet_hit_stone",
+   "sound": ".BUL_STONE"
+  }
+ },
+ "effects": {
+  "bullet_hit_barrel": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     1.0,
+     1.2
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.4
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ]
+    ]
+   },
+   {
+    "node": "sparks",
+    "texture": "effect_spark01",
+    "count": 60,
+    "spread_deg": [
+     -32.0,
+     32.0,
+     -52.0,
+     52.0,
+     -32.0,
+     32.0
+    ],
+    "drag": 0.02,
+    "acceleration": [
+     0.0,
+     -5.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.08,
+     0.1
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ],
+     [
+      1.0,
+      1.0,
+      0.35,
+      1.0,
+      1.0
+     ]
+    ]
+   },
+   {
+    "node": "sparks",
+    "texture": "effect_spark01",
+    "count": 60,
+    "spread_deg": [
+     -12.0,
+     12.0,
+     -12.0,
+     12.0,
+     -12.0,
+     12.0
+    ],
+    "drag": 0.02,
+    "acceleration": [
+     0.0,
+     -15.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.1,
+     0.2
+    ],
+    "size": [
+     0.01,
+     0.045
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ],
+     [
+      1.0,
+      1.0,
+      0.35,
+      1.0,
+      1.0
+     ]
+    ]
+   },
+   {
+    "node": "flamelinger",
+    "texture": "explosion2",
+    "count": 2,
+    "spread_deg": [
+     -3.0,
+     3.0,
+     -3.0,
+     3.0,
+     -3.0,
+     3.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.6,
+     0.7
+    ],
+    "size": [
+     0.1,
+     0.12
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.1
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.07
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.05
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_dirt": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.7
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     1.0,
+     1.5
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.5
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "spinning_dirt_pieces",
+    "texture": "effect_dirtchunks03",
+    "count": 90,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -60.0,
+     60.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -19.0,
+     0.0
+    ],
+    "speed": 1.3,
+    "life": [
+     0.3,
+     0.7
+    ],
+    "size": [
+     0.14,
+     0.16
+    ],
+    "colors": [
+     [
+      0.0,
+      0.14,
+      0.13,
+      0.12,
+      1.0
+     ],
+     [
+      0.8,
+      0.14,
+      0.13,
+      0.12,
+      1.0
+     ],
+     [
+      1.0,
+      0.14,
+      0.13,
+      0.12,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_stay",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.25,
+     0.25
+    ],
+    "colors": [
+     [
+      0.0,
+      0.3,
+      0.3,
+      0.27,
+      0.3
+     ],
+     [
+      1.0,
+      0.3,
+      0.3,
+      0.27,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_stay2",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.25,
+     0.25
+    ],
+    "colors": [
+     [
+      0.0,
+      0.3,
+      0.3,
+      0.27,
+      0.3
+     ],
+     [
+      1.0,
+      0.3,
+      0.3,
+      0.27,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_streak",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -2.0,
+     2.0,
+     -2.0,
+     2.0,
+     -2.0,
+     2.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     0.35,
+     0.55
+    ],
+    "size": [
+     0.05,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.4,
+      0.4,
+      0.35,
+      1.0
+     ],
+     [
+      0.5,
+      0.4,
+      0.4,
+      0.35,
+      0.7
+     ],
+     [
+      1.0,
+      0.4,
+      0.4,
+      0.35,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_streak",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -2.0,
+     2.0,
+     -2.0,
+     2.0,
+     -2.0,
+     2.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     1.35,
+     1.55
+    ],
+    "size": [
+     0.05,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.4,
+      0.4,
+      0.35,
+      1.0
+     ],
+     [
+      0.5,
+      0.4,
+      0.4,
+      0.35,
+      0.7
+     ],
+     [
+      1.0,
+      0.4,
+      0.4,
+      0.35,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_fabric_heavy": [
+   {
+    "node": "blue_smoke01",
+    "texture": "cloudpuff01",
+    "count": 10,
+    "spread_deg": [
+     -2.0,
+     2.0,
+     -2.0,
+     2.0,
+     -2.0,
+     2.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     0.1,
+     0.0
+    ],
+    "speed": 0.0,
+    "life": [
+     1.0,
+     2.0
+    ],
+    "size": [
+     0.05,
+     0.08
+    ],
+    "colors": [
+     [
+      0.0,
+      0.4,
+      0.5,
+      0.4,
+      0.0
+     ],
+     [
+      0.1,
+      0.4,
+      0.5,
+      0.4,
+      0.1
+     ],
+     [
+      1.0,
+      0.4,
+      0.5,
+      0.4,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_gastank": [
+   {
+    "node": "gas_squirt_out",
+    "texture": "cloudpuff01",
+    "count": 7,
+    "spread_deg": [
+     -0.15,
+     0.15,
+     0.0,
+     0.0,
+     -0.15,
+     0.15
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -2.0,
+     0.0
+    ],
+    "speed": 0.0,
+    "life": [
+     0.35,
+     0.5
+    ],
+    "size": [
+     0.12,
+     0.13
+    ],
+    "colors": [
+     [
+      0.0,
+      0.83,
+      0.81,
+      0.54,
+      0.0
+     ],
+     [
+      0.05,
+      0.83,
+      0.81,
+      0.54,
+      0.4
+     ],
+     [
+      0.8,
+      0.83,
+      0.81,
+      0.54,
+      0.5
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_grass": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     1.0,
+     1.2
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.4
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ]
+    ]
+   },
+   {
+    "node": "spinning_grass_pieces",
+    "texture": "effect_dirtchunks01",
+    "count": 50,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -60.0,
+     60.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -19.0,
+     0.0
+    ],
+    "speed": 1.3,
+    "life": [
+     0.3,
+     0.7
+    ],
+    "size": [
+     0.1,
+     0.16
+    ],
+    "colors": [
+     [
+      0.0,
+      0.155,
+      0.155,
+      0.07,
+      1.0
+     ],
+     [
+      1.0,
+      0.155,
+      0.155,
+      0.07,
+      1.0
+     ]
+    ]
+   },
+   {
+    "node": "grass_spurt_stay",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.25,
+     0.25
+    ],
+    "colors": [
+     [
+      0.0,
+      0.32,
+      0.32,
+      0.22,
+      0.3
+     ],
+     [
+      1.0,
+      0.32,
+      0.32,
+      0.22,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "grass_spurt_stay2",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.25,
+     0.25
+    ],
+    "colors": [
+     [
+      0.0,
+      0.32,
+      0.32,
+      0.22,
+      0.3
+     ],
+     [
+      1.0,
+      0.32,
+      0.32,
+      0.22,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "grass_spurt_streak",
+    "texture": "effect_dustpuff01",
+    "count": 80,
+    "spread_deg": [
+     -2.0,
+     2.0,
+     -2.0,
+     2.0,
+     -2.0,
+     2.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.05,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.32,
+      0.32,
+      0.22,
+      1.0
+     ],
+     [
+      1.0,
+      0.32,
+      0.32,
+      0.22,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_gravel": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     1.0,
+     1.2
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.4
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ]
+    ]
+   },
+   {
+    "node": "sparks",
+    "texture": "effect_spark01",
+    "count": 60,
+    "spread_deg": [
+     -32.0,
+     32.0,
+     -52.0,
+     52.0,
+     -32.0,
+     32.0
+    ],
+    "drag": 0.02,
+    "acceleration": [
+     0.0,
+     -5.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.08,
+     0.1
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.35,
+      1.0,
+      1.0,
+      0.8,
+      0.8
+     ],
+     [
+      0.75,
+      1.0,
+      0.5,
+      0.0,
+      0.7
+     ]
+    ]
+   },
+   {
+    "node": "spinning_rocks1",
+    "texture": "effect_dirtchunks03",
+    "count": 120,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.001,
+    "acceleration": [
+     0.0,
+     -10.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.25,
+     1.0
+    ],
+    "size": [
+     0.06,
+     0.08
+    ],
+    "colors": [
+     [
+      0.0,
+      0.6,
+      0.5,
+      0.4,
+      1.0
+     ],
+     [
+      1.0,
+      0.6,
+      0.5,
+      0.4,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "spinning_rocks2",
+    "texture": "effect_dirtchunks03",
+    "count": 120,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.001,
+    "acceleration": [
+     0.0,
+     -10.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.25,
+     1.0
+    ],
+    "size": [
+     0.06,
+     0.08
+    ],
+    "colors": [
+     [
+      0.0,
+      0.6,
+      0.5,
+      0.4,
+      1.0
+     ],
+     [
+      1.0,
+      0.6,
+      0.5,
+      0.4,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "spinning_rocks3",
+    "texture": "effect_dirtchunks03",
+    "count": 120,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.001,
+    "acceleration": [
+     0.0,
+     -10.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.25,
+     1.0
+    ],
+    "size": [
+     0.06,
+     0.08
+    ],
+    "colors": [
+     [
+      0.0,
+      0.6,
+      0.5,
+      0.4,
+      1.0
+     ],
+     [
+      1.0,
+      0.6,
+      0.5,
+      0.4,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dust_spurt_stay_rotate1",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.15,
+     0.2
+    ],
+    "colors": [
+     [
+      0.0,
+      0.4,
+      0.38,
+      0.3,
+      0.25
+     ],
+     [
+      1.0,
+      0.4,
+      0.38,
+      0.3,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dust_spurt_stay_rotate2",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.15,
+     0.2
+    ],
+    "colors": [
+     [
+      0.0,
+      0.4,
+      0.38,
+      0.3,
+      0.25
+     ],
+     [
+      1.0,
+      0.4,
+      0.38,
+      0.3,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_ice": [
+   {
+    "node": "ice_spurt_up",
+    "texture": "effect_dustpuff01",
+    "count": 40,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.02,
+    "acceleration": [
+     0.0,
+     -7.0,
+     0.0
+    ],
+    "speed": 1.5,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.02,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.85,
+      0.85,
+      0.85,
+      1.0
+     ],
+     [
+      1.0,
+      0.85,
+      0.85,
+      0.85,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "ice_spurt_stay",
+    "texture": "effect_dustpuff01",
+    "count": 10,
+    "spread_deg": [
+     -7.0,
+     7.0,
+     -0.0,
+     0.0,
+     -7.0,
+     7.0
+    ],
+    "drag": 0.002,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 0.0,
+    "life": [
+     2.5,
+     2.7
+    ],
+    "size": [
+     0.06,
+     0.1
+    ],
+    "colors": [
+     [
+      0.0,
+      0.8,
+      0.8,
+      0.8,
+      1.0
+     ],
+     [
+      1.0,
+      0.6,
+      0.6,
+      0.6,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_leafy_tree": [
+   {
+    "node": "pieces_spurt_up",
+    "texture": "effect_spark02",
+    "count": 30,
+    "spread_deg": [
+     -20.0,
+     20.0,
+     -10.0,
+     30.0,
+     -20.0,
+     20.0
+    ],
+    "drag": 0.02,
+    "acceleration": [
+     0.0,
+     -9.0,
+     0.0
+    ],
+    "speed": 0.0,
+    "life": [
+     0.55,
+     1.15
+    ],
+    "size": [
+     0.07,
+     0.2
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "grass_spurt_stay",
+    "texture": "effect_dustpuff01",
+    "count": 40,
+    "spread_deg": [
+     -5.0,
+     5.0,
+     -5.0,
+     5.0,
+     -5.0,
+     5.0
+    ],
+    "drag": 0.002,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 0.3,
+    "life": [
+     0.3,
+     0.5
+    ],
+    "size": [
+     0.11,
+     0.17
+    ],
+    "colors": [
+     [
+      0.0,
+      0.47,
+      0.55,
+      0.42,
+      0.9
+     ],
+     [
+      1.0,
+      0.47,
+      0.55,
+      0.42,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_leather": [
+   {
+    "node": "fluffy_puff",
+    "texture": "cloudpuff01",
+    "count": 5,
+    "spread_deg": [
+     -5.0,
+     5.0,
+     -5.0,
+     5.0,
+     -5.0,
+     5.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.6,
+     0.7
+    ],
+    "size": [
+     0.032,
+     0.04
+    ],
+    "colors": [
+     [
+      0.0,
+      0.5,
+      0.5,
+      0.5,
+      1.0
+     ],
+     [
+      1.0,
+      0.5,
+      0.5,
+      0.5,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "leather_spurt_up2",
+    "texture": "effect_dirtchunks02",
+    "count": 30,
+    "spread_deg": [
+     -10.0,
+     10.0,
+     0.0,
+     50.0,
+     -10.0,
+     10.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -10.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     0.15,
+     0.3
+    ],
+    "size": [
+     0.12,
+     0.15
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.3,
+      0.2,
+      0.2
+     ],
+     [
+      0.2,
+      1.0,
+      0.31,
+      0.5,
+      0.5
+     ],
+     [
+      0.5,
+      1.0,
+      0.34,
+      0.5,
+      0.5
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_leaves": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     1.0,
+     1.2
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.4
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ]
+    ]
+   },
+   {
+    "node": "spinning_grass_pieces",
+    "texture": "effect_dirtchunks01",
+    "count": 50,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -60.0,
+     60.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -19.0,
+     0.0
+    ],
+    "speed": 1.3,
+    "life": [
+     0.3,
+     0.7
+    ],
+    "size": [
+     0.1,
+     0.16
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     [
+      0.14,
+      0.1,
+      0.04,
+      1.0,
+      1.0
+     ],
+     [
+      0.14,
+      0.1,
+      0.04,
+      1.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "grass_spurt_stay",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.25,
+     0.25
+    ],
+    "colors": [
+     [
+      0.0,
+      0.25,
+      0.2,
+      0.12,
+      0.3
+     ],
+     [
+      1.0,
+      0.25,
+      0.2,
+      0.12,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "grass_spurt_stay2",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.25,
+     0.25
+    ],
+    "colors": [
+     [
+      0.0,
+      0.25,
+      0.2,
+      0.12,
+      0.3
+     ],
+     [
+      1.0,
+      0.25,
+      0.2,
+      0.12,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "grass_spurt_streak",
+    "texture": "effect_dustpuff01",
+    "count": 80,
+    "spread_deg": [
+     -2.0,
+     2.0,
+     -2.0,
+     2.0,
+     -2.0,
+     2.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.05,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.25,
+      0.2,
+      0.12,
+      1.0
+     ],
+     [
+      1.0,
+      0.25,
+      0.2,
+      0.12,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_metal_thick": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     1.0,
+     1.2
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.4
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ]
+    ]
+   },
+   {
+    "node": "sparks",
+    "texture": "effect_spark01",
+    "count": 80,
+    "spread_deg": [
+     -60.0,
+     60.0,
+     -60.0,
+     60.0,
+     -60.0,
+     60.0
+    ],
+    "drag": 0.0002,
+    "acceleration": [
+     0.0,
+     -5.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.08,
+     0.1
+    ],
+    "size": [
+     0.02,
+     0.03
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ],
+     [
+      1.0,
+      1.0,
+      0.35,
+      1.0,
+      1.0
+     ]
+    ]
+   },
+   {
+    "node": "sparks2",
+    "texture": "effect_spark01",
+    "count": 40,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0002,
+    "acceleration": [
+     0.0,
+     -5.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.08,
+     0.1
+    ],
+    "size": [
+     0.02,
+     0.03
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ],
+     [
+      1.0,
+      1.0,
+      0.35,
+      1.0,
+      1.0
+     ]
+    ]
+   },
+   {
+    "node": "sparks3",
+    "texture": "effect_spark01",
+    "count": 40,
+    "spread_deg": [
+     -20.0,
+     20.0,
+     -20.0,
+     20.0,
+     -20.0,
+     20.0
+    ],
+    "drag": 0.0002,
+    "acceleration": [
+     0.0,
+     -8.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.08,
+     0.2
+    ],
+    "size": [
+     0.03,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ],
+     [
+      1.0,
+      1.0,
+      0.35,
+      1.0,
+      1.0
+     ]
+    ]
+   },
+   {
+    "node": "flamelinger",
+    "texture": "explosion2",
+    "count": 2,
+    "spread_deg": [
+     -3.0,
+     3.0,
+     -3.0,
+     3.0,
+     -3.0,
+     3.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.6,
+     0.7
+    ],
+    "size": [
+     0.1,
+     0.12
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.1
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.07
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.05
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_metal_thin": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     1.0,
+     1.2
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.4
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ]
+    ]
+   },
+   {
+    "node": "sparks",
+    "texture": "effect_spark01",
+    "count": 60,
+    "spread_deg": [
+     -32.0,
+     32.0,
+     -52.0,
+     52.0,
+     -32.0,
+     32.0
+    ],
+    "drag": 0.02,
+    "acceleration": [
+     0.0,
+     -5.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.08,
+     0.1
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ],
+     [
+      1.0,
+      1.0,
+      0.35,
+      1.0,
+      1.0
+     ]
+    ]
+   },
+   {
+    "node": "sparks",
+    "texture": "effect_spark01",
+    "count": 60,
+    "spread_deg": [
+     -12.0,
+     12.0,
+     -12.0,
+     12.0,
+     -12.0,
+     12.0
+    ],
+    "drag": 0.02,
+    "acceleration": [
+     0.0,
+     -15.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.1,
+     0.2
+    ],
+    "size": [
+     0.01,
+     0.045
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0
+     ],
+     [
+      1.0,
+      1.0,
+      0.35,
+      1.0,
+      1.0
+     ]
+    ]
+   },
+   {
+    "node": "flamelinger",
+    "texture": "explosion2",
+    "count": 2,
+    "spread_deg": [
+     -3.0,
+     3.0,
+     -3.0,
+     3.0,
+     -3.0,
+     3.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.6,
+     0.7
+    ],
+    "size": [
+     0.1,
+     0.12
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.1
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.07
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.05
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_mud": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.3
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.1
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     1.0,
+     1.5
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.2
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.1
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "spinning_dirt_pieces",
+    "texture": "effect_dirtchunks03",
+    "count": 90,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -60.0,
+     60.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -29.0,
+     0.0
+    ],
+    "speed": 1.3,
+    "life": [
+     0.3,
+     0.7
+    ],
+    "size": [
+     0.14,
+     0.16
+    ],
+    "colors": [
+     [
+      0.0,
+      0.07,
+      0.055,
+      0.03,
+      1.0
+     ],
+     [
+      0.8,
+      0.07,
+      0.055,
+      0.03,
+      1.0
+     ],
+     [
+      1.0,
+      0.07,
+      0.055,
+      0.03,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "spinning_dirt_pieces2",
+    "texture": "effect_dirtchunks03",
+    "count": 90,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -60.0,
+     60.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -29.0,
+     0.0
+    ],
+    "speed": 1.3,
+    "life": [
+     0.3,
+     0.7
+    ],
+    "size": [
+     0.14,
+     0.16
+    ],
+    "colors": [
+     [
+      0.0,
+      0.05,
+      0.03,
+      0.02,
+      1.0
+     ],
+     [
+      0.8,
+      0.05,
+      0.03,
+      0.02,
+      1.0
+     ],
+     [
+      1.0,
+      0.05,
+      0.03,
+      0.02,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_streak",
+    "texture": "effect_dustpuff01",
+    "count": 50,
+    "spread_deg": [
+     -2.0,
+     2.0,
+     -2.0,
+     2.0,
+     -2.0,
+     2.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     0.35,
+     0.55
+    ],
+    "size": [
+     0.05,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.1,
+      0.07,
+      0.05,
+      1.0
+     ],
+     [
+      0.5,
+      0.1,
+      0.07,
+      0.05,
+      0.7
+     ],
+     [
+      1.0,
+      0.1,
+      0.07,
+      0.05,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_streak",
+    "texture": "effect_dustpuff01",
+    "count": 50,
+    "spread_deg": [
+     -2.0,
+     2.0,
+     -2.0,
+     2.0,
+     -2.0,
+     2.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     1.35,
+     1.55
+    ],
+    "size": [
+     0.05,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.1,
+      0.07,
+      0.05,
+      1.0
+     ],
+     [
+      0.5,
+      0.1,
+      0.07,
+      0.05,
+      0.7
+     ],
+     [
+      1.0,
+      0.1,
+      0.07,
+      0.05,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_person": [
+   {
+    "node": "red_flash01",
+    "texture": "effect_dustpuff01",
+    "count": 5,
+    "spread_deg": [
+     -6.0,
+     6.0,
+     -6.0,
+     6.0,
+     -6.0,
+     6.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.8,
+     0.9
+    ],
+    "size": [
+     0.04,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.15,
+      0.05,
+      0.06,
+      1.0
+     ],
+     [
+      1.0,
+      0.15,
+      0.05,
+      0.06,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "red_flash02",
+    "texture": "effect_dustpuff01",
+    "count": 5,
+    "spread_deg": [
+     -6.0,
+     6.0,
+     -6.0,
+     6.0,
+     -6.0,
+     6.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.8,
+     0.9
+    ],
+    "size": [
+     0.04,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.15,
+      0.05,
+      0.06,
+      1.0
+     ],
+     [
+      1.0,
+      0.15,
+      0.05,
+      0.06,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "red_streak01",
+    "texture": "raindrop",
+    "count": 15,
+    "spread_deg": [
+     -8.0,
+     8.0,
+     -8.0,
+     8.0,
+     -8.0,
+     8.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     -3.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.1,
+     0.25
+    ],
+    "size": [
+     0.09,
+     0.1
+    ],
+    "colors": [
+     [
+      0.0,
+      0.15,
+      0.05,
+      0.06,
+      1.0
+     ],
+     [
+      1.0,
+      0.15,
+      0.05,
+      0.06,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "red_streak02",
+    "texture": "raindrop",
+    "count": 15,
+    "spread_deg": [
+     -8.0,
+     8.0,
+     -8.0,
+     8.0,
+     -8.0,
+     8.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     -3.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.1,
+     0.25
+    ],
+    "size": [
+     0.09,
+     0.1
+    ],
+    "colors": [
+     [
+      0.0,
+      0.3,
+      0.05,
+      0.06,
+      1.0
+     ],
+     [
+      1.0,
+      0.3,
+      0.05,
+      0.06,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dust_spurt_stay_rotate1",
+    "texture": "effect_dustpuff01",
+    "count": 10,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.2,
+     0.4
+    ],
+    "size": [
+     0.08,
+     0.11
+    ],
+    "colors": [
+     [
+      0.0,
+      0.3,
+      0.05,
+      0.06,
+      0.1
+     ],
+     [
+      1.0,
+      0.3,
+      0.05,
+      0.06,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dust_spurt_stay_rotate2",
+    "texture": "effect_dustpuff01",
+    "count": 10,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.2,
+     0.4
+    ],
+    "size": [
+     0.08,
+     0.11
+    ],
+    "colors": [
+     [
+      0.0,
+      0.2,
+      0.05,
+      0.06,
+      0.1
+     ],
+     [
+      1.0,
+      0.2,
+      0.05,
+      0.06,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "red_flash01",
+    "texture": "effect_dustpuff01",
+    "count": 9,
+    "spread_deg": [
+     -10.0,
+     10.0,
+     -10.0,
+     10.0,
+     -10.0,
+     10.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.8,
+     0.9
+    ],
+    "size": [
+     0.04,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.15,
+      0.05,
+      0.06,
+      1.0
+     ],
+     [
+      1.0,
+      0.15,
+      0.05,
+      0.06,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "red_flash02",
+    "texture": "effect_dustpuff01",
+    "count": 9,
+    "spread_deg": [
+     -10.0,
+     10.0,
+     -10.0,
+     10.0,
+     -10.0,
+     10.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.8,
+     0.9
+    ],
+    "size": [
+     0.04,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.15,
+      0.05,
+      0.06,
+      1.0
+     ],
+     [
+      1.0,
+      0.15,
+      0.05,
+      0.06,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "red_streak01",
+    "texture": "raindrop",
+    "count": 45,
+    "spread_deg": [
+     -16.0,
+     16.0,
+     -16.0,
+     16.0,
+     -16.0,
+     16.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     -3.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.2,
+     0.5
+    ],
+    "size": [
+     0.1,
+     0.11
+    ],
+    "colors": [
+     [
+      0.0,
+      0.15,
+      0.05,
+      0.06,
+      1.0
+     ],
+     [
+      1.0,
+      0.15,
+      0.05,
+      0.06,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "red_streak02",
+    "texture": "raindrop",
+    "count": 45,
+    "spread_deg": [
+     -16.0,
+     16.0,
+     -16.0,
+     16.0,
+     -16.0,
+     16.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     -3.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.2,
+     0.5
+    ],
+    "size": [
+     0.1,
+     0.11
+    ],
+    "colors": [
+     [
+      0.0,
+      0.3,
+      0.05,
+      0.06,
+      1.0
+     ],
+     [
+      1.0,
+      0.3,
+      0.05,
+      0.06,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dust_spurt_stay_rotate1",
+    "texture": "effect_dustpuff01",
+    "count": 10,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     1.0,
+     1.5
+    ],
+    "size": [
+     0.08,
+     0.11
+    ],
+    "colors": [
+     [
+      0.0,
+      0.3,
+      0.05,
+      0.06,
+      0.2
+     ],
+     [
+      1.0,
+      0.3,
+      0.05,
+      0.06,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dust_spurt_stay_rotate2",
+    "texture": "effect_dustpuff01",
+    "count": 10,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     1.0,
+     1.5
+    ],
+    "size": [
+     0.08,
+     0.11
+    ],
+    "colors": [
+     [
+      0.0,
+      0.2,
+      0.05,
+      0.06,
+      0.2
+     ],
+     [
+      1.0,
+      0.2,
+      0.05,
+      0.06,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_pipe_steam": [
+   {
+    "node": "steam_spew_out",
+    "texture": "cloudpuff01",
+    "count": 50,
+    "spread_deg": [
+     -6.0,
+     6.0,
+     0.0,
+     0.0,
+     -6.0,
+     6.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 0.0,
+    "life": [
+     0.35,
+     0.4
+    ],
+    "size": [
+     0.02,
+     0.025
+    ],
+    "colors": [
+     [
+      0.0,
+      0.35,
+      0.36,
+      0.4,
+      0.0
+     ],
+     [
+      0.05,
+      0.35,
+      0.36,
+      0.4,
+      0.2
+     ],
+     [
+      0.8,
+      0.35,
+      0.36,
+      0.4,
+      0.3
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_rubber": [
+   {
+    "node": "sand_spurt_up",
+    "texture": "effect_spark02",
+    "count": 30,
+    "spread_deg": [
+     -3.0,
+     3.0,
+     -3.0,
+     3.0,
+     -3.0,
+     3.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -8.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.8,
+     0.9
+    ],
+    "size": [
+     0.07,
+     0.1
+    ],
+    "colors": [
+     [
+      0.0,
+      0.3,
+      0.3,
+      0.25,
+      0.4
+     ],
+     [
+      1.0,
+      0.3,
+      0.3,
+      0.25,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "sand_spurt_stay",
+    "texture": "effect_dustpuff01",
+    "count": 8,
+    "spread_deg": [
+     -7.0,
+     7.0,
+     -0.0,
+     0.0,
+     -7.0,
+     7.0
+    ],
+    "drag": 0.002,
+    "acceleration": [
+     0.0,
+     -1.1,
+     0.0
+    ],
+    "speed": 0.0,
+    "life": [
+     2.5,
+     2.7
+    ],
+    "size": [
+     0.08,
+     0.11
+    ],
+    "colors": [
+     [
+      0.0,
+      0.7,
+      0.7,
+      0.65,
+      1.0
+     ],
+     [
+      1.0,
+      0.7,
+      0.7,
+      0.65,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_sand": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.7
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     1.0,
+     1.5
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.5
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "waterdropets1",
+    "texture": "effect_dustpuff01",
+    "count": 110,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -60.0,
+     60.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -24.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.06,
+     0.07
+    ],
+    "size": [
+     0.3,
+     0.36
+    ],
+    "colors": [
+     [
+      0.0,
+      0.6,
+      0.5,
+      0.3,
+      0.5
+     ],
+     [
+      1.0,
+      0.6,
+      0.5,
+      0.3,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "water_vapor",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     20.0,
+     0.0
+    ],
+    "speed": 3.0,
+    "life": [
+     1.75,
+     1.95
+    ],
+    "size": [
+     0.14,
+     0.16
+    ],
+    "colors": [
+     [
+      0.0,
+      0.6,
+      0.5,
+      0.3,
+      0.15
+     ],
+     [
+      0.1,
+      0.6,
+      0.5,
+      0.3,
+      0.1
+     ],
+     [
+      1.0,
+      0.6,
+      0.5,
+      0.3,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "water_spurt_streak",
+    "texture": "effect_dustpuff01",
+    "count": 30,
+    "spread_deg": [
+     -8.0,
+     8.0,
+     -8.0,
+     8.0,
+     -8.0,
+     8.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.163,
+     0.455
+    ],
+    "size": [
+     0.03,
+     0.035
+    ],
+    "colors": [
+     [
+      0.0,
+      0.6,
+      0.5,
+      0.3,
+      1.0
+     ],
+     [
+      0.5,
+      0.6,
+      0.5,
+      0.3,
+      0.5
+     ],
+     [
+      1.0,
+      0.6,
+      0.5,
+      0.3,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_snow": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "effect_spark01",
+    "count": 20,
+    "spread_deg": [
+     -5.0,
+     5.0,
+     -5.0,
+     5.0,
+     -5.0,
+     5.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 8.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.7
+     ],
+     [
+      0.5,
+      1.0,
+      1.0,
+      1.0,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "effect_spark01",
+    "count": 20,
+    "spread_deg": [
+     -5.0,
+     5.0,
+     -5.0,
+     5.0,
+     -5.0,
+     5.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 8.0,
+    "life": [
+     1.0,
+     1.5
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.7
+     ],
+     [
+      0.5,
+      1.0,
+      1.0,
+      1.0,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "spinning_dirt_pieces",
+    "texture": "effect_dirtchunks03",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -60.0,
+     60.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -23.0,
+     0.0
+    ],
+    "speed": 1.3,
+    "life": [
+     0.2,
+     0.5
+    ],
+    "size": [
+     0.1,
+     0.16
+    ],
+    "colors": [
+     [
+      0.0,
+      0.835,
+      0.835,
+      0.835,
+      0.38
+     ],
+     [
+      1.0,
+      0.835,
+      0.835,
+      0.835,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_stay",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.25,
+     0.25
+    ],
+    "colors": [
+     [
+      0.0,
+      0.835,
+      0.835,
+      0.835,
+      0.3
+     ],
+     [
+      1.0,
+      0.835,
+      0.835,
+      0.835,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_stay2",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.3,
+     0.5
+    ],
+    "size": [
+     0.25,
+     0.25
+    ],
+    "colors": [
+     [
+      0.0,
+      0.835,
+      0.835,
+      0.835,
+      0.3
+     ],
+     [
+      1.0,
+      0.835,
+      0.835,
+      0.835,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_streak",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -2.0,
+     2.0,
+     -2.0,
+     2.0,
+     -2.0,
+     2.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     0.35,
+     0.55
+    ],
+    "size": [
+     0.05,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.845,
+      0.845,
+      0.845,
+      1.0
+     ],
+     [
+      0.5,
+      0.845,
+      0.845,
+      0.845,
+      0.7
+     ],
+     [
+      1.0,
+      0.845,
+      0.845,
+      0.845,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_streak",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -2.0,
+     2.0,
+     -2.0,
+     2.0,
+     -2.0,
+     2.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     1.35,
+     1.55
+    ],
+    "size": [
+     0.05,
+     0.05
+    ],
+    "colors": [
+     [
+      0.0,
+      0.845,
+      0.845,
+      0.845,
+      1.0
+     ],
+     [
+      0.5,
+      0.845,
+      0.845,
+      0.845,
+      0.7
+     ],
+     [
+      1.0,
+      0.845,
+      0.845,
+      0.845,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_stone": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 10,
+    "spread_deg": [
+     -5.0,
+     5.0,
+     -5.0,
+     5.0,
+     -5.0,
+     5.0
+    ],
+    "drag": 0.05,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     1.0
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.5
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.2
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.1
+     ]
+    ]
+   },
+   {
+    "node": "sparks",
+    "texture": "effect_spark01",
+    "count": 40,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.05,
+    "acceleration": [
+     0.0,
+     -5.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.08,
+     0.1
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.35,
+      1.0,
+      1.0,
+      0.8,
+      0.8
+     ],
+     [
+      0.75,
+      1.0,
+      0.5,
+      0.0,
+      0.7
+     ]
+    ]
+   },
+   {
+    "node": "spinning_rocks1",
+    "texture": "effect_dirtchunks03",
+    "count": 120,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.001,
+    "acceleration": [
+     0.0,
+     -10.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.25,
+     1.0
+    ],
+    "size": [
+     0.06,
+     0.08
+    ],
+    "colors": [
+     [
+      0.0,
+      0.4,
+      0.35,
+      0.3,
+      1.0
+     ],
+     [
+      1.0,
+      0.4,
+      0.35,
+      0.3,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "spinning_rocks2",
+    "texture": "effect_dirtchunks03",
+    "count": 120,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.001,
+    "acceleration": [
+     0.0,
+     -10.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.25,
+     1.0
+    ],
+    "size": [
+     0.06,
+     0.08
+    ],
+    "colors": [
+     [
+      0.0,
+      0.4,
+      0.35,
+      0.3,
+      1.0
+     ],
+     [
+      1.0,
+      0.4,
+      0.35,
+      0.3,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "spinning_rocks3",
+    "texture": "effect_dirtchunks03",
+    "count": 120,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.001,
+    "acceleration": [
+     0.0,
+     -10.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.25,
+     1.0
+    ],
+    "size": [
+     0.06,
+     0.08
+    ],
+    "colors": [
+     [
+      0.0,
+      0.4,
+      0.35,
+      0.3,
+      1.0
+     ],
+     [
+      1.0,
+      0.4,
+      0.35,
+      0.3,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dust_spurt_stay_rotate1",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.15,
+     0.2
+    ],
+    "colors": [
+     [
+      0.0,
+      0.4,
+      0.38,
+      0.3,
+      0.25
+     ],
+     [
+      1.0,
+      0.4,
+      0.38,
+      0.3,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dust_spurt_stay_rotate2",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.15,
+     0.2
+    ],
+    "colors": [
+     [
+      0.0,
+      0.4,
+      0.38,
+      0.3,
+      0.25
+     ],
+     [
+      1.0,
+      0.4,
+      0.38,
+      0.3,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_thatch": [
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -10.0,
+     10.0,
+     -10.0,
+     10.0,
+     -10.0,
+     10.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.6,
+     0.7
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.4
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ]
+    ]
+   },
+   {
+    "node": "puff",
+    "texture": "cloudpuff01",
+    "count": 5,
+    "spread_deg": [
+     -5.0,
+     5.0,
+     -5.0,
+     5.0,
+     -5.0,
+     5.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.6,
+     0.7
+    ],
+    "size": [
+     0.032,
+     0.04
+    ],
+    "colors": [
+     [
+      0.0,
+      0.7,
+      0.65,
+      0.63,
+      1.0
+     ],
+     [
+      1.0,
+      0.7,
+      0.65,
+      0.63,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "pieces_spurt_up",
+    "texture": "effect_spark02",
+    "count": 30,
+    "spread_deg": [
+     -20.0,
+     20.0,
+     0.0,
+     50.0,
+     -20.0,
+     20.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -20.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     0.2,
+     0.55
+    ],
+    "size": [
+     0.17,
+     0.2
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.1
+     ],
+     [
+      0.53,
+      0.5,
+      0.42,
+      1.0,
+      0.12
+     ]
+    ]
+   },
+   {
+    "node": "pieces_spurt_up2",
+    "texture": "effect_dirtchunks02",
+    "count": 30,
+    "spread_deg": [
+     -20.0,
+     20.0,
+     0.0,
+     50.0,
+     -20.0,
+     20.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -20.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     0.2,
+     0.55
+    ],
+    "size": [
+     0.17,
+     0.2
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.3,
+      0.2,
+      0.18
+     ],
+     [
+      0.17,
+      1.0,
+      0.31,
+      0.53,
+      0.5
+     ],
+     [
+      0.42,
+      1.0,
+      0.34,
+      0.53,
+      0.5
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_water": [
+   {
+    "node": "waterdropets1",
+    "texture": "effect_dustpuff01",
+    "count": 110,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -60.0,
+     60.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -14.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.06,
+     0.07
+    ],
+    "size": [
+     0.3,
+     0.36
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.5
+     ],
+     [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "water_vapor",
+    "texture": "effect_dustpuff01",
+    "count": 0,
+    "spread_deg": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     20.0,
+     0.0
+    ],
+    "speed": 3.0,
+    "life": [
+     1.75,
+     1.95
+    ],
+    "size": [
+     0.14,
+     0.16
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      0.15
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.1
+     ],
+     [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "water_spurt_streak",
+    "texture": "effect_dustpuff01",
+    "count": 0,
+    "spread_deg": [
+     0.0,
+     0.0,
+     -30.0,
+     30.0,
+     0.0,
+     0.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 0.5,
+    "life": [
+     0.163,
+     0.455
+    ],
+    "size": [
+     0.03,
+     0.035
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      1.0,
+      1.0,
+      0.5
+     ],
+     [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "theripple",
+    "texture": "wake01",
+    "count": 0,
+    "spread_deg": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "drag": 0.002,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 0.0,
+    "life": [
+     0.5,
+     0.7
+    ],
+    "size": [
+     0.2,
+     0.2
+    ],
+    "colors": [
+     [
+      0.0,
+      0.7,
+      0.7,
+      0.7,
+      1.0
+     ],
+     [
+      0.2,
+      0.7,
+      0.7,
+      0.7,
+      0.4
+     ],
+     [
+      1.0,
+      0.7,
+      0.7,
+      0.7,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_wood_thick": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -10.0,
+     10.0,
+     -10.0,
+     10.0,
+     -10.0,
+     10.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.6,
+     0.7
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.4
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ]
+    ]
+   },
+   {
+    "node": "puff",
+    "texture": "cloudpuff01",
+    "count": 5,
+    "spread_deg": [
+     -5.0,
+     5.0,
+     -5.0,
+     5.0,
+     -5.0,
+     5.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.6,
+     0.7
+    ],
+    "size": [
+     0.032,
+     0.04
+    ],
+    "colors": [
+     [
+      0.0,
+      0.7,
+      0.65,
+      0.63,
+      1.0
+     ],
+     [
+      1.0,
+      0.7,
+      0.65,
+      0.63,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "pieces_spurt_up",
+    "texture": "effect_spark02",
+    "count": 30,
+    "spread_deg": [
+     -20.0,
+     20.0,
+     0.0,
+     50.0,
+     -20.0,
+     20.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -20.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     0.2,
+     0.55
+    ],
+    "size": [
+     0.17,
+     0.2
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.1
+     ],
+     [
+      0.53,
+      0.5,
+      0.42,
+      1.0,
+      0.12
+     ]
+    ]
+   },
+   {
+    "node": "pieces_spurt_up2",
+    "texture": "effect_dirtchunks02",
+    "count": 30,
+    "spread_deg": [
+     -20.0,
+     20.0,
+     0.0,
+     50.0,
+     -20.0,
+     20.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -20.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     0.2,
+     0.55
+    ],
+    "size": [
+     0.17,
+     0.2
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.3,
+      0.2,
+      0.18
+     ],
+     [
+      0.17,
+      1.0,
+      0.31,
+      0.53,
+      0.5
+     ],
+     [
+      0.42,
+      1.0,
+      0.34,
+      0.53,
+      0.5
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_stay",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.25,
+     0.25
+    ],
+    "colors": [
+     [
+      0.0,
+      0.35,
+      0.33,
+      0.3,
+      0.3
+     ],
+     [
+      1.0,
+      0.35,
+      0.33,
+      0.3,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_stay2",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.25,
+     0.25
+    ],
+    "colors": [
+     [
+      0.0,
+      0.35,
+      0.33,
+      0.3,
+      0.3
+     ],
+     [
+      1.0,
+      0.35,
+      0.33,
+      0.3,
+      0.0
+     ]
+    ]
+   }
+  ],
+  "bullet_hit_wood_thin": [
+   {
+    "node": "NVGPUFF",
+    "texture": "effect_muzzle01",
+    "count": 45,
+    "spread_deg": [
+     -15.0,
+     15.0,
+     -15.0,
+     15.0,
+     -15.0,
+     15.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.5,
+     0.75
+    ],
+    "size": [
+     0.01,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ],
+     [
+      1.0,
+      1.0,
+      0.2,
+      0.0,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "firepuff",
+    "texture": "explosion2",
+    "count": 20,
+    "spread_deg": [
+     -10.0,
+     10.0,
+     -10.0,
+     10.0,
+     -10.0,
+     10.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 6.0,
+    "life": [
+     0.6,
+     0.7
+    ],
+    "size": [
+     0.016,
+     0.02
+    ],
+    "colors": [
+     [
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     [
+      0.1,
+      1.0,
+      1.0,
+      1.0,
+      0.4
+     ],
+     [
+      0.5,
+      1.0,
+      0.8,
+      0.6,
+      0.2
+     ]
+    ]
+   },
+   {
+    "node": "puff",
+    "texture": "cloudpuff01",
+    "count": 5,
+    "spread_deg": [
+     -5.0,
+     5.0,
+     -5.0,
+     5.0,
+     -5.0,
+     5.0
+    ],
+    "drag": 0.003,
+    "acceleration": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "speed": 1.0,
+    "life": [
+     0.6,
+     0.7
+    ],
+    "size": [
+     0.032,
+     0.04
+    ],
+    "colors": [
+     [
+      0.0,
+      0.7,
+      0.65,
+      0.63,
+      1.0
+     ],
+     [
+      1.0,
+      0.7,
+      0.65,
+      0.63,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "pieces_spurt_up",
+    "texture": "effect_spark02",
+    "count": 30,
+    "spread_deg": [
+     -20.0,
+     20.0,
+     0.0,
+     50.0,
+     -20.0,
+     20.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -20.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     0.2,
+     0.55
+    ],
+    "size": [
+     0.17,
+     0.2
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.1
+     ],
+     [
+      0.53,
+      0.5,
+      0.42,
+      1.0,
+      0.12
+     ]
+    ]
+   },
+   {
+    "node": "pieces_spurt_up2",
+    "texture": "effect_dirtchunks02",
+    "count": 30,
+    "spread_deg": [
+     -20.0,
+     20.0,
+     0.0,
+     50.0,
+     -20.0,
+     20.0
+    ],
+    "drag": 0.01,
+    "acceleration": [
+     0.0,
+     -20.0,
+     0.0
+    ],
+    "speed": 0.8,
+    "life": [
+     0.2,
+     0.55
+    ],
+    "size": [
+     0.17,
+     0.2
+    ],
+    "colors": [
+     [
+      0.0,
+      0.0,
+      0.3,
+      0.2,
+      0.18
+     ],
+     [
+      0.17,
+      1.0,
+      0.31,
+      0.53,
+      0.5
+     ],
+     [
+      0.42,
+      1.0,
+      0.34,
+      0.53,
+      0.5
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_stay",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.25,
+     0.25
+    ],
+    "colors": [
+     [
+      0.0,
+      0.35,
+      0.33,
+      0.3,
+      0.3
+     ],
+     [
+      1.0,
+      0.35,
+      0.33,
+      0.3,
+      0.0
+     ]
+    ]
+   },
+   {
+    "node": "dirt_spurt_stay2",
+    "texture": "effect_dustpuff01",
+    "count": 100,
+    "spread_deg": [
+     -30.0,
+     30.0,
+     -30.0,
+     30.0,
+     -30.0,
+     30.0
+    ],
+    "drag": 0.0001,
+    "acceleration": [
+     0.0,
+     -0.8,
+     0.0
+    ],
+    "speed": 2.0,
+    "life": [
+     0.75,
+     0.95
+    ],
+    "size": [
+     0.25,
+     0.25
+    ],
+    "colors": [
+     [
+      0.0,
+      0.35,
+      0.33,
+      0.3,
+      0.3
+     ],
+     [
+      1.0,
+      0.35,
+      0.33,
+      0.3,
+      0.0
+     ]
+    ]
+   }
+  ]
+ }
+}

@@ -714,11 +714,33 @@
    "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/trashcan.tif.png"
   }
  },
+ "surfaces": {
+  "action": 6,
+  "asphalt": 933,
+  "chainlink_fence": 28,
+  "dirt": 325,
+  "fabric_heavy": 28,
+  "glass": 35,
+  "glass_thick": 142,
+  "grass": 410,
+  "invisible_di": 268,
+  "metal_grate": 118,
+  "metal_thick": 265,
+  "metal_thin": 106,
+  "person": 108,
+  "rubber": 120,
+  "sand": 32,
+  "stone": 2298,
+  "underwater": 64,
+  "water": 15,
+  "wood_thick": 1772,
+  "wood_thin": 262
+ },
  "counts": {
   "triangles": 37566,
   "sky_triangles": 378,
   "collision_triangles": 7320,
   "dropped_faces": 1780,
-  "skipped_collision_polygons": 166
+  "skipped_collision_polygons": 155
  }
 }

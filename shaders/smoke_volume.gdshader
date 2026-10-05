@@ -9,6 +9,9 @@ uniform float age = 0.0;
 uniform float lifetime = 18.0;
 uniform vec3 bounds = vec3(6.3, 4.5, 6.3);
 uniform vec3 source = vec3(0.0, -4.05, 0.0);
+// Metres from the eye left clear: the third-person camera's distance to the soldier,
+// so smoke between the camera and a soldier outside the cloud never covers them.
+uniform float clear_distance = 0.0;
 varying flat vec3 camera_local;
 varying flat mat4 local_from_view;
 
@@ -89,7 +92,7 @@ void fragment() {
 	vec3 color = vec3(0.0);
 	for (int i = 0; i < 48; i++) {
 		vec3 p = camera_local + direction * travel;
-		float density = smoke(p);
+		float density = smoke(p) * smoothstep(clear_distance * 0.6, clear_distance, travel);
 		if (density > 0.015) {
 			float toward_light = smoke(p + vec3(-0.6, 0.9, 0.4));
 			float light = 0.22 + 0.78 * exp(-toward_light * 0.85);

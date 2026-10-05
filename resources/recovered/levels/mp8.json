@@ -306,6 +306,12 @@
    "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/rockwall2.tif.png"
   }
  },
+ "surfaces": {
+  "dirt": 7852,
+  "invisible_di": 286,
+  "metal_thick": 907,
+  "wood_thick": 4519
+ },
  "counts": {
   "triangles": 28088,
   "sky_triangles": 174,

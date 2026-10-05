@@ -61,11 +61,13 @@ def build_level(LEVEL):
         group('Sky', import_obj(LEVEL['sky']))
     for mat in bpy.data.materials:
         prepare_material(mat)
-    collision = import_obj(LEVEL['collision'])[0]
-    collision.name = LEVEL['asset'] + '-colonly'
-    collision.display_type = 'WIRE'
-    collision.hide_render = True
-    collision.hide_set(True)
+    # One collision object per original surface, named <asset>_<surface>-colonly.
+    collision = import_obj(LEVEL['collision'])
+    for obj in collision:
+        obj.data.name = obj.name
+        obj.display_type = 'WIRE'
+        obj.hide_render = True
+        obj.hide_set(True)
     scene = bpy.context.scene
     scene['recovery_source'] = LEVEL['source']
     scene['recovery_map'] = LEVEL['map']
@@ -73,8 +75,8 @@ def build_level(LEVEL):
     bpy.ops.wm.save_as_mainfile(filepath=ROOT + '/art/blender/' + LEVEL['asset'] + '.blend')
     meshes = [o for o in bpy.data.objects if o.type == 'MESH']
     print('LEVEL ' + json.dumps({'asset': LEVEL['asset'], 'objects': len(meshes),
-                                 'triangles': sum(len(o.data.polygons) for o in meshes if o is not collision),
-                                 'collision': len(collision.data.polygons), 'materials': len(bpy.data.materials)}))
+                                 'triangles': sum(len(o.data.polygons) for o in meshes if o not in collision),
+                                 'collision': {o.name: len(o.data.polygons) for o in collision}, 'materials': len(bpy.data.materials)}))
 
 
 for level in LEVELS:

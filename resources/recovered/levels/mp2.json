@@ -485,6 +485,18 @@
    "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/h-grate.tif.png"
   }
  },
+ "surfaces": {
+  "barrel": 320,
+  "fabric_heavy": 30,
+  "glass": 12,
+  "invisible_di": 452,
+  "metal_grate": 156,
+  "metal_railing": 14,
+  "metal_thick": 3186,
+  "metal_thin": 41,
+  "plaster": 70,
+  "stone": 625
+ },
  "counts": {
   "triangles": 16410,
   "sky_triangles": 132,

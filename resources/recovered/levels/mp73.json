@@ -600,11 +600,29 @@
    "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/woodsides.tif.png"
   }
  },
+ "surfaces": {
+  "action": 7,
+  "asphalt": 2207,
+  "barrel": 180,
+  "fabric_heavy": 28,
+  "glass": 212,
+  "invisible_di": 461,
+  "metal_grate": 4,
+  "metal_thick": 452,
+  "metal_thin": 288,
+  "rubber": 260,
+  "sand": 6098,
+  "stone": 4079,
+  "underwater": 48,
+  "water": 2,
+  "wood_thick": 1659,
+  "wood_thin": 212
+ },
  "counts": {
   "triangles": 64088,
   "sky_triangles": 182,
   "collision_triangles": 16195,
   "dropped_faces": 1954,
-  "skipped_collision_polygons": 135
+  "skipped_collision_polygons": 134
  }
 }

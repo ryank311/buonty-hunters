@@ -1,7 +1,7 @@
 extends RefCounted
 ## The stand-in soldiers each level starts with, so the round rules can be tried by hand:
 ## teammates to watch after being eliminated, enemies to shoot and search, and one enemy
-## on patrol to walk into a claymore. They live in a "Roster" node under the level, are
+## on patrol to set a claymore for. They live in a "Roster" node under the level, are
 ## reset with it, and are kept out of the level scenes because tools/build_graybox.py
 ## regenerates those.
 ##

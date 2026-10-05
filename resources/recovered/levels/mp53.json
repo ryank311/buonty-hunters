@@ -336,11 +336,23 @@
    "texture": "previous/recovery/converted/textures/shared/MP53/SP53_TXR-8f132a13e2-b2366709/foggy.tif.png"
   }
  },
+ "surfaces": {
+  "dirt": 1249,
+  "grass": 1464,
+  "gravel": 170,
+  "invisible_di": 182,
+  "metal_grate": 16,
+  "metal_thick": 38,
+  "stone": 5327,
+  "underwater": 275,
+  "water": 128,
+  "wood_thick": 658
+ },
  "counts": {
   "triangles": 30245,
   "sky_triangles": 204,
   "collision_triangles": 9379,
   "dropped_faces": 0,
-  "skipped_collision_polygons": 83
+  "skipped_collision_polygons": 9
  }
 }

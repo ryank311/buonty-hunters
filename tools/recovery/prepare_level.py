@@ -16,7 +16,8 @@ original lighting, fog, draw distance, spawns and per-texture blend modes.
 Geometry selection: intact states only. Destroyed/debris branches, shadow and
 pulse helpers, camera-following rain/dust and night-vision masks are omitted;
 the sky dome is split into its own mesh; collision skips camera/trigger
-volumes and water (the Crossroads pilot's filters, extended to every map).
+volumes and is grouped by original surface (<asset>_<surface>-colonly), with
+water in its own group that the game keeps off the movement layers.
 """
 import argparse
 import gzip
@@ -65,6 +66,12 @@ def pairs(values):
         if isinstance(values[i], str):
             result[values[i]] = values[i + 1]
     return result
+
+
+def soils():
+    """materials.rdr's SOILS surface names, in index order."""
+    record = json.loads(next((RECOVERY / 'native/scripts/disc').glob('READERC.ZAR-*/*-materials.rdr.json')).read_text())
+    return re.findall(r'"NAME", \["([^"]*)"\]', json.dumps(record))
 
 
 def world_params(map_id):
@@ -387,24 +394,47 @@ def prepare(map_id):
                     'radius': round(float(max(sky_high[0] - sky_low[0], sky_high[2] - sky_low[2])) * SCALE / 2, 2),
                     'height': [round(float(sky_low[1]) * SCALE, 2), round(float(sky_high[1]) * SCALE, 2)]}
     source = json.loads(gzip.decompress((folder / 'collision.json.gz').read_bytes()))
-    solid, skipped, seen = [], 0, set()
+    # Each polygon's material id is its SOILS index + 2 (materials.rdr); 0 and 1 take the
+    # map's DefaultMaterial. Collision is grouped by surface, so the game knows what a
+    # round struck; water (id 11) becomes its own group the game puts on a bullet-only layer.
+    soil = soils()
+    default = world_params(map_id).get('DefaultMaterial', ['STONE'])[0]
+
+    def surface(material):
+        name = soil[material - 2] if 2 <= material < len(soil) + 2 else default
+        return name.lower().replace(' ', '_')
+
+    solid, kinds, water, skipped, seen = [], [], [], 0, set()
     for poly in source:
         if DROP.search(poly['path'].replace('/', '_').replace('=', '_')) or SKY.search(poly['path'].replace('/', '_')) \
-                or poly['poly']['cameratype'] & 1 or poly['poly']['material'] == 11:
+                or poly['poly']['cameratype'] & 1:
             skipped += 1
             continue
+        material = poly['poly']['material']
         for tri in triangles(list(np.array(poly['points']).reshape(-1, 3))):
             signature = tuple(sorted(tuple(np.round(v, 4)) for v in tri))
             if signature not in seen:
                 seen.add(signature)
-                solid.append(tri)
+                if material == 11:
+                    water.append(tri)
+                else:
+                    solid.append(tri)
+                    kinds.append(surface(material))
     solid = np.array(solid)
-    lines = [f'o {asset}-colonly\n']
-    for tri in solid:
-        for v in tri:
-            p = (v - origin) @ C.T * SCALE
-            lines.append(f'v {p[0]:.4f} {p[1]:.4f} {p[2]:.4f}\n')
-    lines += [f'f {i*3+1} {i*3+2} {i*3+3}\n' for i in range(len(solid))]
+    groups = {}
+    for tri, kind in zip(solid, kinds):
+        groups.setdefault(kind, []).append(tri)
+    if water:
+        groups['water'] = water
+    lines, base = [], 1
+    for kind, tris in sorted(groups.items()):
+        lines.append(f'o {asset}_{kind}-colonly\n')
+        for tri in tris:
+            for v in tri:
+                p = (v - origin) @ C.T * SCALE
+                lines.append(f'v {p[0]:.4f} {p[1]:.4f} {p[2]:.4f}\n')
+            lines.append(f'f {base} {base+1} {base+2}\n')
+            base += 3
     (out / 'collision.obj').write_text(''.join(lines))
     spawn_list = spawns(map_id, solid, origin)
     mission_name = report['name']
@@ -415,6 +445,7 @@ def prepare(map_id):
         'scale': SCALE, 'bounds': [((low - origin) * SCALE).round(2).tolist(), ((high - origin) * SCALE).round(2).tolist()],
         'kill_height': round(float(min(low[1], solid[:, :, 1].min())) * SCALE - 10, 2),
         'ambience': ambience(map_id), 'sky': sky_info, 'spawns': spawn_list, 'materials': runtime_materials,
+        'surfaces': {kind: len(tris) for kind, tris in sorted(groups.items())},
         'counts': {'triangles': world.count, 'sky_triangles': sky.count, 'collision_triangles': len(solid),
                    'dropped_faces': dropped, 'skipped_collision_polygons': skipped},
     }

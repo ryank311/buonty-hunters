@@ -472,11 +472,26 @@
    "texture": "previous/recovery/converted/textures/levels/MP52/MP52_TXR-a097c6c87d-c66ec228/mp52_sidewalk_base.tif.png"
   }
  },
+ "surfaces": {
+  "asphalt": 402,
+  "barrel": 188,
+  "dirt": 200,
+  "glass_medium": 192,
+  "glass_thick": 46,
+  "invisible_di": 761,
+  "metal_grate": 18,
+  "metal_grate_thin": 460,
+  "metal_thick": 2703,
+  "stone": 767,
+  "underwater": 100,
+  "water": 52,
+  "wood_thick": 2359
+ },
  "counts": {
   "triangles": 34678,
   "sky_triangles": 140,
   "collision_triangles": 8196,
   "dropped_faces": 216,
-  "skipped_collision_polygons": 30
+  "skipped_collision_polygons": 0
  }
 }

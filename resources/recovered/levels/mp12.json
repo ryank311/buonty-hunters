@@ -294,11 +294,20 @@
    "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/thai3r_palmtrunk2.tif.png"
   }
  },
+ "surfaces": {
+  "grass": 317,
+  "invisible_di": 78,
+  "metal_thick": 46,
+  "stone": 8874,
+  "underwater": 185,
+  "water": 177,
+  "wood_thick": 424
+ },
  "counts": {
   "triangles": 45406,
   "sky_triangles": 216,
   "collision_triangles": 9924,
   "dropped_faces": 1075,
-  "skipped_collision_polygons": 135
+  "skipped_collision_polygons": 8
  }
 }

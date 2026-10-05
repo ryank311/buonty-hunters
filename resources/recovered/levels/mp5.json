@@ -294,11 +294,21 @@
    "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/sky01.tif.png"
   }
  },
+ "surfaces": {
+  "grass": 1177,
+  "invisible_di": 122,
+  "leafy_tree": 116,
+  "metal_thick": 2,
+  "stone": 5486,
+  "underwater": 363,
+  "water": 4,
+  "wood_thick": 1091
+ },
  "counts": {
   "triangles": 35187,
   "sky_triangles": 288,
   "collision_triangles": 8357,
   "dropped_faces": 0,
-  "skipped_collision_polygons": 37
+  "skipped_collision_polygons": 35
  }
 }
