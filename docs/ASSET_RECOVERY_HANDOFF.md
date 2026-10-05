@@ -30,6 +30,10 @@ Extraction yielded 15,270 texture entries (3,398 distinct PNG hashes), 4,813 sta
 
 ## Integration paths and traps
 
+### HUD and crosshairs
+
+Read [HUD.md](../tools/recovery/HUD.md). All 174 distinct HUD/HUD2/HUDW textures are committed under `art/ui/recovered/`, with a searchable `index.html` and `resources/recovered/hud_catalogue.json` provenance. Rebuild with `python3 tools/recovery/prepare_hud.py`; no Blender step is needed for these 2D source images. Rifle, sidearm, shotgun, grenade and scope reticles are connected to gameplay, including team tint and the muzzle-obstruction pip. Other HUD icons are catalogued but not yet connected. Preserve source padding, alpha and the original 640×448 coordinate mapping. The current angular spread/recoil system is still an approximation; the guide distinguishes recovered constants from adaptations.
+
 ### Characters and animations
 
 Read [CHARACTERS.md](../tools/recovery/CHARACTERS.md) for commands, runtime behavior and verification. Key code:
@@ -81,6 +85,7 @@ Run `tools/dev import` after new assets or scripts, `tools/dev check` before tes
 - `recovered_collection_regression`: all 202 models, all 402 clips, searchable browser, live player selection, character switching and persistence.
 - `recovered_motion_regression`: gameplay run equals Lab pose at varied view pitch; jump and landing advance once; dive avoids the wrap frame and settles prone.
 - `recovered_gunplay_regression`: idle cadence, raised aim and pitch, actual-shot recoil, dry fire, reload progress and cancellation, and partial pistol/prone fire poses.
+- `recovered_hud_regression`: recovered weapon reticle selection, actual fire/spread, pellet cone, grenade charge, team identification, muzzle obstruction, scope and modal visibility. See the HUD guide for source-art provenance and remaining engine-behavior approximations.
 - `recovery_regression`: pilot geometry, textures, collision and traversal. Existing combat, posture, movement, impact and ragdoll suites remain required.
 
 The full native fidelity audit measured at most 0.016 mm translation error and 0.000015 basis-vector error. Run/jump/dive/prone transitions were inspected in the live renderer. These checks preserve source deformation; they do not certify every recovered animation, material or collision branch as finished gameplay content. Add meaningful checks for each newly integrated behavior and state remaining limits in the relevant guide.

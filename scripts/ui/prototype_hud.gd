@@ -507,4 +507,4 @@ func update_display(delta: float) -> void:
 	_layout_hud()
 	minimap.refresh()
 	weapon_icon.queue_redraw()
-	crosshair.update_reticle(player.weapon.spread_degrees(),player.camera_rig.camera.fov,delta,player.weapon.blocked,player.weapon.hit_flash > 0,session.modal,player.camera_rig.reticle_offset(crosshair.size))
+	crosshair.update_weapon(player.weapon, delta, session.modal)

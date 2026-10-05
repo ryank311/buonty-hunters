@@ -134,11 +134,11 @@ func _run() -> void:
 	var ring_center: Vector2 = reticle.center_ring.position
 	reticle.update_reticle(9.0,60,1.0/60.0,false,false,false)
 	check(reticle.spread_marks.size() == 4 and reticle.center_ring.get_parent() == reticle,"Center disc and four cardinal marks are separate UI nodes")
-	check(radius >= 24 and reticle.CIRCLE_FILL.a < 0.2 and reticle.CIRCLE_RIM.a < 0.35,"Reticle uses a larger translucent charcoal disc and faint rim")
-	check(reticle.mark_distance > resting_distance + 15 and reticle.circle_radius == radius and reticle.center_ring.position == ring_center,"Spread pushes the four marks outward while the circle stays fixed")
+	check(reticle.center_texture.get_size() == Vector2(64, 64) and reticle.arm_texture.get_size() == Vector2(32, 32),"Rifle reticle uses the recovered 64px disc and 32px arm sprites")
+	check(reticle.mark_distance > resting_distance + 10 and reticle.circle_radius == radius and reticle.center_ring.position == ring_center,"Spread pushes the four marks outward while the circle stays fixed")
 	var symmetric := true
 	for index: int in range(4):
-		symmetric = symmetric and reticle.spread_marks[index].position.is_equal_approx(ring_center + reticle.DIRECTIONS[index] * reticle.mark_distance)
+		symmetric = symmetric and reticle.spread_marks[index].position.is_equal_approx(ring_center + reticle.DIRECTIONS[index] * reticle.mark_distance * reticle.pixel_scale)
 	check(symmetric,"All four spread marks remain symmetric on the cardinal axes")
 	var expanded: float = reticle.mark_distance
 	reticle.update_reticle(0.25,60,1.0/60.0,false,false,false)

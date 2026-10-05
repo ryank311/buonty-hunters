@@ -114,26 +114,7 @@ func _process(delta: float) -> void:
 		menu.position = (LAYOUT_SIZE - menu.size) * Vector2(0.5, 0.42)
 
 func _draw_scope() -> void:
-	var size := scope.size
-	var centre := size * 0.5
-	var radius := minf(size.x, size.y) * 0.46
-	var reach := size.length()
-	# Black everywhere outside the lens: a ring of quads from the lens edge outward.
-	var steps := 64
-	for index: int in range(steps):
-		var a := Vector2.from_angle(TAU * index / steps)
-		var b := Vector2.from_angle(TAU * (index + 1) / steps)
-		scope.draw_colored_polygon(PackedVector2Array([centre + a * radius, centre + b * radius, centre + b * reach, centre + a * reach]), Color.BLACK)
-	scope.draw_arc(centre, radius, 0.0, TAU, 96, Color.BLACK, 3.0)
-	var ink := Color(0.03, 0.03, 0.03, 0.95)
-	var gap := radius * 0.06
-	for direction: Vector2 in [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]:
-		scope.draw_line(centre + direction * gap, centre + direction * radius * 0.32, ink, 1.0)
-		scope.draw_line(centre + direction * radius * 0.32, centre + direction * radius, ink, 3.0)
-	# Hold-over ticks below the centre for judging bullet drop.
-	for tick: int in range(1, 5):
-		var y := radius * 0.07 * tick
-		scope.draw_line(centre + Vector2(-6, y), centre + Vector2(6, y), ink, 1.0)
-	scope.draw_circle(centre, 1.2, Color(0.75, 0.1, 0.08))
+	preload("res://scripts/ui/recovered_scope.gd").draw(scope, scope.size)
 	if scope_caption != "":
-		scope.draw_string(ThemeDB.fallback_font, centre + Vector2(radius * 0.42, radius * 0.86), scope_caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, INK)
+		# Our weapon strip occupies the original bottom-left caption location.
+		scope.draw_string(ThemeDB.fallback_font, Vector2(scope.size.x * 0.5 - 38, scope.size.y * 0.93), "ZOOM: " + scope_caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 12, INK)
