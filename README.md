@@ -119,6 +119,10 @@ tools/dev shot town_market lab_range --full
 
 On this Mac the executable is `/Applications/Godot.app/Contents/MacOS/Godot`. The suites exercise character motion/collision, all three town routes, visible limb endpoints and posture, controller input events and menu navigation, ammunition conservation, recoil/recovery, persistent surface impacts, and the class loadouts, weapon damage, bullet flight, grenades, claymores, elimination, and body searches. QA mode ignores saved tuning; headless runs skip audio playback and vibration. The project retains Mobile rendering and Jolt Physics.
 
+## Linux and SteamOS builds
+
+`tools/dev build linux` creates a native x86_64 release with the recovered runtime assets. It downloads matching verified templates on first use and audits the packaged data. `tools/dev deploy linux deck@STEAMOS_HOST` copies the latest build over SSH, tests the actual Linux executable, and installs **SOCOM Playtest** in KDE with a stable `~/Games/socom/play.sh` launcher for Steam. Quit and relaunch to pick up updates. See [Linux playtesting](docs/LINUX_PLAYTEST.md) for setup, logs, rollback and native development.
+
 ## Working on the game with an AI while it runs
 
 While you play (F5 in the editor, or `tools/dev play`), the game serves an MCP endpoint on this machine, and the `game` MCP server registered for Claude Code and Codex connects an agent to it. Say what you feel ("walking is slow", "the jump is floaty", "that reload looks wrong") and the agent can:
