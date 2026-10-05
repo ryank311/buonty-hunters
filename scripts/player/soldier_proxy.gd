@@ -211,6 +211,8 @@ func set_weapon(slot: int) -> void:
 	muzzle.position = Vector3(0, 0.015, -0.52 if slot == 0 else -0.26)
 
 func reset_pose() -> void:
+	if soldier_skin != null:
+		soldier_skin.driver.reset()
 	cycle = 0.0
 	blend = 0.0
 	body_drop = 0.0
@@ -643,7 +645,11 @@ func pose(stance: int, speed: float, movement: Vector2, aim_pitch: float, lean: 
 	lean_roll = lerpf(lean_roll, -lean * 0.08 - clampf(acceleration.x * 0.002, -0.04, 0.04) * weight, amount)
 	transform = Transform3D(Basis(Vector3.BACK, lean_roll), Vector3(lean_shift, 0, 0)) * dive_frame(dive_phase, dive_side, dive_blend)
 	if soldier_skin != null:
-		soldier_skin.drive(self)
+		# The recovered dive clip supplies the body pose, without applying the
+		# old procedural dive frame a second time.
+		var bank := Basis(Vector3.UP, -dive_side * 0.35 * sin(PI * dive_phase) * dive_blend) * Basis(Vector3.BACK, -dive_side * 0.65 * sin(PI * minf(dive_phase * 1.15, 1.0)) * dive_blend)
+		transform = Transform3D(Basis(Vector3.BACK, lean_roll) * bank, Vector3(lean_shift, 0, 0))
+		soldier_skin.pose(self, stance, speed, movement, grounded, aim_pitch, delta)
 
 static func dive_frame(phase: float, side: float, amount: float) -> Transform3D:
 	# Whole-body flight path over the prone layout: launch inclined off the planted

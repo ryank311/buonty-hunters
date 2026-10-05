@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/levels/recovery_lab.gd" id="1"]
+[ext_resource type="PackedScene" path="res://art/models/recovered_crossroads.glb" id="2"]
+[ext_resource type="PackedScene" path="res://art/models/recovered_seal.glb" id="3"]
+[ext_resource type="PackedScene" path="res://art/models/recovered_m4.glb" id="4"]
+[ext_resource type="PackedScene" path="res://art/models/recovered_char_seal_a_cqb.glb" id="5"]
+
+[node name="RecoveryLab" type="Node3D"]
+script = ExtResource("1")
+metadata/inspection_only = true
+
+[node name="Map" parent="." instance=ExtResource("2")]
+
+[node name="Character" parent="." instance=ExtResource("3")]
+position = Vector3(8, 0.08, 8)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="Weapon" parent="." instance=ExtResource("4")]
+position = Vector3(5, 0.9, 8)
+rotation_degrees = Vector3(0, 90, 0)
+
+[node name="Retargeted" parent="." instance=ExtResource("5")]
+position = Vector3(10.5, 0.08, 8)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="Spawns" type="Node3D" parent="."]
+
+[node name="Showcase" type="Marker3D" parent="Spawns"]
+position = Vector3(6.5, 0.12, 13)
+
+[node name="Plaza" type="Marker3D" parent="Spawns"]
+position = Vector3(-8, 0.12, -12)
+rotation_degrees = Vector3(0, 208, 0)
+
+[node name="NorthStreet" type="Marker3D" parent="Spawns"]
+position = Vector3(8, 0.12, -12)
+rotation_degrees = Vector3(0, 180, 0)
+
+[node name="Locations" type="Node3D" parent="."]
+
+[node name="Plaza" type="Marker3D" parent="Locations"]
+metadata/title = "CROSSROADS PLAZA"
+metadata/radius = 200.0

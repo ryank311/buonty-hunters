@@ -12,7 +12,18 @@ const KEYS: Dictionary = {
 	"equip_rifle": KEY_1, "equip_pistol": KEY_2,
 	"equip_item_1": KEY_3, "equip_item_2": KEY_4,
 	"interact": KEY_F, "class_menu": KEY_F4,
+	"recovery_clip": KEY_F6, "recovery_pause": KEY_F7,
+	"recovery_collision": KEY_F8, "recovery_step": KEY_F9,
+	"recovery_browser": KEY_TAB,
+	"character_previous": KEY_BRACKETLEFT, "character_next": KEY_BRACKETRIGHT,
 	"zoom_in": KEY_EQUAL, "zoom_out": KEY_MINUS,
+}
+
+const COMMAND_KEYS: Dictionary = {
+	"tuning": KEY_1, "switch_level": KEY_2,
+	"debug_view": KEY_3, "class_menu": KEY_4,
+	"recovery_clip": KEY_6, "recovery_pause": KEY_7,
+	"recovery_collision": KEY_8, "recovery_step": KEY_9,
 }
 
 static func setup() -> void:
@@ -23,6 +34,12 @@ static func setup() -> void:
 		var event := InputEventKey.new()
 		event.physical_keycode = KEYS[action]
 		InputMap.action_add_event(action, event)
+	for action: String in COMMAND_KEYS:
+		var event := InputEventKey.new()
+		event.physical_keycode = COMMAND_KEYS[action]
+		event.meta_pressed = true
+		if not InputMap.action_has_event(action, event):
+			InputMap.action_add_event(action, event)
 	for action: String in ["fire", "aim", "pad_stance", "look_left", "look_right", "look_up", "look_down"]:
 		if not InputMap.has_action(action):
 			InputMap.add_action(action)
@@ -69,6 +86,9 @@ static func setup() -> void:
 	_axis("aim", JOY_AXIS_TRIGGER_LEFT, 1.0)
 	InputMap.action_set_deadzone("fire", 0.15)
 	InputMap.action_set_deadzone("aim", 0.15)
+
+static func function_key_hint(number: int) -> String:
+	return "CMD+%d" % number if OS.get_name() == "macOS" else "F%d" % number
 
 static func _mouse(action: String, button: MouseButton) -> void:
 	var event := InputEventMouseButton.new()

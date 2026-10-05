@@ -45,6 +45,10 @@ const SCENARIOS: Dictionary = {
 	"rifle_empty": {"level": "lab", "pos": [23.0, 0.1, 5.0], "look_at": "Targets/Target10", "ammo": 0, "reserve": 0},
 	"pistol_ready": {"level": "lab", "pos": [23.0, 0.1, 5.0], "look_at": "Targets/Target10", "weapon": "pistol"},
 	"crouch_aim": {"level": "lab", "pos": [23.0, 0.1, 5.0], "look_at": "Targets/Target10", "stance": "crouch", "hold": ["aim"]},
+	"recovery_start": {"level": "recovery", "spawn": "Showcase", "roster": false},
+	"recovery_character": {"level": "recovery", "pos": [8.0, 0.1, 11.5], "look_at": [8.0, 1.25, 8.0], "roster": false},
+	"recovery_weapon": {"level": "recovery", "pos": [5.0, 0.1, 10.0], "look_at": [5.0, 1.05, 8.0], "roster": false},
+	"recovery_plaza": {"level": "recovery", "spawn": "Plaza", "roster": false},
 }
 
 static func session(tree: SceneTree) -> Node:
@@ -103,10 +107,13 @@ static func apply(tree: SceneTree, spec: Dictionary) -> Dictionary:
 			placed.queue_free()
 	if spec.has("level"):
 		var wanted := str(spec.level)
-		if wanted not in ["town", "lab"]:
-			notes.append("unknown level '%s' (town or lab)" % wanted)
-		elif (wanted == "lab") != s.in_lab or spec.get("reload", false):
-			s.load_level(wanted == "lab")
+		if wanted not in ["town", "lab", "recovery"]:
+			notes.append("unknown level '%s' (town, lab or recovery)" % wanted)
+		elif wanted != s.current_level or spec.get("reload", false):
+			if wanted == "recovery":
+				s.load_recovery()
+			else:
+				s.load_level(wanted == "lab")
 			await _ticks(tree, 2)
 	if spec.has("spawn"):
 		var index := _child_index(s.level.get_node("Spawns"), spec.spawn)
@@ -352,7 +359,7 @@ static func state(tree: SceneTree) -> Dictionary:
 			var kind: String = node.get_script().resource_path.get_file().get_basename()
 			live[kind] = int(live.get(kind, 0)) + 1
 	var result: Dictionary = {
-		"level": "lab" if s.in_lab else "town",
+		"level": s.current_level,
 		"location": s.location_name(),
 		"spawn": str(s.level.get_node("Spawns").get_child(s.spawn_index).name),
 		"menu": s.modal,

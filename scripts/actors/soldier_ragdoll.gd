@@ -45,6 +45,8 @@ func _ready() -> void:
 ## Replaces `proxy` with the ragdoll. `hit` comes from impact(); `carried` is the
 ## soldier's velocity at the moment of death.
 func build(proxy: SoldierProxy, hit: Dictionary = {}, carried := Vector3.ZERO) -> void:
+	if proxy.soldier_skin != null:
+		proxy.soldier_skin.capture_proxy(proxy)
 	var frame := proxy.global_transform
 	var right := frame.basis.x.normalized()
 	var up := frame.basis.y.normalized()

@@ -278,7 +278,7 @@ func tick(delta: float, fire: bool, reload_requested: bool) -> void:
 	var fresh_press := fire and not fire_was_down
 	fire_was_down = fire
 	for item: int in range(2):
-		if Input.is_action_just_pressed("equip_item_%d" % (item + 1)):
+		if Input.is_action_just_pressed("equip_item_%d" % (item + 1), true):
 			equip(2 + item)
 	pad_cycle = false
 	_update_scope(delta)

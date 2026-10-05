@@ -185,7 +185,7 @@ func _build_hud() -> void:
 	debug_label = _text(debug, "", 16)
 	debug_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	stats_label = _text(debug, "", 16)
-	controls_label = _text(root, "START / F1  OPTIONS", 14, INK)
+	controls_label = _text(root, "START / %s  OPTIONS" % PlayerInput.function_key_hint(1), 14, INK)
 	controls_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	crosshair = preload("res://scripts/ui/spread_reticle.gd").new()
 	root.add_child(crosshair)
@@ -212,9 +212,11 @@ func _layout_hud() -> void:
 	var notice_width := minf(600, viewport_size.x - margin.x * 2 - 340)
 	_set_card_rect("Notice", Vector2((viewport_size.x - notice_width) * 0.5, margin.y + 6), Vector2(notice_width, 0))
 	_set_card_rect("Diagnostics", Vector2(margin.x, margin.y + 65), Vector2(300, 0))
-	controls_label.position = Vector2((viewport_size.x - 220) * 0.5, viewport_size.y - margin.y - 22)
-	controls_label.size = Vector2(220,22)
-	controls_label.visible = session.debug_visible and not session.modal
+	var recovery: bool = session.current_level == "recovery"
+	var control_height := 64.0 if recovery else 22.0
+	controls_label.position = Vector2((viewport_size.x - 250) * 0.5, viewport_size.y - margin.y - control_height)
+	controls_label.size = Vector2(250, control_height)
+	controls_label.visible = (session.debug_visible or recovery) and not session.modal
 	for id: String in hud_panels:
 		var style: StyleBoxFlat = hud_panels[id].get_theme_stylebox("panel")
 		style.bg_color.a = session.player.camera_settings.hud_opacity if id in ["Weapon", "Squad", "Diagnostics"] else 0.0
@@ -373,6 +375,7 @@ func _build_menu() -> void:
 	common_controls.append(_button(row, "Resume / Start", func() -> void: session.set_modal(false)))
 	common_controls.append(_button(row, "Old Quarter", func() -> void: session.load_level(false); session.set_modal(false)))
 	common_controls.append(_button(row, "Movement Lab", func() -> void: session.load_level(true); session.set_modal(false)))
+	common_controls.append(_button(row, "Recovery Lab", func() -> void: session.load_recovery(); session.set_modal(false)))
 	common_controls.append(_button(row, "Reset / refill", func() -> void: session.reset_player(); session.set_modal(false)))
 	var bottom := HBoxContainer.new()
 	menu_box.add_child(bottom)
@@ -458,7 +461,10 @@ func notify(text: String) -> void:
 
 func update_display(delta: float) -> void:
 	var player: PrototypePlayer = session.player
-	location_heading.text = "MOVEMENT LAB" if session.in_lab else "OLD QUARTER"
+	location_heading.text = session.level_title()
+	var recovery: bool = session.current_level == "recovery"
+	controls_label.text = "TAB  CHARACTER / MOTION BROWSER\n%s CLIP  ·  %s PAUSE\n%s COLLISION  ·  %s STEP" % [PlayerInput.function_key_hint(6), PlayerInput.function_key_hint(7), PlayerInput.function_key_hint(8), PlayerInput.function_key_hint(9)] if recovery else "START / %s  OPTIONS" % PlayerInput.function_key_hint(1)
+	minimap.visible = not recovery
 	location_label.text = session.location_name()
 	stance_label.text = "DIVING" if player.diving else "SETTLING" if player.dive_recovery > 0 else StanceController.NAMES[player.stance.current]
 	weapon_label.text = player.weapon.profile.display_name
@@ -497,7 +503,7 @@ func update_display(delta: float) -> void:
 	hud_panels.Notice.visible = notice_time > 0 and not session.modal
 	hud_panels.Notice.modulate.a = minf(notice_time, 1.0)
 	hud_panels.Diagnostics.visible = session.debug_visible and not session.modal
-	debug_label.text = "%.0f FPS\nPosition  %.1f / %.1f / %.1f\nCamera  %.2f m  |  FOV %.0f°\nGrounded  %s\nR3 / F3  Hide diagnostics" % [Engine.get_frames_per_second(), player.position.x, player.position.y, player.position.z, player.camera_rig.arm.get_hit_length(), player.camera_rig.camera.fov, player.is_on_floor()]
+	debug_label.text = "%.0f FPS\nPosition  %.1f / %.1f / %.1f\nCamera  %.2f m  |  FOV %.0f°\nGrounded  %s\nR3 / %s  Hide diagnostics" % [Engine.get_frames_per_second(), player.position.x, player.position.y, player.position.z, player.camera_rig.arm.get_hit_length(), player.camera_rig.camera.fov, player.is_on_floor(), PlayerInput.function_key_hint(3)]
 	_layout_hud()
 	minimap.refresh()
 	weapon_icon.queue_redraw()

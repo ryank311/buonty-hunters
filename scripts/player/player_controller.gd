@@ -132,9 +132,10 @@ func _physics_process(delta: float) -> void:
 		for action: String in ["fire", "jump", "crouch", "prone", "pad_stance", "reload", "equip_rifle", "equip_pistol"]:
 			input_armed = input_armed and not Input.is_action_pressed(action)
 		return
-	if Input.is_action_just_pressed("equip_rifle"):
+	# Modified number shortcuts must not also change the equipped weapon.
+	if Input.is_action_just_pressed("equip_rifle", true):
 		weapon.equip(0)
-	elif Input.is_action_just_pressed("equip_pistol"):
+	elif Input.is_action_just_pressed("equip_pistol", true):
 		weapon.equip(1)
 	if Input.is_action_just_pressed("prone"):
 		request_stance(StanceController.Stance.STAND if stance.current == StanceController.Stance.PRONE else StanceController.Stance.PRONE)

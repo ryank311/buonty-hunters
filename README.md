@@ -6,7 +6,9 @@ The playable graybox has an original town, a measured movement lab, a controllab
 
 ## Play
 
-Open `project.godot` in **Godot 4.7** and press **F5**. You start in **Old Quarter**. Press **F2** to switch to the **Movement Lab**, **F1** to tune the feel, and **Esc** to release the mouse and open the menu.
+Open `project.godot` in **Godot 4.7** and click the **Play ▶** button (or press **F5**). You start in **Old Quarter**. Press **F2** to switch to the **Movement Lab**, **F1** to tune the feel, and **Esc** to release the mouse and open the menu. On Mac, **Command + the matching number** also works for every in-game function-key shortcut: **Cmd+1** opens options, **Cmd+2** switches levels, **Cmd+3** toggles diagnostics, and **Cmd+4** opens class selection.
+
+**Cmd+1 / F1 → Recovery Lab**, then **Tab**, opens a searchable collection of **202 recovered character models and 402 motion clips**. The selected character and our player model play the same clip side by side. The browser has category filters, pause, scrubbing and frame stepping. **Try recovered leg motion on player** enables an optional standing/crouching locomotion trial; close the browser to walk. **Cmd+6 / F6** changes the clip, **Cmd+7 / F7** pauses, **Cmd+9 / F9** steps one animation frame, and **Cmd+8 / F8** shows recovered collision. **N** cycles three inspection spawns. See the [character and animation guide](tools/recovery/CHARACTERS.md) and [map/weapon pilot guide](tools/recovery/PILOT.md) for sources, rebuilding and current limits.
 
 The entire game renders at a fixed **640×480 (4:3)**, including the HUD and menus. Resizing only enlarges that finished image; every monitor shows the same framing, detail, and HUD proportions. Black bars fill unused space without cropping or stretching. The camera sits above and slightly right of the soldier, framing him just left of the reticle with the aiming area clear. The window opens at twice the render size (in screen points, so Retina displays are not halved), stepping down only to fit the screen. **F1/Start → Camera → Camera height above stance** and **Camera side offset** adjust that framing; ceiling and wall probes keep it within the level.
 
@@ -26,11 +28,11 @@ The entire game renders at a fixed **640×480 (4:3)**, including the HUD and men
 | Throw a grenade / set a claymore | Left mouse button with it equipped |
 | Scope zoom (sniper rifle, while aiming) | Mouse wheel, or = / - |
 | Search a body | F |
-| Choose class | F4 |
+| Choose class | F4 / Cmd+4 |
 | Switch view while eliminated | Q / E |
-| Tuning / pause | F1 / Esc |
-| Switch level | F2 |
-| Diagnostic display | F3 |
+| Tuning / pause | F1 / Cmd+1 / Esc |
+| Switch level | F2 / Cmd+2 |
+| Diagnostic display | F3 / Cmd+3 |
 | Reset position | Backspace |
 | Next spawn | N |
 | Start / stop route timer | T |

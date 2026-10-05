@@ -40,10 +40,12 @@ static func ensure(level: Node, lab: bool) -> void:
 	var holder := Node3D.new()
 	holder.name = NODE_NAME
 	level.add_child(holder)
-	_fill(holder, lab)
+	if not level.get_meta(&"inspection_only", false):
+		_fill(holder, lab)
 
 ## Removes the level's soldiers, or puts them back.
 static func set_present(level: Node, lab: bool, present: bool) -> void:
+	present = present and not level.get_meta(&"inspection_only", false)
 	ensure(level, lab)
 	var holder := level.get_node(NODE_NAME)
 	if present == (holder.get_child_count() > 0):

@@ -82,6 +82,9 @@ def main():
         export_lights=False,
         export_extras=True,
         export_materials="EXPORT",
+        # Preserve every nonzero influence instead of truncating at four. glTF
+        # can store a second JOINTS/WEIGHTS set; Godot supports eight influences.
+        export_all_influences=True,
     )
     print("EXPORT " + json.dumps({
         "glb": options.out,

@@ -7,6 +7,7 @@ const SETTINGS_PATH := "user://prototype_settings.cfg"
 @onready var hud: PrototypeHUD = $HUD
 var level: Node3D
 var in_lab: bool = false
+var current_level: String = "town"
 var spawn_index: int = 0
 var modal: bool = false
 var elapsed: float = 0.0
@@ -15,12 +16,14 @@ var lap_running: bool = false
 var last_lap: float = 0.0
 var lap_start := Vector3.ZERO
 var debug_visible: bool = false
+var recovered_characters: Array = []
 var qa_mode: bool = "--qa" in OS.get_cmdline_user_args() or "--capture" in OS.get_cmdline_user_args()
 
 func _enter_tree() -> void:
 	PlayerInput.setup()
 
 func _ready() -> void:
+	recovered_characters = preload("res://scripts/levels/recovery_library.gd").catalogue().characters
 	_load_settings()
 	hud.initialize(self)
 	player.message.connect(hud.notify)
@@ -76,6 +79,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		debug_visible = not debug_visible
 	elif event.is_action_pressed("start_lap"):
 		toggle_lap()
+	elif event.is_action_pressed("character_previous") or event.is_action_pressed("character_next"):
+		var index := 0
+		for current: int in range(recovered_characters.size()):
+			if recovered_characters[current].path == player.soldier.soldier_skin.model_path:
+				index = current
+		set_player_character(index + (-1 if event.is_action_pressed("character_previous") else 1))
+		get_viewport().set_input_as_handled()
+
+func set_player_character(index: int) -> void:
+	var entry: Dictionary = recovered_characters[posmod(index, recovered_characters.size())]
+	player.soldier.soldier_skin.set_model_path(entry.path)
+	if level.has_method("update_player_preview"):
+		level.update_player_preview()
+	hud.notify("Character: %s • [ / ] switches character" % entry.name)
 
 func next_spawn() -> void:
 	spawn_index = (spawn_index + 1) % level.get_node("Spawns").get_child_count()
@@ -100,16 +117,27 @@ func _controller_connection_changed(_device: int, connected: bool) -> void:
 		hud.notify("Controller connected • Start opens tuning")
 
 func load_level(lab: bool) -> void:
+	_replace_level(LAB if lab else TOWN, "lab" if lab else "town")
+	hud.notify("Movement Lab • measured fixtures and practice targets" if lab else "Old Quarter • explore the three routes")
+
+func load_recovery() -> void:
+	_replace_level(load("res://scenes/levels/recovery_lab.tscn"), "recovery")
+	hud.notify("Recovery Lab • %s animation · %s pause · %s collision · %s step" % [PlayerInput.function_key_hint(6), PlayerInput.function_key_hint(7), PlayerInput.function_key_hint(8), PlayerInput.function_key_hint(9)])
+
+func _replace_level(scene: PackedScene, key: String) -> void:
 	if is_instance_valid(level):
 		remove_child(level)
 		level.queue_free()
-	in_lab = lab
+	current_level = key
+	in_lab = key == "lab"
 	spawn_index = 0
-	level = (LAB if lab else TOWN).instantiate()
+	level = scene.instantiate()
 	add_child(level)
 	level.process_mode = Node.PROCESS_MODE_DISABLED if modal else Node.PROCESS_MODE_INHERIT
 	reset_player()
-	hud.notify("Movement Lab • measured fixtures and practice targets" if lab else "Old Quarter • explore the three routes")
+
+func level_title() -> String:
+	return "RECOVERY LAB" if current_level == "recovery" else "MOVEMENT LAB" if in_lab else "OLD QUARTER"
 
 func reset_player() -> void:
 	var spawn: Marker3D = level.get_node("Spawns").get_child(spawn_index)
@@ -149,7 +177,7 @@ func _process(delta: float) -> void:
 	hud.update_display(delta)
 
 func location_name() -> String:
-	var result := "OLD QUARTER" if not in_lab else "MOVEMENT LAB"
+	var result := level_title()
 	var best: float = INF
 	for marker: Marker3D in level.get_node("Locations").get_children():
 		var distance := player.global_position.distance_to(marker.global_position)
