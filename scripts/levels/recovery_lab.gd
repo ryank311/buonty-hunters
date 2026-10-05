@@ -87,8 +87,8 @@ func set_gun(index: int) -> void:
 	_prepare_materials(model)
 	weapon_caption.text = entry.name.to_upper()
 
-func equip_gun() -> void:
-	var profile := Guns.profile_for(guns[weapon_index].id)
+func equip_gun(record_id: int = -1) -> void:
+	var profile := Guns.profile_for(guns[weapon_index].id, record_id)
 	if profile == null:
 		return
 	var combat: PracticeWeapon = get_parent().player.weapon

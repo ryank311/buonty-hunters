@@ -39,7 +39,7 @@ Say what you ran and what it showed. A change that was not checked is not done.
 Three servers are registered for Claude Code in `.mcp.json` and for Codex in `.codex/config.toml`:
 
 - `godot` (godot-mcp-runtime) runs `tools/agent/mcp`, which pins the server version and points it at the Godot wrapper. `tools/dev mcp-smoke` tests it end to end.
-- `game` is the live link. The game serves MCP itself while it runs (the `Live` autoload, `scripts/live/`, on 127.0.0.1 from port 47200); `tools/agent/live-mcp.mjs` stays up between games, finds them in `.agent/live/`, and forwards the tools listed in `scripts/live/tools.json`. It acts on the game the user is playing or on a hidden sandbox it starts. `tools/dev live smoke` tests it end to end, and `tools/dev live call <tool>` reaches the same tools from a shell.
+- `game` is the live link. The real game serves MCP itself while it runs (the `Live` autoload, `scripts/live/`, on 127.0.0.1 from port 47200); `tools/agent/live-mcp.mjs` stays up between runs, finds the game in `.agent/live/`, and forwards the tools listed in `scripts/live/tools.json`. It acts on the real game only: the link never starts in a test run, and the server never lists or uses a test instance. `tools/dev live smoke` tests it end to end, and `tools/dev live call <tool>` reaches the same tools from a shell.
 - `blender` (mcp-for-blender) runs `tools/agent/blender-mcp.mjs`, which starts a Blender instance for the agent at the first tool call: Claude Code's on port 9886, Codex's on 9887. `tools/dev blender smoke` tests it end to end.
 
 ## Rules
@@ -49,7 +49,7 @@ Three servers are registered for Claude Code in `.mcp.json` and for Codex in `.c
 - Keep each `.gd.uid` file with its script when moving, renaming, or deleting.
 - Do not edit `.godot/`, `.mcp/`, or `.agent/`, and do not run `tools/build_graybox.py` unless asked (it overwrites the level scenes).
 - Start Godot only through `tools/dev` or the MCP server, and launch MCP game sessions with `background: true`. A bare launch takes the user's keyboard focus and mouse.
-- The `game` server reaches the game the user is playing. Read it freely; move, freeze, drive, or restart it only when the request calls for it, and use a sandbox (`game_launch`) for your own experiments.
+- The `game` server is the game the user is playing. Read it freely; move, freeze, drive, or restart it only when the request calls for it. When they ask for a change in the game, make it there. An experiment of your own goes in a hidden sandbox (`tools/dev live sandbox`, reached by `--port`), and what you see there is not the state of their game.
 - Use Blender only through the `blender` MCP server and `tools/dev blender`. The user's own Blender, its preferences, and its files are not yours to touch.
 - A model is a `.blend` in `art/blender/` plus its exported `.glb` in `art/models/`. Change the source and re-export; never edit a `.glb` or its `.import` file by hand.
 - This checkout is shared with a person in the Godot editor and with other agents. Leave Godot processes you did not start, re-read a file before editing it, and report unexpected changes or failures in files you did not touch instead of reverting them.

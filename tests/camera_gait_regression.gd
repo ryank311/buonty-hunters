@@ -120,7 +120,7 @@ func _run() -> void:
 	rig.pitch = -0.1
 	player.weapon.shoot({})
 	await frames(2)
-	check(reticle.center_ring.position.y < reticle.size.y*0.5 and player.weapon.recoil.bloom > 0,"A real shot raises the reticle and independently adds spread")
+	check(reticle.center_ring.position.y < reticle.size.y*0.5 and player.weapon.accuracy.size > player.weapon.accuracy.table().TargetMin,"A real shot raises the reticle and independently adds spread")
 	player.weapon.tick(2.0,false,false)
 	await frames(2)
 	check(reticle.center_ring.position.is_equal_approx(reticle.size*0.5),"Recoil recovery returns the circle exactly to center")

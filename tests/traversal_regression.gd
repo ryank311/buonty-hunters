@@ -37,7 +37,7 @@ func _run() -> void:
 	check(highest > 0.35 and travelled > 3.5, "Walking onto the gazebo steps up both 0.2 m tiers (rose %.2f m, travelled %.2f m)" % [highest, travelled])
 	check(absf(player.soldier.position.y) < 0.02, "The soldier's step easing settles back onto the body")
 
-	# Jump: gravity 23.5 m/s^2 and a 0.39 m apex, 0.36 s in the air on flat ground.
+	# Jump: gravity 23.5 m/s^2 and a 1.0 m apex, about 0.58 s in the air on flat ground.
 	await H.scenario(self, "lab_start", {"roster": false, "freeze": true})
 	var ground := player.global_position.y
 	await H.step(self, 1, {"tap": ["jump"]})
@@ -48,8 +48,22 @@ func _run() -> void:
 		apex = maxf(apex, player.global_position.y - ground)
 		if not player.is_on_floor():
 			airborne += 1
-	check(absf(apex - 0.39) < 0.015, "Jump apex matches the original's 0.39 m (%.3f m)" % apex)
-	check(absf(airborne / 60.0 - 0.36) < 0.05, "Jump airtime matches the original's 0.36 s (%.2f s)" % (airborne / 60.0))
+	check(absf(apex - 1.0) < 0.015, "Jump apex is the tuned 1.0 m (%.3f m)" % apex)
+	check(absf(airborne / 60.0 - 0.58) < 0.05, "Jump airtime is about 0.58 s (%.2f s)" % (airborne / 60.0))
+	# A jump carries the player onto an obstacle above step height, without a climb.
+	await H.scenario(self, "lab_start", {"roster": false, "freeze": true})
+	var hop := box(session.level, Vector3(3.0, 0.85, 3.0), player.global_position - player.global_basis.z * 2.0)
+	await H.step(self, 2)
+	await H.step(self, 12, {"forward": 1.0})
+	await H.step(self, 1, {"forward": 1.0, "tap": ["jump"]})
+	var climbed := false
+	var landed := false
+	for tick: int in range(40):
+		await H.step(self, 1, {"forward": 1.0})
+		climbed = climbed or player.traversal.active
+		landed = landed or (player.is_on_floor() and player.global_position.y > ground + 0.8)
+	check(not climbed and landed, "Jump hops onto a 0.85 m obstacle instead of climbing it")
+	hop.queue_free()
 
 	# Climbs: boxes of each band, in an open part of the Movement Lab.
 	var level: Node = session.level

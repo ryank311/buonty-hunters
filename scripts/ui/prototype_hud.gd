@@ -33,6 +33,7 @@ var lap_label: Label
 var notice_label: Label
 var debug_label: Label
 var crosshair: Control
+var context_hud: Control
 var menu: Control
 var menu_box: VBoxContainer
 var sliders: Dictionary = {}
@@ -46,6 +47,7 @@ var common_controls: Array[Control] = []
 var focus_order: Array[Control] = []
 var current_page: int = 0
 var slider_parent: VBoxContainer
+var loadout_menu: VBoxContainer
 
 func initialize(owner_session: Node3D) -> void:
 	session = owner_session
@@ -138,7 +140,7 @@ func _build_hud() -> void:
 	weapon_label = _text(weapon_title, "FIELD RIFLE", 16, INK)
 	mode_label = _text(weapon_title, "AUTO", 15, GOLD)
 	mode_label.size_flags_horizontal = Control.SIZE_SHRINK_END
-	mode_label.custom_minimum_size.x = 46
+	mode_label.custom_minimum_size.x = 60
 	weapon_icon = Control.new()
 	weapon.add_child(weapon_icon)
 	weapon_icon.custom_minimum_size = Vector2(124, 42)
@@ -191,6 +193,9 @@ func _build_hud() -> void:
 	root.add_child(crosshair)
 	crosshair.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	crosshair.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	context_hud = preload("res://scripts/ui/context_hud.gd").new()
+	root.add_child(context_hud)
+	context_hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 func _layout_hud() -> void:
 	var viewport_size := root.size
@@ -327,7 +332,7 @@ func _build_menu() -> void:
 	_label(menu_box, "Paused · LB / RB change page · ↑ / ↓ select · ← / → adjust · A confirm · B back", Vector2.ZERO, 13, MUTED)
 	var tabs := HBoxContainer.new()
 	menu_box.add_child(tabs)
-	for title: String in ["Movement", "Camera", "Controller", "Rifle recoil", "Pistol recoil", "Accuracy", "Maps"]:
+	for title: String in ["Movement", "Camera", "Controller", "Rifle recoil", "Pistol recoil", "Accuracy", "Maps", "Loadout"]:
 		var index := page_buttons.size()
 		page_buttons.append(_button(tabs, title, func() -> void: show_page(index)))
 	_page("Grounded movement")
@@ -357,20 +362,18 @@ func _build_menu() -> void:
 	_bind_focus(invert_toggle)
 	page_controls.back().append(invert_toggle)
 	for prefix: String in ["rifle", "pistol"]:
-		_page(("Rifle · automatic" if prefix == "rifle" else "Pistol · one shot per trigger pull") + " · starting feel preset")
-		_slider(prefix + "/vertical_kick", "Aim kick per shot (°)", 0.0, 2.0, 0.05)
-		_slider(prefix + "/horizontal_kick", "Side kick per shot (°)", 0.0, 1.0, 0.05)
-		_slider(prefix + "/recovery_delay", "Recovery delay (s)", 0.0, 0.5, 0.01)
-		_slider(prefix + "/recovery_speed", "Recovery speed (°/s)", 1.0, 25.0, 0.5)
-		_slider(prefix + "/max_climb", "Maximum aim climb (°)", 1.0, 15.0, 0.5)
-		_slider(prefix + "/spread_per_shot", "Spread growth / shot (°)", 0.0, 0.8, 0.01)
+		_page(("Primary" if prefix == "rifle" else "Sidearm") + " · recovered recoil")
+		_slider(prefix + "/recovered_recoil_scale", "Recoil strength (1 = original)", 0.0, 2.0, 0.05)
 		_slider(prefix + "/weapon_kick", "Visible weapon kick", 0.0, 2.0, 0.1)
-	_page("Accuracy · movement adds to the actual shot cone")
+		_label(slider_parent, "B / L3 changes firing mode.\nEach gun uses its recovered stance tables.", Vector2.ZERO, 14, MUTED)
+	_page("Recovered accuracy · movement, turning and shots")
 	for prefix: String in ["rifle", "pistol"]:
-		_slider(prefix + "/walk_spread", prefix.capitalize() + " walking spread (°)", 0.0, 2.5, 0.05)
-		_slider(prefix + "/run_spread", prefix.capitalize() + " running spread (°)", 2.5, 10.0, 0.1)
-		_slider(prefix + "/max_bloom", prefix.capitalize() + " maximum shot bloom (°)", 0.5, 6.0, 0.1)
+		_slider(prefix + "/recovered_spread_scale", prefix.capitalize() + " spread (1 = original)", 0.0, 2.0, 0.05)
 	_build_map_page()
+	_page("Loadout & character · A / click opens a list")
+	loadout_menu = preload("res://scripts/ui/debug_loadout.gd").new()
+	slider_parent.add_child(loadout_menu)
+	loadout_menu.initialize(self)
 	var row := HBoxContainer.new()
 	menu_box.add_child(row)
 	common_controls.append(_button(row, "Resume / Start", func() -> void: session.set_modal(false)))
@@ -445,8 +448,13 @@ func refresh_settings() -> void:
 		sliders[key].set_value_no_signal(value)
 		values[key].text = "%.4f" % value if key == "mouse_sensitivity" else "%.2f" % value
 	invert_toggle.set_pressed_no_signal(session.player.camera_settings.invert_y)
+	if loadout_menu != null:
+		loadout_menu.refresh()
 
 func show_page(index: int, focus: bool = true) -> void:
+	close_menu_popup()
+	if loadout_menu != null:
+		loadout_menu.refresh()
 	current_page = posmod(index, pages.size())
 	focus_order.clear()
 	for button: Button in page_buttons:
@@ -472,7 +480,16 @@ func show_page(index: int, focus: bool = true) -> void:
 func change_page(direction: int) -> void:
 	show_page(current_page + direction)
 
+func close_menu_popup() -> bool:
+	for control: Control in focus_order:
+		if control is OptionButton and control.get_popup().visible:
+			control.get_popup().hide()
+			return true
+	return false
+
 func set_menu(value: bool) -> void:
+	if not value:
+		close_menu_popup()
 	menu.visible = value
 	if value:
 		refresh_settings()
@@ -495,7 +512,8 @@ func update_display(delta: float) -> void:
 	weapon_label.text = player.weapon.profile.display_name
 	# Grenades and claymores are counted, not loaded from magazines.
 	var equipment: bool = player.weapon.profile.kind != "firearm"
-	mode_label.text = "GEAR" if equipment else "AUTO" if player.weapon.profile.automatic else "SEMI"
+	mode_label.text = "GEAR" if equipment else player.weapon.mode_caption()
+	mode_label.tooltip_text = "B / L3: change firing mode"
 	ammo_label.text = "x %d" % player.weapon.ammo if equipment else "%02d / %02d" % [player.weapon.ammo, player.weapon.reserve]
 	ammo_caption.text = "CARRIED" if equipment else "%d MAGS" % ceili(float(player.weapon.reserve) / player.weapon.profile.magazine_size)
 	var pad := not Input.get_connected_joypads().is_empty()
@@ -520,9 +538,9 @@ func update_display(delta: float) -> void:
 	_update_squad()
 	stats_label.text = "%.1f m/s  ·  %d hits" % [Vector2(player.velocity.x, player.velocity.z).length(), player.weapon.hits]
 	if session.lap_running:
-		lap_label.text = "%05.2f s  ·  %s STOP" % [session.lap_time, "Y" if pad else "T"]
+		lap_label.text = "%05.2f s  ·  T STOP" % session.lap_time
 	else:
-		lap_label.text = "LAST  %.2f s" % session.last_lap if session.last_lap > 0 else "%s  START" % ("Y" if pad else "T")
+		lap_label.text = "LAST  %.2f s" % session.last_lap if session.last_lap > 0 else "T  START"
 	hud_panels.Timer.visible = (session.lap_running or session.last_lap > 0.0) and not session.modal
 	notice_time = maxf(0.0, notice_time - delta)
 	hud_panels.Notice.visible = notice_time > 0 and not session.modal
@@ -533,3 +551,4 @@ func update_display(delta: float) -> void:
 	minimap.refresh()
 	weapon_icon.queue_redraw()
 	crosshair.update_weapon(player.weapon, delta, session.modal)
+	context_hud.update_actions(player.interactions, delta)

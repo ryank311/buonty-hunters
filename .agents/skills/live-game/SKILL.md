@@ -7,16 +7,18 @@ description: Inspect and change the game while it is running and being played, t
 
 The game serves MCP itself while it runs (`scripts/live/`, the `Live` autoload). The `game` MCP server (`tools/agent/live-mcp.mjs`) is the way in: it stays up between games, finds the ones that are running, and forwards each tool call. It is separate from the `godot` server, which works on the project and on hidden sessions of its own.
 
-The link is on in any game someone is playing (F5 in the editor, or `tools/dev play`), and never in an exported build. Without the MCP tools, `tools/dev live call <tool> '<json>'` does the same from a shell, and `tools/dev live status` lists the games.
+The link runs in the real game and only there: a window, run as a player runs it (F5 in the editor, `tools/dev play`, or `game_launch`). It never runs in a test: not in a regression suite, not in `tools/dev shot`, not in anything headless or QA. Without the MCP tools, `tools/dev live call <tool> '<json>'` does the same from a shell, and `tools/dev live status` shows what is running.
 
-## Whose game it is
+## It is the user's game
 
-| Game | What it is | How to treat it |
-|---|---|---|
-| **player** | The window the user is playing in, with their saved F1 settings | Read freely. Change what they asked about. Do not teleport, respawn, freeze, or drive it unless the request calls for it, and say what you did. |
-| **sandbox** | A hidden, silent game with default tuning, started by `game_launch` | Yours. Use it to measure, reproduce, and try things without touching the user's game. |
+Every tool of the `game` server acts on the real game. There is no test instance behind it and no way to ask it for one, so when the user says "the walk feels slow" and you change it, it changes in the window they are playing.
 
-With one game running the tools use it. With both, choose with `game_attach` (`role` or `port`); each answer then ends with the game it came from. From a shell, set `SOCOM_LIVE_AGENT=<your name>` on `tools/dev live` commands so your sandboxes are yours alone, and pass `--port` to `call`: several agents share this checkout, and a sandbox two of them drive gives neither a true reading. `state` reports `window_focused`: false means the user has tabbed away and their game is sitting in its menu.
+- **Read freely.** `state`, `telemetry`, `logs`, `screenshot`, `inspect`, `tuning_get` disturb nothing.
+- **Change what they asked about.** Do not teleport, respawn, freeze, drive, or restart their game unless the request calls for it, and say what you did.
+- **If the game is not running,** say so or open it with `game_launch`. The window does not take their keyboard focus unless you pass `focus: true` because they asked to play now.
+- `state` reports `window_focused`: false means they have tabbed away and the game is sitting in its menu.
+
+**An experiment of your own** (measuring a gait, trying a risky change, looking at something without interrupting them) does not belong in their game. Use a hidden QA sandbox: `SOCOM_LIVE_AGENT=<your name> tools/dev live sandbox` prints a port, and `tools/dev live call <tool> '<json>' --port=<n>` reaches it; `tools/dev live stop <n>` ends it. It has default tuning, no sound, and no saved settings. What you learn there is about a test instance: never report it as the state of the user's game, and never do there what they asked to have done in theirs.
 
 ## The feel loop
 
@@ -44,7 +46,7 @@ A value that is not in a tuning profile (a constant in a script, a curve, a blen
 | `inspect` / `set` / `call` | Read variables, write them, and call methods on anything: `player`, `weapon`, `camera`, `soldier`, `hud`, `level`, `actor:<NAME>`, a node path, or a variable chain such as `weapon.recoil`. |
 | `eval` | GDScript in the game, with `live`, `session`, `player`, `level`, `tree` in scope. |
 | `reload` / `restart` | Bring edited files into the running game. |
-| `game_status` / `game_launch` / `game_stop` / `game_attach` | Which games are running, start or stop a sandbox, choose one. |
+| `game_status` / `game_launch` / `game_stop` | Whether the game is running, open it, close one you opened. |
 
 Units: metres `[x, y, z]`, degrees (yaw 0 faces -Z, positive turns left), ticks of 1/60 s.
 
@@ -63,7 +65,7 @@ Units: metres `[x, y, z]`, degrees (yaw 0 faces -Z, positive turns left), ticks 
 ## Looking at animation
 
 - **A pose:** `time {"frozen": true}`, then `screenshot` from `left`, `front`, and `top`. `time {"step": 3}` moves on a few ticks.
-- **A motion you can drive:** `filmstrip {"view": "right", "every": 4, "input": {"forward": 1}}` in a sandbox. Raise `frames` or `every` to cover a whole cycle.
+- **A motion you can drive:** `filmstrip {"view": "right", "every": 4, "input": {"forward": 1}}`, in a sandbox unless the user wants to watch. Raise `frames` or `every` to cover a whole cycle.
 - **A motion the user is doing:** ask them to do it, then `filmstrip` with no input, or `time {"scale": 0.25}` so they can watch it themselves.
 - **The numbers driving it:** `inspect {"path": "soldier", "props": "all"}` returns the blend and phase values.
 
@@ -81,8 +83,8 @@ Always put time back: `time {"frozen": false, "scale": 1}`. A banner tells the u
 
 | Symptom | Do |
 |---|---|
-| "No game with the live link is running" | The user starts theirs (F5 or `tools/dev play`), or `game_launch`. `game_status` lists what is up. |
-| The user's game is running but not listed | It was started before the link existed, in QA mode, or with `SOCOM_LIVE=0`. Have them restart it; `tools/dev doctor` checks the autoload. |
+| "The game is not running" | The user starts it (F5 or `tools/dev play`), or `game_launch` opens it. A sandbox does not count and is never used in its place. |
+| The game is running but not found | It was started in QA mode or with `SOCOM_LIVE=0`. Have them restart it; `tools/dev doctor` checks the autoload. |
 | `state` or `setup` says the harness did not load | A gameplay change broke `tools/agent/harness.gd`. `logs` has the error; `tools/dev test agent_harness` shows what drifted. |
 | A reloaded script misbehaves | `logs {"level": "errors"}`, then fix and `reload`, or `restart`. |
 | Tools are missing from the agent | `tools/dev live smoke` tests the whole chain; `tools/dev doctor` checks the registration. |

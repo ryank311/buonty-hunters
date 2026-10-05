@@ -67,7 +67,7 @@ func _run() -> void:
 				jump_valid = jump_valid and absf(skin.driver.last_pose[root_id].origin.y - ground_root) < 0.001
 		elif saw_air and skin.driver.active_clip == "seal_land_soft":
 			saw_land = true
-	check(saw_air and peak > 0.32 and jump_valid, "Jump advances through airborne frames once, without adding source root lift to physics")
+	check(saw_air and peak > 0.8 and jump_valid, "Jump advances through airborne frames once, without adding source root lift to physics")
 	check(saw_land, "A normal jump reaches the recovered landing animation on floor contact")
 	await H.step(self, 45)
 	check(skin.driver.active_clip == "seal_stand", "Landing finishes and returns to idle without looping")

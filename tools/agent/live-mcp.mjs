@@ -1,21 +1,26 @@
 #!/usr/bin/env node
-// The `game` MCP server: the agents' way into a running game.
+// The `game` MCP server: the agents' way into the running game.
 //
 // The game itself serves MCP over HTTP while it runs (scripts/live/live_server.gd). An
 // agent's MCP connection outlives any one game, so this script sits in front of it: it
-// stays up, offers the same tools whether or not a game is running, finds the running
-// games in .agent/live/, and forwards each call to one of them. It adds four tools of
-// its own for choosing, starting, and stopping games.
+// stays up, offers the same tools whether or not the game is running, finds the game in
+// .agent/live/, and forwards each call to it. It adds four tools of its own for seeing,
+// starting, and stopping the game.
+//
+// It only ever acts on the real game: the one in a window, run as a player runs it. A
+// hidden QA sandbox is a separate thing an agent starts on purpose from the command line
+// for an experiment of its own, and reaches only by naming its port. The MCP server never
+// lists, starts, or attaches to one, so an agent asked to change the game changes the game.
 //
 //   live-mcp.mjs [agent-name]             serve MCP over stdio (what the agent configs run)
-//   live-mcp.mjs status                   list the running games
+//   live-mcp.mjs status                   list what is running
 //   live-mcp.mjs tools                    list the tools
-//   live-mcp.mjs call <tool> ['<json>']   call one tool and print the answer
-//   live-mcp.mjs launch [--play]          start a hidden sandbox game (or a visible one)
-//   live-mcp.mjs stop [port]              stop games started by `launch`
-//   --port=<n> on `call` picks the game when more than one is running, and on `launch`
-//   asks for that port. Set SOCOM_LIVE_AGENT to a name of your own when several agents
-//   use these commands at once: each then sees and stops only the sandboxes it started.
+//   live-mcp.mjs call <tool> ['<json>']   call one tool on the real game and print the answer
+//   live-mcp.mjs launch [--focus]         open the real game (in front, with --focus)
+//   live-mcp.mjs sandbox [--port=<n>]     start a hidden QA sandbox for your own experiment
+//   live-mcp.mjs stop [port]              stop games these commands started
+//   --port=<n> on `call` names a sandbox. Set SOCOM_LIVE_AGENT to a name of your own when
+//   several agents use these commands at once: each then stops only what it started.
 import { spawn } from "node:child_process";
 import { randomBytes } from "node:crypto";
 import { mkdirSync, openSync, readdirSync, readFileSync, rmSync } from "node:fs";
@@ -28,7 +33,7 @@ const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, "../..");
 const registry = join(root, ".agent/live");
 const manifestPath = join(root, "scripts/live/tools.json");
-const commands = ["status", "tools", "call", "launch", "stop"];
+const commands = ["status", "tools", "call", "launch", "sandbox", "stop"];
 const command = commands.includes(process.argv[2]) ? process.argv[2] : null;
 // Games remember who started them. Each agent's server is its own owner, so one agent
 // never stops another's game. The command line keeps one name across invocations:
@@ -37,8 +42,8 @@ const cliName = (process.env.SOCOM_LIVE_AGENT || "").replace(/[^A-Za-z0-9_]/g, "
 const owner = command ? (cliName ? `cli:${cliName}` : "cli") : `${process.argv[2] || "agent"}-${process.pid}`;
 const SANDBOX_PORTS = [47210, 47240];
 const NO_GAME =
-  "No game with the live link is running. The player can start theirs (F5 in the Godot editor, or `tools/dev play`), " +
-  "or call game_launch: mode \"sandbox\" is a hidden game for your own tests, mode \"play\" opens a window for the player.";
+  "The game is not running. The player can start it (F5 in the Godot editor, or `tools/dev play`), or game_launch opens it. " +
+  "These tools act only on the real game, never on a test instance.";
 
 class Problem extends Error {}
 
@@ -94,28 +99,26 @@ async function games() {
 }
 
 const mine = (game) => game.launched_by === owner;
-// A sandbox whose owner has gone is nobody's; anyone may use or stop it.
-const orphaned = (game) => {
-  const pid = Number(String(game.launched_by).split("-").pop());
-  return game.launched_by !== "" && !String(game.launched_by).startsWith("cli") && Number.isInteger(pid) && !alive(pid);
-};
-// What this agent may drive: the player's game, and sandboxes it started (or orphans).
-const usable = (game) => game.role === "player" || mine(game) || orphaned(game);
+// The real game: a window, run as a player runs it. Everything else is a sandbox.
+const real = (game) => game.role === "player";
 
 let attached = null;
 
-async function target(port = attached) {
+// The game a call goes to. Without a port that is the real game and nothing else; a
+// sandbox is reached only from the command line, by its port.
+async function target(port = 0) {
   const running = await games();
   if (port) {
     const chosen = running.find((game) => game.port === port);
-    if (chosen) return { game: chosen, several: running.filter(usable).length > 1 };
-    if (port !== attached) throw new Problem(`No game is answering on port ${port}. ${describe(running)}`);
-    attached = null;
+    if (chosen) return { game: chosen, several: false };
+    throw new Problem(`Nothing is answering on port ${port}. ${describe(running)}`);
   }
-  const offered = running.filter(usable);
-  if (offered.length === 1) return { game: offered[0], several: false };
+  const offered = running.filter(real);
   if (offered.length === 0) throw new Problem(NO_GAME);
-  throw new Problem(`More than one game is running; pick one with game_attach (port, or role player/sandbox). ${describe(offered)}`);
+  if (offered.length === 1) return { game: offered[0], several: false };
+  const chosen = offered.find((game) => game.port === attached);
+  if (chosen) return { game: chosen, several: true };
+  throw new Problem(`The game is running more than once; pick one with game_attach. ${describe(offered)}`);
 }
 
 function summary(game) {
@@ -126,16 +129,15 @@ function summary(game) {
     level: game.level,
     window: game.hidden ? "hidden" : game.focused ? "visible, focused" : "visible, not focused",
     tuning: game.qa ? "defaults (QA mode)" : "the player's saved settings",
-    started_by: mine(game) ? "you" : game.launched_by ? `${game.launched_by}${orphaned(game) ? " (gone)" : ""}` : "a person",
+    started_by: mine(game) ? "you" : game.launched_by || "a person",
     running_minutes: minutes,
-    attached: game.port === attached,
     pid: game.pid,
   };
 }
 
 function describe(running) {
   if (running.length === 0) return "Nothing is running.";
-  return `Running: ${running.map((game) => `${game.role} on ${game.port}${mine(game) ? " (yours)" : ""}`).join(", ")}.`;
+  return `Running: ${running.map((game) => `${real(game) ? "the game" : "a sandbox"} on ${game.port}${mine(game) ? " (yours)" : ""}`).join(", ")}.`;
 }
 
 async function post(game, message, timeoutMs) {
@@ -169,37 +171,45 @@ function freePort(wanted = 0) {
   })();
 }
 
-async function launch(mode, wanted = 0) {
-  const play = mode === "play";
-  const port = await freePort(wanted);
+// Opens the real game in a window as a player would run it, or with `sandbox` starts a
+// hidden QA instance on a port of its own.
+async function launch({ sandbox = false, focus = false, wanted = 0 } = {}) {
   const logs = join(registry, "logs");
   mkdirSync(logs, { recursive: true });
-  const output = join(logs, `game-${port}.log`);
+  const port = sandbox ? await freePort(wanted) : 0;
+  const stamp = sandbox ? String(port) : `game-${Date.now()}`;
+  const output = join(logs, `${stamp}.log`);
   const stream = openSync(output, "w");
   const env = {
     ...process.env,
     // GUI-launched agents may start with a minimal PATH.
     PATH: `${process.env.PATH}:/usr/local/bin:/opt/homebrew/bin`,
-    SOCOM_LIVE: "1",
-    SOCOM_LIVE_PORT: String(port),
     SOCOM_LIVE_OWNER: owner,
-    // "play" runs as the player would: their saved tuning, a window that takes focus.
-    SOCOM_AGENT_QA: play ? "0" : "1",
-    SOCOM_AGENT_SHOW: play ? "1" : "0",
-    // If another agent's Godot MCP session has its bridge autoload in project.godot,
-    // this game loads it too; give it a port and token nobody uses.
-    MCP_BRIDGE_PORT: String(20000 + Math.floor(Math.random() * 20000)),
-    MCP_SESSION_TOKEN: randomBytes(16).toString("hex"),
   };
   delete env.SOCOM_LIVE_RESTORE;
-  if (play) {
-    delete env.SOCOM_LIVE_HIDDEN;
-    delete env.MCP_BACKGROUND;
+  delete env.SOCOM_LIVE_PORT;
+  delete env.SOCOM_LIVE_HIDDEN;
+  delete env.MCP_BACKGROUND;
+  if (sandbox) {
+    Object.assign(env, {
+      SOCOM_LIVE: "1",
+      SOCOM_LIVE_PORT: String(port),
+      SOCOM_LIVE_HIDDEN: "1",
+      SOCOM_AGENT_QA: "1",
+      SOCOM_AGENT_SHOW: "0",
+      MCP_BACKGROUND: "1",
+      // If another agent's Godot MCP session has its bridge autoload in project.godot,
+      // this instance loads it too; give it a port and token nobody uses.
+      MCP_BRIDGE_PORT: String(20000 + Math.floor(Math.random() * 20000)),
+      MCP_SESSION_TOKEN: randomBytes(16).toString("hex"),
+    });
   } else {
-    env.SOCOM_LIVE_HIDDEN = "1";
-    env.MCP_BACKGROUND = "1";
+    // The game as the player runs it: their saved settings, a real window. Unless asked
+    // to come to the front, the launcher hands keyboard focus back to what they were in.
+    Object.assign(env, { SOCOM_AGENT_QA: "0", SOCOM_AGENT_SHOW: focus ? "1" : "0" });
+    delete env.SOCOM_LIVE;
   }
-  const child = spawn(join(here, "godot"), ["--path", root, "--log-file", join(logs, `godot-${port}.log`)], {
+  const child = spawn(join(here, "godot"), ["--path", root, "--log-file", join(logs, `godot-${stamp}.log`)], {
     env,
     detached: true,
     stdio: ["ignore", stream, stream],
@@ -210,7 +220,7 @@ async function launch(mode, wanted = 0) {
   child.once("error", (error) => (exited = error.message));
   const deadline = Date.now() + 60_000;
   while (Date.now() < deadline) {
-    const game = (await games()).find((candidate) => candidate.port === port);
+    const game = (await games()).find((candidate) => candidate.pid === child.pid);
     if (game) return game;
     if (exited !== null) {
       throw new Problem(`The game stopped while starting (${exited}). Its output is in ${output}; \`tools/dev check\` usually names the file at fault.`);
@@ -220,16 +230,16 @@ async function launch(mode, wanted = 0) {
   throw new Problem(`The game did not come up within a minute. Its output is in ${output}.`);
 }
 
+// Stops games this owner started: the one on `port`, or all of them.
 async function stop(port) {
   const running = await games();
-  const stoppable = running.filter((game) => mine(game) || orphaned(game));
-  const chosen = port ? running.filter((game) => game.port === port) : stoppable;
+  const chosen = port ? running.filter((game) => game.port === port) : running.filter(mine);
   const stopped = [];
   for (const game of chosen) {
-    if (!mine(game) && !orphaned(game)) {
+    if (!mine(game)) {
       throw new Problem(
         game.launched_by
-          ? `The game on port ${game.port} belongs to ${game.launched_by}; leave it running.`
+          ? `What is on port ${game.port} belongs to ${game.launched_by}; leave it running.`
           : `The game on port ${game.port} was started by a person. Ask them to close it.`,
       );
     }
@@ -243,43 +253,29 @@ async function stop(port) {
   return stopped;
 }
 
-// Stops this server's hidden games when it exits. A game opened for the player stays.
-function stopSandboxesNow() {
-  for (const entry of registered()) {
-    if (entry.launched_by === owner && entry.hidden) {
-      try {
-        process.kill(entry.pid, "SIGTERM");
-      } catch {
-        // Already gone.
-      }
-    }
-  }
-}
-
 const ownTools = [
   {
     name: "game_status",
     description:
-      "Lists the running games that have the live link: the player's own game and any sandbox games, with level, window state, and which one the other tools are talking to. Call this first if a tool says no game is running.",
+      "Whether the game is running, with its level and whether its window has focus. Call this first if a tool says the game is not running. Only the real game is ever listed here: the tools of this server cannot reach a test instance.",
     inputSchema: { type: "object", properties: {} },
     annotations: { readOnlyHint: true },
   },
   {
     name: "game_launch",
     description:
-      "Starts a game and attaches to it. mode \"sandbox\" (default) is hidden, silent, uses default tuning, and never takes the player's focus: use it for your own tests and measurements. mode \"play\" opens a normal window in front for the player, with their saved settings. Not needed when the player already has a game running.",
-    inputSchema: { type: "object", properties: { mode: { type: "string", enum: ["sandbox", "play"] } } },
+      "Opens the real game in a window, as the player runs it, with their saved settings. Use it when the game is not running. By default the window does not take keyboard focus from what the player is doing; pass focus true when they have asked to play now.",
+    inputSchema: { type: "object", properties: { focus: { type: "boolean" } } },
   },
   {
     name: "game_stop",
-    description: "Stops games this server started (the one on `port`, or all of them). It never stops a game a person started.",
+    description: "Closes a game this server opened with game_launch. It never closes a game a person started.",
     inputSchema: { type: "object", properties: { port: { type: "integer" } } },
   },
   {
     name: "game_attach",
-    description:
-      "Chooses which running game the other tools act on, by port or by role. Needed only when more than one is running, for example the player's game and your sandbox.",
-    inputSchema: { type: "object", properties: { port: { type: "integer" }, role: { type: "string", enum: ["player", "sandbox"] } } },
+    description: "Chooses between copies of the game by port. Needed only if the game is running more than once.",
+    inputSchema: { type: "object", properties: { port: { type: "integer" } }, required: ["port"] },
   },
 ];
 
@@ -297,30 +293,24 @@ const failure = (message) => ({ content: [{ type: "text", text: JSON.stringify({
 
 async function callOwn(name, args) {
   if (name === "game_status") {
-    const running = await games();
-    const current = running.filter(usable).length === 1 ? running.filter(usable)[0].port : attached;
-    return text({
-      games: running.map((game) => ({ ...summary(game), attached: game.port === current })),
-      ...(running.length === 0 ? { note: NO_GAME } : {}),
-    });
+    const running = (await games()).filter(real);
+    return text({ games: running.map(summary), ...(running.length === 0 ? { note: NO_GAME } : {}) });
   }
   if (name === "game_launch") {
-    const game = await launch(args.mode === "play" ? "play" : "sandbox");
-    attached = game.port;
-    return text({ launched: summary(game), note: "The other tools now act on this game." });
+    const already = (await games()).filter(real);
+    if (already.length > 0) return text({ already_running: already.map(summary), note: "The game is already open; the tools act on it." });
+    const game = await launch({ focus: Boolean(args.focus) });
+    return text({ launched: summary(game) });
   }
   if (name === "game_stop") {
     const stopped = await stop(args.port ? Number(args.port) : 0);
-    return text({ stopped, ...(stopped.length === 0 ? { note: "This server has no game of its own running." } : {}) });
+    return text({ stopped, ...(stopped.length === 0 ? { note: "This server has not opened a game." } : {}) });
   }
   if (name === "game_attach") {
-    const running = await games();
-    const matches = running.filter((game) => (args.port ? game.port === Number(args.port) : game.role === args.role && usable(game)));
-    if (matches.length !== 1) {
-      throw new Problem(`${matches.length === 0 ? "No game matches" : "More than one game matches; give a port"}. ${describe(running)}`);
-    }
-    attached = matches[0].port;
-    return text({ attached: summary(matches[0]) });
+    const match = (await games()).filter(real).find((game) => game.port === Number(args.port));
+    if (!match) throw new Problem(`The game is not running on port ${args.port}. ${describe((await games()).filter(real))}`);
+    attached = match.port;
+    return text({ attached: summary(match) });
   }
   return null;
 }
@@ -341,19 +331,19 @@ async function callTool(name, args = {}, port = undefined) {
   try {
     const own = await callOwn(name, args);
     if (own) return own;
-    const { game, several } = await target(port);
+    const { game, several } = await target(port ?? 0);
     let reply;
     try {
       reply = await post(game, { jsonrpc: "2.0", id: 1, method: "tools/call", params: { name, arguments: args } }, 15 * 60_000);
     } catch (error) {
       if (error instanceof Problem) throw error;
-      throw new Problem(`The game on port ${game.port} stopped answering (${error.cause?.code ?? error.name}); it may have closed or crashed. game_status shows what is running.`);
+      throw new Problem(`The game on port ${game.port} stopped answering (${error.cause?.code ?? error.name}); it may have closed or crashed. game_status shows whether it is running.`);
     }
     if (reply.error) return failure(reply.error.message);
     const result = reply.result;
     if (name === "restart" && !result.isError) result.content.push({ type: "text", text: JSON.stringify(await awaitRestart(game)) });
-    // With two games up, say which one answered.
-    if (several) result.content.push({ type: "text", text: `[game: ${game.role} on port ${game.port}]` });
+    // With the game open twice, say which copy answered.
+    if (several) result.content.push({ type: "text", text: `[the game on port ${game.port}]` });
     return result;
   } catch (error) {
     if (error instanceof Problem) return failure(error.message);
@@ -371,16 +361,20 @@ if (command) {
   try {
     if (command === "status") {
       const running = await games();
-      if (running.length === 0) console.log("No game with the live link is running. Start one: tools/dev play (or F5 in the Godot editor).");
+      if (!running.some(real)) console.log("The game is not running. Start it: tools/dev play (or F5 in the Godot editor).");
       for (const game of running) {
         const each = summary(game);
-        console.log(`${each.port}  ${each.role.padEnd(8)} ${String(each.level).padEnd(9)} ${each.window.padEnd(22)} started by ${each.started_by}, ${each.running_minutes} min ago  pid ${each.pid}`);
+        const what = real(game) ? "the game" : "sandbox ";
+        console.log(`${each.port}  ${what}  ${String(each.level).padEnd(9)} ${each.window.padEnd(22)} started by ${each.started_by}, ${each.running_minutes} min ago  pid ${each.pid}`);
       }
     } else if (command === "tools") {
       for (const tool of [...ownTools, ...gameTools()]) console.log(`${tool.name.padEnd(13)} ${tool.description.split(". ")[0]}.`);
     } else if (command === "launch") {
-      const game = await launch(rest.includes("--play") ? "play" : "sandbox", flag("port") ? Number(flag("port")) : 0);
-      console.log(`${game.role} game on port ${game.port} (pid ${game.pid})`);
+      const game = await launch({ focus: rest.includes("--focus") });
+      console.log(`the game is open on port ${game.port} (pid ${game.pid})`);
+    } else if (command === "sandbox") {
+      const game = await launch({ sandbox: true, wanted: flag("port") ? Number(flag("port")) : 0 });
+      console.log(`sandbox on port ${game.port} (pid ${game.pid}); reach it with: call <tool> --port=${game.port}`);
     } else if (command === "stop") {
       const stopped = await stop(words[0] ? Number(words[0]) : 0);
       console.log(stopped.length ? `stopped ${stopped.join(", ")}` : "nothing to stop");
@@ -392,7 +386,7 @@ if (command) {
       } catch (error) {
         throw new Problem(`The arguments are not JSON: ${error.message}`);
       }
-      const result = await callTool(words[0], args, flag("port") ? Number(flag("port")) : undefined);
+      const result = await callTool(words[0], args, flag("port") ? Number(flag("port")) : 0);
       for (const part of result.content) console.log(part.type === "text" ? part.text : `(${part.type}, ${part.mimeType})`);
       failed = Boolean(result.isError);
     }
@@ -420,10 +414,10 @@ async function handle(message) {
           capabilities: { tools: {} },
           serverInfo: { name: "socom-game", title: "SOCOM live game", version: "1.0.0" },
           instructions:
-            "Inspects and changes the SOCOM game while it runs. state and telemetry read what the player is doing; tuning_set changes feel values at once; " +
-            "setup, play, time, set, call and eval act on the game; reload and restart bring in edited code. By default the tools act on the player's own game, " +
-            "so on that game read freely but move or freeze things only when the request calls for it. game_launch starts a hidden sandbox for your own tests. " +
-            "The live-game skill has the workflow.",
+            "Inspects and changes the SOCOM game while it runs. Every tool acts on the real game, the one the player has open: there is no test instance behind this server. " +
+            "state and telemetry read what the player is doing; tuning_set changes feel values at once; setup, play, time, set, call and eval act on the game; " +
+            "reload and restart bring in edited code. Read freely, but move, freeze, or restart the player's game only when the request calls for it. " +
+            "game_launch opens the game if it is not running. The live-game skill has the workflow.",
         },
       });
     } else if (method === "ping") {
@@ -440,7 +434,6 @@ async function handle(message) {
   }
 }
 
-process.on("exit", stopSandboxesNow);
 for (const signal of ["SIGINT", "SIGTERM", "SIGHUP"]) process.on(signal, () => process.exit(0));
 
 const lines = createInterface({ input: process.stdin });

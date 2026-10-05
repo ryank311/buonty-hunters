@@ -1,0 +1,1 @@
+{"map":"MP9","source":"native/scripts/MP9/READERM.ZAR/actions.rdr; archives/MP9/RUN/*/MP9/MZANIM.ZAR","scale":0.1,"doors":[],"unavailable":[{"node":"terrorist_tent","type":"MPBOMB","reason":"Mission/objective executor not implemented"},{"node":"seal_tent","type":"MPBOMB","reason":"Mission/objective executor not implemented"}]}

@@ -11,11 +11,12 @@ const KEYS: Dictionary = {
 	"walk": KEY_SHIFT, "jump": KEY_SPACE, "crouch": KEY_C,
 	"prone": KEY_Z, "lean_left": KEY_Q, "lean_right": KEY_E,
 	"reload": KEY_R, "reset_player": KEY_BACKSPACE,
+	"fire_mode": KEY_B,
 	"pause": KEY_ESCAPE, "tuning": KEY_F1, "debug_view": KEY_F3,
 	"switch_level": KEY_F2, "start_lap": KEY_T, "next_spawn": KEY_N,
 	"equip_rifle": KEY_1, "equip_pistol": KEY_2,
 	"equip_item_1": KEY_3, "equip_item_2": KEY_4,
-	"interact": KEY_F, "class_menu": KEY_F4,
+	"interact": KEY_F, "context_next": KEY_TAB, "class_menu": KEY_F4,
 	"recovery_clip": KEY_F6, "recovery_pause": KEY_F7,
 	"recovery_collision": KEY_F8, "recovery_step": KEY_F9,
 	"recovery_browser": KEY_TAB,
@@ -63,12 +64,16 @@ static func setup() -> void:
 	_button("equip_pistol", JOY_BUTTON_DPAD_RIGHT)
 	_button("next_spawn", JOY_BUTTON_DPAD_UP)
 	_button("reset_player", JOY_BUTTON_DPAD_DOWN)
-	_button("start_lap", JOY_BUTTON_Y)
+	# The action button belongs exclusively to contextual interactions.
+	for event: InputEvent in InputMap.action_get_events("start_lap"):
+		if event is InputEventJoypadButton and event.button_index == JOY_BUTTON_Y:
+			InputMap.action_erase_event("start_lap", event)
 	# Also remove the old binding when setup runs after a live script reload.
 	for event: InputEvent in InputMap.action_get_events("walk"):
 		if event is InputEventJoypadButton and event.button_index == JOY_BUTTON_LEFT_STICK:
 			InputMap.action_erase_event("walk", event)
 	_button("debug_view", JOY_BUTTON_RIGHT_STICK)
+	_button("fire_mode", JOY_BUTTON_LEFT_STICK)
 	# Explicit UI bindings keep menu navigation independent of gameplay actions.
 	for action: String in ["menu_previous", "menu_next"]:
 		if not InputMap.has_action(action):

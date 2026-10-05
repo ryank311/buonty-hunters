@@ -1,0 +1,447 @@
+[
+  {
+    "map": "MP1",
+    "doors": 6,
+    "unavailable": [
+      {
+        "node": "terrorist_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "seal_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP11",
+    "doors": 0,
+    "unavailable": [
+      {
+        "node": "access_action1",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action2",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "epanel_di1",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "epanel_di2",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP12",
+    "doors": 0,
+    "unavailable": [
+      {
+        "node": "terrorist_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "seal_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP2",
+    "doors": 3,
+    "unavailable": []
+  },
+  {
+    "map": "MP51",
+    "doors": 4,
+    "unavailable": [
+      {
+        "node": "access_action1",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action2",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action3",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action4",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action5",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP52",
+    "doors": 0,
+    "unavailable": []
+  },
+  {
+    "map": "MP53",
+    "doors": 0,
+    "unavailable": []
+  },
+  {
+    "map": "MP6",
+    "doors": 1,
+    "unavailable": [
+      {
+        "node": "access_action1",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP61",
+    "doors": 0,
+    "unavailable": [
+      {
+        "node": "terrorist_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "radio_call_1",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "radio_call_2",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action1",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action2",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action3",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action4",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action5",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action6",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP62",
+    "doors": 0,
+    "unavailable": [
+      {
+        "node": "access_action1",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action2",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "terrorist_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "epanel_light_di",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "epanel_di1",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "epanel_di2",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "epanel_di3",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "radio_call_1",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "radio_call_2",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP64",
+    "doors": 0,
+    "unavailable": []
+  },
+  {
+    "map": "MP7",
+    "doors": 0,
+    "unavailable": [
+      {
+        "node": "terrorist_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "seal_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP71",
+    "doors": 6,
+    "unavailable": [
+      {
+        "node": "access_action1",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action2",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action3",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "plank_action1",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "plank_action2",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "plank_action3",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP72",
+    "doors": 0,
+    "unavailable": [
+      {
+        "node": "terrorist_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "seal_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "seal_callstrike_1",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "terrorist_callstrike_1",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP73",
+    "doors": 7,
+    "unavailable": [
+      {
+        "node": "terrorist_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "radio_call_1",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "radio_call_2",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "rtower_action",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action1",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action2",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action3",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "plank_action1",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "radio_action",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP81",
+    "doors": 2,
+    "unavailable": [
+      {
+        "node": "epan_1",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "epan_2",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "epan_3",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP82",
+    "doors": 9,
+    "unavailable": [
+      {
+        "node": "access_action1",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action2",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action3",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action4",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "radio_call",
+        "type": "SWITCH",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP83",
+    "doors": 5,
+    "unavailable": [
+      {
+        "node": "terrorist_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "seal_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action1",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "access_action2",
+        "type": "SCRIPT",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  },
+  {
+    "map": "MP9",
+    "doors": 0,
+    "unavailable": [
+      {
+        "node": "terrorist_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      },
+      {
+        "node": "seal_tent",
+        "type": "MPBOMB",
+        "reason": "Mission/objective executor not implemented"
+      }
+    ]
+  }
+]

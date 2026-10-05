@@ -169,6 +169,8 @@ func _run() -> void:
 	await tap(JOY_BUTTON_DPAD_LEFT)
 	await frames(25)
 	check(weapon.active_slot == 0 and weapon.ammo == 30, "D-pad left restores the rifle and its own magazine")
+	await tap(JOY_BUTTON_LEFT_STICK)
+	check(weapon.fire_mode() == 3, "L3 changes the recovered rifle from burst to automatic")
 	axis(JOY_AXIS_TRIGGER_RIGHT, 0.8)
 	await frames(65)
 	check(weapon.ammo < 22 and weapon.ammo > 17, "Rifle fires automatically through the right trigger")
@@ -186,9 +188,15 @@ func _run() -> void:
 	await frames(150)
 	check(weapon.ammo == 30 and weapon.reserve == rifle_reserve - (30-rifle_ammo), "Reload transfers only missing rounds from finite reserve")
 	await tap(JOY_BUTTON_Y)
-	check(session.lap_running, "Y starts the route timer")
-	await tap(JOY_BUTTON_Y)
-	check(not session.lap_running and session.last_lap > 0, "Y stops the route timer")
+	check(not session.lap_running, "Context action button never starts the route timer")
+	for down: bool in [true, false, true, false]:
+		var timer_key := InputEventKey.new()
+		timer_key.physical_keycode = KEY_T
+		timer_key.pressed = down
+		Input.parse_input_event(timer_key)
+		Input.flush_buffered_events()
+		await frames(2)
+	check(not session.lap_running and session.last_lap > 0, "T still starts and stops the route timer")
 	await tap(JOY_BUTTON_RIGHT_STICK)
 	check(session.debug_visible, "Right stick click toggles diagnostics")
 	var spawn_before: int = session.spawn_index
@@ -207,9 +215,9 @@ func _run() -> void:
 	for tick: int in range(3):
 		await tap(JOY_BUTTON_RIGHT_SHOULDER)
 	check(session.hud.current_page == 3, "RB reaches the rifle recoil page")
-	var kick_before: float = weapon.profiles[0].vertical_kick
+	var kick_before: float = weapon.profiles[0].recovered_recoil_scale
 	await tap(JOY_BUTTON_DPAD_RIGHT)
-	check(weapon.profiles[0].vertical_kick > kick_before, "D-pad adjusts recoil without a mouse")
+	check(weapon.profiles[0].recovered_recoil_scale > kick_before, "D-pad adjusts recovered recoil without a mouse")
 	var all_pages_fit := true
 	for page: int in range(session.hud.pages.size()):
 		session.hud.show_page(page)
@@ -266,7 +274,7 @@ func _run() -> void:
 	weapon.reset()
 	var base_pitch := player.camera_rig.pitch
 	weapon.shoot({})
-	check(is_equal_approx(player.camera_rig.pitch, base_pitch) and player.camera_rig.rotation.x > base_pitch, "Recoil moves aim without overwriting player look input")
+	check(is_equal_approx(player.camera_rig.pitch, base_pitch) and is_equal_approx(player.camera_rig.rotation.x, base_pitch) and weapon.accuracy.knock.y < 0, "Recovered recoil lifts the reticle without overwriting look or camera pitch")
 	weapon.tick(2.0, false, false)
 	check(is_equal_approx(player.camera_rig.rotation.x, base_pitch), "Recoil recovery returns to the player's aim")
 	player.stance.current = 0
@@ -281,6 +289,8 @@ func _run() -> void:
 	player.movement.body_weight = 1.4
 	weapon.profiles[0].run_spread = 7.4
 	weapon.profiles[1].walk_spread = 1.4
+	weapon.profiles[0].recovered_recoil_scale = 1.35
+	weapon.profiles[1].recovered_spread_scale = 0.75
 	player.movement.prone_speed = 0.3
 	var saved: String = session.settings_config().encode_to_text()
 	session.reset_tuning()
@@ -289,6 +299,7 @@ func _run() -> void:
 	session.apply_settings_config(config)
 	check(parse_error == OK and is_equal_approx(weapon.profiles[0].vertical_kick, 0.85) and is_equal_approx(weapon.profiles[1].recovery_speed, 14.0) and is_equal_approx(player.movement.body_weight, 1.4), "Per-weapon recoil and body weight survive settings serialization")
 	check(is_equal_approx(weapon.profiles[0].run_spread,7.4) and is_equal_approx(weapon.profiles[1].walk_spread,1.4) and is_equal_approx(player.movement.prone_speed,0.3),"Accuracy and crawl tuning survive settings serialization")
+	check(is_equal_approx(weapon.profiles[0].recovered_recoil_scale, 1.35) and is_equal_approx(weapon.profiles[1].recovered_spread_scale, 0.75), "Recovered recoil and spread multipliers survive settings serialization")
 	session.reset_tuning()
 	var legacy := ConfigFile.new()
 	legacy.set_value("meta","version",2)

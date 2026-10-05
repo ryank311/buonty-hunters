@@ -70,10 +70,8 @@ func _physics_process(delta: float) -> void:
 	_find_body()
 	if loot_open and body_in_reach == null:
 		close_menus()
-	if class_open or loot_open:
-		overlay.show_prompt("")
-	else:
-		overlay.show_prompt("F / Y  search body  ·  %s" % Combat.name_of(body_in_reach) if body_in_reach else "")
+	# All world prompts are selected and drawn by the shared context HUD.
+	overlay.show_prompt("")
 
 func _input(event: InputEvent) -> void:
 	if menu_blocks_input():
@@ -103,10 +101,15 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("class_menu"):
 		open_class_menu()
 		get_viewport().set_input_as_handled()
-	elif event.is_action_pressed("interact") and body_in_reach != null:
-		open_loot_menu()
-		# The same button starts the lap timer; searching the body takes precedence.
+	elif event.is_action_pressed("interact"):
+		player.interactions.activate()
 		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("context_next") and session().current_level != "recovery":
+		if player.interactions.cycle(1):
+			get_viewport().set_input_as_handled()
+	elif event is InputEventJoypadButton and event.pressed and event.button_index in [JOY_BUTTON_DPAD_UP, JOY_BUTTON_DPAD_DOWN]:
+		if player.interactions.cycle(-1 if event.button_index == JOY_BUTTON_DPAD_UP else 1):
+			get_viewport().set_input_as_handled()
 
 # --- Elimination and spectating ---------------------------------------------
 

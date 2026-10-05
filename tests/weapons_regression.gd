@@ -107,12 +107,17 @@ func _firearms() -> void:
 	var smg_far: Dictionary = await _one_shot({"class": "pointman", "pos": [32.0, 0.1, 5.0], "look_at": "Targets/Target50"})
 	check(is_equal_approx(smg_near.weapon.last_damage, 22.0) and smg_mid.weapon.last_damage < 21.0 and smg_far.weapon.last_damage < 11.0 and smg_far.weapon.last_damage > 9.0, "The submachine gun hits for less and fades with distance (%.1f at 10 m, %.1f at 25 m, %.1f at 50 m)" % [smg_near.weapon.last_damage, smg_mid.weapon.last_damage, smg_far.weapon.last_damage])
 	await scenario("lab_range", {"class": "pointman"})
+	weapon.cycle_fire_mode()
+	await H.step(self, 1)
 	var burst: Dictionary = await H.step(self, 60, {"hold": ["fire"]})
 	check(burst.weapon.shots >= 13 and burst.weapon.shots <= 14, "The submachine gun fires faster than the rifle (%d rounds in a second)" % burst.weapon.shots)
 	await scenario("lab_range", {"class": "marksman", "weapon": "secondary"})
 	var spray: Dictionary = await H.step(self, 60, {"hold": ["fire"]})
 	check(spray.weapon.name == "MACHINE PISTOL" and spray.weapon.shots >= 16, "The machine pistol is automatic (%d rounds in a second)" % spray.weapon.shots)
 	await scenario("lab_range", {"class": "breacher", "weapon": "secondary"})
+	# Damage/cadence assertion: remove random dispersion. Native distribution has
+	# its own deterministic statistical checks in recovered_accuracy_regression.
+	weapon.profile.recovered_spread_scale = 0.0
 	var heavy: Dictionary = await H.step(self, 60, {"hold": ["fire"]})
 	check(heavy.weapon.name == "HEAVY PISTOL" and heavy.weapon.shots == 1 and heavy.weapon.last_damage > 50.0, "The heavy pistol fires once per pull and hits hard (%.0f)" % heavy.weapon.last_damage)
 	# Shotgun: one shell is nine pellets in a wide cone.
@@ -131,7 +136,7 @@ func _firearms() -> void:
 	await ticks(2)
 	var distant := actor("DISTANT")
 	var distant_damage: float = distant.max_health - distant.health
-	check(distant.alive and distant_damage < 25.0, "The same shell does little at 25 m (%.0f damage)" % distant_damage)
+	check(distant.alive and distant_damage < close_damage * 0.35, "The same shell does much less at 25 m (%.0f damage)" % distant_damage)
 	# Hit regions: the rifle's 34 becomes 100 to the head and 25 to a leg.
 	await scenario("lab_start", {"actors": [{"team": 1, "pos": [0.0, 0.0, 18.0], "name": "REGIONS"}]})
 	var regions := actor("REGIONS")

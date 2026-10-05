@@ -23,6 +23,8 @@ func _run() -> void:
 	var disc_size: Vector2 = reticle.center_texture.get_size() * reticle.center_ring.scale * session.hud.root.scale
 	check(disc_size.is_equal_approx(Vector2(64, 64 * 480.0 / 448.0)), "Original 64px rifle disc maps from 640x448 into our fixed 640x480 frame")
 	var resting: float = reticle.mark_distance
+	weapon.cycle_fire_mode()
+	await H.step(self, 1)
 	await H.step(self, 40, {"forward": 1.0, "hold": ["fire"]})
 	reticle.update_weapon(weapon, 1.0 / 60.0, false)
 	check(weapon.shots_fired > 0 and reticle.mark_distance > resting + 5.0 and reticle.center_ring.position.y < reticle.size.y * 0.5, "Actual running fire opens the arms and lifts the whole native reticle")
@@ -34,8 +36,8 @@ func _run() -> void:
 	check(reticle.family == "sidearm" and reticle.center_texture.get_width() == 32 and reticle.arm_texture.get_width() == 16, "Pistol selection uses its smaller recovered disc and arms")
 	await H.scenario(self, "lab_start", {"class": "breacher", "roster": false, "freeze": true})
 	reticle.update_weapon(weapon, 1.0, false)
-	var pellet_gap: float = tan(deg_to_rad(weapon.spread_degrees() + weapon.profile.pellet_spread)) * 112.0 / tan(deg_to_rad(player.camera_rig.camera.fov * 0.5))
-	check(reticle.family == "shotgun" and is_equal_approx(reticle.target_spread, pellet_gap), "Shotgun selects quarter-circle arms and includes its actual pellet spread")
+	var pellet_gap: float = weapon.accuracy.size * 0.5
+	check(reticle.family == "shotgun" and is_equal_approx(reticle.target_spread, pellet_gap), "Shotgun selects quarter-circle arms with the native half-size displacement")
 	await H.apply(self, {"weapon": "frag"})
 	await H.step(self, 40, {"hold": ["fire"]})
 	reticle.update_weapon(weapon, 0.1, false)

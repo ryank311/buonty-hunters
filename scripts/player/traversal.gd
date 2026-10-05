@@ -106,11 +106,16 @@ static func find_ledge(body: CharacterBody3D, movement: MovementProfile) -> Dict
 	var kind := "low" if height <= movement.low_climb_height else "medium" if height <= movement.medium_climb_height else "high"
 	return {"height": height, "distance": distance, "forward": ahead, "kind": kind}
 
+## The HUD and execution share the same destination-clearance check.
+func landing_stance(body: CharacterBody3D, stance: StanceController, ledge: Dictionary) -> int:
+	var destination: Vector3 = body.global_position + ledge.forward * (ledge.distance + RADIUS + 0.2) + Vector3.UP * (ledge.height + 0.02)
+	return 0 if _room(body, stance, 0, destination) else 1 if _room(body, stance, 1, destination) else -1
+
 ## Starts climbing the ledge if there is room on top; returns whether it started.
 func begin(body: CharacterBody3D, stance: StanceController, motion: Node, ledge: Dictionary, pistol: bool) -> bool:
 	var destination: Vector3 = body.global_position + ledge.forward * (ledge.distance + RADIUS + 0.2) + Vector3.UP * (ledge.height + 0.02)
-	var stand_room := _room(body, stance, 0, destination)
-	if not stand_room and not _room(body, stance, 1, destination):
+	var landing := landing_stance(body, stance, ledge)
+	if landing < 0:
 		return false
 	kind = ledge.kind
 	clips.clear()
@@ -132,7 +137,7 @@ func begin(body: CharacterBody3D, stance: StanceController, motion: Node, ledge:
 	forward = ledge.forward as Vector3
 	rise = destination.y - start.y
 	travel = Vector2(destination.x - start.x, destination.z - start.z).length()
-	end_stance = 0 if stand_room else 1
+	end_stance = landing
 	body.velocity = Vector3.ZERO
 	body.look_at(body.global_position + forward, Vector3.UP)
 	elapsed = 0.0

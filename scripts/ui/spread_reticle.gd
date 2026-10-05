@@ -1,7 +1,6 @@
 class_name SpreadReticle
 extends Control
-## Original HUD2 bitmaps in their 640x448 coordinate space. Gameplay still supplies
-## the prototype's real cone/recoil; see tools/recovery/HUD.md for fidelity limits.
+## Original HUD2 bitmaps and accuracy/knock in their 640x448 coordinate space.
 
 const Combat := preload("res://scripts/combat/combat.gd")
 const SOURCE_SIZE := Vector2(640, 448)
@@ -73,6 +72,9 @@ func update_weapon(weapon: PracticeWeapon, delta: float, paused: bool) -> void:
 	var camera := player.camera_rig.camera
 	var hidden: bool = paused or weapon.scoped or weapon.director.dead or weapon.director.class_open or weapon.director.loot_open
 	var recoil_pixels := player.camera_rig.reticle_offset(size)
+	var native := weapon.native_accuracy()
+	if native:
+		recoil_pixels = weapon.accuracy.knock * profile.recovered_recoil_scale * size / SOURCE_SIZE
 	ink = REST
 	charge = clampf(weapon.throw_charge, 0.0, 1.0) if weapon.ammo > 0 else 0.0
 	_pip_target = false
@@ -88,9 +90,9 @@ func update_weapon(weapon: PracticeWeapon, delta: float, paused: bool) -> void:
 			pip_offset = pip_offset.clamp(Vector2(-200, -200), Vector2(200, 200))
 			_pip_target = pip_offset.length() > center_texture.get_width() * 0.5
 	# Include the shotgun pellet cone, which the previous reticle omitted.
-	update_reticle(weapon.spread_degrees() + profile.pellet_spread, camera.fov, delta, weapon.blocked, false, hidden, recoil_pixels)
+	update_reticle(weapon.spread_degrees() + profile.pellet_spread, camera.fov, delta, weapon.blocked, false, hidden, recoil_pixels, weapon.accuracy.size * profile.recovered_spread_scale if native else -1.0)
 
-func update_reticle(spread_degrees: float, vertical_fov: float, delta: float, obstructed: bool, _hit_flash: bool, paused: bool, recoil_pixels: Vector2 = Vector2.ZERO) -> void:
+func update_reticle(spread_degrees: float, vertical_fov: float, delta: float, obstructed: bool, _hit_flash: bool, paused: bool, recoil_pixels: Vector2 = Vector2.ZERO, native_size: float = -1.0) -> void:
 	visible = not paused
 	blocked = obstructed
 	pixel_scale = size / SOURCE_SIZE
@@ -100,6 +102,9 @@ func update_reticle(spread_degrees: float, vertical_fov: float, delta: float, ob
 	target_spread = tan(deg_to_rad(spread_degrees)) * SOURCE_SIZE.y * 0.5 / tan(deg_to_rad(vertical_fov * 0.5)) * 0.5
 	var rate := 35.0 if target_spread > displayed_spread else 9.0
 	displayed_spread = lerpf(displayed_spread, target_spread, 1.0 - exp(-rate * delta))
+	if native_size >= 0.0:
+		target_spread = native_size * 0.5
+		displayed_spread = target_spread
 	mark_distance = displayed_spread
 	var center := size * 0.5 + recoil_pixels
 	center_ring.position = center

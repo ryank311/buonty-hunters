@@ -16,6 +16,8 @@ var health: float = 100.0:
 @onready var weapon: PracticeWeapon = $Weapon
 @onready var footsteps: AudioStreamPlayer3D = $Footsteps
 var stance := StanceController.new()
+## How the body rests on its ground: tilted to the slope when lying prone, eased over time.
+var resting := Transform3D.IDENTITY
 var controls_enabled: bool = true
 var aiming: bool = false
 var move_input := Vector2.ZERO
@@ -38,6 +40,7 @@ var input_armed: bool = true
 var local_acceleration := Vector3.ZERO
 var look_scale: float = 1.0 # Below one while a scope is zoomed in, so aim speed tracks the magnification.
 var traversal := Traversal.new()
+var interactions: Node
 ## Height still to ease out of the soldier after stepping onto a ledge.
 var step_offset: float = 0.0
 
@@ -47,6 +50,18 @@ func _ready() -> void:
 	stance.apply(collider)
 	camera_rig.initialize(self, camera_settings)
 	weapon.initialize(self)
+	interactions = preload("res://scripts/player/context_actions.gd").new()
+	interactions.player = self
+	add_child(interactions)
+
+func try_climb() -> bool:
+	if not controls_enabled or not is_on_floor() or traversal.active or diving or dive_recovery > 0.0 or stance.current == StanceController.Stance.PRONE:
+		return false
+	var ledge := Traversal.find_ledge(self, movement)
+	if ledge.is_empty() or not traversal.begin(self, stance, soldier.soldier_skin.motion, ledge, soldier.weapon_slot == 1):
+		return false
+	_climb(0.0)
+	return true
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not controls_enabled:
@@ -134,7 +149,7 @@ func _physics_process(delta: float) -> void:
 		move_input = test_command.get("move", Vector2.ZERO)
 	if not input_armed:
 		input_armed = true
-		for action: String in ["fire", "jump", "crouch", "prone", "pad_stance", "reload", "equip_rifle", "equip_pistol"]:
+		for action: String in ["fire", "fire_mode", "jump", "crouch", "prone", "pad_stance", "reload", "equip_rifle", "equip_pistol"]:
 			input_armed = input_armed and not Input.is_action_pressed(action)
 		return
 	if traversal.active:
@@ -203,10 +218,11 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 0.0
 	jump_cooldown = maxf(0.0, jump_cooldown - delta)
 	if (Input.is_action_just_pressed("jump") or test_command.get("jump", false)) and is_on_floor() and jump_cooldown <= 0.0 and not diving and dive_recovery <= 0:
-		# As in the original, the jump button climbs whatever ledge is in front.
-		var ledge := Traversal.find_ledge(self, movement) if stance.current != StanceController.Stance.PRONE else {}
-		if not ledge.is_empty() and traversal.begin(self, stance, soldier.soldier_skin.motion, ledge, soldier.weapon_slot == 1):
-			_climb(0.0)
+		# The jump button climbs the ledge in front, unless standing and the jump
+		# itself clears it: then a hop is quicker than the crate climb.
+		var ledge := Traversal.find_ledge(self, movement) if stance.current == StanceController.Stance.STAND else {}
+		var hop: bool = not ledge.is_empty() and ledge.height <= movement.jump_height - 0.1
+		if not hop and try_climb():
 			return
 		if stance.current != StanceController.Stance.STAND:
 			request_stance(StanceController.Stance.STAND)
@@ -241,9 +257,16 @@ func _physics_process(delta: float) -> void:
 			PlayerInput.vibrate(camera_settings.vibration * 0.45, 0.10)
 	var lean := Input.get_axis("lean_left", "lean_right")
 	camera_rig.update_view(self, StanceController.EYE_HEIGHTS[stance.current], lean, aiming, delta)
+	# Lying down, the soldier and the prone box lie along the surface under them, at its
+	# angle. A dive stays level until it lands.
+	var lying := stance.current == StanceController.Stance.PRONE and not diving
+	resting = resting.interpolate_with(stance.lie(self, rotation.y) if lying else Transform3D.IDENTITY, 1.0 - exp(-10.0 * delta))
+	stance.rest(collider, resting)
+	soldier.ground = resting
 	var speed_now := Vector2(velocity.x, velocity.z).length()
 	var local_velocity := basis.inverse() * Vector3(velocity.x, 0, velocity.z)
-	soldier.pose(stance.current, speed_now, Vector2(local_velocity.x, local_velocity.z), camera_rig.aim_pitch(), camera_rig.actual_lean, delta, movement.body_weight, local_acceleration, is_on_floor(), weapon.recoil.visual_kick, weapon.draw_remaining / weapon.profile.draw_seconds, aiming, 1.0 if diving else 0.0, prone_strafe_phase, prone_strafe_amount, clampf((movement.dive_lift - velocity.y) / (2.0 * movement.dive_lift),0.0,1.0), velocity.y)
+	# The weapon stays on aim: a body tilted up a slope raises it that much less.
+	soldier.pose(stance.current, speed_now, Vector2(local_velocity.x, local_velocity.z), camera_rig.aim_pitch() - asin(clampf((resting.basis * Vector3.FORWARD).y, -1.0, 1.0)), camera_rig.actual_lean, delta, movement.body_weight, local_acceleration, is_on_floor(), weapon.recoil.visual_kick, weapon.draw_remaining / weapon.profile.draw_seconds, aiming, 1.0 if diving else 0.0, prone_strafe_phase, prone_strafe_amount, clampf((movement.dive_lift - velocity.y) / (2.0 * movement.dive_lift),0.0,1.0), velocity.y)
 	soldier.set_close_fade(camera_rig.arm.get_hit_length() < 0.70)
 	weapon.tick(delta, Input.is_action_pressed("fire"), Input.is_action_just_pressed("reload"))
 	if step_audio == null:
@@ -282,6 +305,8 @@ func _stance_input(delta: float) -> void:
 
 func reset_at(spawn_transform: Transform3D) -> void:
 	global_transform = spawn_transform
+	resting = Transform3D.IDENTITY
+	soldier.ground = resting
 	health = max_health
 	velocity = Vector3.ZERO
 	stance.current = 0

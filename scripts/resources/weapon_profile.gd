@@ -22,6 +22,11 @@ extends Resource
 @export var spread_per_shot: float = 0.35
 @export var max_bloom: float = 3.5
 @export var weapon_kick: float = 1.0
+@export var recovered_recoil_scale: float = 1.0
+@export var recovered_spread_scale: float = 1.0
+# Populated from the original reader at loadout creation, shared as read-only data.
+var recovered_stats: Dictionary = {}
+var fire_mode: int = 0
 # Cone added while firing without focus aim; keeps scoped weapons honest from the hip.
 @export var unaimed_spread: float = 0.0
 
@@ -61,4 +66,4 @@ extends Resource
 @export var effect_radius: float = 8.0
 @export var effect_seconds: float = 0.0
 
-const TUNING_KEYS: Array[String] = ["vertical_kick", "horizontal_kick", "recovery_delay", "recovery_speed", "max_climb", "spread_per_shot", "weapon_kick", "walk_spread", "run_spread", "max_bloom"]
+const TUNING_KEYS: Array[String] = ["vertical_kick", "horizontal_kick", "recovery_delay", "recovery_speed", "max_climb", "spread_per_shot", "weapon_kick", "walk_spread", "run_spread", "max_bloom", "recovered_recoil_scale", "recovered_spread_scale"]

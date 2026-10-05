@@ -88,7 +88,7 @@ func _run() -> void:
 	session.player.weapon.ammo = 7
 	session.player.weapon.reload_remaining = 1.5
 	await settle()
-	check(hud.mode_label.text == "AUTO" and hud.ammo_label.text == "07 / 90" and hud.weapon_state_label.text.begins_with("RELOADING"), "Reload state preserves rifle mode and ammunition readout")
+	check(hud.mode_label.text == "BURST" and hud.ammo_label.text == "07 / 90" and hud.weapon_state_label.text.begins_with("RELOADING"), "Reload state preserves rifle mode and ammunition readout")
 	session.player.health = 24
 	await settle()
 	check(hud.health_bar.value == 24 and hud.squad_health_bar.value == 24 and hud.health_label.text == "24 / 100", "Both health displays follow player state")

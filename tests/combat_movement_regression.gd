@@ -52,7 +52,10 @@ func box_at(point: Vector3, dimensions: Vector3) -> StaticBody3D:
 
 func pattern(speed: float, bloom: float, center: Vector3) -> Dictionary:
 	player.velocity = Vector3(0,0,-speed)
-	weapon.recoil.bloom = bloom
+	weapon.accuracy.knock = Vector2.ZERO
+	for i: int in range(120):
+		weapon.accuracy.tick(1.0 / 60.0, player.velocity, Vector2.ZERO, false, false, 0)
+	weapon.accuracy.size = minf(weapon.accuracy.size + bloom, weapon.accuracy.table().TargetMax)
 	weapon.rng.seed = 73483
 	player.camera_rig.camera.look_at(center,Vector3.UP)
 	var hits := 0
@@ -81,15 +84,17 @@ func _run() -> void:
 	player.velocity = Vector3.ZERO
 	var standing := weapon.spread_degrees()
 	player.velocity.z = -player.movement.walk_speed
+	weapon.tick(2.0, false, false)
 	var walking := weapon.spread_degrees()
 	player.velocity.z = -player.movement.run_speed
+	weapon.tick(2.0, false, false)
 	var running := weapon.spread_degrees()
 	for i: int in range(4):
 		weapon.cooldown = 0
 		weapon.shoot({})
 	var burst := weapon.spread_degrees()
-	check(standing < walking and walking < running and running < burst,"Idle, walking, running and running bursts have progressively wider real shot cones")
-	check(running > 5.0 and burst > 8.0,"Full-speed running and firing is deliberately inaccurate")
+	check(standing < walking and walking < running and is_equal_approx(running, burst),"Movement widens the native spread; running fire respects the same source cap")
+	check(is_equal_approx(weapon.accuracy.size, 26),"Full-speed running reaches the recovered M4 26px maximum")
 	player.velocity = Vector3.ZERO
 	var standing_burst := weapon.spread_degrees()
 	player.stance.current = 1
@@ -102,16 +107,16 @@ func _run() -> void:
 		weapon.reset()
 		player.stance.current = stance
 		weapon.shoot({})
-		kicks.append(weapon.recoil.offset.x)
+		kicks.append(-weapon.accuracy.knock.y)
 	check(kicks[2] < kicks[1] and kicks[1] < kicks[0],"Stance progressively reduces upward aim kick")
 	weapon.reset()
 	player.stance.current = 0
 	var before: Vector3 = -player.camera_rig.camera.global_basis.z
 	weapon.shoot({})
-	check((-player.camera_rig.camera.global_basis.z).y > before.y,"Firing pitches the actual camera aim upward")
-	check(weapon.recoil.bloom > 0,"A shot adds spread independently of camera climb")
+	check((-player.camera_rig.camera.global_basis.z).is_equal_approx(before),"Unscoped recovered recoil leaves the camera still")
+	check(weapon.accuracy.size > weapon.accuracy.table().TargetMin,"A shot adds native spread independently of reticle climb")
 	weapon.tick(2.0,false,false)
-	check(weapon.recoil.bloom == 0 and weapon.recoil.offset.is_zero_approx(),"Releasing fire recovers both spread and recoil")
+	check(weapon.accuracy.size == weapon.accuracy.table().TargetMin and weapon.accuracy.knock.is_zero_approx(),"Releasing fire recovers both spread and recoil")
 	# Real Jolt camera/muzzle rays against a large wall, aimed at a human-sized rectangle.
 	player.reset_at(Transform3D(Basis.IDENTITY,Vector3(1000,0.05,0)))
 	player.soldier.pose(0,0,Vector2.ZERO,0,0,1.0)
@@ -121,9 +126,9 @@ func _run() -> void:
 	var idle_pattern := pattern(0,0,center)
 	var walk_pattern := pattern(player.movement.walk_speed,0,center)
 	var run_pattern := pattern(player.movement.run_speed,0,center)
-	var burst_pattern := pattern(player.movement.run_speed,weapon.profile.max_bloom,center)
-	check(idle_pattern.rms > 0 and idle_pattern.rms < walk_pattern.rms and walk_pattern.rms < run_pattern.rms and run_pattern.rms < burst_pattern.rms,"Actual hitscan impact patterns widen with movement and sustained fire")
-	check(idle_pattern.hits > 720 and run_pattern.hits < 96 and burst_pattern.hits < run_pattern.hits,"At 25 m, full-speed bursts rarely hit a 0.5 × 1.1 m target (%d / 800 vs idle %d)" % [burst_pattern.hits,idle_pattern.hits])
+	var burst_pattern := pattern(0,25,center)
+	check(idle_pattern.rms > 0 and idle_pattern.rms < walk_pattern.rms and walk_pattern.rms < run_pattern.rms and is_equal_approx(run_pattern.rms, burst_pattern.rms),"Actual native impact patterns widen with motion and bloom up to the same cap")
+	check(idle_pattern.hits > 720 and run_pattern.hits < idle_pattern.hits * 0.65,"At 25 m the native running square reduces hits on a 0.5 × 1.1 m target (%d / 800 vs idle %d)" % [run_pattern.hits,idle_pattern.hits])
 	wall.queue_free()
 	# Reticle components use independent transforms. Recoil never scales the center disc.
 	var reticle: Control = session.hud.crosshair

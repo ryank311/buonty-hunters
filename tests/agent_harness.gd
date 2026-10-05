@@ -29,7 +29,7 @@ func _run() -> void:
 	var range_state: Dictionary = await H.scenario(self, "lab_range")
 	check(range_state.level == "lab" and range_state.aim.hit == "Target10", "lab_range puts the crosshair on the 10 m target (%s)" % range_state.aim.hit)
 	var burst: Dictionary = await H.step(self, 30, {"hold": ["fire"]})
-	check(burst.weapon.shots >= 4 and burst.weapon.shots <= 6 and burst.weapon.hits >= 1, "Half a second of held fire shoots the target (%d shots, %d hits)" % [burst.weapon.shots, burst.weapon.hits])
+	check(burst.weapon.shots == 3 and burst.weapon.fire_mode == "BURST" and burst.weapon.hits >= 1, "Half a second of held fire completes the native burst (%d shots, %d hits)" % [burst.weapon.shots, burst.weapon.hits])
 	await H.scenario(self, "lab_start")
 	var run: Dictionary = await H.step(self, 60, {"forward": 1.0})
 	var distance: float = 26.0 - run.player.pos[2]
@@ -43,7 +43,7 @@ func _run() -> void:
 	var peak := 0.0
 	for sample: Array in jump.trace:
 		peak = maxf(peak, sample[2])
-	check(peak > 0.32 and jump.player.on_floor, "A tapped jump leaves the floor and lands (%.2f m)" % peak)
+	check(peak > 0.8 and jump.player.on_floor, "A tapped jump leaves the floor and lands (%.2f m)" % peak)
 	var low: Dictionary = await H.scenario(self, "lab_low_ceiling")
 	var rise: Dictionary = await H.step(self, 20, {"tap": ["jump"]})
 	check(low.player.stance == "crouch" and rise.player.stance == "crouch", "Real input cannot stand under the low ceiling")

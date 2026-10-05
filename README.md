@@ -10,7 +10,7 @@ Open `project.godot` in **Godot 4.7** and click the **Play ▶** button (or pres
 
 **Cmd+1 / F1 → Recovery Lab**, then **Tab**, opens a searchable collection of **202 recovered character models and 402 motion clips**. The selected character and your playable character share a native clip and clock. Pause, scrub, step frames or turn the models. Click **Use selected character for player**, then close the browser to play; **[ / ]** switches characters anywhere. Selection survives respawn and level changes during the run. **Cmd+6 / F6** changes the clip, **Cmd+7 / F7** pauses, **Cmd+9 / F9** steps one animation frame, and **Cmd+8 / F8** shows recovered collision. **N** cycles inspection spawns. See the [character guide](tools/recovery/CHARACTERS.md), [map/weapon pilot](tools/recovery/PILOT.md), and [agent asset handoff](docs/ASSET_RECOVERY_HANDOFF.md).
 
-**Recovery Lab → Tab → Guns** browses all **43 recovered gun designs (73 source variants)**. Search, filter, rotate and equip firearms; the standard loadouts also use their recovered models. Gun selection uses the existing prototype weapon tuning. Launchers are available for model inspection. See the [gun collection guide](tools/recovery/WEAPONS.md).
+**Recovery Lab → Tab → Guns** browses all **43 recovered gun designs (73 source variants)**. Search, filter, rotate and equip firearms; the standard loadouts also use their recovered models. Guns use recovered recoil, spread and firing modes; damage, ammunition and reloads retain prototype settings. Press **B / L3** to cycle supported modes. Shared-model records can be selected separately. Launchers are available for model inspection. See the [gun collection guide](tools/recovery/WEAPONS.md).
 
 **F1/Start → Maps** loads all **22 recovered multiplayer maps**, at native scale with their original geometry, collision, sky dome, lighting and fog. **Next spawn** cycles grounded spawns from the original named views, supplemented with clear central positions where needed. Campaign maps are excluded from the project and builds; their sources remain in the offline recovery archive. There are no soldiers or objectives on these maps yet. See the [recovered maps guide](tools/recovery/LEVELS.md).
 
@@ -27,6 +27,7 @@ The entire game renders at a fixed **640×480 (4:3)**, including the HUD and men
 | Lean | Hold Q / E |
 | Fire / focus aim | Left / right mouse button |
 | Reload | R |
+| Change firing mode | B |
 | Equip primary / pistol | 1 / 2 |
 | Equip equipment (grenades, claymores) | 3 / 4 |
 | Throw a grenade / set a claymore | Left mouse button with it equipped: hold longer to throw further |
@@ -42,9 +43,9 @@ The entire game renders at a fixed **640×480 (4:3)**, including the HUD and men
 | Next spawn | N |
 | Start / stop route timer | T |
 
-Gamepad bindings use left/right sticks for movement/look, A for jump, B tap for crouch or hold for prone, LB/RB for lean, LT/RT for aim/fire, and X for reload. **With a grenade in hand, how far you squeeze RT is how far it goes:** the arc follows the squeeze, easing off shortens it, and letting go throws. **D-pad left equips the primary; right equips the pistol, and pressed again steps through the equipment.** D-pad up cycles spawns; down resets/refills; while looking through the scope they zoom instead. Y searches a body within reach and otherwise controls the timer, LB/RB switch view while eliminated, **Choose class** is in the Start menu, and R3 toggles diagnostics. Left-stick travel controls stop → walk → jog → sprint continuously; full sprint starts at 90% travel, without clicking L3. Shift still holds slow walk on keyboard. Footfalls follow the recovered leg contacts, with quiet walking, firmer jogging and heavier, louder sprinting. Labels use Xbox names; the corresponding positions on PlayStation controllers work through Godot's mappings.
+Gamepad bindings use left/right sticks for movement/look, A for jump, B tap for crouch or hold for prone, LB/RB for lean, LT/RT for aim/fire, and X for reload. **With a grenade in hand, how far you squeeze RT is how far it goes:** the arc follows the squeeze, easing off shortens it, and letting go throws. **D-pad left equips the primary; right equips the pistol, and pressed again steps through the equipment.** D-pad up cycles spawns; down resets/refills; while looking through the scope they zoom instead. F / Y performs the selected contextual action: open/close a door, climb a ledge, or search a body. Recovered icons appear at the bottom center; Tab or D-pad up/down selects between nearby actions. T controls the route timer. LB/RB switch view while eliminated, **Choose class** is in the Start menu, R3 toggles diagnostics, and **L3 changes firing mode**. Left-stick travel controls stop → walk → jog → sprint continuously; full sprint starts at 90% travel, without clicking L3. Shift still holds slow walk on keyboard. Footfalls follow the recovered leg contacts, with quiet walking, firmer jogging and heavier, louder sprinting. Labels use Xbox names; the corresponding positions on PlayStation controllers work through Godot's mappings.
 
-**Hold C/B for 0.35 seconds** to lie prone; hold while running forward to dive. The dive uses swept collision and lands prone, with a brief settling period before firing or changing stance. Prone crawls at **1.1 m/s**. Sideways prone travel averages about 0.55 m/s using the existing movement curve; the recovered strafe clip supplies the visible pose. Matching its foot/hand contacts to that curve remains follow-up work. Tap C/B to rise to crouch, or Space/A to stand. Walking and running use their original full-body clips. Jump and dive clips follow the controller’s flight phase and blend into recovered landing/prone poses.
+**Hold C/B for 0.35 seconds** to lie prone; hold while running forward to dive. A prone soldier lies along the surface under them at its angle, on ramps and uneven ground as on the flat, and the stance changes only refuse when something stands where the body would go. The dive uses swept collision and lands prone, with a brief settling period before firing or changing stance. Prone crawls at **1.1 m/s**. Sideways prone travel averages about 0.55 m/s using the existing movement curve; the recovered strafe clip supplies the visible pose. Matching its foot/hand contacts to that curve remains follow-up work. Tap C/B to rise to crouch, or Space/A to stand. Walking and running use their original full-body clips. Jump and dive clips follow the controller’s flight phase and blend into recovered landing/prone poses.
 
 Movement speeds are the original game's, read from its own motion table: **6.5 m/s** running forward or sideways, **3.7** backing up, **2.6** walking (Shift), **1.5** crouched, and **1.1** crawling. The legs turn by ground covered, not by a clock. Each recovered gait clip carries the distance its stride travels; the clip for the current speed comes from the original's speed bands, two clips share an overlap, and forward and strafe clips are mixed by direction. A planted foot therefore stays where it was put at any speed, including one you retune in F1. With the weapon raised, forward and backward movement takes the original's "Fire" variants, and strafes keep their own poses, which already hold the weapon on aim.
 
@@ -52,17 +53,17 @@ Movement speeds are the original game's, read from its own motion table: **6.5 m
 
 **Old Quarter** has three traversable routes, ten spawn markers, cover, an arch, market, courtyard, balconies, and a covered service passage. **Movement Lab** has distance markers, ramps, stairs, narrow doorways, stance-clearance fixtures, camera corners, and static/moving practice targets.
 
-The rifle starts with **30 loaded / 90 reserve** rounds; the semi-auto pistol has **12 / 36**. Each keeps its own ammunition across swaps. A swap cancels an unfinished reload without transferring rounds. Reset refills both. Recoil combines aim climb, sideways kick, recovery, expanding shot spread, weapon movement, and optional controller vibration. Those are the rifleman's weapons; the other classes are described under [Classes, weapons, and round rules](#classes-weapons-and-round-rules). Bots, objectives, round flow, and online multiplayer are future work.
+The rifle starts with **30 loaded / 90 reserve** rounds; the semi-auto pistol has **12 / 36**. Each keeps its own ammunition across swaps. A swap cancels an unfinished reload without transferring rounds. Reset refills both. Recovered recoil raises the unscoped reticle while leaving the camera still. Per-gun stance tables govern spread, movement/turn bloom and recovery. The M4 starts on three-round burst; B / L3 switches to automatic or semi. Releasing the trigger cuts a burst short. Weapon movement and optional controller vibration accompany shots. Those are the rifleman's weapons; the other classes are described under [Classes, weapons, and round rules](#classes-weapons-and-round-rules). Bots, objectives, round flow, and online multiplayer are future work.
 
 Holding aim raises the recovered firing pose; firing also keeps the gun ready for five seconds. Rifle and pistol shots use their original recoil poses, and reload animations follow the ammunition timer while preserving movement. Idle breathing uses the original slower playback settings.
 
 Every firearm except the sniper rifle uses **instant hitscan**; the sniper rifle fires a bullet that takes time to arrive and drops on the way. Bullet-hole decals stay on the struck walls, floors, cover, and targets, including moving targets. The latest 128 marks remain until replaced or until you reset/change levels. Swapping or reloading preserves them. Impact sizes are adjustable through `impact_diameter` in each weapon resource (metres).
 
-Crosshairs use the **original recovered rifle, pistol, shotgun, grenade and scope textures**. The fixed disc and expanding arms follow actual spread and recoil; shotgun bloom includes pellet spread. Arms are yellow at rest, green over a living teammate and red over a living enemy within 32 m. A recovered accuracy pip marks a blocked muzzle. Grenade charge fills the original meter. The weapon accuracy/recoil values remain our tunable prototype values. See the [HUD recovery guide](tools/recovery/HUD.md) and [browse all 174 recovered HUD textures](art/ui/recovered/index.html).
+Crosshairs use the **original recovered rifle, pistol, shotgun, grenade and scope textures**. The fixed disc and expanding arms follow actual spread and recoil; shotguns use their recovered square pellet distribution. Arms are yellow at rest, green over a living teammate and red over a living enemy within 32 m. A recovered accuracy pip marks a blocked muzzle. Grenade charge fills the original meter. Recoil, spread and firing modes come from the original weapon records; see the [profile recovery guide](tools/recovery/WEAPON_PROFILES.md) for source evidence and remaining adaptations. See the [HUD recovery guide](tools/recovery/HUD.md) and [browse all 174 recovered HUD textures](art/ui/recovered/index.html).
 
-F1 exposes movement, body weight, camera, controller, separate **Rifle recoil / Pistol recoil** pages, and **Accuracy** for walking/running spread and maximum shot bloom. Changes save when you resume. Use **Restore all defaults** to return to the baseline. See [playtest notes](docs/PLAYTEST.md) for the comparison sequence and validation limits.
+F1 exposes movement, body weight, camera, controller, separate **Rifle recoil / Pistol recoil** pages, and **Accuracy** for recovered spread strength. Recoil/spread multipliers of 1 use the source values. Changes save when you resume. Use **Restore all defaults** to return to the baseline. See [playtest notes](docs/PLAYTEST.md) for the comparison sequence and validation limits.
 
-The HUD uses compact, borderless translucent strips with a 5% screen margin. Bottom left shows the equipped weapon, AUTO/SEMI mode, ammunition, reserve-magazine equivalents, and health. Bottom right shows your stance/health and your squad: teammates, marked OK or DOWN, then open slots. With a grenade or claymore equipped the weapon strip shows how many you carry instead of magazines. The circular map at top right follows your position and facing over the level's real building footprints: yellow is you, cyan is the selected spawn, and N indicates north. **F1/Start → Camera → HUD backing opacity** adjusts the strip opacity (18% by default). This solo build starts at 100 health. The only incoming damage is from your own explosives, and the other soldiers are stand-ins that do not think or shoot.
+The HUD uses compact, borderless translucent strips with a 5% screen margin. Bottom left shows the equipped weapon, SEMI/BURST/AUTO mode, ammunition, reserve-magazine equivalents, and health. Bottom right shows your stance/health and your squad: teammates, marked OK or DOWN, then open slots. With a grenade or claymore equipped the weapon strip shows how many you carry instead of magazines. The circular map at top right follows your position and facing over the level's real building footprints: yellow is you, cyan is the selected spawn, and N indicates north. **F1/Start → Camera → HUD backing opacity** adjusts the strip opacity (18% by default). This solo build starts at 100 health. The only incoming damage is from your own explosives, and the other soldiers are stand-ins that do not think or shoot.
 
 ## Classes, weapons, and round rules
 
@@ -70,10 +71,10 @@ You choose a soldier class, not individual weapons. **F4**, or **Choose class** 
 
 | Class | Primary | Pistol | Equipment |
 | --- | --- | --- | --- |
-| Rifleman | Field rifle: automatic, 600 rpm, 30 rounds | Service pistol: 9 mm, 12 rounds | 2 frag grenades, 1 smoke grenade |
-| Marksman | Sniper rifle: scoped, 5 rounds | Machine pistol: automatic, 1000 rpm, 18 rounds | 2 claymores, 1 smoke grenade |
+| Rifleman | Field rifle: semi/burst/auto, 625 rpm burst/auto, 30 rounds | Service pistol: 9 mm, 12 rounds | 2 frag grenades, 1 smoke grenade |
+| Marksman | Sniper rifle: scoped, 5 rounds | Machine pistol: semi/auto, 1,250 rpm auto, 18 rounds | 2 claymores, 1 smoke grenade |
 | Breacher | Combat shotgun: 6 shells of 9 pellets | Heavy pistol: 7 rounds, 55 damage each | 2 flashbangs, 2 frag grenades |
-| Pointman | Submachine gun: automatic, 800 rpm, 30 rounds | Service pistol | 2 flashbangs, 2 claymores |
+| Pointman | Submachine gun: semi/burst/auto, 750 rpm burst/auto, 30 rounds | Service pistol | 2 flashbangs, 2 claymores |
 
 Soldiers have 100 health. A hit to the head does about three times a weapon's damage and a hit to the legs about three quarters. Damage also falls with distance, at a different rate for each weapon:
 
@@ -81,7 +82,7 @@ Soldiers have 100 health. A hit to the head does about three times a weapon's da
 | --- | --- | --- | --- |
 | Field rifle | 34 | 70% | 60 and 150 m |
 | Submachine gun | 22 | 45% | 15 and 45 m |
-| Combat shotgun | 9 × 14, spread over 4.5° | 20% | 6 and 25 m |
+| Combat shotgun | 9 × 14, recovered stance-dependent spread | 20% | 6 and 25 m |
 | Sniper rifle | 95 | 80% | 250 and 400 m |
 | Service pistol | 26 | 50% | 20 and 50 m |
 | Heavy pistol | 55 | 50% | 20 and 60 m |
@@ -134,7 +135,7 @@ While you play (F5 in the editor, or `tools/dev play`), the game serves an MCP e
 - bring edited scripts into the running game without restarting it, or restart it in place and put you back where you were;
 - write the values you settle on into the default resources.
 
-The link listens on 127.0.0.1 only, needs a token only your user account can read (`.agent/live/`), and is absent from exported builds. `SOCOM_LIVE=0` turns it off. `tools/dev live status` lists the running games it can reach; `.agents/skills/live-game/SKILL.md` describes the tools.
+The link runs only in the real game, never in a test run, so what an agent changes is the game in front of you. It listens on 127.0.0.1 only, needs a token only your user account can read (`.agent/live/`), and is absent from exported builds. `SOCOM_LIVE=0` turns it off. `tools/dev live status` shows what is running; `.agents/skills/live-game/SKILL.md` describes the tools.
 
 ## Design and research
 

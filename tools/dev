@@ -14,8 +14,10 @@ Usage: tools/dev <command>
 
   check                 Load every script, scene, and resource headlessly; report parse
                         errors and broken references as file:line. Takes about 2 s.
-  test [suite...]       Run the headless regression suites in tests/ in parallel
-                        (all of them, or the ones named, e.g. `test hud_layout`).
+  test [suite...|--all] Run headless regression suites from tests/. With no argument:
+                        the core suites listed in tests/core.txt (well under a minute).
+                        Name suites to run those; --all runs every suite. A few run at
+                        once (SOCOM_TEST_JOBS, default the number of processor cores).
   shot [options] [scenario...] [key=value...]
                         Render scenarios to PNG in a hidden window. No arguments lists
                         the scenarios. key=value sets any harness state (level=lab
@@ -37,8 +39,10 @@ Usage: tools/dev <command>
   mcp-smoke             Drive the Godot MCP server end to end against this project.
   play                  Start the game in a window as a player would, with the live link
                         on so an agent can inspect and tune it while you play.
-  live <command>        The live link to running games: status, tools, call <tool>
-                        ['<json>'], launch [--play], stop [port], smoke.
+  live <command>        The live link to the running game: status, tools, call <tool>
+                        ['<json>'], launch [--focus] (open the real game), stop [port],
+                        smoke. `sandbox [--port=n]` starts a hidden QA instance for an
+                        experiment of your own, reached only with call --port=n.
   godot [args...]       Run Godot through the project wrapper.
 EOF
 }
@@ -122,7 +126,7 @@ run_suite() {
 		if [[ $status -eq 143 || $status -eq 137 ]]; then
 			printf '%-28s TIMEOUT after %ss (%s passed before it stalled)\n' "$name" "$limit" "$passed"
 		elif [[ $status -eq 0 && $failed -eq 0 && $passed -gt 0 ]]; then
-			printf '%-28s PASS  %3s checks  %ss\n' "$name" "$passed" "$((SECONDS - started))"
+			printf '%-28s PASS  %3s checks  %ss%s\n' "$name" "$passed" "$((SECONDS - started))" "$([[ $((SECONDS - started)) -gt ${SOCOM_TEST_BUDGET:-20} ]] && echo "  SLOW: over the ${SOCOM_TEST_BUDGET:-20}s a suite is allowed")"
 		else
 			printf '%-28s FAIL  %s of %s checks failed  %ss\n' "$name" "$failed" "$((passed + failed))" "$((SECONDS - started))"
 		fi
@@ -135,11 +139,19 @@ run_suite() {
 	[[ $status -eq 0 && $failed -eq 0 && $passed -gt 0 ]]
 }
 
+# The suites a plain `tools/dev test` runs: tests/core.txt, one name a line.
+core_suites() {
+	sed -e 's/#.*//' -e 's/[[:space:]]//g' "$root/tests/core.txt" 2>/dev/null | grep -v '^$'
+}
+
 cmd_test() {
-	local suites=() name available
+	local suites=() name available all=0 names=()
 	available="$(cd "$root/tests" && grep -l '^extends SceneTree' *.gd 2>/dev/null | sed 's/\.gd$//')"
-	if [[ $# -gt 0 ]]; then
-		for name in "$@"; do
+	for name in "$@"; do
+		if [[ "$name" == "--all" ]]; then all=1; else names+=("$name"); fi
+	done
+	if [[ ${#names[@]} -gt 0 ]]; then
+		for name in "${names[@]}"; do
 			name="${name%.gd}"
 			name="${name##*/}"
 			if ! echo "$available" | grep -qx "$name"; then
@@ -148,18 +160,32 @@ cmd_test() {
 			fi
 			suites+=("$name")
 		done
-	else
+	elif [[ $all -eq 1 ]]; then
 		for name in $available; do
 			suites+=("$name")
+		done
+	else
+		for name in $(core_suites); do
+			if echo "$available" | grep -qx "$name"; then
+				suites+=("$name")
+			else
+				echo "tests/core.txt names $name, but there is no tests/$name.gd"
+			fi
 		done
 	fi
 	if [[ ${#suites[@]} -eq 0 ]]; then
 		echo "TESTS: no suites found in tests/"
 		return 1
 	fi
-	local run pids=() failures=0 index=0
+	# A few at a time: one process a core. Starting every suite at once only makes them
+	# all slow, and starves anyone else using the machine.
+	local limit="${SOCOM_TEST_JOBS:-$(sysctl -n hw.physicalcpu 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 4)}"
+	local run pids=() failures=0 index=0 began=$SECONDS
 	run="$(new_run logs)"
 	for name in "${suites[@]}"; do
+		while [[ $(jobs -rp | wc -l) -ge $limit ]]; do
+			sleep 0.2
+		done
 		run_suite "$name" "$run" &
 		pids+=($!)
 	done
@@ -168,12 +194,16 @@ cmd_test() {
 		cat "$run/$name.summary"
 		index=$((index + 1))
 	done
+	local shape="${#suites[@]} suite$([[ ${#suites[@]} -eq 1 ]] || echo s), $((SECONDS - began))s"
+	if [[ ${#names[@]} -eq 0 && $all -eq 0 ]]; then
+		shape="$shape; core only, --all runs every suite"
+	fi
 	if [[ $failures -gt 0 ]]; then
-		echo "TESTS: FAIL ($failures of ${#suites[@]} suites)"
+		echo "TESTS: FAIL ($failures of $shape)"
 		return 1
 	fi
 	rm -rf "$run"
-	echo "TESTS: ok (${#suites[@]} suite$([[ ${#suites[@]} -eq 1 ]] || echo s))"
+	echo "TESTS: ok ($shape)"
 }
 
 cmd_shot() {
@@ -261,7 +291,7 @@ cmd_doctor() {
 		local live
 		live="$(node "$root/tools/agent/live-mcp.mjs" status 2>/dev/null | grep -E '^[0-9]+ ')"
 		if [[ -n "$live" ]]; then
-			echo "note  games with the live link:"
+			echo "note  running with the live link (the game MCP server acts only on \"the game\"):"
 			echo "$live" | sed 's/^/        /'
 		fi
 	else

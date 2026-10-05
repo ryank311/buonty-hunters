@@ -9,6 +9,8 @@ const THROWABLE := preload("res://scripts/combat/throwable.gd")
 const CLAYMORE := preload("res://scripts/combat/claymore.gd")
 const DIRECTOR := preload("res://scripts/combat/combat_director.gd")
 const THROW_ARC := preload("res://scripts/combat/throw_arc.gd")
+const Guns := preload("res://scripts/combat/recovered_weapons.gd")
+const Accuracy := preload("res://scripts/combat/recovered_accuracy.gd")
 ## Holding the throw this long reaches full strength.
 const THROW_CHARGE_SECONDS := 1.1
 ## Strength at which a throw stops being a lob, and at which it becomes a full throw.
@@ -54,6 +56,10 @@ var fire_was_down: bool = false
 var require_trigger_release: bool = false
 var empty_notified: bool = false
 var recoil := RecoilState.new()
+var accuracy := Accuracy.new()
+var rounds_in_pull: int = 0
+var last_look := Vector2.ZERO
+var scope_dropped: bool = false
 var rng := RandomNumberGenerator.new()
 var aim_point := Vector3.ZERO
 var hit_point := Vector3.ZERO
@@ -111,7 +117,9 @@ func initialize(owner_player: PrototypePlayer) -> void:
 func reset_profiles() -> void:
 	profiles.clear()
 	for defaults: WeaponProfile in soldier_class.weapons():
-		profiles.append(defaults.duplicate())
+		var loaded := defaults.duplicate() as WeaponProfile
+		Guns.apply_stats(loaded)
+		profiles.append(loaded)
 	magazines.resize(profiles.size())
 	reserves.resize(profiles.size())
 
@@ -151,6 +159,7 @@ func reset() -> void:
 	pad_cycle = false
 	_cancel_throw()
 	recoil.reset()
+	_reset_accuracy()
 	if player:
 		set_scope(false)
 		_show_weapon()
@@ -173,6 +182,8 @@ func equip(slot: int) -> bool:
 	draw_from = profile
 	draw_serial += 1
 	active_slot = slot
+	recoil.reset()
+	_reset_accuracy()
 	draw_remaining = profile.draw_seconds
 	cooldown = maxf(cooldown, draw_remaining)
 	muzzle_timer = 0.0
@@ -189,18 +200,25 @@ func equip(slot: int) -> bool:
 ## Puts another weapon in a slot, as when one is taken from a body.
 func receive(slot: int, taken: WeaponProfile, loaded: int, spare: int) -> void:
 	if slot == active_slot:
+		# Return/cancel a held grenade before replacing the old slot's inventory.
+		_cancel_throw()
 		draw_from = profile
 		draw_serial += 1
 	profiles[slot] = taken
+	if taken.recovered_stats.is_empty():
+		Guns.apply_stats(taken)
 	magazines[slot] = loaded
 	reserves[slot] = spare
 	if slot == active_slot:
+		recoil.reset()
+		_reset_accuracy()
 		reload_remaining = 0.0
 		set_scope(false)
 		draw_remaining = taken.draw_seconds
 		cooldown = maxf(cooldown, draw_remaining)
 		require_trigger_release = true
-		_show_weapon()
+	# Refresh the carried model too when a menu changes the inactive gun.
+	_show_weapon()
 	player.message.emit("Took %s • %d loaded / %d reserve" % [taken.display_name, loaded, spare])
 
 func _show_weapon() -> void:
@@ -240,6 +258,8 @@ func running_fraction() -> float:
 	return clampf((speed - player.movement.walk_speed) / maxf(0.1, player.movement.run_speed - player.movement.walk_speed), 0.0, 1.0)
 
 func spread_degrees() -> float:
+	if native_accuracy():
+		return accuracy.spread_degrees(scoped)
 	var speed := Vector2(player.velocity.x, player.velocity.z).length()
 	var walking := clampf(speed / maxf(0.1,player.movement.walk_speed),0.0,1.0)
 	var movement_spread := lerpf(profile.walk_spread * walking,profile.run_spread,pow(running_fraction(),1.4))
@@ -247,11 +267,57 @@ func spread_degrees() -> float:
 	return (profile.base_spread + unaimed + movement_spread + recoil.bloom) * stability()
 
 func shot_direction() -> Vector3:
+	if native_accuracy():
+		return accuracy.direction(aim_direction(), scoped, magnification(), Vector2(rng.randf_range(-1, 1), rng.randf_range(-1, 1)))
 	# The UI and the real shot use the same cone half-angle; pellets add their own.
 	var firing_basis := player.camera_rig.aim_basis()
 	var angle := rng.randf() * TAU
 	var radius := sqrt(rng.randf()) * tan(deg_to_rad(spread_degrees() + profile.pellet_spread))
 	return (-firing_basis.z + firing_basis.x * cos(angle) * radius + firing_basis.y * sin(angle) * radius).normalized()
+
+func native_accuracy() -> bool:
+	if profile.recovered_stats.is_empty():
+		return false
+	accuracy.bind(profile, player.stance.current)
+	return true
+
+func _reset_accuracy() -> void:
+	accuracy = Accuracy.new()
+	rounds_in_pull = 0
+	scope_dropped = false
+	if player:
+		last_look = Vector2(player.rotation.y, player.camera_rig.pitch)
+		player.camera_rig.set_recoil(Vector2.ZERO)
+		native_accuracy()
+
+func fire_mode() -> int:
+	return profile.fire_mode if not profile.recovered_stats.is_empty() else 3 if profile.automatic else 1
+
+func mode_caption() -> String:
+	return ["SAFE", "SEMI", "BURST", "AUTO"][fire_mode()]
+
+func fire_interval() -> float:
+	if profile.recovered_stats.is_empty():
+		return 60.0 / profile.rounds_per_minute
+	return float(profile.recovered_stats.fire_wait) * (0.8 if fire_mode() >= 2 else 1.0)
+
+func cycle_fire_mode() -> bool:
+	if scoped or profile.kind != "firearm" or profile.recovered_stats.is_empty():
+		return false
+	var modes: Array = profile.recovered_stats.modes
+	if modes.size() < 2:
+		return false
+	profile.fire_mode = int(modes[(modes.find(profile.fire_mode) + 1) % modes.size()])
+	rounds_in_pull = 0
+	require_trigger_release = true
+	player.message.emit("%s • %s • B / L3 change mode" % [profile.display_name, mode_caption()])
+	return true
+
+func magnification() -> float:
+	return tan(deg_to_rad(player.camera_rig.profile.field_of_view * 0.5)) / tan(deg_to_rad(scope_camera.fov * 0.5)) if scoped else 1.0
+
+func aim_direction() -> Vector3:
+	return -scope_camera.global_basis.z if scoped and not profile.recovered_stats.is_empty() else player.camera_rig.aim_direction()
 
 func view_origin() -> Vector3:
 	return scope_camera.global_position if scoped else player.camera_rig.camera.global_position
@@ -260,7 +326,9 @@ func query_aim(with_spread: bool = false) -> Dictionary:
 	# Hitscan resolves immediately: camera chooses aim, then the muzzle resolves the first obstruction.
 	var space := player.get_world_3d().direct_space_state
 	var camera_origin := view_origin()
-	var direction := player.camera_rig.aim_direction()
+	var direction := aim_direction()
+	if native_accuracy():
+		direction = accuracy.direction(direction, scoped, magnification())
 	if with_spread:
 		direction = shot_direction()
 	var endpoint := camera_origin + direction * profile.range_metres
@@ -293,7 +361,7 @@ func tick(delta: float, fire: bool, reload_requested: bool) -> void:
 	# When the interval runs out part-way through a tick of sustained automatic fire, the
 	# overshoot carries into the next interval, so a rate that does not divide the tick
 	# rate still averages out exactly. A weapon that was already ready carries nothing.
-	var cycling := cooldown > 0.0 and fire and profile.automatic
+	var cycling := cooldown > 0.0 and fire and fire_mode() >= 2
 	cooldown -= delta
 	if cooldown < 0.0 and not cycling:
 		cooldown = 0.0
@@ -301,10 +369,21 @@ func tick(delta: float, fire: bool, reload_requested: bool) -> void:
 	hit_flash = maxf(0.0, hit_flash - delta)
 	muzzle_timer = maxf(0.0, muzzle_timer - delta)
 	recoil.tick(delta, profile)
-	player.camera_rig.set_recoil(recoil.offset)
+	if native_accuracy():
+		var look := Vector2(player.rotation.y, player.camera_rig.pitch)
+		var change := Vector2(angle_difference(last_look.x, look.x), look.y - last_look.y)
+		last_look = look
+		var rate := change / maxf(delta, 0.0001) if change.length() < PI * 0.25 else Vector2.ZERO
+		var effort := PlayerInput.move_vector(player.camera_settings.pad_deadzone).length() * (0.2 if scoped else 1.0) + rate.length() * delta * 0.1
+		accuracy.tick(delta, player.velocity, rate, not player.is_on_floor(), scoped, effort)
+		player.camera_rig.set_recoil(Vector2.ZERO)
+	else:
+		player.camera_rig.set_recoil(recoil.offset)
 	player.soldier.flash.visible = muzzle_timer > 0.0
 	if not fire:
 		require_trigger_release = false
+		rounds_in_pull = 0
+		scope_dropped = false
 	var fresh_press := fire and not fire_was_down
 	fire_was_down = fire
 	for item: int in range(2):
@@ -312,11 +391,15 @@ func tick(delta: float, fire: bool, reload_requested: bool) -> void:
 			equip(2 + item)
 	pad_cycle = false
 	_update_scope(delta)
+	if Input.is_action_just_pressed("fire_mode", true):
+		cycle_fire_mode()
 	if profile.kind != "firearm":
 		_tick_equipment(fresh_press, fire, delta)
 		return
 	if reload_requested and player.can_fire() and draw_remaining <= 0.0 and ammo < profile.magazine_size and reserve > 0 and reload_remaining <= 0.0:
 		reload_remaining = profile.reload_seconds
+		rounds_in_pull = 0
+		require_trigger_release = fire
 	if reload_remaining > 0.0:
 		reload_remaining = maxf(0.0, reload_remaining - delta)
 		if reload_remaining <= 0.0:
@@ -325,9 +408,15 @@ func tick(delta: float, fire: bool, reload_requested: bool) -> void:
 			reserve -= loaded
 			empty_notified = false
 	query_aim()
-	var wants_shot := fire and player.can_fire() and (profile.automatic or fresh_press) and not require_trigger_release
+	if fire and not player.can_fire():
+		require_trigger_release = true
+	var limit: int = 1 if fire_mode() == 1 else 3 if fire_mode() == 2 else 10000
+	var wants_shot := fire and player.can_fire() and rounds_in_pull < limit and (fire_mode() >= 2 or fresh_press) and not require_trigger_release
 	if wants_shot and cooldown <= 0.00001 and reload_remaining <= 0.0 and draw_remaining <= 0.0:
 		if ammo > 0:
+			if scoped and rounds_in_pull > 0 and native_accuracy():
+				scope_dropped = true
+				set_scope(false)
 			shoot(query_aim(true))
 		elif not empty_notified:
 			empty_notified = true
@@ -338,7 +427,8 @@ func shoot(result: Dictionary) -> void:
 		return
 	ammo -= 1
 	shots_fired += 1
-	cooldown = 60.0 / profile.rounds_per_minute + minf(cooldown, 0.0)
+	rounds_in_pull += 1
+	cooldown = fire_interval() + minf(cooldown, 0.0)
 	muzzle_timer = 0.045
 	if DisplayServer.get_name() != "headless":
 		sound.pitch_scale = profile.sound_pitch
@@ -354,8 +444,13 @@ func shoot(result: Dictionary) -> void:
 			struck = resolve_hit(pellet_hit, profile, _muzzle_distance(pellet_hit)) or struck
 		if struck:
 			_count_hit()
-	recoil.kick(profile, stability(), running_fraction())
-	player.camera_rig.set_recoil(recoil.offset)
+	if native_accuracy():
+		accuracy.fired(rounds_in_pull, scoped, rng.randf())
+		recoil.visual_kick = minf(recoil.visual_kick + profile.weapon_kick, 2.5)
+		recoil.since_shot = 0.0
+	else:
+		recoil.kick(profile, stability(), running_fraction())
+		player.camera_rig.set_recoil(recoil.offset)
 	PlayerInput.vibrate(player.camera_settings.vibration * (1.0 if profile.hold == "pistol" else 0.7))
 
 func _muzzle_distance(result: Dictionary) -> float:
@@ -411,6 +506,10 @@ func set_scope(value: bool) -> void:
 		return
 	scoped = value
 	if value:
+		if native_accuracy():
+			accuracy.scope_kick = 0.0
+			accuracy.kick_rising = false
+			accuracy.exertion = minf(1.0, accuracy.exertion + 0.5)
 		zoom_index = clampi(zoom_index, 0, profile.scope_fovs.size() - 1)
 		_place_scope_camera()
 		scope_camera.fov = profile.scope_fovs[zoom_index]
@@ -431,11 +530,13 @@ func zoom(step: int) -> void:
 
 func _place_scope_camera() -> void:
 	var aim := player.camera_rig.aim_basis()
+	if native_accuracy():
+		aim *= Basis(Vector3.RIGHT, accuracy.scope_kick * profile.recovered_recoil_scale)
 	var eye := player.global_position + Vector3.UP * StanceController.EYE_HEIGHTS[player.stance.current] + player.global_basis.x * player.camera_rig.actual_lean * 0.2
 	scope_camera.global_transform = Transform3D(aim, eye - aim.z * 0.25)
 
 func _update_scope(delta: float) -> void:
-	set_scope(player.aiming and profile.scope_fovs.size() > 0 and draw_remaining <= 0.0 and reload_remaining <= 0.0 and player.can_fire())
+	set_scope(player.aiming and not scope_dropped and profile.scope_fovs.size() > 0 and draw_remaining <= 0.0 and reload_remaining <= 0.0 and player.can_fire())
 	if not scoped:
 		return
 	_place_scope_camera()

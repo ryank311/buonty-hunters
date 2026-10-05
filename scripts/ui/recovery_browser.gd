@@ -23,6 +23,7 @@ var gun_search: LineEdit
 var gun_category: OptionButton
 var gun_picker: OptionButton
 var gun_details: Label
+var gun_record: OptionButton
 var equip_button: Button
 
 func _ready() -> void:
@@ -152,13 +153,17 @@ func _build_guns(outer: VBoxContainer) -> void:
 	gun_details = _label(gun_box, "", 14)
 	gun_details.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	gun_details.custom_minimum_size = Vector2(338, 100)
+	gun_record = OptionButton.new()
+	gun_box.add_child(gun_record)
+	gun_record.fit_to_longest_item = false
+	gun_record.item_selected.connect(func(_index: int) -> void: _gun_stats())
 	_label(gun_box, "Turn gun", 14)
 	var angle := HSlider.new()
 	gun_box.add_child(angle)
 	angle.max_value = 360
 	angle.value = 90
 	angle.value_changed.connect(func(value: float) -> void: lab.weapon.rotation.y = deg_to_rad(value))
-	equip_button = _button(gun_box, "Equip selected gun", func() -> void: lab.equip_gun(); set_open(false))
+	equip_button = _button(gun_box, "Equip selected gun", func() -> void: lab.equip_gun(gun_record.get_selected_id()); set_open(false))
 	_button(gun_box, "Close / Tab", func() -> void: set_open(false))
 	_filter_guns()
 	_gun_details()
@@ -205,9 +210,24 @@ func _cycle_gun(direction: int) -> void:
 
 func _gun_details() -> void:
 	var entry: Dictionary = lab.guns[lab.weapon_index]
-	var size: Vector3 = lab.Guns.vector(entry.bounds_max) - lab.Guns.vector(entry.bounds_min)
-	gun_details.text = "%s\n%s · %.2f m long\n%s" % [entry.name, entry.category, size.z, "Uses prototype %s tuning." % lab.Guns.template(entry).replace("_", " ") if entry.playable else "Launcher model preview. Firing is not yet implemented."]
+	gun_record.clear()
+	for record: Dictionary in lab.Guns.records_for(entry.id):
+		gun_record.add_item(record.name, int(record.id))
+	gun_record.visible = gun_record.item_count > 1
+	_gun_stats()
 	equip_button.disabled = not entry.playable or gun_picker.item_count == 0
+
+func _gun_stats() -> void:
+	var entry: Dictionary = lab.guns[lab.weapon_index]
+	var size: Vector3 = lab.Guns.vector(entry.bounds_max) - lab.Guns.vector(entry.bounds_min)
+	var info := "Launcher model preview. Firing is not yet implemented."
+	if entry.playable:
+		var profile: WeaponProfile = lab.Guns.profile_for(entry.id, gun_record.get_selected_id())
+		var modes: Array[String] = []
+		for mode: float in profile.recovered_stats.modes:
+			modes.append(["SAFE", "SEMI", "BURST", "AUTO"][int(mode)])
+		info = "%s · %s\nRecovered recoil / spread · B / L3 changes mode\nDamage and ammunition use prototype tuning." % [profile.recovered_stats.name, " / ".join(modes)]
+	gun_details.text = "%s\n%s · %.2f m long\n%s" % [entry.name, entry.category, size.z, info]
 
 func _label(parent: Node, text: String, size: int) -> Label:
 	var label := Label.new()

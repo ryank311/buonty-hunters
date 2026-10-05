@@ -20,11 +20,11 @@ extends Resource
 @export var acceleration: float = 32.0
 @export var braking: float = 35.0
 @export_range(0.0, 2.0) var body_weight: float = 1.0
-## The original's dynamics.rdr: gravity 235 source units/s² (23.5 m/s²). Its jump clip
-## lifts the root 0.46 m from the crouched takeoff and jump_factor scales that by 0.85,
-## a 0.39 m apex and 0.36 s in the air, which is the clip's own airborne span.
+## The original's dynamics.rdr: gravity 235 source units/s² (23.5 m/s²).
 @export var gravity: float = 23.5
-@export var jump_height: float = 0.39
+## Chosen for feel, not recovered: high enough to hop onto anything up to about 0.9 m
+## that the 0.65 m step does not take; higher ledges are climbed.
+@export var jump_height: float = 1.0
 ## dynamics.rdr step_height 6.5 units: ledges up to this are walked onto without a climb.
 @export var step_height: float = 0.65
 ## dynamics.rdr max_slope: the steepest walkable ground.

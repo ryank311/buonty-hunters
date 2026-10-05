@@ -69,6 +69,9 @@ func _size_window() -> void:
 	window.position = usable.position + (usable.size - window.size) / 2
 
 func _input(event: InputEvent) -> void:
+	if modal and event.is_action_pressed("ui_cancel") and hud.close_menu_popup():
+		get_viewport().set_input_as_handled()
+		return
 	if event.is_action_pressed("pause") or event.is_action_pressed("tuning"):
 		set_modal(not modal)
 		get_viewport().set_input_as_handled()
@@ -121,7 +124,7 @@ func toggle_lap() -> void:
 		lap_time = 0.0
 		lap_start = player.global_position
 		lap_running = true
-		hud.notify("Lap started • Y / T to stop")
+		hud.notify("Lap started • T to stop")
 
 func _controller_connection_changed(_device: int, connected: bool) -> void:
 	if not connected:

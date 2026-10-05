@@ -80,7 +80,7 @@ func _run() -> void:
 	for index: int in range(65):
 		await frames(1)
 		peak = maxf(peak, player.position.y)
-	check(peak > 0.32 and peak < 0.46 and player.is_on_floor(), "Jump reaches the original 0.39 m apex and lands (%.3f m)" % peak)
+	check(peak > 0.9 and peak < 1.15 and player.is_on_floor(), "Jump reaches the 1.0 m apex and lands (%.3f m)" % peak)
 	check(player.request_stance(1), "Crouch transition succeeds in open space")
 	player.global_position = Vector3(-10, 0.08, 2)
 	await frames(15)
@@ -119,9 +119,11 @@ func _run() -> void:
 	player.weapon.tick(2.5, false, false)
 	check(player.weapon.ammo == 30, "Reload completes with a full magazine")
 	player.weapon.reset()
+	player.weapon.cycle_fire_mode()
+	player.weapon.tick(1.0 / 60.0, false, false)
 	for tick: int in range(60):
 		player.weapon.tick(1.0 / 60.0, true, false)
-	check(player.weapon.shots_fired == 10 and player.weapon.ammo == 20, "Automatic cadence is ten rounds per second")
+	check(player.weapon.shots_fired == 11 and player.weapon.ammo == 19, "Recovered M4 automatic cadence is 625 rounds per minute")
 	player.weapon.reset()
 	# A waist-high slab between body and muzzle must block a camera-visible target.
 	var blocker := StaticBody3D.new()

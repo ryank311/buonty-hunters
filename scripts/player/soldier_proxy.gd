@@ -119,6 +119,8 @@ var arm_joints: Dictionary = {}
 var pose_points: Dictionary = {}
 # The modelled soldier drawn over these parts; null leaves the blocks visible.
 var soldier_skin: SoldierSkin
+## How the whole soldier rests on the ground: tilted to the slope it lies on when prone.
+var ground := Transform3D.IDENTITY
 ## The throw being held (its cocked pose is drawn into), or -1.
 var throw_hold_style: int = -1
 ## The throw in motion and how far into it, or -1.
@@ -655,7 +657,7 @@ func pose(stance: int, speed: float, movement: Vector2, aim_pitch: float, lean: 
 		var bank := Basis(Vector3.UP, -dive_side * 0.35 * sin(PI * dive_phase) * dive_blend) * Basis(Vector3.BACK, -dive_side * 0.65 * sin(PI * minf(dive_phase * 1.15, 1.0)) * dive_blend)
 		# The native lean includes its own footwork and root shift. Do not tilt
 		# and translate the entire recovered model a second time.
-		transform = Transform3D(bank, Vector3.ZERO)
+		transform = ground * Transform3D(bank, Vector3.ZERO)
 		soldier_skin.pose(self, stance, speed, movement, grounded, aim_pitch, delta, focused, lean, crawl_phase, lateral_intent)
 
 static func dive_frame(phase: float, side: float, amount: float) -> Transform3D:

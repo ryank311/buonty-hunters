@@ -5,8 +5,12 @@ extends Node
 ## Every Godot process on this project loads this script, so it stays tiny and decides
 ## here whether to do anything at all:
 ##   - never in an exported build or in the editor itself;
-##   - on in a game someone is playing: a window, not QA mode;
-##   - off in headless runs, `--script` runs, and QA runs, unless SOCOM_LIVE=1 asks for it;
+##   - never in a test run: anything headless, or started with `--script` (the regression
+##     suites, `tools/dev check`, `tools/dev shot`), whatever the environment says. A
+##     test instance must never be mistaken for the game;
+##   - on in the real game: a window, run as a player runs it;
+##   - off in a QA window, unless SOCOM_LIVE=1 asks for it: that is an agent's own hidden
+##     sandbox (`tools/dev live sandbox`), which only its owner reaches, by port;
 ##   - SOCOM_LIVE=0 turns it off everywhere.
 ## The server is loaded only when it will run, so an error in it cannot stop the game or
 ## the test suites.
@@ -27,13 +31,13 @@ func _ready() -> void:
 static func wanted() -> bool:
 	if not OS.has_feature("editor") or Engine.is_editor_hint():
 		return false
+	var engine := OS.get_cmdline_args()
+	if DisplayServer.get_name() == "headless" or "--script" in engine or "-s" in engine:
+		return false
 	var asked := OS.get_environment("SOCOM_LIVE")
 	if asked == "0":
 		return false
-	if asked == "1":
-		return true
-	var engine := OS.get_cmdline_args()
 	var user := OS.get_cmdline_user_args()
-	if DisplayServer.get_name() == "headless" or "--script" in engine or "-s" in engine:
-		return false
-	return not ("--qa" in user or "--capture" in user)
+	if "--qa" in user or "--capture" in user:
+		return asked == "1"
+	return true

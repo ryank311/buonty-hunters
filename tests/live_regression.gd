@@ -112,8 +112,8 @@ func _run() -> void:
 	# Let the player coast to rest, so the recorder sees a whole stop.
 	await frames(30)
 	var faster: float = defaults.run_speed + 1.5
-	var tuned := await tool("tuning_set", {"changes": {"movement.run_speed": faster, "weapon.vertical_kick": 0.2, "movement.nope": 1}})
-	check(not tuned.is_error and tuned.applied["movement.run_speed"].from == defaults.run_speed and tuned.refused.has("movement.nope") and session.player.movement.run_speed == faster and is_equal_approx(session.player.weapon.profile.vertical_kick, 0.2), "tuning_set changes live values and names the ones it cannot")
+	var tuned := await tool("tuning_set", {"changes": {"movement.run_speed": faster, "weapon.recovered_recoil_scale": 0.2, "movement.nope": 1}})
+	check(not tuned.is_error and tuned.applied["movement.run_speed"].from == defaults.run_speed and tuned.refused.has("movement.nope") and session.player.movement.run_speed == faster and is_equal_approx(session.player.weapon.profile.recovered_recoil_scale, 0.2), "tuning_set changes live values and names the ones it cannot")
 	await tool("setup", {"spawn": "Start"})
 	var quick := await tool("play", {"frames": 60, "forward": 1.0})
 	var covered: float = start.player.pos[2] - quick.player.pos[2]
@@ -123,10 +123,10 @@ func _run() -> void:
 	var movement: Dictionary = listed_tuning.movement
 	check(movement.changed.run_speed.default == defaults.run_speed and movement.changed.run_speed.live == faster and movement.ranges.run_speed == [2.0, 8.0] and movement.default_file == defaults.resource_path and movement.values.has("walk_speed"), "tuning_get shows values, ranges, and what differs from the default file")
 	var weapons := await tool("tuning_get", {"section": "weapons"})
-	check(weapons.has("weapon0") and weapons.weapon0.in_hand and weapons.weapon0.changed.has("vertical_kick") and weapons.has("weapon1") and not weapons.weapon1.has("changed"), "tuning_get lists every carried weapon by slot")
+	check(weapons.has("weapon0") and weapons.weapon0.in_hand and weapons.weapon0.changed.has("recovered_recoil_scale") and weapons.has("weapon1") and not weapons.weapon1.get("changed", {}).has("recovered_recoil_scale"), "tuning_get lists every carried weapon by slot")
 	var planned := await tool("tuning_save", {"dry_run": true})
 	check(planned.would_write.get(defaults.resource_path, {}).has("run_speed") and load(defaults.resource_path).run_speed == defaults.run_speed, "tuning_save can report what it would write without writing")
-	var restored := await tool("tuning_set", {"changes": {"movement.run_speed": null, "weapon.vertical_kick": null}})
+	var restored := await tool("tuning_set", {"changes": {"movement.run_speed": null, "weapon.recovered_recoil_scale": null}})
 	check(not restored.is_error and session.player.movement.run_speed == defaults.run_speed, "null puts a value back to its default")
 
 	# What the player did, in numbers.
