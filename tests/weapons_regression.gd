@@ -372,15 +372,12 @@ func _roster() -> void:
 		check(misplaced.is_empty(), "Every soldier in the %s stands on open floor%s" % [place, "" if misplaced.is_empty() else ": " + ", ".join(misplaced)])
 	await H.scenario(self, "lab_start")
 	var hud: Node = session.hud
-	var row: Node = hud.squad_rows[1]
-	check(row.get_child(0).text == "02  ALPHA" and row.get_child(1).text == "OK", "The squad panel lists teammates (%s)" % row.get_child(0).text)
 	actor("ALPHA").apply_damage(500.0)
 	actor("TANGO 1").apply_damage(500.0)
 	await ticks(3)
-	check(row.get_child(1).text == "DOWN", "A fallen teammate shows as down")
 	session.reset_player()
 	await ticks(3)
-	check(actor("ALPHA").alive and actor("TANGO 1").alive and row.get_child(1).text == "OK", "A reset stands the level's soldiers back up")
+	check(actor("ALPHA").alive and actor("TANGO 1").alive, "A reset stands the level's soldiers back up")
 	await H.apply(self, {"weapon": "frag"})
 	await ticks(3)
 	check(hud.weapon_label.text == "FRAG GRENADE" and hud.ammo_label.text == "x 2" and hud.mode_label.text == "GEAR" and hud.ammo_caption.text == "CARRIED", "The HUD counts equipment instead of magazines (%s)" % hud.ammo_label.text)

@@ -13,55 +13,6 @@ const FOREARM_LENGTH := 0.29
 const RIFLE_STOCK := Vector3(0, 0, 0.375)
 ## Grenade throws, chosen by how long the throw is held and whether the soldier runs.
 enum Throw { LOB, SIDEARM, OVERHAND, FULL }
-## Length of each throw's motion, and the fraction of it at which the hand lets go.
-const THROW_SECONDS: Array[float] = [0.55, 0.55, 0.62, 0.95]
-const THROW_RELEASE: Array[float] = [0.36, 0.33, 0.33, 0.5]
-## A throw pose. Angles are radians added to the torso: yaw turns the right shoulder
-## forward, pitch leans back, roll dips the right shoulder. drop lowers and shift moves
-## the hips forward (metres). hand and front place the right (throwing) and left hands,
-## and pole the right elbow, in the torso's frame from each shoulder (x right, y up,
-## z back). step strides the left foot toward the target, lift raises it, and heel
-## rolls the right foot up onto its toes. w is how much of the body the throw drives.
-const THROW_NEUTRAL := {"w": 0.0, "yaw": 0.0, "pitch": 0.0, "roll": 0.0, "drop": 0.0, "shift": 0.0, "hand": Vector3(-0.13, -0.12, -0.33), "pole": Vector3(0.3, -1.0, 0.1), "front": Vector3(0.2, -0.12, -0.33), "step": 0.0, "lift": 0.0, "heel": 0.0}
-## [time as a fraction of the motion, pose] keys for each throw. The first key is the
-## cocked pose, which the soldier draws back into and holds while the throw is held.
-const THROW_KEYS: Array = [
-	# Underhand lob: knees bent and leaning in, the arm swings back past the hip, then
-	# pendulums through and up, finishing extended toward the target.
-	[
-		[0.0, {"w": 1.0, "yaw": -0.35, "pitch": -0.3, "roll": 0.1, "drop": 0.13, "shift": -0.04, "hand": Vector3(0.12, -0.46, 0.36), "pole": Vector3(0.3, 0.0, 0.9), "front": Vector3(-0.02, -0.1, -0.45), "step": 0.2, "lift": 0.0, "heel": 0.0}],
-		[0.36, {"w": 1.0, "yaw": 0.15, "pitch": -0.25, "roll": 0.0, "drop": 0.11, "shift": 0.06, "hand": Vector3(0.02, -0.4, -0.4), "pole": Vector3(0.3, -0.3, 0.7), "front": Vector3(0.0, -0.3, -0.25), "step": 0.25, "lift": 0.0, "heel": 0.2}],
-		[0.62, {"w": 1.0, "yaw": 0.2, "pitch": -0.12, "roll": 0.0, "drop": 0.04, "shift": 0.06, "hand": Vector3(-0.02, 0.15, -0.55), "pole": Vector3(0.3, -0.7, 0.3), "front": Vector3(0.05, -0.3, -0.2), "step": 0.25, "lift": 0.0, "heel": 0.2}],
-		[1.0, THROW_NEUTRAL],
-	],
-	# Sidearm sling on the run: dipped to the throwing side, the arm sweeps level.
-	[
-		[0.0, {"w": 1.0, "yaw": -0.75, "pitch": -0.05, "roll": 0.3, "drop": 0.03, "shift": 0.0, "hand": Vector3(0.42, -0.12, 0.22), "pole": Vector3(0.3, -1.0, 0.3), "front": Vector3(0.0, -0.05, -0.5), "step": 0.0, "lift": 0.0, "heel": 0.0}],
-		[0.33, {"w": 1.0, "yaw": 0.35, "pitch": -0.12, "roll": 0.15, "drop": 0.04, "shift": 0.05, "hand": Vector3(0.22, -0.12, -0.5), "pole": Vector3(0.2, -1.0, -0.2), "front": Vector3(-0.05, -0.3, -0.12), "step": 0.0, "lift": 0.0, "heel": 0.3}],
-		[0.62, {"w": 1.0, "yaw": 0.55, "pitch": -0.2, "roll": 0.05, "drop": 0.03, "shift": 0.06, "hand": Vector3(-0.42, -0.28, -0.28), "pole": Vector3(0.0, -1.0, 0.0), "front": Vector3(-0.05, -0.35, 0.05), "step": 0.0, "lift": 0.0, "heel": 0.2}],
-		[1.0, THROW_NEUTRAL],
-	],
-	# Overhand, like a baseball: arm cocked behind the head, whipped over, carried across.
-	[
-		[0.0, {"w": 1.0, "yaw": -0.65, "pitch": 0.12, "roll": 0.12, "drop": 0.03, "shift": -0.04, "hand": Vector3(0.1, 0.12, 0.32), "pole": Vector3(0.9, -0.1, 0.4), "front": Vector3(-0.05, 0.08, -0.55), "step": 0.15, "lift": 0.0, "heel": 0.0}],
-		[0.18, {"w": 1.0, "yaw": -0.35, "pitch": 0.06, "roll": 0.05, "drop": 0.04, "shift": 0.04, "hand": Vector3(0.06, 0.25, 0.18), "pole": Vector3(0.8, 0.3, 0.2), "front": Vector3(-0.05, -0.05, -0.45), "step": 0.3, "lift": 0.0, "heel": 0.1}],
-		[0.33, {"w": 1.0, "yaw": 0.35, "pitch": -0.25, "roll": -0.15, "drop": 0.05, "shift": 0.12, "hand": Vector3(-0.02, 0.28, -0.42), "pole": Vector3(0.7, 0.4, -0.2), "front": Vector3(-0.05, -0.3, -0.1), "step": 0.3, "lift": 0.0, "heel": 0.5}],
-		[0.62, {"w": 1.0, "yaw": 0.6, "pitch": -0.45, "roll": -0.1, "drop": 0.07, "shift": 0.14, "hand": Vector3(-0.4, -0.35, -0.3), "pole": Vector3(0.4, -0.2, -0.8), "front": Vector3(-0.05, -0.35, 0.05), "step": 0.3, "lift": 0.0, "heel": 0.6}],
-		[1.0, THROW_NEUTRAL],
-	],
-	# Full strength: lean back off the back foot with the front arm on the target, stride
-	# out, drive the hips and shoulders through, whip the arm over, and fold over the
-	# front leg as the back foot comes up onto its toes.
-	[
-		[0.0, {"w": 1.0, "yaw": -0.95, "pitch": 0.3, "roll": 0.22, "drop": 0.05, "shift": -0.1, "hand": Vector3(0.12, 0.14, 0.4), "pole": Vector3(0.9, 0.0, 0.5), "front": Vector3(0.0, 0.28, -0.52), "step": 0.0, "lift": 0.13, "heel": 0.0}],
-		[0.28, {"w": 1.0, "yaw": -0.85, "pitch": 0.22, "roll": 0.2, "drop": 0.06, "shift": 0.0, "hand": Vector3(0.12, 0.12, 0.42), "pole": Vector3(0.9, 0.0, 0.5), "front": Vector3(0.0, 0.2, -0.52), "step": 0.7, "lift": 0.08, "heel": 0.0}],
-		[0.42, {"w": 1.0, "yaw": -0.25, "pitch": 0.02, "roll": 0.08, "drop": 0.08, "shift": 0.16, "hand": Vector3(0.06, 0.3, 0.12), "pole": Vector3(0.8, 0.4, 0.2), "front": Vector3(-0.02, -0.05, -0.42), "step": 1.0, "lift": 0.0, "heel": 0.3}],
-		[0.5, {"w": 1.0, "yaw": 0.45, "pitch": -0.35, "roll": -0.2, "drop": 0.09, "shift": 0.24, "hand": Vector3(-0.02, 0.3, -0.45), "pole": Vector3(0.7, 0.4, -0.2), "front": Vector3(-0.05, -0.3, -0.1), "step": 1.0, "lift": 0.0, "heel": 0.7}],
-		[0.72, {"w": 1.0, "yaw": 0.75, "pitch": -0.65, "roll": -0.1, "drop": 0.12, "shift": 0.28, "hand": Vector3(-0.45, -0.4, -0.3), "pole": Vector3(0.4, -0.2, -0.8), "front": Vector3(-0.05, -0.38, 0.08), "step": 1.0, "lift": 0.0, "heel": 1.0}],
-		[1.0, THROW_NEUTRAL],
-	],
-]
-
 var parts: Dictionary = {}
 var weapon_pivot: Node3D
 var muzzle: Marker3D
@@ -126,8 +77,7 @@ var throw_hold_style: int = -1
 ## The throw in motion and how far into it, or -1.
 var throw_style: int = -1
 var throw_time: float = 0.0
-## The current throw pose, eased toward the held or animated target each frame.
-var throw_pose: Dictionary = THROW_NEUTRAL.duplicate()
+var throw_duration: float = 0.0
 
 func _ready() -> void:
 	var cloth := _material(Color("898874"))
@@ -250,10 +200,11 @@ func reset_pose() -> void:
 	throw_hold_style = -1
 	throw_style = -1
 	throw_time = 0.0
-	throw_pose = THROW_NEUTRAL.duplicate()
+	throw_duration = 0.0
 	lean_shift = 0.0
 	lean_roll = 0.0
 	focus_blend = 0.0
+	soldier_skin.driver.grenade.hold(style, get_parent().stance.current)
 	locomotion_yaw = 0.0
 	torso_yaw = 0.0
 	gait_direction = Vector3.FORWARD
@@ -270,7 +221,9 @@ func begin_throw(style: int) -> float:
 	throw_hold_style = -1
 	throw_style = style
 	throw_time = 0.0
-	return THROW_SECONDS[style] * THROW_RELEASE[style]
+	var release: float = soldier_skin.driver.grenade.begin(style, get_parent().stance.current)
+	throw_duration = soldier_skin.driver.grenade.duration(soldier_skin.motion)
+	return release
 
 func cancel_throw() -> void:
 	throw_hold_style = -1
@@ -280,35 +233,10 @@ func throwing() -> bool:
 	return throw_style >= 0
 
 func _advance_throw(delta: float) -> void:
-	var target: Dictionary = THROW_NEUTRAL
-	var rate := 12.0
 	if throw_style >= 0:
 		throw_time += delta
-		var progress := throw_time / THROW_SECONDS[throw_style]
-		if progress >= 1.0:
+		if throw_time >= throw_duration:
 			throw_style = -1
-		else:
-			target = _throw_key(THROW_KEYS[throw_style], progress)
-			rate = 30.0
-	elif throw_hold_style >= 0:
-		# The wind-up eases into the cocked pose, and moves between them as the hold grows.
-		target = THROW_KEYS[throw_hold_style][0][1]
-		rate = 9.0
-	throw_pose = _blend_throw(throw_pose, target, 1.0 - exp(-rate * delta))
-
-static func _throw_key(keys: Array, progress: float) -> Dictionary:
-	for index: int in range(keys.size() - 1):
-		var start: float = keys[index][0]
-		var end: float = keys[index + 1][0]
-		if progress <= end:
-			return _blend_throw(keys[index][1], keys[index + 1][1], smoothstep(0.0, 1.0, (progress - start) / maxf(end - start, 0.001)))
-	return keys[-1][1]
-
-static func _blend_throw(from: Dictionary, to: Dictionary, amount: float) -> Dictionary:
-	var mixed := {}
-	for key: String in from:
-		mixed[key] = lerp(from[key], to[key], amount)
-	return mixed
 
 func begin_jump(launch_speed: float) -> void:
 	jump_active = true
@@ -550,11 +478,6 @@ func pose(stance: int, speed: float, movement: Vector2, aim_pitch: float, lean: 
 	jog_bounce = (-0.035 + 0.09 * (0.5 - 0.5 * cos(cycle * 2.0 - TAU * 0.34))) * grounded_run * weight
 	var hip_height := lerpf(lerpf(STANDING_HIP - RUN_HIP_DROP * grounded_run, CROUCH_HIP, stance_blend), KNEEL_HIP, kneel_blend) - body_drop + jog_bounce
 	_advance_throw(delta)
-	# A throw from a standing stop uses the legs: the stride, the weight shift, the back
-	# foot rolling up. On the run, crouched, or prone it is the upper body alone.
-	var throw_legs: float = throw_pose.w * (1.0 - stance_blend) * (1.0 - prone_blend) * (1.0 - 0.85 * run_blend) * (1.0 - jump_blend)
-	hip_height -= throw_pose.drop * throw_pose.w * (1.0 - prone_blend)
-	hip_shift += Vector3(0, 0, -throw_pose.shift * throw_legs)
 	var feet: Array[Dictionary] = []
 	var facing := 1.0 if gait_direction.dot(gait_basis * Vector3.FORWARD) >= 0 else -1.0
 	for index: int in range(2):
@@ -597,17 +520,6 @@ func pose(stance: int, speed: float, movement: Vector2, aim_pitch: float, lean: 
 			# Each foot steps clear of the floor while it moves between gait and kneel.
 			boot_center = placed.origin + Vector3.UP * sin(PI * kneel_blend) * 0.06
 			step.pitch = lerpf(step.pitch, kneel_pitch, kneel_blend)
-		if throw_legs > 0.001:
-			if index == 0:
-				# The front foot strides out toward the target, lifted clear on the way.
-				boot_center += Vector3(0, throw_pose.lift, -0.42 * throw_pose.step) * throw_legs
-			else:
-				# The back foot rolls up onto its toes as the hips drive through.
-				var roll: float = -0.75 * throw_pose.heel * throw_legs
-				var toe: Vector3 = boot_center + foot_basis * Vector3(0, -0.07, -0.145)
-				foot_basis = foot_basis * Basis(Vector3.RIGHT, roll)
-				boot_center = toe - foot_basis * Vector3(0, -0.07, -0.145)
-				step.pitch += roll
 		var ankle: Vector3 = boot_center + foot_basis * Vector3(0, 0.04, 0.035)
 		var hip_horizontal := gait_basis * Vector3(sign_side * 0.14,0,0) + hip_shift
 		var horizontal := Vector2(ankle.x, ankle.z) - Vector2(hip_horizontal.x,hip_horizontal.z)
@@ -688,17 +600,9 @@ func _pose_upper_body(hip_height: float, aim_pitch: float, acceleration: Vector3
 	target_pitch += clampf(aim_pitch * 0.12, -0.06, 0.08)
 	torso_pitch = lerpf(torso_pitch, target_pitch, amount)
 	var sway := sin(cycle) * 0.008 * blend * weight * (1.0 - 0.5 * focus_blend)
-	# A throw coils and uncoils the whole trunk: the shoulders turn furthest, the waist
-	# and hips follow, and the spine leans back, dips sideways, and folds through.
-	var throw_w: float = throw_pose.w
-	var throw_yaw: float = throw_pose.yaw * throw_w
-	var throw_bend := Basis(Vector3.RIGHT, throw_pose.pitch * throw_w) * Basis(Vector3.BACK, -throw_pose.roll * throw_w)
-	var spine := Transform3D(Basis(Vector3.UP, shoulder_yaw + throw_yaw) * Basis(Vector3.RIGHT, torso_pitch) * throw_bend, Vector3(sway, hip_height, 0) + hip_shift * 0.65)
-	var pelvis := Transform3D(Basis(Vector3.UP, locomotion_yaw + gait_twist + throw_yaw * 0.35), Vector3(0, hip_height, 0) + hip_shift)
-	var waist := Transform3D(Basis(Vector3.UP, waist_yaw + throw_yaw * 0.65) * Basis(Vector3.RIGHT, torso_pitch * 0.45) * throw_bend.slerp(Basis.IDENTITY, 0.5), spine.origin)
-	# The hands follow the throw line rather than the full coil of the shoulders, so the
-	# cocked hand stays behind the throwing shoulder instead of swinging round the back.
-	var throw_arms := Basis(Vector3.UP, shoulder_yaw + throw_yaw * 0.25) * Basis(Vector3.RIGHT, torso_pitch) * throw_bend
+	var spine := Transform3D(Basis(Vector3.UP, shoulder_yaw) * Basis(Vector3.RIGHT, torso_pitch), Vector3(sway, hip_height, 0) + hip_shift * 0.65)
+	var pelvis := Transform3D(Basis(Vector3.UP, locomotion_yaw + gait_twist), Vector3(0, hip_height, 0) + hip_shift)
+	var waist := Transform3D(Basis(Vector3.UP, waist_yaw) * Basis(Vector3.RIGHT, torso_pitch * 0.45), spine.origin)
 	var crawl_sway := sin(crawl_cycle) * crawl_blend
 	var side_load := strafe_side * strafe_reach * strafe_blend
 	var prone_spine := Transform3D(Basis(Vector3.FORWARD,side_load * 0.07) * Basis(Vector3.UP,crawl_sway * 0.04) * Basis(Vector3.RIGHT,-PI / 2.0),Vector3(crawl_sway * 0.01 - side_load * 0.015,0.30 + strafe_reach * strafe_blend * 0.012,0.12))
@@ -771,14 +675,6 @@ func _pose_upper_body(hip_height: float, aim_pitch: float, acceleration: Vector3
 			var planted_hand := Vector3(shoulder.x + sign_side * (0.04 + strafe_reach * 0.23),0.075 + strafe_lift * 0.045,shoulder.z - 0.15)
 			hand = hand.lerp(planted_hand,strafe_blend * prone_blend * (1.0 - dive_blend))
 		var pole := Vector3(sign_side * 0.28,-1.0,0.08).lerp(Vector3(sign_side,-0.04,0.1),prone_blend)
-		if throw_w > 0.001:
-			# The throwing hand carries the grenade through the motion; the other arm
-			# points at the target, then pulls in to drive the turn.
-			var reach: Vector3 = throw_arms.slerp(spine.basis, prone_blend) * (throw_pose.hand if i == 1 else throw_pose.front)
-			hand = hand.lerp(shoulder + reach.limit_length(UPPER_ARM_LENGTH + FOREARM_LENGTH - 0.01), throw_w)
-			pole = pole.lerp(throw_arms.slerp(spine.basis, prone_blend) * (throw_pose.pole if i == 1 else Vector3(-0.3, -1.0, 0.2)), throw_w)
-			if i == 1:
-				weapon_pivot.transform = weapon_pivot.transform.interpolate_with(Transform3D(gun_basis, hand + gun_basis * Vector3(0.0, 0.065, 0.005)), throw_w)
 		var elbow := solve_elbow(shoulder, hand, pole)
 		arm_joints[side] = [shoulder, elbow, hand]
 		_bone(side + "UpperArm", shoulder, elbow, 1.0)

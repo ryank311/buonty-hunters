@@ -21,8 +21,6 @@ const FULL_FROM := 0.9
 const SQUEEZE_SETTLE_SECONDS := 0.12
 ## A trigger moving less than this in a tick is being held, not moved.
 const SQUEEZE_STILL := 0.015
-## Where the hand lets go of each throw, from the soldier's feet (x right, z back) when standing.
-const RELEASE_POINTS: Array[Vector3] = [Vector3(0.22, 0.85, -0.5), Vector3(0.48, 1.25, -0.4), Vector3(0.22, 1.85, -0.35), Vector3(0.2, 1.8, -0.6)]
 const ITEM_COLOURS := {"frag": Color("3f4a33"), "smoke": Color("8a8d86"), "flash": Color("c9cfd4"), "claymore": Color("4d5a3a")}
 var player: PrototypePlayer
 # The class decides what is carried: slot 0 the primary, slot 1 the pistol, then equipment.
@@ -570,7 +568,7 @@ func _tick_equipment(fresh_press: bool, fire: bool, delta: float) -> void:
 	query_aim()
 	if throw_release >= 0.0:
 		throw_release -= delta
-		if throw_release < 0.0:
+		if throw_release <= 0.00001:
 			_throw()
 	# The grenade stays in hand through the wind-up and is gone from the release until
 	# the follow-through ends.
@@ -644,9 +642,10 @@ func throw_launch(strength: float, style: int) -> Dictionary:
 	var aim := player.camera_rig.aim_direction()
 	var pitch := clampf(asin(clampf(aim.y, -1.0, 1.0)) + deg_to_rad(lift), deg_to_rad(-30.0), deg_to_rad(70.0))
 	var flat := Vector3(aim.x, 0.0, aim.z).normalized()
-	var release: Vector3 = RELEASE_POINTS[style]
-	release.y *= StanceController.HEIGHTS[player.stance.current] / StanceController.HEIGHTS[0]
-	var origin := player.global_transform * release
+	var skin := player.soldier.soldier_skin
+	var moving := Vector2(player.velocity.x, player.velocity.z).length() > (0.02 if player.stance.current == 2 else 0.15)
+	var release: Vector3 = skin.driver.grenade.release_point(skin.motion, skin.driver.last_base_pose, style, player.stance.current, moving, player.is_on_floor(), player.soldier.throwing(), skin.driver.gunplay)
+	var origin := player.soldier.global_transform * release
 	# Never release on the far side of a wall the soldier is pressed against.
 	var chest := player.global_position + Vector3.UP * (StanceController.HEIGHTS[player.stance.current] * 0.68)
 	var wall := player.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(chest, origin, Combat.WORLD_MASK, [player.get_rid()]))
@@ -662,7 +661,7 @@ func _commit_throw() -> void:
 	throw_arc.hide_flight()
 	ammo -= 1
 	throw_release = player.soldier.begin_throw(throw_style)
-	cooldown = maxf(60.0 / profile.rounds_per_minute, SoldierProxy.THROW_SECONDS[throw_style])
+	cooldown = maxf(60.0 / profile.rounds_per_minute, player.soldier.throw_duration)
 
 func _cancel_throw() -> void:
 	# A grenade still in the hand (a switch mid wind-up) goes back on the belt.

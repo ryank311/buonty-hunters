@@ -30,7 +30,6 @@ var mark_distance: float = 0.0
 var ink: Color = REST
 var blocked: bool = false
 var pip_alpha: float = 0.0
-var charge: float = 0.0
 var pip_offset := Vector2.ZERO
 var _pip_target: bool = false
 
@@ -76,7 +75,6 @@ func update_weapon(weapon: PracticeWeapon, delta: float, paused: bool) -> void:
 	if native:
 		recoil_pixels = weapon.accuracy.knock * profile.recovered_recoil_scale * size / SOURCE_SIZE
 	ink = REST
-	charge = clampf(weapon.throw_charge, 0.0, 1.0) if weapon.ammo > 0 else 0.0
 	_pip_target = false
 	if not hidden:
 		# Query without random spread so the tint/pip do not flicker between pellets.
@@ -123,15 +121,12 @@ func update_reticle(spread_degrees: float, vertical_fov: float, delta: float, ob
 	feedback.queue_redraw()
 
 func _draw_center() -> void:
-	# The grenade aiming cross sits at the top of its texture; the meter hangs below.
-	var origin := Vector2(-center_texture.get_width() * 0.5, 0) if family == "grenade" else -center_texture.get_size() * 0.5
-	center_ring.draw_texture(center_texture, origin)
-	if family == "grenade" and charge > 0.0:
-		# Reveal the recovered meter from its base up as the existing throw charges.
-		var extent := arm_texture.get_size()
-		var height := extent.y * charge
-		var source := Rect2(0, extent.y - height, extent.x, height)
-		center_ring.draw_texture_rect_region(arm_texture, Rect2(source.position + origin, source.size), source, ink)
+	if family == "grenade":
+		# Only the original aiming cross. The world arc communicates throw strength.
+		var cross := Rect2(0, 0, center_texture.get_width(), 4)
+		center_ring.draw_texture_rect_region(center_texture, Rect2(Vector2(-cross.size.x * 0.5, -2), cross.size), cross)
+	else:
+		center_ring.draw_texture(center_texture, -center_texture.get_size() * 0.5)
 
 func _draw_arm(mark: Control, index: int) -> void:
 	var extent := arm_texture.get_size()

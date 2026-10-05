@@ -11,8 +11,6 @@ const LAYOUT_SIZE := Vector2(1024, 768)
 var minimap: Control
 var session: Node3D
 var root := Control.new()
-var location_label: Label
-var stance_label: Label
 var ammo_label: Label
 var weapon_label: Label
 var controls_label: Label
@@ -21,15 +19,12 @@ var mode_label: Label
 var weapon_state_label: Label
 var health_label: Label
 var health_bar: ProgressBar
-var squad_health_bar: ProgressBar
 var health_fill: StyleBoxFlat
-var squad_fill: StyleBoxFlat
 var weapon_icon: Control
-var location_heading: Label
 var hud_panels: Dictionary = {}
-var squad_rows: Array[HBoxContainer] = []
 var ammo_caption: Label
-var lap_label: Label
+var round_label: Label
+var player_name_label: Label
 var notice_label: Label
 var debug_label: Label
 var crosshair: Control
@@ -125,12 +120,6 @@ func _label(parent: Node, text: String, position: Vector2, font_size: int = 16, 
 	return label
 
 func _build_hud() -> void:
-	var title := _card("Location")
-	location_heading = _text(title, "OLD QUARTER", 16, INK)
-	location_label = _text(title, "WEST YARD", 15, GOLD)
-	var timer := _card("Timer")
-	lap_label = _text(timer, "", 18, INK)
-	lap_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	minimap = MAP_SCRIPT.new()
 	minimap.name = "CircularMap"
 	root.add_child(minimap)
@@ -156,30 +145,15 @@ func _build_hud() -> void:
 	ammo_caption.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	weapon_state_label = _text(weapon, "", 15, GOLD)
 	weapon_state_label.visible = false
-	var health_row := HBoxContainer.new()
-	weapon.add_child(health_row)
-	_text(health_row, "HEALTH", 13, MUTED)
-	health_label = _text(health_row, "100 / 100", 13, INK)
+	var status := _card("Player")
+	round_label = _text(status, "ROUND  00:00", 18, INK)
+	round_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	player_name_label = _text(status, "", 16, INK)
+	player_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	health_label = _text(status, "100 / 100", 13, INK)
 	health_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	health_bar = _bar(weapon, 4)
+	health_bar = _bar(status, 4)
 	health_fill = health_bar.get_theme_stylebox("fill") as StyleBoxFlat
-	var squad := _card("Squad")
-	var local := HBoxContainer.new()
-	squad.add_child(local)
-	squad_rows.append(local)
-	_text(local, "01  YOU", 16, INK)
-	stance_label = _text(local, "STANDING", 13, INK)
-	stance_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	squad_health_bar = _bar(squad, 4)
-	squad_fill = squad_health_bar.get_theme_stylebox("fill") as StyleBoxFlat
-	for slot: int in range(2, 6):
-		var row := HBoxContainer.new()
-		squad.add_child(row)
-		squad_rows.append(row)
-		_text(row, "%02d  OPEN SLOT" % slot, 14, MUTED)
-		var status := _text(row, "—", 14, MUTED)
-		status.size_flags_horizontal = Control.SIZE_SHRINK_END
-		status.custom_minimum_size.x = 20
 	var notice := _card("Notice")
 	notice_label = _text(notice, "", 17, GOLD)
 	notice_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -205,14 +179,11 @@ func _layout_hud() -> void:
 	var margin := Vector2(ceilf(viewport_size.x * 0.05), ceilf(viewport_size.y * 0.05))
 	var left_width := minf(252, viewport_size.x * 0.28)
 	var right_width := minf(236, viewport_size.x * 0.26)
-	_set_card_rect("Location", margin, Vector2(250, 0))
 	_set_card_rect("Weapon", Vector2(margin.x, 0), Vector2(left_width, 0))
-	_set_card_rect("Squad", Vector2(viewport_size.x - margin.x - right_width, 0), Vector2(right_width, 0))
-	for id: String in ["Weapon", "Squad"]:
+	_set_card_rect("Player", Vector2(viewport_size.x - margin.x - right_width, 0), Vector2(right_width, 0))
+	for id: String in ["Weapon", "Player"]:
 		var panel: PanelContainer = hud_panels[id]
 		panel.position.y = viewport_size.y - margin.y - panel.size.y
-	var timer_pos: Vector2 = hud_panels.Squad.position - Vector2(0, 32)
-	_set_card_rect("Timer", timer_pos, Vector2(right_width, 28))
 	minimap.size = Vector2(152,152)
 	minimap.position = Vector2(viewport_size.x - margin.x - minimap.size.x, margin.y)
 	var notice_width := minf(600, viewport_size.x - margin.x * 2 - 340)
@@ -225,28 +196,12 @@ func _layout_hud() -> void:
 	controls_label.visible = (session.debug_visible or recovery) and not session.modal
 	for id: String in hud_panels:
 		var style: StyleBoxFlat = hud_panels[id].get_theme_stylebox("panel")
-		style.bg_color.a = session.player.camera_settings.hud_opacity if id in ["Weapon", "Squad", "Diagnostics"] else 0.0
+		style.bg_color.a = session.player.camera_settings.hud_opacity if id in ["Weapon", "Player", "Diagnostics"] else 0.0
 
 func _set_card_rect(id: String, position: Vector2, size: Vector2) -> void:
 	var panel: PanelContainer = hud_panels[id]
 	panel.position = position
 	panel.size = Vector2(size.x, maxf(size.y, panel.get_combined_minimum_size().y))
-
-## The rows under the player's own list teammates, standing or down; the rest stay open.
-func _update_squad() -> void:
-	var mates: Array[Node] = []
-	for actor: Node in get_tree().get_nodes_in_group(&"combat_actors"):
-		if actor != session.player and actor.get("team") == 0 and not actor.is_queued_for_deletion():
-			mates.append(actor)
-	for index: int in range(1, squad_rows.size()):
-		var title := squad_rows[index].get_child(0) as Label
-		var status := squad_rows[index].get_child(1) as Label
-		var mate: Node = mates[index - 1] if index - 1 < mates.size() else null
-		title.text = "%02d  %s" % [index + 1, mate.display_name if mate else "OPEN SLOT"]
-		title.add_theme_color_override("font_color", INK if mate and mate.alive else MUTED)
-		status.text = "—" if mate == null else "OK" if mate.alive else "DOWN"
-		status.add_theme_color_override("font_color", MUTED if mate == null else Color("96bf78") if mate.alive else Color("e48871"))
-		status.custom_minimum_size.x = 46 if mate else 20
 
 func _draw_weapon_icon() -> void:
 	var color := Color("d9dfce")
@@ -505,12 +460,10 @@ func notify(text: String) -> void:
 
 func update_display(delta: float) -> void:
 	var player: PrototypePlayer = session.player
-	location_heading.text = session.level_title()
 	var recovery: bool = session.current_level == "recovery"
 	controls_label.text = "TAB  CHARACTER / MOTION BROWSER\n%s CLIP  ·  %s PAUSE\n%s COLLISION  ·  %s STEP" % [PlayerInput.function_key_hint(6), PlayerInput.function_key_hint(7), PlayerInput.function_key_hint(8), PlayerInput.function_key_hint(9)] if recovery else "START / %s  OPTIONS" % PlayerInput.function_key_hint(1)
 	minimap.visible = not recovery
-	location_label.text = session.location_name()
-	stance_label.text = "DIVING" if player.diving else "SETTLING" if player.dive_recovery > 0 else StanceController.NAMES[player.stance.current]
+	player_name_label.text = preload("res://scripts/combat/combat.gd").name_of(player)
 	weapon_label.text = player.weapon.profile.display_name
 	# Grenades and claymores are counted, not loaded from magazines.
 	var equipment: bool = player.weapon.profile.kind != "firearm"
@@ -531,19 +484,12 @@ func update_display(delta: float) -> void:
 	health_label.text = "%d / %d" % [player.health, player.max_health]
 	health_bar.max_value = player.max_health
 	health_bar.value = player.health
-	squad_health_bar.max_value = player.max_health
-	squad_health_bar.value = player.health
 	var health_fraction := player.health / maxf(1, player.max_health)
 	var health_color := Color("e48871") if health_fraction <= 0.25 else (Color("d5bd7f") if health_fraction <= 0.5 else Color("96bf78"))
 	health_fill.bg_color = health_color
-	squad_fill.bg_color = health_color
-	_update_squad()
 	stats_label.text = "%.1f m/s  ·  %d hits" % [Vector2(player.velocity.x, player.velocity.z).length(), player.weapon.hits]
-	if session.lap_running:
-		lap_label.text = "%05.2f s  ·  T STOP" % session.lap_time
-	else:
-		lap_label.text = "LAST  %.2f s" % session.last_lap if session.last_lap > 0 else "T  START"
-	hud_panels.Timer.visible = (session.lap_running or session.last_lap > 0.0) and not session.modal
+	var elapsed := int(session.elapsed)
+	round_label.text = "ROUND  %02d:%02d" % [elapsed / 60, elapsed % 60]
 	notice_time = maxf(0.0, notice_time - delta)
 	hud_panels.Notice.visible = notice_time > 0 and not session.modal
 	hud_panels.Notice.modulate.a = minf(notice_time, 1.0)
@@ -551,6 +497,8 @@ func update_display(delta: float) -> void:
 	debug_label.text = "%.0f FPS\nPosition  %.1f / %.1f / %.1f\nCamera  %.2f m  |  FOV %.0f°\nGrounded  %s\nR3 / %s  Hide diagnostics" % [Engine.get_frames_per_second(), player.position.x, player.position.y, player.position.z, player.camera_rig.arm.get_hit_length(), player.camera_rig.camera.fov, player.is_on_floor(), PlayerInput.function_key_hint(3)]
 	_layout_hud()
 	minimap.refresh()
+	if session.lap_running or session.last_lap > 0.0:
+		debug_label.text += "\nLAP  %.2f s" % (session.lap_time if session.lap_running else session.last_lap)
 	weapon_icon.queue_redraw()
 	crosshair.update_weapon(player.weapon, delta, session.modal)
 	context_hud.update_actions(player.interactions, delta)

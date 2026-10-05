@@ -23,6 +23,7 @@ const Prone = preload("res://scripts/actors/recovered_prone.gd")
 var gunplay := preload("res://scripts/actors/recovered_gunplay.gd").new()
 var lean := preload("res://scripts/actors/recovered_lean.gd").new()
 var swap := preload("res://scripts/actors/recovered_swap.gd").new()
+var grenade := preload("res://scripts/actors/recovered_throw.gd").new()
 var active_clip: String = ""
 var time: float = 0.0
 var base_time: float = 0.0
@@ -62,6 +63,7 @@ func reset() -> void:
 	gunplay.reset()
 	lean.reset()
 	swap.reset()
+	grenade.reset()
 	was_grounded = true
 	was_diving = false
 	landing_time = -1.0
@@ -289,6 +291,7 @@ func drive(skin: SoldierSkin, proxy: SoldierProxy, stance: int, speed: float, mo
 	lean.update(player, stance, pistol, lean_input, lean_allowed, delta)
 	gunplay.apply(player, pose, clip, time, weapon, stance, moving, allowed, focused or lean.weight > 0.0, pitch, delta, lean)
 	swap.apply(player, pose, weapon, stance, moving, grounded, diving, delta, gunplay)
+	grenade.apply(player, pose, proxy, weapon, stance, moving, grounded, delta, gunplay)
 	last_pose = pose.duplicate()
 	player.current_animation_position = time
 	player.apply_pose(pose)

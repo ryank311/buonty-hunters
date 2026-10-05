@@ -106,6 +106,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 func set_player_character(index: int) -> void:
+	player.weapon._cancel_throw()
 	var entry: Dictionary = recovered_characters[posmod(index, recovered_characters.size())]
 	player.soldier.soldier_skin.set_model_path(entry.path)
 	if level.has_method("update_player_preview"):

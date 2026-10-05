@@ -125,14 +125,23 @@ func _run() -> void:
 	paused = false
 	await ticks(40)
 	check(weapon.throw_charge > 0.5 and weapon.throw_arc.visible and weapon.throw_arc.ring.visible and grenades().is_empty() and weapon.ammo == 2, "Holding builds strength and shows the arc and landing ring, without throwing yet (%.2f)" % weapon.throw_charge)
-	check(player.soldier.throw_hold_style == SoldierProxy.Throw.OVERHAND and player.soldier.throw_pose.w > 0.5, "The soldier draws back into the throw while it is held")
 	# Held actions are let go by the next apply().
 	await H.apply(self, {"settle": 0})
 	paused = false
 	await ticks(2)
-	check(not weapon.throw_arc.visible and weapon.ammo == 1 and player.soldier.throwing() and grenades().is_empty(), "Letting go starts the throwing motion; the grenade is still in the hand (arc %s, ammo %d, throwing %s, live %d, charge %.2f, release %.2f)" % [weapon.throw_arc.visible, weapon.ammo, player.soldier.throwing(), grenades().size(), weapon.throw_charge, weapon.throw_release])
+	check(not weapon.throw_arc.visible and weapon.ammo == 1 and player.soldier.throwing(), "Releasing spends one grenade and hides the arc during the native follow-through")
 	await ticks(20)
 	check(grenades().size() == 1, "The grenade leaves the hand partway through the motion")
+	await H.scenario(self, "lab_start", {"roster": false, "weapon": "frag", "freeze": true})
+	weapon.throw_charge = 0.5
+	weapon._commit_throw()
+	session.set_player_character(0)
+	check(weapon.ammo == 2 and weapon.throw_release < 0.0 and not player.soldier.throwing(), "Changing character cancels and refunds a grenade still in hand")
+	weapon.throw_charge = 0.5
+	weapon._commit_throw()
+	weapon._throw()
+	session.set_player_character(0)
+	check(weapon.ammo == 1 and grenades().size() == 1, "Changing character after release neither refunds nor duplicates the grenade")
 	# The hold picks the throw, and a longer hold throws further.
 	var lob := await throw(2)
 	var overhand := await throw(36)

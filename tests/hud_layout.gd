@@ -38,7 +38,7 @@ func _run() -> void:
 		var bounded := true
 		var legible := true
 		var separate := true
-		var ids := ["Location", "Weapon", "Squad"]
+		var ids := ["Weapon", "Player"]
 		for id: String in ids:
 			var panel: PanelContainer = hud.hud_panels[id]
 			if not safe_rect.encloses(panel.get_global_rect()):
@@ -60,7 +60,7 @@ func _run() -> void:
 		check(separate, "%s: HUD cards do not overlap" % output_size)
 	var style: StyleBoxFlat = hud.hud_panels.Weapon.get_theme_stylebox("panel")
 	check(style.bg_color.a <= 0.2 and style.border_width_left == 0, "Gameplay HUD uses faint backing without black borders")
-	check(hud.hud_panels.Weapon.size.y < 155 and hud.hud_panels.Squad.size.y < 130, "Weapon and squad overlays remain compact")
+	check(hud.hud_panels.Weapon.size.y < 155 and hud.hud_panels.Player.size.y < 130, "Weapon and player overlays remain compact")
 	check(hud.minimap.size.is_equal_approx(Vector2(152,152)), "Circular minimap keeps a compact square footprint")
 	check(hud.minimap.footprints.size() > 20, "Minimap contains authored level geometry")
 	var center: Vector2 = hud.minimap.size * 0.5
@@ -91,12 +91,11 @@ func _run() -> void:
 	check(hud.mode_label.text == "BURST" and hud.ammo_label.text == "07 / 90" and hud.weapon_state_label.text.begins_with("RELOADING"), "Reload state preserves rifle mode and ammunition readout")
 	session.player.health = 24
 	await settle()
-	check(hud.health_bar.value == 24 and hud.squad_health_bar.value == 24 and hud.health_label.text == "24 / 100", "Both health displays follow player state")
+	check(hud.health_bar.value == 24 and hud.health_label.text == "24 / 100", "The player health display follows player state")
 	check(hud.health_fill.bg_color == Color("e48871"), "Low health has a readable critical state")
 	session.reset_player()
 	await settle()
 	check(hud.health_bar.value == 100 and hud.ammo_label.text == "30 / 90", "Reset restores health and ammo readouts")
-	check(hud.squad_rows.size() == 5 and labels_in(hud.hud_panels.Squad).any(func(label: Label) -> bool: return label.text == "05  OPEN SLOT"), "Squad panel contains the player and four explicitly open slots")
 	# A saved comparison option from older builds must not alter the fixed buffer.
 	var legacy := ConfigFile.new()
 	legacy.set_value("display", "retro", true)
