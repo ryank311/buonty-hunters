@@ -1,10 +1,16 @@
 extends RefCounted
 ## Original full-body locomotion on the original rig. No target skeleton or leg IK.
+# motion.rdr playback values are cycle seconds for these stationary motions.
+# The raw key durations remain unchanged for archive inspection in Recovery Lab.
+const IDLE_SECONDS := {"seal_stand": 6.0, "seal_p_stand": 5.0, "seal_crouch": 5.0, "seal_p_crouch": 5.0, "seal_prone": 3.0, "seal_p_prone": 3.0}
+var gunplay := preload("res://scripts/actors/recovered_gunplay.gd").new()
 var active_clip: String = ""
 var time: float = 0.0
+var base_time: float = 0.0
 var transition: float = 1.0
 var from_pose: Array[Transform3D] = []
 var last_pose: Array[Transform3D] = []
+var last_base_pose: Array[Transform3D] = []
 var was_grounded: bool = true
 var was_diving: bool = false
 var landing_time: float = -1.0
@@ -12,14 +18,27 @@ var landing_time: float = -1.0
 func reset() -> void:
 	active_clip = ""
 	time = 0.0
+	base_time = 0.0
 	transition = 1.0
 	from_pose.clear()
 	last_pose.clear()
+	last_base_pose.clear()
+	gunplay.reset()
 	was_grounded = true
 	was_diving = false
 	landing_time = -1.0
 
-func drive(skin: SoldierSkin, proxy: SoldierProxy, stance: int, speed: float, movement: Vector2, grounded: bool, _pitch: float, delta: float) -> void:
+## The rifle clip whose legs carry a partial pistol clip, or "" for a full-body clip.
+static func base_clip(player: Node, clip: String) -> String:
+	if not clip.begins_with("seal_p_") or player.has_track(clip, "hips"):
+		return ""
+	var base := clip.replace("seal_p_", "seal_")
+	for candidate: String in [base, base + "_fast"]:
+		if player.has_animation(candidate):
+			return candidate
+	return ""
+
+func drive(skin: SoldierSkin, proxy: SoldierProxy, stance: int, speed: float, movement: Vector2, grounded: bool, pitch: float, delta: float, focused: bool = false) -> void:
 	var player: Node = skin.motion
 	var prefix := "seal_p_" if proxy.weapon_slot == 1 else "seal_"
 	var moving := speed > 0.15
@@ -64,14 +83,25 @@ func drive(skin: SoldierSkin, proxy: SoldierProxy, stance: int, speed: float, mo
 	was_grounded = grounded
 	was_diving = diving
 	if clip != active_clip:
-		from_pose = last_pose.duplicate()
+		from_pose = last_base_pose.duplicate()
 		transition = 0.0
 		active_clip = clip
 		time = 0.0
+		base_time = 0.0
 		player.play(clip)
+	# Pistol movement clips carry only the upper body. The original layered
+	# them over the rifle gait, so the base clip owns the clock (feet keep
+	# their cadence) and the layer follows at the same phase.
+	var base := base_clip(player, clip) if fixed_time < 0 else ""
 	var length: float = player.get_animation(clip).length
-	time = clampf(fixed_time, 0, length) if fixed_time >= 0 else fmod(time + delta, length)
-	var pose: Array[Transform3D] = player.sample(clip, time)
+	if base != "":
+		var cycle: float = player.get_animation(base).length
+		base_time = fmod(base_time + delta, cycle)
+		time = base_time / cycle * length
+	else:
+		var rate: float = length / IDLE_SECONDS[clip] if IDLE_SECONDS.has(clip) else 1.0
+		time = clampf(fixed_time, 0, length) if fixed_time >= 0 else fmod(time + delta * rate, length)
+	var pose: Array[Transform3D] = player.sample(clip, time, base, base_time)
 	# Capsule motion owns world displacement during jumps.
 	if not grounded and not diving:
 		var root: int = player.rig.names.find("skel_root")
@@ -80,9 +110,10 @@ func drive(skin: SoldierSkin, proxy: SoldierProxy, stance: int, speed: float, mo
 	if not from_pose.is_empty() and transition < 1:
 		for index: int in range(pose.size()):
 			pose[index] = from_pose[index].interpolate_with(pose[index], smoothstep(0, 1, transition))
+	last_base_pose = pose.duplicate()
+	var weapon := proxy.get_parent().get_node_or_null("Weapon") as PracticeWeapon
+	gunplay.apply(player, pose, clip, time, weapon, stance, moving, grounded and not diving and landing_time < 0, focused, pitch, delta)
 	last_pose = pose.duplicate()
-	# Locomotion must match the Recovery Lab. Aim/weapon layers are a separate
-	# integration pass; forcing a hand axis toward the view twists the torso.
 	player.current_animation_position = time
 	player.apply_pose(pose)
-	skin.place_weapon(proxy, clip, time)
+	skin.place_weapon(proxy, clip, time, gunplay.socket)

@@ -70,10 +70,18 @@ func local_track(clip: String, seconds: float, bone: String, fallback: Transform
 	var pair: Array = indexed[bone]
 	return Transform3D(Basis(animation.rotation_track_interpolate(pair[1], seconds)), animation.position_track_interpolate(pair[0], seconds))
 
-func sample(clip: String, seconds: float) -> Array[Transform3D]:
+func has_track(clip: String, bone: String) -> bool:
+	return _tracks(clip).has(bone)
+
+## Bones the clip leaves untracked come from the base clip, then the bind pose.
+## Partial clips (pistol locomotion tracks only spinelo upward) layer this way.
+func sample(clip: String, seconds: float, base: String = "", base_seconds: float = 0.0) -> Array[Transform3D]:
 	var pose: Array[Transform3D] = []
 	for index: int in range(rig.names.size()):
-		var value := local_track(clip, seconds, rig.names[index], rig.locals[index])
+		var fallback: Transform3D = rig.locals[index]
+		if base != "":
+			fallback = local_track(base, base_seconds, rig.names[index], fallback)
+		var value := local_track(clip, seconds, rig.names[index], fallback)
 		if rig.names[index] == "skel_root":
 			value.origin.x = rig.locals[index].origin.x
 			value.origin.z = rig.locals[index].origin.z
@@ -92,4 +100,9 @@ func apply_pose(pose: Array[Transform3D]) -> void:
 		skeleton.set_bone_global_pose(ids[index], to_skeleton * native_worlds[index] * corrections[index])
 
 func attachment(clip: String, seconds: float, name: String) -> Transform3D:
-	return native_worlds[rig.names.find("rhand")] * local_track(clip, seconds, name, Transform3D.IDENTITY)
+	return native_worlds[rig.names.find("rhand")] * weapon_track(clip, seconds, name)
+
+func weapon_track(clip: String, seconds: float, name: String) -> Transform3D:
+	# Some original rifle clips use the older generic attachment name.
+	var key := name if _tracks(clip).has(name) else "weapon"
+	return local_track(clip, seconds, key, Transform3D.IDENTITY)

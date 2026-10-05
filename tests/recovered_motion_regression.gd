@@ -32,6 +32,21 @@ func _run() -> void:
 		var expected: Array[Transform3D] = skin.motion.sample("seal_run", skin.driver.time)
 		run_error = maxf(run_error, pose_error(skin.driver.last_pose, expected))
 	check(skin.driver.active_clip == "seal_run" and run_error < 0.002, "Player run matches the Lab's native pose at every tested view pitch (error %.6f)" % run_error)
+	# Pistol locomotion clips track only spinelo upward; the legs come from the rifle gait.
+	await H.scenario(self, "lab_start", {"roster": false, "freeze": true, "weapon": "secondary"})
+	await H.step(self, 40, {"forward": 1.0})
+	var thigh: int = skin.motion.rig.names.find("rthigh")
+	var spine: int = skin.motion.rig.names.find("spinehi")
+	var stride := 0.0
+	var layer_error := 0.0
+	for tick: int in range(20):
+		await H.step(self, 1, {"forward": 1.0})
+		var legs: Array[Transform3D] = skin.motion.sample("seal_run", skin.driver.base_time)
+		var arms: Array[Transform3D] = skin.motion.sample("seal_p_run", skin.driver.time)
+		var pose: Array[Transform3D] = skin.driver.last_base_pose
+		stride = maxf(stride, pose[thigh].basis.get_rotation_quaternion().angle_to(skin.motion.rig.locals[thigh].basis.get_rotation_quaternion()))
+		layer_error = maxf(layer_error, pose_error([pose[thigh], pose[spine]] as Array[Transform3D], [legs[thigh], arms[spine]] as Array[Transform3D]))
+	check(skin.driver.active_clip == "seal_p_run" and stride > 0.3 and layer_error < 0.002, "Pistol run layers the pistol upper body over the rifle leg cycle (stride %.3f rad, error %.6f)" % [stride, layer_error])
 	await H.scenario(self, "lab_start", {"roster": false, "freeze": true})
 	await H.step(self, 1, {"tap": ["jump"]})
 	var saw_air := false

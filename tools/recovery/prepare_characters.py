@@ -205,7 +205,7 @@ def base_character(asset, skin, mats):
 
 def clip_category(name):
     for category, expression in [
-        ('First person', r'^seal_p?fp_'), ('Death / reaction', r'death|hit|flinch|flashbang|restrain|surrender'),
+        ('Weapon fire poses', r'^seal_p?fp_'), ('Death / reaction', r'death|hit|flinch|flashbang|restrain|surrender'),
         ('Traversal', r'climb|ladder|hang|ledge|jump|land|fall|slide|hopdown|dive|getup'),
         ('Weapons / equipment', r'reload|recoil|pump|throw|toss|grenade|claymore|launcher|rifle2|pistol2|knife|cqb|defuse'),
         ('Locomotion / stance', r'walk|run|jog|strafe|step|crouch$|prone$|stand$|lean|turn'),

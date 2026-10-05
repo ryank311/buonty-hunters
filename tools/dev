@@ -30,6 +30,10 @@ Usage: tools/dev <command>
                         start, stop, export, preview. `tools/dev blender help` lists them.
   doctor                Check the toolchain, the MCP setup, and who else is using the project.
   mcp-smoke             Drive the Godot MCP server end to end against this project.
+  play                  Start the game in a window as a player would, with the live link
+                        on so an agent can inspect and tune it while you play.
+  live <command>        The live link to running games: status, tools, call <tool>
+                        ['<json>'], launch [--play], stop [port], smoke.
   godot [args...]       Run Godot through the project wrapper.
 EOF
 }
@@ -242,7 +246,23 @@ cmd_doctor() {
 		else
 			echo "WARN  $config does not register the godot MCP server"
 		fi
+		if grep -q 'tools/agent/live-mcp.mjs' "$root/$config" 2>/dev/null; then
+			echo "ok    $config registers the game MCP server (the live link)"
+		else
+			echo "WARN  $config does not register the game MCP server (the live link)"
+		fi
 	done
+	if grep -q '^Live="\*res://scripts/live/live_boot.gd"' "$root/project.godot"; then
+		local live
+		live="$(node "$root/tools/agent/live-mcp.mjs" status 2>/dev/null | grep -E '^[0-9]+ ')"
+		if [[ -n "$live" ]]; then
+			echo "note  games with the live link:"
+			echo "$live" | sed 's/^/        /'
+		fi
+	else
+		echo "FAIL  project.godot has no Live autoload; running games cannot be reached by the game MCP server"
+		problems=1
+	fi
 	local owners
 	owners="$(ls "$root/.mcp/godot-runtime/bridge/owners" 2>/dev/null | wc -l | tr -d ' ')"
 	if grep -q '^McpBridge=' "$root/project.godot"; then
@@ -316,6 +336,13 @@ case "$command" in
 		source "$root/tools/agent/blender/commands.sh"
 		cmd_blender "$@" ;;
 	mcp-smoke) exec node "$root/tools/agent/mcp_smoke.mjs" "$@" ;;
+	play) SOCOM_AGENT_QA=0 SOCOM_AGENT_SHOW=1 exec "$godot" --path "$root" "$@" ;;
+	live)
+		if [[ "${1:-}" == "smoke" ]]; then
+			shift
+			exec node "$root/tools/agent/live_smoke.mjs" "$@"
+		fi
+		exec node "$root/tools/agent/live-mcp.mjs" "${@:-status}" ;;
 	godot) exec "$godot" "$@" ;;
 	help|-h|--help) usage ;;
 	*) echo "Unknown command: $command"; usage; exit 2 ;;

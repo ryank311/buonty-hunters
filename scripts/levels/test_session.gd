@@ -162,7 +162,9 @@ func set_modal(value: bool) -> void:
 	level.process_mode = Node.PROCESS_MODE_DISABLED if value else Node.PROCESS_MODE_INHERIT
 	hud.set_menu(value)
 	if DisplayServer.get_name() != "headless":
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if value else Input.MOUSE_MODE_CAPTURED
+		# A window without focus never takes the cursor: the live link can close the menu
+		# to move things in the world while the player is typing somewhere else.
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if not value and get_window().has_focus() else Input.MOUSE_MODE_VISIBLE
 	if not value:
 		_save_settings()
 

@@ -1,0 +1,247 @@
+{
+  "about": "The tools the running game offers through the live link. scripts/live/live_server.gd serves this list, tools/agent/live-mcp.mjs shows it to agents, and scripts/live/live_tools.gd answers each tool in a method named _tool_<name>. Units: positions are metres [x, y, z]; yaw and pitch are degrees (yaw 0 faces -Z, positive turns left; positive pitch looks up); frames are physics ticks of 1/60 s.",
+  "tools": [
+    {
+      "name": "state",
+      "description": "Digest of the running game right now: level and location, the player's position, speed, stance, health and what they are aiming at, weapon and ammunition, camera, the other soldiers, whether the menu is open, the game is frozen, and its window has focus. Cheap; read it before reaching for a screenshot.",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "readOnlyHint": true }
+    },
+    {
+      "name": "telemetry",
+      "description": "What the player actually did over the last seconds of play (time in the menu or frozen is not counted): seconds, average and top speed in each movement state (run, walk, crouch move, crawl, air, dive, standing still), how long each start took to reach speed and each stop took to come to rest, jump height and air time, turn rate, shots and hits, and a timeline of events. Use it to turn feel feedback ('walking feels slow', 'the jump is floaty', 'stopping is slippery') into numbers before changing anything.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "seconds": { "type": "number", "description": "How far back to look, 1 to 60. Default 10." },
+          "samples": { "type": "integer", "description": "Also return this many evenly spaced raw samples (position, speed, facing, stance, input). Default 0." }
+        }
+      },
+      "annotations": { "readOnlyHint": true }
+    },
+    {
+      "name": "logs",
+      "description": "What the game has printed: print() output, warnings, and errors, each with its script and line when the engine knows it. Newest last. Check it after a reload, and whenever a result looks wrong.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "level": { "type": "string", "enum": ["all", "warnings", "errors"], "description": "\"warnings\" leaves out print output; \"errors\" leaves out warnings too. Default all." },
+          "seconds": { "type": "number", "description": "Only lines from the last N seconds." },
+          "limit": { "type": "integer", "description": "At most this many lines. Default 40." },
+          "clear": { "type": "boolean", "description": "Empty the log after reading it." }
+        }
+      },
+      "annotations": { "readOnlyHint": true }
+    },
+    {
+      "name": "screenshot",
+      "description": "A picture of the game, returned inline and saved as a PNG. view \"player\" is the screen exactly as the player sees it, HUD included. The other views look at a target from outside without moving the player's camera: back, front, left, right, top, quarter, or \"orbit\" with your own yaw, pitch and distance. Use them to judge a pose or an animation from the side, or to look at any object in the level.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "view": { "type": "string", "enum": ["player", "back", "front", "left", "right", "top", "quarter", "orbit"], "description": "Default player." },
+          "target": { "type": "string", "description": "What an outside view looks at: player (default), actor:<NAME>, or a node path such as level/Targets/Target10." },
+          "at": { "type": "array", "items": { "type": "number" }, "description": "Look at this point [x, y, z] instead of a target." },
+          "yaw": { "type": "number", "description": "Degrees around the target from behind it: 0 behind, 90 its right side, 180 in front." },
+          "pitch": { "type": "number", "description": "Degrees above the horizon the camera sits, -89 to 89." },
+          "distance": { "type": "number", "description": "Metres from the target. Default 3.5." },
+          "height": { "type": "number", "description": "Metres above the target's origin to look at. Default 1.0." },
+          "fov": { "type": "number", "description": "Vertical field of view of an outside view. Default 45." },
+          "scale": { "type": "number", "description": "Resize the picture, 0.25 to 2. Default 1 (640x480)." },
+          "inline": { "type": "boolean", "description": "False returns only the file path. Default true." }
+        }
+      },
+      "annotations": { "readOnlyHint": true }
+    },
+    {
+      "name": "filmstrip",
+      "description": "A sequence of frames over time, tiled into one picture: the way to look at motion and animation. With no input it records what is happening (ask the player to do the move, then call this); with input it plays that input itself, as `play` does. A frozen game runs for the length of the strip and freezes again. Takes the same view options as screenshot; a side view at 4 to 6 ticks apart shows a stride well.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "frames": { "type": "integer", "description": "How many frames, 2 to 16. Default 8." },
+          "every": { "type": "integer", "description": "Physics ticks between frames. Default 6 (a tenth of a second)." },
+          "columns": { "type": "integer", "description": "Tiles in each row. Default 4." },
+          "input": { "type": "object", "description": "Input to hold while recording: forward and right (-1..1), hold [actions], tap [actions], turn (degrees per second). Closes the menu for the duration." },
+          "view": { "type": "string", "enum": ["player", "back", "front", "left", "right", "top", "quarter", "orbit"] },
+          "target": { "type": "string" },
+          "at": { "type": "array", "items": { "type": "number" } },
+          "yaw": { "type": "number" },
+          "pitch": { "type": "number" },
+          "distance": { "type": "number" },
+          "height": { "type": "number" },
+          "fov": { "type": "number" },
+          "inline": { "type": "boolean" }
+        }
+      }
+    },
+    {
+      "name": "tuning_get",
+      "description": "The live tuning values the game is running with: movement (speeds, acceleration, braking, gravity, jump, dive), camera (distance, offsets, field of view, sensitivity), and each weapon (recoil, spread, damage, fall-off, reload, fuses). Shows which values differ from the defaults on disk, the default file for each section, and the allowed range where one is declared.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "section": { "type": "string", "description": "movement, camera, weapon (the one in hand), weapon<slot> such as weapon1, weapons (every carried weapon), or all. Default: movement, camera and the weapon in hand." }
+        }
+      },
+      "annotations": { "readOnlyHint": true }
+    },
+    {
+      "name": "tuning_set",
+      "description": "Changes tuning values in the running game at once, so the player feels the difference without restarting. The change shows as a notice on their HUD and in the F1 tuning menu. It lasts for this run (the player's own game also keeps F1-menu values in their saved settings); use tuning_save to make it the default in the project.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "changes": { "type": "object", "description": "Values by name, for example {\"movement.walk_speed\": 2.0, \"camera.distance\": 2.8, \"weapon.vertical_kick\": 0.5, \"weapon1.damage\": 30}. null puts a value back to its default." },
+          "reset": { "type": "boolean", "description": "First put every value back to its default." }
+        }
+      }
+    },
+    {
+      "name": "tuning_save",
+      "description": "Writes the live tuning values into the project's default resources (resources/movement, resources/camera, resources/weapons), so they become the baseline for every run and show up in git. Reports each file and value written.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "sections": { "type": "array", "items": { "type": "string" }, "description": "Limit to these sections (movement, camera, weapon, weapon<slot>). Default: every section with a changed value." },
+          "dry_run": { "type": "boolean", "description": "Report what would be written without writing it." }
+        }
+      }
+    },
+    {
+      "name": "setup",
+      "description": "Puts the game into a described state and returns the digest. Every key is optional and they combine: go to a level or spawn, place and face the player, set stance, class, weapon, ammunition and health, add or clear the other soldiers, drop a model into the level, open a menu, freeze. Setting state this way skips the checks a player is held to; the answer's notes say when the result is not something a player could reach. If the menu was open it is open again afterwards.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "scenario": { "type": "string", "description": "A named starting point from tools/agent/harness.gd (lab_start, lab_range, lab_stairs, town_spawn, town_market, ...), applied from a clean respawn with default tuning. An unknown name returns the list. The other keys then override it." },
+          "level": { "type": "string", "enum": ["town", "lab", "recovery"] },
+          "reload": { "type": "boolean", "description": "Rebuild the level even if it is the current one." },
+          "reset": { "type": "boolean", "description": "Respawn, refill, and return to the default class and tuning first." },
+          "spawn": { "description": "Spawn marker by name or index; respawns the player there." },
+          "at": { "type": "string", "description": "A node in the level to stand at, such as Locations/Market." },
+          "pos": { "type": "array", "items": { "type": "number" }, "description": "[x, y, z]" },
+          "yaw": { "type": "number" },
+          "pitch": { "type": "number" },
+          "look_at": { "description": "A point [x, y, z] or a level node path to aim at." },
+          "stance": { "type": "string", "enum": ["stand", "crouch", "prone"] },
+          "class": { "type": "string", "enum": ["rifleman", "marksman", "breacher", "pointman"] },
+          "weapon": { "description": "primary, secondary, frag, smoke, flash, claymore, part of a weapon's name, or a slot index." },
+          "ammo": { "type": "integer" },
+          "reserve": { "type": "integer" },
+          "health": { "type": "number", "description": "0 eliminates the player." },
+          "hold": { "type": "array", "items": { "type": "string" }, "description": "Input actions kept down until the next setup or play, such as [\"aim\"]." },
+          "actors": { "type": "array", "items": { "type": "object" }, "description": "Stand-in soldiers to add: {team (0 is the player's), class, pos, yaw, travel (metres of patrol), name, dead}." },
+          "roster": { "type": "boolean", "description": "False removes the level's own soldiers." },
+          "place": { "type": "array", "items": { "type": "object" }, "description": "Scenes to stand in the level: {scene: \"res://art/models/crate.glb\", pos, yaw, scale}." },
+          "panel": { "type": "string", "enum": ["class", "search"] },
+          "menu": { "description": "true opens the tuning menu, a number opens that page, false leaves it closed." },
+          "debug": { "type": "boolean" },
+          "tuning": { "type": "object", "description": "{movement|camera|weapon: {name: value}}; tuning_set is the usual way." },
+          "freeze": { "type": "boolean" },
+          "settle": { "type": "integer", "description": "Ticks to let the world settle before answering. Default 8." }
+        }
+      }
+    },
+    {
+      "name": "play",
+      "description": "Plays the game for an exact number of ticks with the given input held, then lets go and returns the digest: the way to drive the player and to measure movement, firing, or timing repeatably. Tick-exact and the same every time. A frozen game runs for the window and freezes again; an open menu is closed for the window and reopened.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "frames": { "type": "integer", "description": "Ticks to play, up to 3600. Default 60 (one second)." },
+          "forward": { "type": "number", "description": "-1..1; negative walks backwards." },
+          "right": { "type": "number", "description": "-1..1; negative strafes left." },
+          "hold": { "type": "array", "items": { "type": "string" }, "description": "Actions held throughout: fire, aim, walk, crouch, lean_left, lean_right, ..." },
+          "tap": { "type": "array", "items": { "type": "string" }, "description": "Actions pressed for the first two ticks: jump, reload, prone, equip_pistol, interact, switch_level, ..." },
+          "turn": { "type": "number", "description": "Degrees per second to turn left." },
+          "look_up": { "type": "number", "description": "Degrees per second to look up." },
+          "trace": { "type": "integer", "description": "Record [frame, x, y, z, speed] every N ticks." },
+          "speed": { "type": "number", "description": "Run up to 8 times faster than real time; the outcome is identical." },
+          "walk_to": { "type": "array", "items": { "type": "array", "items": { "type": "number" } }, "description": "Instead of the above: walk through these [x, z] waypoints and report whether the player arrived or where they were blocked." }
+        }
+      }
+    },
+    {
+      "name": "time",
+      "description": "Freezes the game, runs it in slow motion, or advances a frozen game by single ticks. Slow motion lets the player watch an animation while they play; a freeze holds a moment still for screenshots from several angles. A banner on screen says the game is held, and the player can press Esc to release a freeze. Put time back (frozen false, scale 1) when finished.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "frozen": { "type": "boolean" },
+          "scale": { "type": "number", "description": "Speed of time, 0.05 to 8. 1 is normal, 0.25 is quarter speed." },
+          "step": { "type": "integer", "description": "Advance this many ticks, then freeze." }
+        }
+      }
+    },
+    {
+      "name": "inspect",
+      "description": "Looks inside the running game: a node's children, and the variables of any node, resource, or object. With no props it lists the script's variable names and types; props \"all\" returns their values; a list returns just those, each a dotted path such as \"velocity\", \"stance.current\", or \"weapon.profile.damage\".",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "session (default), player, weapon, camera, soldier, hud, level, actor:<NAME>, root, a node path (level/Targets/Target10, /root/FieldTest/Player), any node's name, or one of these followed by properties (player.movement, weapon.recoil)." },
+          "props": { "description": "\"all\", or a list of dotted property paths." },
+          "depth": { "type": "integer", "description": "Levels of children to list. Default 1." }
+        }
+      },
+      "annotations": { "readOnlyHint": true }
+    },
+    {
+      "name": "set",
+      "description": "Sets variables on a node, resource, or object in the running game. Each value is converted to the type already there: vectors are [x, y, z], colours \"#rrggbb\", and a dotted path reaches inside (\"velocity.y\", \"stance.current\", \"profile.damage\"). For the tuning profiles prefer tuning_set, which also updates the menu and can be saved.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "As for inspect." },
+          "values": { "type": "object", "description": "{\"property.path\": value}" }
+        },
+        "required": ["values"]
+      }
+    },
+    {
+      "name": "call",
+      "description": "Calls a method on a node, resource, or object in the running game and returns what it returns, for example session.reset_player, session.load_level [true], or actor:BRAVO die.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string", "description": "As for inspect." },
+          "method": { "type": "string" },
+          "args": { "type": "array", "description": "Arguments in order. Whole numbers are passed as integers." }
+        },
+        "required": ["method"]
+      }
+    },
+    {
+      "name": "eval",
+      "description": "Runs GDScript inside the game, for anything the other tools do not cover. One line is an expression whose value is returned (player.velocity.length()). Several lines are the body of a function: use return, and await if needed. In scope: live (the tools node), session, player, level, tree. Vector3 and other engine types can be built directly.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "code": { "type": "string", "description": "An expression, or statements indented with tabs where nested." }
+        },
+        "required": ["code"]
+      }
+    },
+    {
+      "name": "reload",
+      "description": "Brings files edited on disk into the running game without restarting it, keeping the game's state. Scripts are recompiled under the live objects, so changed functions and constants take effect on the next tick; a script that does not compile is refused and the game keeps the version it had, with the error returned. Changed scenes, resources, and shaders are refreshed for their next use. With no paths it takes everything changed since the game loaded it. New variables start empty and _ready does not run again; use restart when a change needs a fresh start.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "paths": { "type": "array", "items": { "type": "string" }, "description": "Project paths such as scripts/player/player_controller.gd. Default: every changed file." }
+        }
+      }
+    },
+    {
+      "name": "restart",
+      "description": "Restarts this game so it runs the code and scenes now on disk, then puts the player back where they were: same level, position, facing, stance, class, weapon, and tuning. Takes a few seconds. A game started from the Godot editor comes back detached from the editor's debugger.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "restore": { "type": "boolean", "description": "False starts fresh at the default spawn. Default true." }
+        }
+      }
+    }
+  ]
+}

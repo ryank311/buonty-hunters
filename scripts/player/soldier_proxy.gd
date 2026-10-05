@@ -649,7 +649,7 @@ func pose(stance: int, speed: float, movement: Vector2, aim_pitch: float, lean: 
 		# old procedural dive frame a second time.
 		var bank := Basis(Vector3.UP, -dive_side * 0.35 * sin(PI * dive_phase) * dive_blend) * Basis(Vector3.BACK, -dive_side * 0.65 * sin(PI * minf(dive_phase * 1.15, 1.0)) * dive_blend)
 		transform = Transform3D(Basis(Vector3.BACK, lean_roll) * bank, Vector3(lean_shift, 0, 0))
-		soldier_skin.pose(self, stance, speed, movement, grounded, aim_pitch, delta)
+		soldier_skin.pose(self, stance, speed, movement, grounded, aim_pitch, delta, focused)
 
 static func dive_frame(phase: float, side: float, amount: float) -> Transform3D:
 	# Whole-body flight path over the prone layout: launch inclined off the planted

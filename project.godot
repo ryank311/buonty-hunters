@@ -15,6 +15,11 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Live="*res://scripts/live/live_boot.gd"
+
+McpBridge="*res://.mcp/godot-runtime/bridge/mcp_bridge.gd"
 [display]
 
 window/size/viewport_width=640
