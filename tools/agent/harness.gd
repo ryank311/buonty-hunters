@@ -297,8 +297,8 @@ static func step(tree: SceneTree, frames: int, input: Dictionary = {}) -> Dictio
 		result["trace"] = trace
 	return result
 
-## Walks through [x, z] waypoints the way tests/prototype_smoke.gd does: face the next
-## point and hold forward. Reports where it stopped if a leg cannot be completed.
+## Walks through [x, z] waypoints: face the next point and hold forward. Reports where
+## it stopped if a leg cannot be completed.
 ## `speed` fast-forwards as in step(); "seconds" in the result is simulated time.
 static func walk_to(tree: SceneTree, points: Array, speed: float = 4.0, leg_frames: int = 900) -> Dictionary:
 	var s := session(tree)

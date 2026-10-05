@@ -26,7 +26,7 @@ Every tool of the `game` server acts on the real game. There is no test instance
 2. **Read the values behind it.** `tuning_get` lists movement, camera, and weapon values, which differ from the defaults, and their ranges.
 3. **Change it live.** `tuning_set {"changes": {"movement.walk_speed": 2.0}}` takes effect on the next tick. The user sees a notice on their HUD and the value in the F1 menu. Change one thing at a time, by a step they can feel (15 to 25 percent), and say the old and new value.
 4. **Let them play, and repeat.** Their next `telemetry` shows whether it did what you meant.
-5. **Keep it.** `tuning_save` writes the live values into the default resources under `resources/` (they show in `git diff`). Then run `tools/dev test`: the suites assert on several default speeds and timings, and a deliberate feel change means updating those numbers.
+5. **Keep it.** `tuning_save` writes the live values into the default resources under `resources/` (they show in `git diff`). Then run `tools/dev test`. A check that fails because a value was retuned is a fault in the check: make it read the value from the profile, or delete it, instead of writing the new number in.
 
 A value that is not in a tuning profile (a constant in a script, a curve, a blend time) is a code change: edit the file, then `reload`.
 

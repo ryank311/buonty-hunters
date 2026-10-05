@@ -89,7 +89,7 @@ Parallel contributors should agree on ownership of shared catalogues, runtime li
 
 Runtime exports are covered by [the Linux/SteamOS pipeline](LINUX_PLAYTEST.md): `tools/dev build linux` audits all installed GLBs and raw recovery JSON in the exported PCK. Keep newly added dynamic catalogues under the included runtime paths, and extend the inventory if adding another asset format. Do not ship source-only recovery trees or assume an editor-side load proves the packaged build works.
 
-Run `tools/dev import` after new assets or scripts, `tools/dev check` before tests, and `tools/dev test` before handing off. Use focused suites while iterating. For visible changes inspect hidden screenshots or a background Godot MCP session and stop that session before editing again.
+Run `tools/dev import` after new assets or scripts, `tools/dev check` before tests, and `tools/dev test --all` before handing off (a plain `tools/dev test` runs only the core suites). Use focused suites while iterating. For visible changes inspect hidden screenshots or a background Godot MCP session and stop that session before editing again.
 
 - `native_fidelity_regression`: 35 committed archive-derived pose expectations across five representative rigs, including the previously broken pilot SEAL. Optional `--all-recovered` audit checks 1,421 poses across 203 imports after regenerating local staging.
 - `recovered_collection_regression`: all 202 models, all 402 clips, searchable browser, live player selection, character switching and persistence.

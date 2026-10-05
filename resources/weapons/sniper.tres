@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1")
 recovered_model = "remington700"
-display_name = "SNIPER RIFLE"
+display_name = "M40A1"
 automatic = false
 magazine_size = 5
 starting_reserve = 20
@@ -35,4 +35,4 @@ bullet_gravity = 9.8
 scope_fovs = PackedFloat32Array(20.0, 10.0, 5.0)
 muzzle_length = 0.74
 visual_scale = Vector3(0.9, 0.95, 1.38)
-sound_pitch = 0.6
+sound_pitch = 1.0

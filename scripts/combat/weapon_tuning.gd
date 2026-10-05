@@ -61,7 +61,7 @@ static func apply(profile: WeaponProfile) -> void:
 			var value := clampf(float(values[field]), FIELDS[field][1], FIELDS[field][2])
 			profile.set(field, roundi(value) if profile.get(field) is int else value)
 	var zooms: Variant = values.get("scope_fovs")
-	if zooms is PackedFloat32Array:
+	if zooms is PackedFloat32Array and zooms.size() == profile.scope_fovs.size():
 		var valid := true
 		for zoom: float in zooms:
 			valid = valid and is_finite(zoom) and zoom >= 1.0 and zoom <= 100.0

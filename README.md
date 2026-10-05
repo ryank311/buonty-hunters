@@ -114,11 +114,11 @@ Use the project wrapper for validation and hidden screenshots:
 
 ```sh
 tools/dev check
-tools/dev test
+tools/dev test          # the core suites, about 10 s; --all runs every suite
 tools/dev shot town_market lab_range --full
 ```
 
-On this Mac the executable is `/Applications/Godot.app/Contents/MacOS/Godot`. The suites exercise character motion/collision, all three town routes, visible limb endpoints and posture, controller input events and menu navigation, ammunition conservation, recoil/recovery, persistent surface impacts, and the class loadouts, weapon damage, bullet flight, grenades, claymores, elimination, and body searches. QA mode ignores saved tuning; headless runs skip audio playback and vibration. The project retains Mobile rendering and Jolt Physics.
+On this Mac the executable is `/Applications/Godot.app/Contents/MacOS/Godot`. The suites exercise character motion/collision, feet holding the ground in each gait, stances on slopes, controller input events and menu navigation, ammunition conservation, recoil/recovery, persistent surface impacts, and the class loadouts, weapon damage, bullet flight, grenades, claymores, elimination, and body searches. QA mode ignores saved tuning; headless runs skip audio playback and vibration. The project retains Mobile rendering and Jolt Physics.
 
 ## Linux and SteamOS builds
 

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1")
 recovered_model = "glock18"
-display_name = "MACHINE PISTOL"
+display_name = "MODEL 18"
 automatic = true
 magazine_size = 18
 starting_reserve = 54
@@ -32,4 +32,4 @@ minimum_damage = 0.4
 hold = "pistol"
 muzzle_length = 0.28
 visual_scale = Vector3(1, 1.1, 1.1)
-sound_pitch = 1.45
+sound_pitch = 1.0

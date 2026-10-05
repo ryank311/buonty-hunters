@@ -132,7 +132,17 @@ func _changed(value: float, key: String) -> void:
 		var weapon: PracticeWeapon = hud.session.player.weapon
 		weapon.magazines[slot] = mini(weapon.magazines[slot], edited_profile.magazine_size)
 	Tuning.capture(edited_profile)
+	_sync_carried()
 	feedback.text = "Applied · Save changes to keep this weapon's tuning."
+
+func _sync_carried() -> void:
+	# Two equipment slots may carry the same grenade type. They share its tuning.
+	var weapon: PracticeWeapon = hud.session.player.weapon
+	for index: int in range(weapon.profiles.size()):
+		var profile := weapon.profiles[index]
+		if profile != edited_profile and Tuning.key(profile) == Tuning.key(edited_profile):
+			Tuning.apply(profile)
+			weapon.magazines[index] = mini(weapon.magazines[index], profile.magazine_size)
 
 func save_changes() -> void:
 	for edit: SpinBox in editors.values():
@@ -157,4 +167,5 @@ func reset_selected() -> void:
 	weapon.magazines[slot] = mini(weapon.magazines[slot], edited_profile.magazine_size)
 	Tuning.capture(edited_profile)
 	refresh()
+	_sync_carried()
 	feedback.text = "Weapon defaults restored · Save changes to keep them."

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1")
 recovered_model = "baretta_m9"
-display_name = "SERVICE PISTOL"
+display_name = "M9"
 automatic = false
 magazine_size = 12
 starting_reserve = 36
@@ -31,4 +31,4 @@ falloff_end = 50.0
 minimum_damage = 0.5
 hold = "pistol"
 muzzle_length = 0.26
-sound_pitch = 1.25
+sound_pitch = 1.0

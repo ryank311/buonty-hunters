@@ -68,7 +68,7 @@ Feet hold the ground because the legs are driven the way the original drove them
 - **A landing at rest plays the landing clip; one that comes down moving runs straight on**, as in the original.
 - **Raised weapon.** The strafes, crouch walks, and crawls hold the weapon within about ten degrees of straight ahead through their whole cycle, which is why the original's animation set has "Fire walk", "Fire jog", "Fire run" and their backward and pistol forms but no fire strafe. `aims()` measures this once per clip. A clip that aims by itself is left alone; one that does not takes its fire variant's upper body over its own legs before the direction mix is blended. Laying the standing fire stance over a strafe is wrong: that stance turns the torso 60 degrees right, and the faster left strafes turn the hips 30 to 45 degrees left, a twist of over 100 between them.
 
-Movement speeds in `resources/movement` are the original's top speeds for each set. `tests/foot_plant_regression.gd` measures, in the running game, how far a planted foot slides in each gait, and where the barrel points and how far the chest turns from the hips while aiming on the move.
+Movement speeds in `resources/movement` are the original's top speeds for each set. `tests/movement_regression.gd` measures, in the running game, how far a planted foot slides in each gait, and where the barrel points and how far the chest turns from the hips while aiming on the move.
 
 ## Rebuild
 

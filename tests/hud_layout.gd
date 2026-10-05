@@ -82,7 +82,7 @@ func _run() -> void:
 	# Weapon identity, mode and ammo remain visible through swaps and reload states.
 	session.player.weapon.equip(1)
 	await settle()
-	check(hud.weapon_label.text == "SERVICE PISTOL" and hud.mode_label.text == "SEMI" and hud.ammo_label.text == "12 / 36", "Pistol selection updates weapon, fire mode and ammunition")
+	check(hud.weapon_label.text == "M9" and hud.mode_label.text == "SEMI" and hud.ammo_label.text == "12 / 36", "Pistol selection updates weapon, fire mode and ammunition")
 	session.player.weapon.equip(0)
 	session.player.weapon.draw_remaining = 0
 	session.player.weapon.ammo = 7

@@ -31,10 +31,13 @@ static func apply_stats(profile: WeaponProfile, record_id: int = -1) -> void:
 			if int(record.id) == record_id:
 				selected = record
 	profile.recovered_stats = selected
+	profile.display_name = selected.name.to_upper()
 	var modes: Array = selected.modes
 	profile.fire_mode = 2 if profile.hold == "long" and modes.has(2) else int(modes.back())
 	profile.automatic = modes.has(3)
 	profile.rounds_per_minute = 60.0 / float(selected.fire_wait)
+	# The recovered bank already encodes each gun's pitch.
+	profile.sound_pitch = 1.0
 	preload("res://scripts/combat/weapon_tuning.gd").apply(profile)
 
 static func catalogue() -> Array:

@@ -1,0 +1,10 @@
+# The suites `tools/dev test` runs when no suite is named: the game starts, the player
+# moves, shoots, and changes stance, and the scenario harness that every screenshot and
+# playtest relies on still drives it. `tools/dev test --all` runs every suite.
+#
+# Keep this list short. Together these must finish in about fifteen seconds, and none
+# may check a tuning value: a suite that fails when someone retunes the feel does not
+# belong here.
+prototype_smoke
+movement_regression
+agent_harness

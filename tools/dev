@@ -15,9 +15,10 @@ Usage: tools/dev <command>
   check                 Load every script, scene, and resource headlessly; report parse
                         errors and broken references as file:line. Takes about 2 s.
   test [suite...|--all] Run headless regression suites from tests/. With no argument:
-                        the core suites listed in tests/core.txt (well under a minute).
-                        Name suites to run those; --all runs every suite. A few run at
-                        once (SOCOM_TEST_JOBS, default the number of processor cores).
+                        the core suites listed in tests/core.txt (about 10 s). Name
+                        suites to run those; --all runs every suite (over a minute).
+                        A few run at once (SOCOM_TEST_JOBS, default two fewer than the
+                        processor's cores); a suite over 20 s is marked SLOW.
   shot [options] [scenario...] [key=value...]
                         Render scenarios to PNG in a hidden window. No arguments lists
                         the scenarios. key=value sets any harness state (level=lab
@@ -177,9 +178,11 @@ cmd_test() {
 		echo "TESTS: no suites found in tests/"
 		return 1
 	fi
-	# A few at a time: one process a core. Starting every suite at once only makes them
-	# all slow, and starves anyone else using the machine.
-	local limit="${SOCOM_TEST_JOBS:-$(sysctl -n hw.physicalcpu 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 4)}"
+	# A few at a time, leaving two cores for the game being played and whoever else is
+	# working here. Starting every suite at once only makes them all slow.
+	local cores limit
+	cores="$(sysctl -n hw.physicalcpu 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 4)"
+	limit="${SOCOM_TEST_JOBS:-$((cores > 4 ? cores - 2 : 2))}"
 	local run pids=() failures=0 index=0 began=$SECONDS
 	run="$(new_run logs)"
 	for name in "${suites[@]}"; do

@@ -48,6 +48,7 @@ var focus_order: Array[Control] = []
 var current_page: int = 0
 var slider_parent: VBoxContainer
 var loadout_menu: VBoxContainer
+var weapon_tuning_menu: VBoxContainer
 
 func initialize(owner_session: Node3D) -> void:
 	session = owner_session
@@ -137,7 +138,7 @@ func _build_hud() -> void:
 	var weapon := _card("Weapon")
 	var weapon_title := HBoxContainer.new()
 	weapon.add_child(weapon_title)
-	weapon_label = _text(weapon_title, "FIELD RIFLE", 16, INK)
+	weapon_label = _text(weapon_title, "M4A1", 16, INK)
 	mode_label = _text(weapon_title, "AUTO", 15, GOLD)
 	mode_label.size_flags_horizontal = Control.SIZE_SHRINK_END
 	mode_label.custom_minimum_size.x = 60
@@ -332,7 +333,7 @@ func _build_menu() -> void:
 	_label(menu_box, "Paused · LB / RB change page · ↑ / ↓ select · ← / → adjust · A confirm · B back", Vector2.ZERO, 13, MUTED)
 	var tabs := HBoxContainer.new()
 	menu_box.add_child(tabs)
-	for title: String in ["Movement", "Camera", "Controller", "Rifle recoil", "Pistol recoil", "Accuracy", "Maps", "Loadout"]:
+	for title: String in ["Movement", "Camera", "Controller", "Debug tuning", "Maps", "Loadout"]:
 		var index := page_buttons.size()
 		page_buttons.append(_button(tabs, title, func() -> void: show_page(index)))
 	_page("Grounded movement")
@@ -361,14 +362,10 @@ func _build_menu() -> void:
 	invert_toggle.toggled.connect(func(value: bool) -> void: session.player.camera_settings.invert_y = value)
 	_bind_focus(invert_toggle)
 	page_controls.back().append(invert_toggle)
-	for prefix: String in ["rifle", "pistol"]:
-		_page(("Primary" if prefix == "rifle" else "Sidearm") + " · recovered recoil")
-		_slider(prefix + "/recovered_recoil_scale", "Recoil strength (1 = original)", 0.0, 2.0, 0.05)
-		_slider(prefix + "/weapon_kick", "Visible weapon kick", 0.0, 2.0, 0.1)
-		_label(slider_parent, "B / L3 changes firing mode.\nEach gun uses its recovered stance tables.", Vector2.ZERO, 14, MUTED)
-	_page("Recovered accuracy · movement, turning and shots")
-	for prefix: String in ["rifle", "pistol"]:
-		_slider(prefix + "/recovered_spread_scale", prefix.capitalize() + " spread (1 = original)", 0.0, 2.0, 0.05)
+	_page("Debug tuning · your current weapons and equipment")
+	weapon_tuning_menu = preload("res://scripts/ui/debug_weapon_tuning.gd").new()
+	slider_parent.add_child(weapon_tuning_menu)
+	weapon_tuning_menu.initialize(self)
 	_build_map_page()
 	_page("Loadout & character · A / click opens a list")
 	loadout_menu = preload("res://scripts/ui/debug_loadout.gd").new()
@@ -450,11 +447,15 @@ func refresh_settings() -> void:
 	invert_toggle.set_pressed_no_signal(session.player.camera_settings.invert_y)
 	if loadout_menu != null:
 		loadout_menu.refresh()
+	if weapon_tuning_menu != null:
+		weapon_tuning_menu.refresh()
 
 func show_page(index: int, focus: bool = true) -> void:
 	close_menu_popup()
 	if loadout_menu != null:
 		loadout_menu.refresh()
+	if weapon_tuning_menu != null:
+		weapon_tuning_menu.refresh()
 	current_page = posmod(index, pages.size())
 	focus_order.clear()
 	for button: Button in page_buttons:
@@ -492,6 +493,7 @@ func set_menu(value: bool) -> void:
 		close_menu_popup()
 	menu.visible = value
 	if value:
+		weapon_tuning_menu.refresh(true)
 		refresh_settings()
 		show_page(current_page)
 	else:

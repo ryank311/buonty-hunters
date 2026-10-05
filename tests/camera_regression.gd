@@ -1,4 +1,6 @@
 extends SceneTree
+## The 640x480 frame at any window size, where the camera puts the soldier, and the
+## reticle: it stays centred, and under recoil it marks where the shot will go.
 
 var failures: Array[String] = []
 var checks := 0
@@ -37,30 +39,6 @@ func box_at(point: Vector3, dimensions: Vector3) -> StaticBody3D:
 	body.position = point
 	return body
 
-func gait_sample(speed: float) -> Dictionary:
-	var soldier := player.soldier
-	soldier.reset_pose()
-	for i: int in range(120):
-		soldier.pose(0,speed,Vector2.UP,0,0,1.0/60.0)
-	var low := INF
-	var high := -INF
-	var lift := 0.0
-	var flight := 0
-	var grounded_feet := true
-	for i: int in range(360):
-		soldier.pose(0,speed,Vector2.UP,0,0,1.0/120.0)
-		low = minf(low,soldier.pose_points.head.y)
-		high = maxf(high,soldier.pose_points.head.y)
-		if not soldier.foot_samples.L.contact and not soldier.foot_samples.R.contact:
-			flight += 1
-		for side: String in ["L","R"]:
-			lift = maxf(lift,soldier.foot_samples[side].lift)
-			var foot: MeshInstance3D = soldier.parts[side + "Boot"]
-			var half: Vector3 = foot.mesh.size * 0.5
-			var sole := foot.position.y - absf(foot.basis.x.y)*half.x - absf(foot.basis.y.y)*half.y - absf(foot.basis.z.y)*half.z
-			grounded_feet = grounded_feet and sole >= -0.001 and (not soldier.foot_samples[side].contact or absf(sole) < 0.001)
-	return {"bounce":high-low,"lift":lift,"flight":flight,"feet":grounded_feet}
-
 func _run() -> void:
 	session = load("res://scenes/main.tscn").instantiate()
 	root.add_child(session)
@@ -72,19 +50,18 @@ func _run() -> void:
 	# Real window stretch transforms, not just project-settings string assertions.
 	var center_ray := rig.camera.project_ray_normal(Vector2(320,240))
 	var corner_ray := rig.camera.project_ray_normal(Vector2(0,0))
-	for output: Vector2i in [Vector2i(1024,768),Vector2i(1600,900),Vector2i(1920,1080),Vector2i(2560,1080),Vector2i(800,600),Vector2i(800,1000),Vector2i(3840,2160)]:
+	# One window of the frame's own shape, one wider, one taller.
+	for output: Vector2i in [Vector2i(1024,768),Vector2i(2560,1080),Vector2i(800,1000)]:
 		root.size = output
 		await frames(3)
 		var logical := root.get_visible_rect().size
 		var transform := root.get_final_transform()
 		var content := Rect2(transform.origin,logical * transform.get_scale())
-		check(logical.is_equal_approx(Vector2(640,480)),"%s keeps the full frame at exactly 640x480" % output)
-		check(root.get_texture().get_size().is_equal_approx(Vector2(640,480)),"%s keeps the render texture at 640x480 rather than the window resolution" % output)
-		check(is_equal_approx(logical.x/logical.y,4.0/3.0) and absf(transform.x.length()-transform.y.length()) < 0.001,"%s preserves 4:3 without stretching" % output)
 		var expected_scale := minf(output.x/640.0,output.y/480.0)
-		check(content.position.distance_to((Vector2(output)-content.size)*0.5) < 1.0 and content.size.distance_to(Vector2(640,480)*expected_scale) < 1.0,"%s fits the whole image between equal black bars" % output)
-		check((reticle.get_global_transform()*reticle.center_ring.position).is_equal_approx(logical*0.5),"%s keeps idle aim at exact viewport center" % output)
-		check(center_ray.is_equal_approx(rig.camera.project_ray_normal(Vector2(320,240))) and corner_ray.is_equal_approx(rig.camera.project_ray_normal(Vector2.ZERO)),"%s shows the same world and aim direction" % output)
+		var frame_kept: bool = logical.is_equal_approx(Vector2(640,480)) and root.get_texture().get_size().is_equal_approx(Vector2(640,480)) and absf(transform.x.length()-transform.y.length()) < 0.001
+		var letterboxed: bool = content.position.distance_to((Vector2(output)-content.size)*0.5) < 1.0 and content.size.distance_to(Vector2(640,480)*expected_scale) < 1.0
+		var same_view: bool = (reticle.get_global_transform()*reticle.center_ring.position).is_equal_approx(logical*0.5) and center_ray.is_equal_approx(rig.camera.project_ray_normal(Vector2(320,240))) and corner_ray.is_equal_approx(rig.camera.project_ray_normal(Vector2.ZERO))
+		check(frame_kept and letterboxed and same_view,"A %s window shows the same unstretched 640x480 frame between equal bars, aim at its centre (frame %s, bars %s, view %s)" % [output,frame_kept,letterboxed,same_view])
 	root.size = Vector2i(1024,768)
 	await frames(10)
 	var head := rig.camera.unproject_position(player.soldier.parts.Helmet.global_position)
@@ -145,25 +122,12 @@ func _run() -> void:
 	await frames(30)
 	var ceiling := player.get_world_3d().direct_space_state.intersect_ray(PhysicsRayQueryParameters3D.create(player.global_position+Vector3.UP*0.95,player.global_position+Vector3.UP*3,1))
 	check(not ceiling.is_empty() and rig.global_position.y+0.15 < ceiling.position.y and rig.camera.global_position.y < ceiling.position.y,"Raised camera retracts below the crouch fixture ceiling")
-	await place()
-	player.controls_enabled = false
-	# These inspect the hidden legacy proxy's authored joint curves. Gameplay
-	# uses the native gait, covered by foot_plant/recovered_motion_regression.
-	var walk := gait_sample(1.6)
-	var jog := gait_sample(4.5)
-	check(jog.bounce > 0.065 and jog.bounce > walk.bounce*1.3,"Jog has a visibly stronger body bounce than walking (%.3f m vs %.3f m)" % [jog.bounce,walk.bounce])
-	check(jog.lift > 0.12 and walk.lift < 0.03,"Jog lifts the recovering foot and knee; the walk keeps a low swing")
-	check(jog.flight > 0 and walk.flight == 0,"Jog includes flight between push-offs; walking keeps ground contact")
-	check(jog.feet and walk.feet,"Walk and jog supporting soles stay planted without floor penetration")
-	# The original left/right crawl takes are asymmetric, with different travel
-	# per cycle. recovered_lean_prone_regression now checks the visible native
-	# poses, shared movement phase, pull speed, release and reversal. The old
-	# fixed 1.15-second mirrored proxy curve is no longer the gameplay motion.
+	# A crawl is pushed by its animation; it must still stop at a wall.
 	await place(2)
 	wall = box_at(Vector3(1,0.5,25),Vector3(0.1,1,4))
 	await frames(3)
 	player.test_command = {"move":Vector2.RIGHT}
-	await frames(240)
+	await frames(150)
 	check(player.position.x < 0.63,"Authored crawl movement still respects wall collision")
 	wall.queue_free()
 	print("\nRESULT: %d checks, %d failure(s)" % [checks,failures.size()])

@@ -117,6 +117,7 @@ func die() -> void:
 	if dead:
 		return
 	dead = true
+	weapon.weapon_audio.cancel_reload()
 	close_menus()
 	player.set_meta(&"alive", false)
 	weapon.set_scope(false)

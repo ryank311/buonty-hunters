@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1")
 recovered_model = "remington870"
-display_name = "COMBAT SHOTGUN"
+display_name = "870"
 automatic = false
 magazine_size = 6
 starting_reserve = 24
@@ -33,4 +33,4 @@ pellets = 9
 pellet_spread = 4.5
 muzzle_length = 0.56
 visual_scale = Vector3(1.15, 1, 1.05)
-sound_pitch = 0.72
+sound_pitch = 1.0

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1")
 recovered_model = "desert_eagle"
-display_name = "HEAVY PISTOL"
+display_name = "DE .50"
 automatic = false
 magazine_size = 7
 starting_reserve = 21
@@ -32,4 +32,4 @@ minimum_damage = 0.5
 hold = "pistol"
 muzzle_length = 0.3
 visual_scale = Vector3(1.15, 1.15, 1.2)
-sound_pitch = 0.85
+sound_pitch = 1.0

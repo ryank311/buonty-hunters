@@ -63,7 +63,7 @@ var scope_dropped: bool = false
 var rng := RandomNumberGenerator.new()
 var aim_point := Vector3.ZERO
 var hit_point := Vector3.ZERO
-var sound := AudioStreamPlayer3D.new()
+var weapon_audio := preload("res://scripts/combat/recovered_weapon_audio.gd").new()
 var impact_decals := preload("res://scripts/combat/impact_decals.gd").new()
 # Scoped weapons look through their own camera at the eye while focus aim is held.
 var scoped: bool = false
@@ -89,10 +89,7 @@ var throw_arc: MeshInstance3D
 func initialize(owner_player: PrototypePlayer) -> void:
 	player = owner_player
 	reset_profiles()
-	add_child(sound)
-	sound.stream = preload("res://audio/rifle.wav")
-	sound.volume_db = -13.0
-	sound.max_distance = 120.0
+	weapon_audio.initialize(self)
 	add_child(impact_decals)
 	scope_camera.top_level = true
 	scope_camera.near = 0.05
@@ -135,6 +132,7 @@ func set_class(value: Variant) -> void:
 	reset()
 
 func reset() -> void:
+	weapon_audio.reset()
 	impact_decals.clear()
 	if is_inside_tree():
 		Combat.clear_spawned(get_tree())
@@ -178,6 +176,7 @@ func equip(slot: int) -> bool:
 		return false
 	# The loaded rounds stay in each gun. An interrupted reload transfers nothing.
 	reload_remaining = 0.0
+	weapon_audio.cancel_reload()
 	set_scope(false)
 	_cancel_throw()
 	draw_from = profile
@@ -203,6 +202,7 @@ func receive(slot: int, taken: WeaponProfile, loaded: int, spare: int) -> void:
 	if slot == active_slot:
 		# Return/cancel a held grenade before replacing the old slot's inventory.
 		_cancel_throw()
+		weapon_audio.cancel_reload()
 		draw_from = profile
 		draw_serial += 1
 	profiles[slot] = taken
@@ -399,6 +399,7 @@ func tick(delta: float, fire: bool, reload_requested: bool) -> void:
 		return
 	if reload_requested and player.can_fire() and draw_remaining <= 0.0 and ammo < profile.magazine_size and reserve > 0 and reload_remaining <= 0.0:
 		reload_remaining = profile.reload_seconds
+		weapon_audio.reload(profile)
 		rounds_in_pull = 0
 		require_trigger_release = fire
 	if reload_remaining > 0.0:
@@ -431,9 +432,7 @@ func shoot(result: Dictionary) -> void:
 	rounds_in_pull += 1
 	cooldown = fire_interval() + minf(cooldown, 0.0)
 	muzzle_timer = 0.045
-	if DisplayServer.get_name() != "headless":
-		sound.pitch_scale = profile.sound_pitch
-		sound.play()
+	weapon_audio.fire(profile)
 	player.soldier.flash.visible = true
 	if profile.muzzle_velocity > 0.0:
 		_fire_bullet(result)

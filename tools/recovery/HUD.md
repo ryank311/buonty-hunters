@@ -12,7 +12,7 @@ Rebuild from the existing recovery without Blender:
 python3 tools/recovery/prepare_hud.py
 tools/dev import
 tools/dev check
-tools/dev test recovered_hud_regression combat_movement_regression camera_gait_regression weapons_regression
+tools/dev test recovered_hud_regression combat_movement_regression camera_regression weapons_regression
 ```
 
 The preparation script verifies the recovered hashes before copying, rejects conflicting same-name variants and regenerates the HTML catalogue. It preserves the decoded RGBA PNG bytes, including the extraction's PS2 alpha conversion. Do not paint over those source textures to fix placement; their transparent padding is meaningful.

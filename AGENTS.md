@@ -10,7 +10,7 @@ A third-person tactical shooter prototype in Godot 4.7: GDScript, Jolt physics, 
 | `scenes/` | `main.tscn`, `actors/player.tscn`, `actors/combat_dummy.tscn`, `levels/old_quarter.tscn`, `levels/movement_lab.tscn` |
 | `resources/` | Default tuning values (`.tres`) for movement, camera, and each weapon and piece of equipment (`weapons/`); what each soldier class carries (`classes/`) |
 | `art/` | `blender/` holds model sources (`.blend`, hidden from Godot); `models/` holds the exported `.glb` files the game loads; `decals/` |
-| `tests/` | Headless regression suites, one `SceneTree` script each |
+| `tests/` | Headless regression suites, one `SceneTree` script each; `core.txt` lists the few that run by default |
 | `tools/dev` | The single command for checking, testing, and capturing the game, and for the Blender asset pipeline |
 | `tools/agent/` | What `tools/dev` and the MCP servers run: Godot wrapper, MCP launchers, the live link's front (`live-mcp.mjs`), scenario harness, capture and check scripts, Blender export and preview scripts |
 | `.agents/skills/` | Skills for this project (`.claude/skills` links here) |
@@ -22,14 +22,26 @@ Read [docs/ASSET_RECOVERY_HANDOFF.md](docs/ASSET_RECOVERY_HANDOFF.md) before imp
 ## Verify every change
 
 1. `tools/dev check`: every script, scene, and resource loads (about 1 s).
-2. `tools/dev test`: the regression suites pass (about 25 s; name suites to run fewer).
+2. `tools/dev test`: the core suites pass (about 10 s). Add the suite for the area you changed by name (`tools/dev test weapons_regression`); `tools/dev test --all` (over a minute) is for the end of a large change, not for every edit.
 3. If the change can be seen or felt, look at it: `tools/dev shot <scenario>` for a frame, the `godot` MCP server to play it, or the `game` MCP server to see it in a game that is already running.
 
 Say what you ran and what it showed. A change that was not checked is not done.
 
+## Tests are the exception
+
+This is a prototype whose feel and features change daily. Looking at a change is how it is verified, and git is the safety net: work is checkpointed often, so something that breaks can be diffed, bisected, or reverted. A test written for every change slows every later change, so:
+
+- **Do not add a test for a change by default.** No test for a new feature while it is still being shaped, for a tuning value, for how a pose or an animation looks, or for a fix the diff already makes plain.
+- **Add one only for what would break silently**: a rule nobody would notice failing by playing for a minute (ammunition conserved across a swap, a save file from an older version), something that has already broken more than once, or tooling other tools stand on. Extend the suite that covers the area; a new suite file needs a new area.
+- **Never assert a tuning number.** Read speeds, heights, damage, and timings from the profile, or compare (faster than a walk, less than at 10 m). A check that fails when the user retunes the feel is a bug in the check.
+- **When a check fails after a change you meant**, do not just update its expected value. Make it independent of the value, or delete it if the behaviour it held is gone. Delete the checks for anything you remove.
+- **Keep them fast.** A suite over 20 s is reported as `SLOW`. One run at a time: the runner already uses the cores it should.
+
+`godot-dev-loop` has the suites by area and how to write a check that lasts.
+
 ## Skills
 
-- `godot-dev-loop`: the check, test, look loop with `tools/dev`, the Godot pitfalls that cost time here, and how to write a regression suite.
+- `godot-dev-loop`: the check, test, look loop with `tools/dev`, the Godot pitfalls that cost time here, which suite covers what, and when a test is worth writing.
 - `godot-playtest`: driving the running game through the `godot` MCP server and the scenario harness: any level, spawn, stance, weapon, or menu state; tick-exact input; state digests; screenshots.
 - `live-game`: working on the game while it runs and is played, through the `game` MCP server: what the player just did in numbers, live tuning of feel, pictures and filmstrips from any angle, slow motion, editing any variable, hot-reloading edited scripts, restarting in place.
 - `blender-modeling`: building models and level objects through the `blender` MCP server, then exporting, previewing, and placing them in the game with `tools/dev blender`.

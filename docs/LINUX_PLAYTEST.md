@@ -18,7 +18,7 @@ Replace `STEAMOS_HOST` with the desktop's hostname or IP. `--port PORT` supports
 The build command:
 
 1. Checks the editor version against `tools/build/linux_toolchain.json`. On first use it downloads the official template archive (about 1.3 GB), verifies its pinned SHA-256 and extracts only the two Linux x86_64 templates into `.build/templates/`. No global Godot installation settings are changed.
-2. Runs `tools/dev import` and `tools/dev check`, then exports the `Linux` preset. It refuses an active temporary MCP bridge autoload. Run `tools/dev test` as the normal broader regression gate before a handoff.
+2. Runs `tools/dev import` and `tools/dev check`, then exports the `Linux` preset. It refuses an active temporary MCP bridge autoload. Run `tools/dev test --all` as the broader regression gate before a handoff.
 3. Audits the PCK itself: every installed GLB and every raw recovery JSON file must be present; JSON bytes must match their source hashes. Rejects campaign map models, textures and level descriptions in the package. Starts the packaged game headlessly using this machine's Godot editor, with no source-file fallback.
 4. Writes the executable, PCK, launcher, build metadata and checksums into `.build/linux/BUILD_ID/`. Only a successful build advances `.build/linux/latest`. Output and templates are ignored by Git.
 

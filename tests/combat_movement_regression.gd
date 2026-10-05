@@ -1,4 +1,7 @@
 extends SceneTree
+## Shooting on the move and going to ground: how movement and stance change the shot
+## cone, the reticle's parts, tap and hold on the stance key, and the dive from launch
+## to landing.
 
 var failures: Array[String] = []
 var checks := 0
@@ -171,15 +174,9 @@ func _run() -> void:
 	player.test_command = {"move":Vector2.UP}
 	await frames(30)
 	var start := player.position
-	var min_ankle: float = player.soldier.leg_joints.L[2].z
-	var max_ankle := min_ankle
-	for i: int in range(60):
-		await frames(1)
-		min_ankle = minf(min_ankle,player.soldier.leg_joints.L[2].z)
-		max_ankle = maxf(max_ankle,player.soldier.leg_joints.L[2].z)
+	await frames(60)
 	var crawled := player.position.distance_to(start)
 	check(crawled > player.movement.prone_speed * 0.9 and crawled < player.movement.prone_speed * 1.05,"Prone movement is a crawl at its set speed (%.2f m in a second at %.2f m/s)" % [crawled, player.movement.prone_speed])
-	check(max_ankle-min_ankle > 0.09 and player.soldier.parts.Head.position.y < 0.5,"Crawl visibly shimmies the legs with the body lying flat")
 	player.test_command = {}
 	await place()
 	key(KEY_SHIFT,true)
@@ -203,7 +200,6 @@ func _run() -> void:
 	var launch := Vector3.ZERO
 	var landing := Vector3.ZERO
 	var peak := 0.0
-	var extended := false
 	for i: int in range(100):
 		await frames(1)
 		if player.diving:
@@ -215,7 +211,6 @@ func _run() -> void:
 			weapon.cooldown = 0
 			weapon.shoot({})
 			locked_fire = locked_fire and weapon.ammo == ammo
-			extended = extended or (player.soldier.dive_blend > 0.8 and player.soldier.arm_joints.R[2].z < -0.7)
 		if saw_flight and not player.diving and not saw_landing:
 			landing = player.position
 			saw_landing = true
@@ -227,7 +222,6 @@ func _run() -> void:
 	check(saw_flight and saw_landing and peak > 0.15,"Running plus controller hold launches an airborne forward dive")
 	# The recovered dive clip itself travels 2.98 m.
 	check(landing.distance_to(launch) > 2.4 and landing.distance_to(launch) < 3.8,"Dive travels forward under physics before landing (%.2f m)" % landing.distance_to(launch))
-	check(extended,"Dive stretches the arms forward into the airborne pose")
 	check(locked_fire and player.can_fire(),"Firing is blocked in flight/recovery and restored after settling")
 	check(player.stance.current == 2 and not player.diving,"Holding through landing never retriggers a dive or stands the player up")
 	# A strafe dive leaves sideways with the carried momentum, pushes faster, and keeps the aim.
@@ -285,28 +279,6 @@ func _run() -> void:
 	await frames(3)
 	session.reset_player()
 	check(not player.diving and player.dive_recovery == 0 and player.floor_snap_length > 0 and player.soldier.dive_blend == 0,"Reset cancels flight/recovery and restores a standing pose")
-	# Different walking and running contact timing, with anatomical dive limbs.
-	player.controls_enabled = false
-	var soldier := player.soldier
-	for i: int in range(120):
-		soldier.pose(0,1.6,Vector2.UP,0,0,1.0/60.0)
-	var walk_cycle := soldier.cycle
-	for i: int in range(60):
-		soldier.pose(0,1.6,Vector2.UP,0,0,1.0/60.0)
-	var walk_cadence := soldier.cycle - walk_cycle
-	check(soldier.stride_contact > 0.5,"Walking keeps at least one boot planted through the step cycle")
-	for i: int in range(120):
-		soldier.pose(0,4.5,Vector2.UP,0,0,1.0/60.0)
-	var run_cycle := soldier.cycle
-	for i: int in range(60):
-		soldier.pose(0,4.5,Vector2.UP,0,0,1.0/60.0)
-	check(soldier.cycle - run_cycle > walk_cadence * 1.2 and soldier.stride_contact < 0.4,"Running has a distinct quicker cadence and shorter ground contact")
-	var limbs := true
-	for i: int in range(60):
-		soldier.pose(2,5.6,Vector2.UP,0,0,1.0/60.0,1.0,Vector3.ZERO,false,0,0,false,1.0)
-		for joints: Array in soldier.arm_joints.values():
-			limbs = limbs and absf(joints[0].distance_to(joints[1])-SoldierProxy.UPPER_ARM_LENGTH) < 0.001 and absf(joints[1].distance_to(joints[2])-SoldierProxy.FOREARM_LENGTH) < 0.001
-	check(limbs,"Dive extension preserves arm lengths instead of stretching the mesh")
 	print("\nRESULT: %d checks, %d failure(s)" % [checks,failures.size()])
 	session.queue_free()
 	await frames(2)

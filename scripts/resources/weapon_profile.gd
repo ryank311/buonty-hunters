@@ -1,7 +1,7 @@
 class_name WeaponProfile
 extends Resource
 
-@export var display_name: String = "FIELD RIFLE"
+@export var display_name: String = "M4A1"
 @export var automatic: bool = true
 @export var magazine_size: int = 30
 @export var starting_reserve: int = 90

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1")
 recovered_model = "mp5"
-display_name = "SUBMACHINE GUN"
+display_name = "HK5"
 automatic = true
 magazine_size = 30
 starting_reserve = 120
@@ -31,4 +31,4 @@ falloff_end = 45.0
 minimum_damage = 0.45
 muzzle_length = 0.4
 visual_scale = Vector3(1, 1, 0.78)
-sound_pitch = 1.15
+sound_pitch = 1.0

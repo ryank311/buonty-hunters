@@ -78,7 +78,8 @@ func _run() -> void:
 	check(page.character_picker.item_count == 202, "Character selector contains every recovered model")
 	var old_path: String = skin.model_path
 	page.character_search.text = "scuba"
-	check(page.character_picker.item_count > 0 and skin.model_path == old_path, "Searching characters filters without swapping automatically")
+	page.character_search.text_changed.emit(page.character_search.text)
+	check(page.character_picker.item_count > 0 and page.character_picker.item_count < 202 and skin.model_path == old_path, "Searching characters filters without swapping automatically")
 	var character_index: int = page.character_picker.get_item_id(0)
 	var chosen_path: String = session.recovered_characters[character_index].path
 	var ammo := w.ammo
@@ -86,8 +87,10 @@ func _run() -> void:
 	page.character_picker.item_selected.emit(0)
 	check(skin.model_path == chosen_path and skin.skeleton.get_bone_count() == 26 and session.player.position == position and w.ammo == ammo, "Character selection swaps the playable native rig without resetting position or ammo")
 	page.character_search.text = "no such recovered character"
+	page.character_search.text_changed.emit(page.character_search.text)
 	check(page.character_picker.disabled and skin.model_path == chosen_path, "An empty character search disables selection and keeps the current model")
 	page.character_search.clear()
+	page.character_search.text_changed.emit("")
 	check(page.character_picker.get_selected_id() == character_index, "Clearing the search restores selection to the active character")
 	session.set_modal(false)
 	await frames(40)

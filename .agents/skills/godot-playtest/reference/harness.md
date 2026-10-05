@@ -74,7 +74,11 @@ Input actions: `move_forward`, `move_back`, `move_left`, `move_right`, `walk`, `
 
 ## walk_to(tree, points, speed := 4.0, leg_frames := 900)
 
-Walks `[[x, z], ...]` in order: faces each point and holds forward until within 0.35 m. Adds `walk`: `{"arrived": bool, "seconds": simulated time, "blocked_before": [x, z]}` (the last only when a leg timed out). Waypoints for the three town routes are in `tests/prototype_smoke.gd`.
+Walks `[[x, z], ...]` in order: faces each point and holds forward until within 0.35 m. Adds `walk`: `{"arrived": bool, "seconds": simulated time, "blocked_before": [x, z]}` (the last only when a leg timed out). The three town routes, spawn to spawn:
+
+- Market: `[[-46,9],[-40,9],[-40,-13],[-17,-13],[-17,-1],[-9,-1],[-1,-1],[8,0],[11,8],[15,14],[43,14],[46,10]]`
+- Courtyard: `[[-46,9],[-40,9],[-40,-13],[-29,-13],[-29,-36],[18,-36],[33,-36],[33,-14],[40,-14],[40,10],[46,10]]`
+- Service Passage: `[[-46,9],[-40,22],[-26.5,22],[-26.5,38],[7,38],[7,17],[14,17],[43,17],[46,10]]`
 
 ## state(tree)
 

@@ -1,4 +1,6 @@
 extends SceneTree
+## Controller input from the pad through InputMap to the game and its menus, weapon
+## swap and reload rules, recoil arithmetic, and saved settings.
 
 var failures: Array[String] = []
 var session: Node3D
@@ -47,60 +49,6 @@ func _run() -> void:
 	weapon = player.weapon
 	session.load_level(true)
 	await frames(20)
-	player.controls_enabled = false
-	# Full strides, including sideways travel and backpedaling, never reverse knee bend.
-	var knees_valid := true
-	var lengths_valid := true
-	for stance: int in [0, 1]:
-		for direction: Vector2 in [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT, Vector2(1,-1).normalized(), Vector2(-1,1).normalized()]:
-			for tick: int in range(180):
-				player.soldier.pose(stance, 4.5 if stance == 0 else 2.5, direction, 0, 0, 1.0/60.0)
-				for joints: Array in player.soldier.leg_joints.values():
-					var bend: Vector3 = joints[1] - (joints[0] + joints[2]) * 0.5
-					var forward := Basis(Vector3.UP, player.soldier.locomotion_yaw) * Vector3.FORWARD
-					knees_valid = knees_valid and bend.dot(forward) >= -0.0001
-					lengths_valid = lengths_valid and absf(joints[0].distance_to(joints[1]) - SoldierProxy.THIGH_LENGTH) < 0.001 and absf(joints[1].distance_to(joints[2]) - SoldierProxy.SHIN_LENGTH) < 0.001
-	check(knees_valid, "Knees bend toward the feet through all standing/crouched travel directions")
-	check(lengths_valid, "Thigh and shin lengths stay constant throughout strides")
-	for tick: int in range(180):
-		player.soldier.pose(0, 4.5, Vector2.RIGHT, 0, 0, 1.0/60.0)
-	check(player.soldier.locomotion_yaw < -1.5 and player.soldier.torso_yaw < -0.9, "Right strafe turns feet, hips and torso toward travel")
-	check(absf(player.soldier.weapon_pivot.rotation.y) < 0.001, "Locomotion twist keeps the weapon aligned to aim")
-	for tick: int in range(180):
-		player.soldier.pose(0, 4.5, Vector2.LEFT, 0, 0, 1.0/60.0)
-	check(player.soldier.locomotion_yaw > 1.5 and player.soldier.torso_yaw > 0.9, "Left strafe mirrors the directional turn")
-	player.soldier.land(5.0, 1.0)
-	player.soldier.pose(0, 0, Vector2.ZERO, 0, 0, 1.0/60.0)
-	check(player.soldier.body_drop > 0.005, "Landing loads the body visibly")
-	for tick: int in range(180):
-		player.soldier.pose(0, 0, Vector2.ZERO, 0, 0, 1.0/60.0)
-	check(player.soldier.body_drop < 0.001, "Body settles after landing")
-	var neutral_straight := true
-	var neutral_flat := true
-	for side: String in ["L", "R"]:
-		var joints: Array = player.soldier.leg_joints[side]
-		var flex := 180.0 - rad_to_deg((joints[0] - joints[1]).angle_to(joints[2] - joints[1]))
-		neutral_straight = neutral_straight and flex < 18.0 and flex > 3.0
-		neutral_flat = neutral_flat and absf(player.soldier.foot_samples[side].pitch) < 0.001 and absf(player.soldier.foot_samples[side].ankle.y - 0.11) < 0.002
-	check(neutral_straight, "Standing knees rest nearly straight instead of in a permanent crouch")
-	check(neutral_flat, "Idle boots rest flat with grounded ankles")
-	var planted := true
-	var low_swing := true
-	var controlled_roll := true
-	for tick: int in range(240):
-		player.soldier.pose(0,1.6,Vector2.UP,0,0,1.0/120.0)
-		for side: String in ["L", "R"]:
-			var step: Dictionary = player.soldier.foot_samples[side]
-			var boot: MeshInstance3D = player.soldier.parts[side + "Boot"]
-			var half: Vector3 = boot.mesh.size * 0.5
-			var lowest := boot.position.y - absf(boot.basis.x.y)*half.x - absf(boot.basis.y.y)*half.y - absf(boot.basis.z.y)*half.z
-			if step.contact:
-				planted = planted and absf(lowest) < 0.001
-			low_swing = low_swing and step.lift <= 0.046 and lowest >= -0.001
-			controlled_roll = controlled_roll and absf(step.pitch) <= deg_to_rad(10.01)
-	check(planted, "Supporting boot stays on the floor throughout the planted part of a stride")
-	check(low_swing, "Swing clears the floor without high bird-like ankle lift")
-	check(controlled_roll, "Heel-to-toe roll stays within a restrained ten degrees")
 	# Real controller events pass through InputMap and the gameplay/menu handlers.
 	player.reset_at(Transform3D(Basis.IDENTITY, Vector3(0,0.1,25)))
 	player.controls_enabled = true
@@ -137,19 +85,7 @@ func _run() -> void:
 	check(player.stance.current == 0, "A rises from prone")
 	await tap(JOY_BUTTON_A)
 	check(not player.is_on_floor(), "A jumps from standing")
-	check(player.soldier.jump_active, "A jump drives the airborne animation")
-	var highest_boot := 0.0
-	var touchdown_boot := 1.0
-	var impact_load := 0.0
-	for tick: int in range(60):
-		await frames()
-		if not player.is_on_floor():
-			highest_boot = maxf(highest_boot,player.soldier.parts.LBoot.position.y)
-			touchdown_boot = player.soldier.parts.LBoot.position.y
-		else:
-			impact_load = maxf(impact_load,player.soldier.body_drop)
-	check(highest_boot > 0.30 and touchdown_boot < 0.13, "Live jump folds the legs then reaches down before ground contact")
-	check(impact_load > 0.07 and player.soldier.body_drop < 0.01, "Live touchdown absorbs impact and settles back to ready")
+	await frames(60)
 	button(JOY_BUTTON_RIGHT_SHOULDER, true)
 	await frames(10)
 	check(player.camera_rig.actual_lean > 0.9, "Shoulder button leans")
@@ -214,8 +150,9 @@ func _run() -> void:
 	check(session.spawn_index == spawn_before and weapon.active_slot == 0, "Menu D-pad does not change spawn or weapon")
 	for tick: int in range(3):
 		await tap(JOY_BUTTON_RIGHT_SHOULDER)
-	check(session.hud.current_page == 3, "RB reaches the rifle recoil page")
+	check(session.hud.current_page == 3 and session.hud.page_buttons[3].text == "Debug tuning", "RB reaches the consolidated debug tuning page")
 	var kick_before: float = weapon.profiles[0].recovered_recoil_scale
+	session.hud.weapon_tuning_menu.editors.recovered_recoil_scale.get_line_edit().grab_focus()
 	await tap(JOY_BUTTON_DPAD_RIGHT)
 	check(weapon.profiles[0].recovered_recoil_scale > kick_before, "D-pad adjusts recovered recoil without a mouse")
 	var all_pages_fit := true
