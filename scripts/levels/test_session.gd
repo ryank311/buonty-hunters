@@ -30,12 +30,26 @@ func _ready() -> void:
 	load_level(false)
 	if DisplayServer.get_name() != "headless":
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	get_window().focus_exited.connect(_window_focus_exited)
+	get_window().focus_entered.connect(_window_focus_entered)
 	if not qa_mode:
-		get_window().focus_exited.connect(func() -> void: set_modal(true))
 		_size_window()
 	Input.joy_connection_changed.connect(_controller_connection_changed)
 	if "--capture" in OS.get_cmdline_user_args():
 		_capture_preview()
+
+func _window_focus_exited() -> void:
+	# Alt-tab releases the pointer without opening a menu or pausing the world.
+	player.pending_mouse = Vector2.ZERO
+	player.input_armed = false
+	PlayerInput.stop_vibration()
+	if DisplayServer.get_name() != "headless":
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+func _window_focus_entered() -> void:
+	player.pending_mouse = Vector2.ZERO
+	if DisplayServer.get_name() != "headless" and get_window().has_focus():
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if not modal and player.controls_enabled else Input.MOUSE_MODE_VISIBLE
 
 func _size_window() -> void:
 	# Open at twice the 640x480 render in screen points, so a Retina display does not
@@ -111,7 +125,6 @@ func toggle_lap() -> void:
 
 func _controller_connection_changed(_device: int, connected: bool) -> void:
 	if not connected:
-		set_modal(true)
 		hud.notify("Controller disconnected • reconnect or use mouse and keyboard")
 	else:
 		hud.notify("Controller connected • Start opens tuning")
@@ -124,9 +137,13 @@ func load_recovery() -> void:
 	_replace_level(load("res://scenes/levels/recovery_lab.tscn"), "recovery")
 	hud.notify("Recovery Lab • %s animation · %s pause · %s collision · %s step" % [PlayerInput.function_key_hint(6), PlayerInput.function_key_hint(7), PlayerInput.function_key_hint(8), PlayerInput.function_key_hint(9)])
 
-## A recovered disc map, by id (MP72, M51...); see scripts/levels/recovered_map.gd.
+## An installed multiplayer disc map, by id (MP72, MP1...).
 func load_map(id: String) -> void:
-	_replace_level(null, "map:" + id.to_upper(), RecoveredMap.new(id.to_upper()))
+	var map_id := id.to_upper()
+	if not RecoveredMap.catalogue().any(func(entry: Dictionary) -> bool: return entry.id == map_id):
+		hud.notify("Multiplayer map unavailable: " + map_id)
+		return
+	_replace_level(null, "map:" + map_id, RecoveredMap.new(map_id))
 	var spawn := level.get_node("Spawns").get_child(0)
 	hud.notify("%s • %s • %d spawns · %s cycles them" % [level.data.name, spawn.name, level.get_node("Spawns").get_child_count(), "Next spawn"])
 

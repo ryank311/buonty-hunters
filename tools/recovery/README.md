@@ -4,7 +4,7 @@ This is an offline extraction/staging pipeline. It preserves the ISO, extracts i
 
 The recovered collection is at `previous/recovery/`. Open `previous/recovery/index.html` for the searchable catalogue. `previous/` is already git-ignored; `.gdignore` keeps the recovery tree out of Godot's importer. Back up this folder separately from Git.
 
-A first Blender/Godot integration now lives in **Cmd+1 / F1 → Recovery Lab**. Its M4, animated SEAL and Crossroads plaza sources, controls and rebuild steps are documented in [PILOT.md](PILOT.md). The extraction commands below still only produce the offline collection.
+A first Blender/Godot integration now lives in **Cmd+1 / F1 → Recovery Lab**. Its M4, animated SEAL and Crossroads plaza sources, controls and rebuild steps are documented in [PILOT.md](PILOT.md). The extraction commands below still only produce the offline collection. The main project now installs all 22 multiplayer maps through [LEVELS.md](LEVELS.md); campaign maps remain offline and must not be reinstalled.
 
 ## Recovery result — 2026-10-05
 

@@ -19,7 +19,11 @@ func _run() -> void:
 	var default_environment: Environment = session.get_node("Environment").environment
 	var default_sun: Transform3D = session.get_node("Sun").transform
 	var maps := RecoveredMap.catalogue()
-	check(not maps.is_empty(), "At least one recovered map is installed (%d)" % maps.size())
+	check(maps.size() == 22 and maps.all(func(entry: Dictionary) -> bool: return entry.mode == "Multiplayer" and entry.id.begins_with("MP")), "All 22 recovered multiplayer maps are installed")
+	check(DirAccess.get_files_at(RecoveredMap.LEVELS).size() == 22, "Runtime level descriptions contain only the 22 multiplayer maps")
+	var original_level: Node = session.level
+	session.load_map("M51")
+	check(session.level == original_level and session.current_level == "lab", "A retired campaign map request preserves the active level")
 	for entry: Dictionary in maps:
 		var title := "%s (%s)" % [entry.name, entry.id]
 		await H.apply(self, {"level": "map:" + entry.id})

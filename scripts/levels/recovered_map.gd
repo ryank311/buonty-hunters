@@ -19,16 +19,16 @@ var sky_eye := Vector3.ZERO
 var restore: Dictionary = {}
 var fill_light: DirectionalLight3D
 
-## Every map whose model has been installed, multiplayer first, then by name.
+## Installed multiplayer maps, sorted by name. Campaign maps stay offline.
 static func catalogue() -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	for file: String in DirAccess.get_files_at(LEVELS):
 		if not file.ends_with(".json"):
 			continue
 		var entry: Variant = JSON.parse_string(FileAccess.get_file_as_string(LEVELS + file))
-		if entry is Dictionary and ResourceLoader.exists(entry.model):
+		if entry is Dictionary and entry.get("mode") == "Multiplayer" and ResourceLoader.exists(entry.model):
 			result.append(entry)
-	result.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return [a.mode != "Multiplayer", a.name] < [b.mode != "Multiplayer", b.name])
+	result.sort_custom(func(a: Dictionary, b: Dictionary) -> bool: return a.name < b.name)
 	return result
 
 func _init(id: String = "") -> void:

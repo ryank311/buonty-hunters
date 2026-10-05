@@ -388,9 +388,9 @@ func _build_menu() -> void:
 	show_page(0, false)
 	refresh_settings()
 
-## Recovered disc maps installed by tools/recovery/prepare_level.py.
+## Multiplayer disc maps installed by tools/recovery/prepare_level.py.
 func _build_map_page() -> void:
-	_page("Recovered maps · original geometry, sky, lighting and fog")
+	_page("Multiplayer maps · original geometry, sky, lighting and fog")
 	var scroll := ScrollContainer.new()
 	slider_parent.add_child(scroll)
 	scroll.custom_minimum_size = Vector2(0, 222)
@@ -402,10 +402,10 @@ func _build_map_page() -> void:
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var maps := RecoveredMap.catalogue()
 	if maps.is_empty():
-		_label(grid, "No recovered maps installed yet", Vector2.ZERO, 14, MUTED)
+		_label(grid, "No multiplayer maps installed yet", Vector2.ZERO, 14, MUTED)
 	for entry: Dictionary in maps:
 		var id: String = entry.id
-		var button := _button(grid, "%s · %s" % [entry.name, "MP" if entry.mode == "Multiplayer" else "Campaign"], func() -> void: session.load_map(id); session.set_modal(false))
+		var button := _button(grid, entry.name, func() -> void: session.load_map(id); session.set_modal(false))
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.custom_minimum_size.y = 30
 		button.add_theme_font_size_override("font_size", 13)

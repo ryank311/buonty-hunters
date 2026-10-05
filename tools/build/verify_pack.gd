@@ -18,6 +18,13 @@ func _initialize() -> void:
 	for path: String in ["res://tools/dev", "res://tests/prototype_smoke.gd", "res://previous/recovery/reports/assets.json"]:
 		if FileAccess.file_exists(path):
 			failures.append("Development file leaked into export: " + path)
+	var campaign := RegEx.create_from_string("^(recovered_map_)?m[0-9]+[._]")
+	for directory: String in ["res://art/models/", "res://resources/recovered/levels/", "res://resources/recovered/actions/"]:
+		if not DirAccess.dir_exists_absolute(directory):
+			continue
+		for file: String in DirAccess.get_files_at(directory):
+			if campaign.search(file) != null:
+				failures.append("Campaign map leaked into export: " + directory + file)
 	for failure: String in failures:
 		push_error(failure)
 	print("PACK_AUDIT: %d JSON files, %d resources, %d failures" % [manifest.runtime_json.size(), manifest.runtime_resources.size(), failures.size()])

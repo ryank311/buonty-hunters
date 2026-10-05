@@ -50,7 +50,7 @@ func menu_blocks_input() -> bool:
 
 func _physics_process(delta: float) -> void:
 	if menu_blocks_input():
-		# The pause menu took over (it also opens when the window loses focus).
+		# The explicitly opened pause menu took over.
 		if class_open or loot_open:
 			close_menus()
 		return

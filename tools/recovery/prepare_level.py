@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare recovered maps for the Blender level recipe and the game.
+"""Prepare recovered multiplayer maps for the Blender level recipe and the game.
 
 Run with previous/recovery/.venv/bin/python. For each map this writes, under
 previous/recovery/staging/levels/<ID>/, Blender-space OBJ files for the world,
@@ -10,7 +10,7 @@ committed runtime description resources/recovered/levels/<id>.json: name,
 original lighting, fog, draw distance, spawns and per-texture blend modes.
 
     prepare_level.py MP72 MP1        # named maps
-    prepare_level.py --all           # every assembled map
+    prepare_level.py --all           # every assembled multiplayer map
     prepare_level.py --batch MP1 MP2 # one Blender call that builds both
 
 Geometry selection: intact states only. Destroyed/debris branches, shadow and
@@ -43,10 +43,14 @@ DROP = re.compile(r'destroyed|_shadow|_pulse|healthy_explosive|whats_left|(?<!go
 SKY = re.compile(r'(^|_)(sky|sky_\d+|skydome|skyhorizon|sky_follow|sky_model|sky_mark|sky_m72|cyl_sky|plane_sky|cloudlayer)(_|$)', re.I)
 # Sky, cloud, star and moon textures; not skylight windows or the North Star sign.
 SKY_TEXTURE = re.compile(r'^(?!.*skylight)(\w*sky\w*|\w*cloud\w*|stars?\d*|\w*_star|moon)\.(tif|bmp|png)', re.I)
-# Original mission titles for the campaign maps (the records hold string ids).
-TITLES = {'M51': 'Seeding Chaos', 'M52': 'Terminal Transaction', 'M53': 'Upland Assault', 'M61': 'Urban Sweep',
-          'M62': 'Stranglehold', 'M63': 'Hydroelectric', 'M71': 'Guardian Angels', 'M72': 'Protect and Serve',
-          'M73': 'Against the Tide', 'M81': 'Lockdown', 'M82': 'Guided Tour', 'M83': 'Doomsday Delivery'}
+
+
+def multiplayer_maps(maps):
+    """Reject non-MP requests before writing any project or staging files."""
+    invalid = [m for m in maps if not re.fullmatch(r'MP[0-9]+', m)]
+    if invalid:
+        raise ValueError(f'Only multiplayer maps can be installed: {invalid}. Campaign sources stay in previous/recovery/.')
+    return maps
 
 
 def rdr(map_id, stem):
@@ -289,8 +293,7 @@ def spawns(map_id, solid, origin):
         if clear_above(points, position):
             result.append({'name': view['name'], 'source': position.tolist()})
     if len(result) < 3:
-        # Campaign starts are not decoded yet, and some views have no clear
-        # ground: add clear walkable surfaces nearest the centre of the
+        # Some views have no clear ground: add walkable surfaces nearest the centre of the
         # walkable area, at least 15 m from every other spawn.
         walk = (normals[:, 1] > 0.85)
         centres = points[walk].mean(axis=1)
@@ -314,7 +317,8 @@ def spawns(map_id, solid, origin):
 
 def blender_call(maps):
     """The bounded code for the Blender MCP execute_blender_code tool. Every
-    map needs a sky: all 34 have one (a sky.obj is written for each)."""
+    multiplayer map needs a sky (a sky.obj is written for each)."""
+    multiplayer_maps(maps)
     code = (ROOT / 'tools/recovery/blender_level.py').read_text()
     code = code.replace("ROOT = '/Users/king/socom'", 'ROOT = ' + repr(str(ROOT)))
     code = code.replace("MAPS = ['__MAPS__']", 'MAPS = ' + repr(list(maps)))
@@ -324,6 +328,7 @@ def blender_call(maps):
 
 
 def prepare(map_id):
+    multiplayer_maps([map_id])
     folder = LEVELS / map_id
     report = json.loads((folder / 'level-report.json').read_text())
     asset = 'recovered_map_' + map_id.lower()
@@ -402,10 +407,10 @@ def prepare(map_id):
     lines += [f'f {i*3+1} {i*3+2} {i*3+3}\n' for i in range(len(solid))]
     (out / 'collision.obj').write_text(''.join(lines))
     spawn_list = spawns(map_id, solid, origin)
-    mission_name = report['name'] if map_id.startswith('MP') else TITLES.get(map_id, map_id)
+    mission_name = report['name']
     runtime = {
         'id': map_id, 'name': ' '.join(w.capitalize() for w in mission_name.split()) if mission_name.isupper() else mission_name,
-        'mode': 'Multiplayer' if map_id.startswith('MP') else 'Campaign',
+        'mode': 'Multiplayer',
         'model': f'res://art/models/{asset}.glb', 'source': report['path'], 'source_origin': origin.tolist(),
         'scale': SCALE, 'bounds': [((low - origin) * SCALE).round(2).tolist(), ((high - origin) * SCALE).round(2).tolist()],
         'kill_height': round(float(min(low[1], solid[:, :, 1].min())) * SCALE - 10, 2),
@@ -422,11 +427,15 @@ def prepare(map_id):
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('maps', nargs='*')
-    parser.add_argument('--all', action='store_true')
+    parser.add_argument('--all', action='store_true', help='prepare only assembled multiplayer maps')
     parser.add_argument('--batch', action='store_true',
                         help='only write staging/levels/batch_call.py: one Blender call building the named, already prepared maps')
     args = parser.parse_args()
-    maps = sorted(p.name for p in LEVELS.iterdir() if p.is_dir()) if args.all else [m.upper() for m in args.maps]
+    maps = sorted(p.name for p in LEVELS.iterdir() if p.is_dir() and re.fullmatch(r'MP[0-9]+', p.name)) if args.all else [m.upper() for m in args.maps]
+    try:
+        multiplayer_maps(maps)
+    except ValueError as error:
+        parser.error(str(error))
     if args.batch:
         missing = [m for m in maps if not (STAGING / m / 'sky.obj').exists()]
         if missing:

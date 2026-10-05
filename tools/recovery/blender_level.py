@@ -7,10 +7,13 @@ writes the GLBs the game loads.
 """
 import bpy
 import json
+import re
 
 ROOT = '/Users/king/socom'
 STAGING = ROOT + '/previous/recovery/staging/levels/'
 MAPS = ['__MAPS__']
+if any(not re.fullmatch(r'MP[0-9]+', m) for m in MAPS):
+    raise ValueError('Only multiplayer maps belong in the project; campaign sources stay in previous/recovery/.')
 LEVELS = [{'asset': 'recovered_map_' + m.lower(), 'map': m, 'world': STAGING + m + '/world.obj', 'sky': STAGING + m + '/sky.obj',
            'collision': STAGING + m + '/collision.obj', 'source': 'converted/levels/' + m + '/level.obj', 'scale': 0.1} for m in MAPS]
 
