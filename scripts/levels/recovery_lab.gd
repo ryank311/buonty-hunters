@@ -42,7 +42,7 @@ func _ready() -> void:
 			character_index = index
 	# Both players advance from the same inspection clock.
 	caption = _label("", character.position + Vector3(0, 2.37, 0), 24)
-	_label("PLAYER • ORIGINAL SEAL RIG", retargeted.position + Vector3(0, 2.15, 0), 24)
+	_label("PLAYER • ORIGINAL RIG", retargeted.position + Vector3(0, 2.15, 0), 24)
 	_label("M4 CARBINE", weapon.position + Vector3(0, 0.8, 0), 24)
 	_label("CROSSROADS • RECOVERED PLAZA", Vector3(0, 3.1, 0), 28)
 	_box("WeaponStand", Vector3(1.5, 0.9, 0.65), weapon.position - Vector3(0, 0.45, 0), Color("535c58"))
@@ -166,6 +166,7 @@ func set_collision_visible(value: bool) -> void:
 func _prepare_materials(node: Node) -> void:
 	if node is MeshInstance3D:
 		var mesh := node as MeshInstance3D
+		var local_mesh := mesh.mesh.duplicate() as ArrayMesh
 		for surface: int in range(mesh.mesh.get_surface_count()):
 			var source := mesh.get_active_material(surface) as StandardMaterial3D
 			if source == null:
@@ -176,7 +177,10 @@ func _prepare_materials(node: Node) -> void:
 			if material.transparency != BaseMaterial3D.TRANSPARENCY_DISABLED:
 				material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
 				material.alpha_scissor_threshold = 0.5
-			mesh.set_surface_override_material(surface, material)
+			local_mesh.surface_set_material(surface, material)
+		mesh.mesh = local_mesh
+		for surface: int in range(local_mesh.get_surface_count()):
+			mesh.set_surface_override_material(surface, null)
 	for child: Node in node.get_children():
 		_prepare_materials(child)
 

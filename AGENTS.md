@@ -15,6 +15,10 @@ A third-person tactical shooter prototype in Godot 4.7: GDScript, Jolt physics, 
 | `tools/agent/` | What `tools/dev` and the MCP servers run: Godot wrapper, MCP launchers, scenario harness, capture and check scripts, Blender export and preview scripts |
 | `.agents/skills/` | Skills for this project (`.claude/skills` links here) |
 
+## Asset recovery work
+
+Read [docs/ASSET_RECOVERY_HANDOFF.md](docs/ASSET_RECOVERY_HANDOFF.md) before importing recovered weapons, props, levels or motions. Recovered characters are now the gameplay models; preserve their native proportions, weights and rigs. Do not restore the retired 19-bone player retarget. The handoff links the extraction manifests, Blender recipes, native animation calibration, known limits and checks.
+
 ## Verify every change
 
 1. `tools/dev check`: every script, scene, and resource loads (about 1 s).

@@ -122,7 +122,9 @@ func _firearms() -> void:
 	await ticks(2)
 	var close := actor("CLOSE")
 	var close_damage: float = close.max_health - close.health
-	check(weapon.ammo == 5 and weapon.shots_fired == 1 and weapon.hits == 1 and close_damage > 60.0, "One shotgun shell is one shot whose pellets wreck a soldier at 4 m (%.0f damage)" % close_damage)
+	# Native hand/muzzle placement changes which pellets strike torso versus legs.
+	# Require several pellets' damage without baking in the retired model's socket.
+	check(weapon.ammo == 5 and weapon.shots_fired == 1 and weapon.hits == 1 and close_damage >= weapon.profile.damage * 4.0, "One shotgun shell consumes one round and delivers multiple pellets at 4 m (%.0f damage)" % close_damage)
 	await scenario("lab_start", {"class": "breacher", "actors": [{"team": 1, "pos": [0.0, 0.0, 1.0], "name": "DISTANT"}], "look_at": [0.0, 1.1, 1.0]})
 	weapon.rng.seed = 7
 	weapon.shoot(weapon.query_aim(true))

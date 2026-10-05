@@ -224,7 +224,7 @@ def clip_info(asset, clip, source_names):
             'frames': clip['frameCount'], 'category': clip_category(asset['name']),
             'partial': bool(missing), 'missing_body_tracks': missing,
             'extra_tracks': sorted(tracks-set(source_names)), 'root_travel_m': travel.tolist(),
-            'review': 'Retargeted for inspection; event timing and gameplay layering require review'}
+            'review': 'Native motion for inspection; event timing and gameplay layering require review'}
 
 
 def original_animation(doc, skin, clip, info):
@@ -356,9 +356,11 @@ def main():
             key = digest({k: v for k, v in raw.items() if k != 'name'})
             group = motion_groups.setdefault(key, {'asset': asset, 'clip': raw, 'occurrences': []})
         group['occurrences'].append({'name': asset['name'], 'source': asset['source'], 'path': asset['path']})
-    manifest = {'scale': SCALE, 'bone_map': MAP, 'characters': [], 'motions': [], 'errors': []}
+    manifest = {'scale': SCALE, 'legacy_bone_map': MAP, 'characters': [], 'motions': [], 'errors': []}
     if args.motions_only:
         manifest = json.loads((OUT/'character_manifest.json').read_text())
+        manifest['motions'] = []
+        manifest['legacy_bone_map'] = manifest.pop('bone_map', manifest.get('legacy_bone_map', MAP))
     used = set()
     for key, group in sorted(character_groups.items(), key=lambda pair: pair[1]['asset']['name'].lower()):
         if args.motions_only:

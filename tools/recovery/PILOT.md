@@ -4,7 +4,7 @@
 
 Click Godot's **Play ▶** button (or press **F5**), then choose **Cmd+1 / F1 → Recovery Lab**. The player starts in front of a recovered M4 and a SEAL model. Walk through the surrounding Crossroads plaza with the normal controls. Command-number shortcuts work while the game has keyboard focus; Mac HUD hints show these shortcuts.
 
-The pilot now also has a [complete character/motion collection](CHARACTERS.md): **Tab** opens its browser, with 202 characters and 402 clips compared against our retargeted player model.
+The pilot now also has a [complete character/motion collection](CHARACTERS.md): **Tab** opens its browser, with 202 characters and 402 clips compared against the currently selected recovered player character.
 
 | Key | Inspection action |
 | --- | --- |
@@ -17,7 +17,7 @@ The pilot now also has a [complete character/motion collection](CHARACTERS.md): 
 | Backspace | Return to the selected spawn and refill |
 | Cmd+1 / F1 | Return to the other levels or adjust camera settings |
 
-The weapon and recovered character remain inspection displays. The browser also offers an optional recovered leg-motion trial on the playable soldier; weapon attachment and upper-body gameplay still use the existing procedural system. The recovery area has no combat roster. The M4 and character can be viewed from every side; the plaza has visible fences at its cropped edges.
+The pilot stands remain inspection displays. The playable soldier now uses recovered character geometry and native full-body locomotion; the browser’s **Use selected character for player** button and **[ / ]** switch the playable model. The M4 follows the recovered hand/weapon track. Aim layers and weapon-specific models remain follow-up work. The recovery area has no combat roster. The M4 and character can be viewed from every side; the plaza has visible fences at its cropped edges.
 
 ## First assets
 
@@ -32,7 +32,7 @@ The original PNGs used by the Blender materials are copied to `art/blender/textu
 - A shared **0.1 metre per source unit** conversion preserves proportions across all three assets. The M4 is 0.886 m long. This is the pilot's explicit calibration, not proof of an original authored unit convention.
 - The M4 has **563 nondegenerate, distinct triangles** and both source texture bindings. Its muzzle points Blender +Y / Godot -Z; its bottom is at zero. Source assembly had 621 triangles including repeated/degenerate faces.
 - The character retains **26 skeleton parts**, seven texture surfaces and all nonzero weights. Its source reports up to five influence slots, including a zero-weight slot; this model's maximum number of distinct positive influences is four. The exporter now preserves additional influence sets for future models instead of applying a four-weight limit.
-- Four original clips are baked at their stored **30 Hz** key times. Track names map to bone names; bone matrices retain the original hierarchy and rest pose. Horizontal root travel is held at the bind position for in-place inspection. Vertical motion stays intact, and the original unmodified tracks remain in the recovery collection.
+- The pilot source contains four original clips, baked at their stored **30 Hz** key times. Track names map to bone names; bone matrices retain the original hierarchy and rest pose. Horizontal root travel is held at the bind position for in-place inspection. Vertical motion stays intact, and the original unmodified tracks remain in the recovery collection. Current runtime playback uses `native.res` and per-rig axis conversion; see [CHARACTERS.md](CHARACTERS.md) before changing the rig or its motions.
 - The map is a **60 × 60 m** crop around source position `[1275, 43.5, 1445]`. It retains **10,453 visual triangles** and **3,933 collision triangles**. Crop edges interpolate UVs. Sky, destroyed-state, shadow and pulse meshes, exact duplicates and degenerate triangles are omitted. Camera/trigger volumes and water surfaces are excluded from solid collision.
 - `recovery_lab.gd` explicitly enables **two-sided concave collision**. This is necessary because the original probes accept both polygon orientations. Without it, several floors are ignored from above. Apply the same setting when moving this recovered collision to another Godot scene.
 

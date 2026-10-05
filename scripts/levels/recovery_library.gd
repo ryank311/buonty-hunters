@@ -3,7 +3,6 @@ extends RefCounted
 
 const CATALOGUE := "res://resources/recovered/catalogue.json"
 const ORIGINAL := "res://resources/recovered/native.res"
-const SOLDIER := "res://resources/recovered/soldier.res"
 
 static func catalogue() -> Dictionary:
 	return JSON.parse_string(FileAccess.get_file_as_string(CATALOGUE))

@@ -29,8 +29,8 @@ static func wear(proxy: SoldierProxy) -> SoldierSkin:
 		old.free()
 	var rifle := load(RIFLE).instantiate() as Node3D
 	rifle.position = RIFLE_ORIGIN
-	proxy.rifle_mesh.add_child(rifle)
 	prepare_materials(rifle)
+	proxy.rifle_mesh.add_child(rifle)
 	return skin
 
 func set_model_path(path: String) -> void:
@@ -38,8 +38,8 @@ func set_model_path(path: String) -> void:
 		model.free()
 	model_path = path
 	model = load(path).instantiate()
-	add_child(model)
 	prepare_materials(model)
+	add_child(model)
 	motion = Library.attach(model)
 	skeleton = motion.skeleton
 	bone.clear()
@@ -52,6 +52,10 @@ func set_model_path(path: String) -> void:
 
 static func prepare_materials(root: Node) -> void:
 	for mesh: MeshInstance3D in root.find_children("*", "MeshInstance3D", true, false):
+		# Keep per-character paint on an owned mesh. Surface overrides on shared
+		# imported meshes leave stale material queries when a sibling is freed
+		# (reproducible with two CQB instances in Godot's headless renderer).
+		var local_mesh := mesh.mesh.duplicate() as ArrayMesh
 		for surface: int in range(mesh.mesh.get_surface_count()):
 			var original := mesh.get_active_material(surface) as BaseMaterial3D
 			if original == null:
@@ -59,7 +63,10 @@ static func prepare_materials(root: Node) -> void:
 			var material := original.duplicate() as BaseMaterial3D
 			material.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 			material.cull_mode = BaseMaterial3D.CULL_DISABLED
-			mesh.set_surface_override_material(surface, material)
+			local_mesh.surface_set_material(surface, material)
+		mesh.mesh = local_mesh
+		for surface: int in range(local_mesh.get_surface_count()):
+			mesh.set_surface_override_material(surface, null)
 
 func pose(proxy: SoldierProxy, stance: int, speed: float, movement: Vector2, grounded: bool, pitch: float, delta: float) -> void:
 	driver.drive(self, proxy, stance, speed, movement, grounded, pitch, delta)

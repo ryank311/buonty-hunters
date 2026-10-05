@@ -80,7 +80,7 @@ Skip the `uv venv` command when that environment already exists. Verification ch
 - Animation: original motion clips plus decoded frame counts, durations, translations, quaternion keys and track flags. zAnim controllers remain indexed native records.
 - Sounds/movies: all original files and named bank/stream records are preserved. Audio/video transcoding is not performed by this adapter.
 
-OBJ uses the original right-handed Y-up game coordinates. One recovered soldier is about 19.4 source units tall and an M4 is about 8.86 units long; select the common unit conversion during Blender integration. Do not independently normalize every asset. OBJ V is flipped for its bottom-left texture convention. Surface normals should be recalculated on import; original normals and vertex colours remain in the native records (and character sidecars).
+OBJ uses the original right-handed Y-up game coordinates. One recovered soldier is about 19.4 source units tall and an M4 is about 8.86 units long; the established Blender/Godot conversion is 0.1 metres per source unit. Do not independently normalize every asset. OBJ V is flipped for its bottom-left texture convention. Surface normals should be recalculated on import; original normals and vertex colours remain in the native records (and character sidecars).
 
 The MTL provides base-colour texture links. The PS2's blending, alpha test, vertex lighting, animated material effects, billboards and LOD/state selection need explicit handling in the next pipeline stage. A model with an unresolved texture is marked in the catalogue and validation report. A cross-context texture is used only when every recovered PNG of that exact name has identical bytes; ambiguous alternatives remain unresolved.
 
@@ -92,6 +92,6 @@ Archive layout was also cross-checked with [SOCOM Archives Manager](https://gith
 
 ## Blender and Godot pilot
 
-The [pilot](PILOT.md) imports an M4 and a Crossroads section with collision. The [character collection](CHARACTERS.md) extends it to all 202 distinct rigged character variants and 402 distinct motion clips, including a retarget to the player's 19-bone rig. In Recovery Lab, **Tab** opens the searchable comparison browser. Sources are saved in `art/blender/` and exported through `tools/dev blender` to `art/models/`.
+The [pilot](PILOT.md) imports an M4 and a Crossroads section with collision. The [character collection](CHARACTERS.md) extends it to all 202 distinct rigged character variants and 402 distinct motion clips, with the original 26-part rigs now used by the playable characters. In Recovery Lab, **Tab** opens the searchable comparison browser. Sources are saved in `art/blender/` and exported through `tools/dev blender` to `art/models/`. Start new integration work from the [agent asset handoff](../../docs/ASSET_RECOVERY_HANDOFF.md); it records the runtime architecture, validation requirements and remaining asset batches.
 
 `preview_obj.py` is an optional software render for extraction QA. It needs Pillow and NumPy, and displays only source geometry/base-colour textures; it is not a Godot rendering comparison.

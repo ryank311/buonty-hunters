@@ -14,3 +14,6 @@
 
 previous/
 
+# Python recovery tool caches
+__pycache__/
+*.pyc

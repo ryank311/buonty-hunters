@@ -2,6 +2,8 @@
 
 This plan implements the [design](DESIGN.md) in small, testable stages. Its immediate goal is **M0: a soldier that can reliably navigate a readable town graybox**. Everything below is proposed work unless identified as an observed repository fact.
 
+Current asset work is tracked in [ASSET_RECOVERY_HANDOFF.md](ASSET_RECOVERY_HANDOFF.md). Recovered original characters and native locomotion have replaced the prototype player model; weapon, prop, level and action integration should follow that handoff. The staged plan below remains the broader gameplay roadmap.
+
 **Implementation update — October 3, 2026:** the first runnable traversal prototype now exists, with both levels, stances, camera clearance, live tuning, and limited practice shooting. The October 2 inventory below records the starting state. Read [PLAYTEST.md](PLAYTEST.md) and the repository README for the current build. Automated physics checks cover the implemented fundamentals; visual and device checks are still required to complete M0.
 
 ## Current project

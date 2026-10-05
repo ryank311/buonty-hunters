@@ -1,4 +1,14 @@
-# First playable review
+# Playtest notes
+
+## Current recovered-character pass — October 5, 2026
+
+The player now uses the original recovered characters and native full-body motion. Use **[ / ]** to switch, or **Cmd+1 / F1 → Recovery Lab → Tab → Use selected character for player**. Compare `seal_run` in the Lab and while running at different view pitches: the torso should keep the source pose. Jump from rest and while moving; inspect takeoff, apex and landing. Run and hold C through the dive: it must lower into prone without snapping upright. Then try crouch/crawl, side dives, weapons, respawn and switching levels with another character selected.
+
+The native motion regression covers run fidelity, jump/landing timing and low dive recovery. The collection suite checks 202 models, 402 clips, selection and switching. Archive-derived fidelity checks cover representative rigs; the extended local audit covers 1,421 poses. See [the asset handoff](ASSET_RECOVERY_HANDOFF.md) and [character guide](../tools/recovery/CHARACTERS.md) for current architecture, rebuild steps and remaining animation/weapon work.
+
+The October 3 notes and images below describe the retired procedural model. Their controller/camera/combat observations remain useful, but their joint poses, foot planting, grips and visual test counts do not describe the recovered models. Many legacy tests still inspect hidden proxy joints; use the native suites and rendered inspection for the visible character.
+
+## Historical first playable review
 
 October 3, 2026. This is an offline movement and aiming graybox for testing the design's fundamentals. Open `project.godot` in Godot 4.7 and press F5. The original low-poly soldier and muted environment are placeholders for judging silhouette, scale, and camera position; final character animation and PS2-style environment art come later.
 

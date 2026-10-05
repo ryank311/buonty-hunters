@@ -184,17 +184,18 @@ func receive(slot: int, taken: WeaponProfile, loaded: int, spare: int) -> void:
 	player.message.emit("Took %s • %d loaded / %d reserve" % [taken.display_name, loaded, spare])
 
 func _show_weapon() -> void:
-	# The soldier has two stand-in meshes; other weapons borrow and stretch them until
-	# they have models of their own. Equipment is held as a small ball in the hand.
+	# Recovered weapons keep their source dimensions and native attachment transform.
+	# Other long-gun profiles borrow the M4 until their own models are imported.
 	var soldier := player.soldier
 	var firearm := profile.kind == "firearm"
 	var long_gun := profile.hold == "long"
 	soldier.set_weapon(0 if long_gun else 1)
 	soldier.rifle_mesh.visible = firearm and long_gun
 	soldier.pistol_mesh.visible = firearm and not long_gun
-	soldier.rifle_mesh.scale = profile.visual_scale if long_gun else Vector3.ONE
-	soldier.pistol_mesh.scale = Vector3.ONE if long_gun else profile.visual_scale
-	soldier.muzzle.position.z = -profile.muzzle_length
+	if soldier.soldier_skin == null:
+		soldier.rifle_mesh.scale = profile.visual_scale if long_gun else Vector3.ONE
+		soldier.pistol_mesh.scale = Vector3.ONE if long_gun else profile.visual_scale
+		soldier.muzzle.position.z = -profile.muzzle_length
 	held_item.visible = not firearm and ammo > 0
 	if not firearm:
 		item_paint.albedo_color = ITEM_COLOURS.get(profile.kind, Color.DIM_GRAY)

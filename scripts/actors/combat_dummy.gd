@@ -145,8 +145,9 @@ func swap_weapon(slot: int, incoming: Dictionary) -> Dictionary:
 func _show_weapon() -> void:
 	var primary: WeaponProfile = carried[0].profile
 	soldier.set_weapon(0 if primary.hold == "long" else 1)
-	soldier.rifle_mesh.scale = primary.visual_scale if primary.hold == "long" else Vector3.ONE
-	soldier.pistol_mesh.scale = primary.visual_scale if primary.hold == "pistol" else Vector3.ONE
+	if soldier.soldier_skin == null:
+		soldier.rifle_mesh.scale = primary.visual_scale if primary.hold == "long" else Vector3.ONE
+		soldier.pistol_mesh.scale = primary.visual_scale if primary.hold == "pistol" else Vector3.ONE
 
 func _tint() -> void:
 	var tint: Color = TEAM_TINT.get(team, Color.GRAY)
