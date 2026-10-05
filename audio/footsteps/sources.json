@@ -1,0 +1,108 @@
+{
+  "source": "previous/recovery/native/audio/disc/BNKSTORE.ZAR-06e793c85d/00001-M51_am.bnk.bin",
+  "sha256": "1af29f5688123a13f15d7620ee47aec9967824c905ae99bdefa45be840537a67",
+  "decoder": "previous/recovery/research/socom-unzipped/web/redotcom/packages/sound/src",
+  "recipe": "tools/recovery/prepare_footsteps.ts",
+  "note": "Stone surface only. Walk uses STEALTH; jog uses STEP; sprint adapts STEP down one semitone with extra low impact. Runtime supplies gait volume and contact timing.",
+  "outputs": [
+    {
+      "file": "walk_1.wav",
+      "sound": ".STEALTH_STONE",
+      "choice": 0.1,
+      "sampleOffsets": [
+        525072
+      ],
+      "seconds": 0.672125,
+      "peak": 0.85,
+      "rms": 0.08492318405611078
+    },
+    {
+      "file": "walk_2.wav",
+      "sound": ".STEALTH_STONE",
+      "choice": 0.5,
+      "sampleOffsets": [
+        525072
+      ],
+      "seconds": 0.6571458333333333,
+      "peak": 0.85,
+      "rms": 0.08494505000203727
+    },
+    {
+      "file": "walk_3.wav",
+      "sound": ".STEALTH_STONE",
+      "choice": 0.9,
+      "sampleOffsets": [
+        525072
+      ],
+      "seconds": 0.6423541666666667,
+      "peak": 0.85,
+      "rms": 0.08459166476676708
+    },
+    {
+      "file": "jog_1.wav",
+      "sound": ".STEP_STONE",
+      "choice": 0.1,
+      "sampleOffsets": [
+        513520
+      ],
+      "seconds": 0.6583958333333333,
+      "peak": 0.8500000000000001,
+      "rms": 0.04684554219903676
+    },
+    {
+      "file": "jog_2.wav",
+      "sound": ".STEP_STONE",
+      "choice": 0.5,
+      "sampleOffsets": [
+        530976
+      ],
+      "seconds": 0.5833333333333334,
+      "peak": 0.85,
+      "rms": 0.08512060646547802
+    },
+    {
+      "file": "jog_3.wav",
+      "sound": ".STEP_STONE",
+      "choice": 0.9,
+      "sampleOffsets": [
+        513520
+      ],
+      "seconds": 0.6172708333333333,
+      "peak": 0.85,
+      "rms": 0.04684768351983005
+    },
+    {
+      "file": "sprint_1.wav",
+      "sound": ".STEP_STONE",
+      "choice": 0.1,
+      "sampleOffsets": [
+        513520
+      ],
+      "seconds": 0.6974583333333333,
+      "peak": 0.85,
+      "rms": 0.052466493337191715
+    },
+    {
+      "file": "sprint_2.wav",
+      "sound": ".STEP_STONE",
+      "choice": 0.5,
+      "sampleOffsets": [
+        530976
+      ],
+      "seconds": 0.61775,
+      "peak": 0.7783008246979353,
+      "rms": 0.09
+    },
+    {
+      "file": "sprint_3.wav",
+      "sound": ".STEP_STONE",
+      "choice": 0.9,
+      "sampleOffsets": [
+        513520
+      ],
+      "seconds": 0.6539375,
+      "peak": 0.85,
+      "rms": 0.0527510949867061
+    }
+  ]
+}

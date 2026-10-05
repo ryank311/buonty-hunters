@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1")
+recovered_model = "glock18"
 display_name = "MACHINE PISTOL"
 automatic = true
 magazine_size = 18

@@ -4,11 +4,8 @@ extends Node3D
 ## Native motion drives the skin. The proxy supplies controller bookkeeping.
 
 const Library = preload("res://scripts/levels/recovery_library.gd")
+const Guns = preload("res://scripts/combat/recovered_weapons.gd")
 const MODEL := "res://art/models/recovered_char_seal_a_cqb.glb"
-const RIFLE := "res://art/models/recovered_m4.glb"
-# Undo the inspection export's centering, retaining its canonical -Z facing.
-const RIFLE_ORIGIN := Vector3(0, -0.12186501, -0.096025765)
-const RIFLE_MUZZLE := RIFLE_ORIGIN + Vector3(0, 0.216, -0.443055)
 const CARRIERS := {"rthigh": "RThigh", "rcalf": "RShin", "rfoot": "RShin", "rtoe": "RShin", "lthigh": "LThigh", "lcalf": "LShin", "lfoot": "LShin", "ltoe": "LShin", "rbicep": "RUpperArm", "rforearm": "RForearm", "rhand": "RForearm", "lbicep": "LUpperArm", "lforearm": "LForearm", "lhand": "LForearm", "neck": "Head", "head": "Head"}
 var model: Node3D
 var model_path: String = MODEL
@@ -17,6 +14,8 @@ var motion: Node
 var driver: RefCounted
 var bone: Dictionary = {}
 var carried: Array = []
+var weapon_ids := {"long": "", "pistol": ""}
+var weapon_muzzles := {"long": Vector3.ZERO, "pistol": Vector3.ZERO}
 
 static func wear(proxy: SoldierProxy) -> SoldierSkin:
 	var skin := SoldierSkin.new()
@@ -25,13 +24,26 @@ static func wear(proxy: SoldierProxy) -> SoldierSkin:
 	skin.set_model_path(MODEL)
 	for part: MeshInstance3D in proxy.parts.values():
 		part.hide()
-	for old: Node in proxy.rifle_mesh.get_children():
-		old.free()
-	var rifle := load(RIFLE).instantiate() as Node3D
-	rifle.position = RIFLE_ORIGIN
-	prepare_materials(rifle)
-	proxy.rifle_mesh.add_child(rifle)
+	skin.set_weapon_model(proxy, "m4acarbine", "long")
+	skin.set_weapon_model(proxy, "baretta_m9", "pistol")
 	return skin
+
+func set_weapon_model(proxy: SoldierProxy, id: String, hold: String) -> void:
+	if id.is_empty():
+		id = "baretta_m9" if hold == "pistol" else "m4acarbine"
+	if weapon_ids[hold] == id:
+		return
+	var entry := Guns.find(id)
+	if entry.is_empty() or entry.hold != hold:
+		return
+	var carrier: Node3D = proxy.pistol_mesh if hold == "pistol" else proxy.rifle_mesh
+	for child: Node in carrier.get_children():
+		child.free()
+	var gun := load(entry.path).instantiate() as Node3D
+	prepare_materials(gun)
+	carrier.add_child(gun)
+	weapon_ids[hold] = id
+	weapon_muzzles[hold] = Guns.vector(entry.muzzle)
 
 func set_model_path(path: String) -> void:
 	if model != null:
@@ -77,11 +89,15 @@ func place_weapon(proxy: SoldierProxy, clip: String, seconds: float, socket: Var
 	var local := proxy.weapon_pivot.transform.affine_inverse() * canonical
 	if proxy.weapon_slot == 0:
 		proxy.rifle_mesh.transform = local
-		proxy.muzzle.transform = local * Transform3D(Basis.IDENTITY, RIFLE_MUZZLE)
+		proxy.muzzle.transform = local * Transform3D(Basis.IDENTITY, weapon_muzzles.long)
 	else:
 		proxy.pistol_mesh.transform = local
-		proxy.muzzle.transform = local * Transform3D(Basis.IDENTITY, Vector3(0, 0.015, -0.26))
+		proxy.muzzle.transform = local * Transform3D(Basis.IDENTITY, weapon_muzzles.pistol)
 	var weapon: Node = proxy.get_parent().get_node_or_null("Weapon")
+	if weapon != null and not weapon.profiles.is_empty():
+		proxy.rifle_mesh.visible = weapon.profile.kind == "firearm" and weapon.profile.hold == "long"
+		proxy.pistol_mesh.visible = weapon.profile.kind == "firearm" and weapon.profile.hold == "pistol"
+		driver.swap.show_weapons(self, proxy, weapon)
 	if weapon != null and weapon.held_item.visible:
 		var hand: Transform3D = motion.native_worlds[motion.rig.names.find("rhand")]
 		weapon.held_item.transform = proxy.weapon_pivot.transform.affine_inverse() * hand

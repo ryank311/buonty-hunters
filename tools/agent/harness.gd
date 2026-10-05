@@ -70,7 +70,7 @@ static func scenario(tree: SceneTree, title: String, overrides: Dictionary = {})
 	return await apply(tree, spec)
 
 ## Puts the game into the described state and returns state(). Every key is optional:
-##   level "town"|"lab", reload bool      spawn index|name (respawns)
+##   level "town"|"lab"|"recovery"|"map:MP72", reload bool      spawn index|name (respawns)
 ##   reset bool (respawn, refill, default tuning)
 ##   at "Locations/Market" (level node)   pos [x,y,z]
 ##   yaw deg, pitch deg                   look_at [x,y,z] | level node path
@@ -107,10 +107,14 @@ static func apply(tree: SceneTree, spec: Dictionary) -> Dictionary:
 			placed.queue_free()
 	if spec.has("level"):
 		var wanted := str(spec.level)
-		if wanted not in ["town", "lab", "recovery"]:
-			notes.append("unknown level '%s' (town, lab or recovery)" % wanted)
+		if wanted.begins_with("map:"):
+			wanted = "map:" + wanted.substr(4).to_upper()
+		if wanted not in ["town", "lab", "recovery"] and not (wanted.begins_with("map:") and FileAccess.file_exists(RecoveredMap.LEVELS + wanted.substr(4).to_lower() + ".json")):
+			notes.append("unknown level '%s' (town, lab, recovery or map:<id> such as map:MP72)" % wanted)
 		elif wanted != s.current_level or spec.get("reload", false):
-			if wanted == "recovery":
+			if wanted.begins_with("map:"):
+				s.load_map(wanted.substr(4))
+			elif wanted == "recovery":
 				s.load_recovery()
 			else:
 				s.load_level(wanted == "lab")

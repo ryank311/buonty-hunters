@@ -16,7 +16,7 @@ The link is on in any game someone is playing (F5 in the editor, or `tools/dev p
 | **player** | The window the user is playing in, with their saved F1 settings | Read freely. Change what they asked about. Do not teleport, respawn, freeze, or drive it unless the request calls for it, and say what you did. |
 | **sandbox** | A hidden, silent game with default tuning, started by `game_launch` | Yours. Use it to measure, reproduce, and try things without touching the user's game. |
 
-With one game running the tools use it. With both, choose with `game_attach` (`role` or `port`); each answer then ends with the game it came from. `state` reports `window_focused`: false means the user has tabbed away and their game is sitting in its menu.
+With one game running the tools use it. With both, choose with `game_attach` (`role` or `port`); each answer then ends with the game it came from. From a shell, set `SOCOM_LIVE_AGENT=<your name>` on `tools/dev live` commands so your sandboxes are yours alone, and pass `--port` to `call`: several agents share this checkout, and a sandbox two of them drive gives neither a true reading. `state` reports `window_focused`: false means the user has tabbed away and their game is sitting in its menu.
 
 ## The feel loop
 

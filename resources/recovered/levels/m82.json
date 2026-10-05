@@ -1,0 +1,772 @@
+{
+ "id": "M82",
+ "name": "Guided Tour",
+ "mode": "Campaign",
+ "model": "res://art/models/recovered_map_m82.glb",
+ "source": "converted/levels/M82/level.obj",
+ "source_origin": [
+  1520.0,
+  0.0,
+  1760.0
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -148.0,
+   -33.9,
+   -176.0
+  ],
+  [
+   148.0,
+   56.85,
+   176.0
+  ]
+ ],
+ "kill_height": -43.9,
+ "ambience": {
+  "night": true,
+  "ambient": [
+   0.1765,
+   0.1765,
+   0.1961
+  ],
+  "lights": [
+   {
+    "color": [
+     0.1961,
+     0.1961,
+     0.1961
+    ],
+    "direction": [
+     1.0,
+     -0.5,
+     -1.0
+    ]
+   },
+   {
+    "color": [
+     0.0667,
+     0.0667,
+     0.1176
+    ],
+    "direction": [
+     0.31,
+     -0.92,
+     -0.25
+    ]
+   },
+   {
+    "color": [
+     0.098,
+     0.098,
+     0.1176
+    ],
+    "direction": [
+     -0.36,
+     0.74,
+     0.57
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.0392,
+    0.0392,
+    0.0588
+   ],
+   "begin": 5.0,
+   "end": 30.0
+  },
+  "far_clip": 52.0
+ },
+ "sky": {
+  "triangles": 86,
+  "source": "level",
+  "radius": 215.41,
+  "height": [
+   19.12,
+   19.12
+  ]
+ },
+ "spawns": [
+  {
+   "name": "Map centre",
+   "source": [
+    1262.65625,
+    21.330276489257812,
+    1574.1820882161458
+   ],
+   "position": [
+    -25.734,
+    2.133,
+    -18.582
+   ],
+   "facing": [
+    -0.383,
+    0.924
+   ]
+  },
+  {
+   "name": "Map centre 2",
+   "source": [
+    1224.0192464192708,
+    21.146747589111328,
+    1422.3527018229167
+   ],
+   "position": [
+    -29.598,
+    2.115,
+    -33.765
+   ],
+   "facing": [
+    0.383,
+    0.924
+   ]
+  },
+  {
+   "name": "Map centre 3",
+   "source": [
+    995.5398559570312,
+    -266.48052978515625,
+    1712.7098388671875
+   ],
+   "position": [
+    -52.446,
+    -26.648,
+    -4.729
+   ],
+   "facing": [
+    1.0,
+    -0.0
+   ]
+  }
+ ],
+ "materials": {
+  "floor_oil256": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/floor_oil256.tif.png"
+  },
+  "m82_snow": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m82_snow.tif.png"
+  },
+  "a_steel18": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/a_steel18.tif.png"
+  },
+  "tex_secmon": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_secmon.tif.png"
+  },
+  "barrel02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/barrel02.tif.png"
+  },
+  "spikebush": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/spikebush.tif.png"
+  },
+  "steeldeckstructure": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/steeldeckstructure.tif.png"
+  },
+  "leather": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/leather.tif.png"
+  },
+  "subpen_wood": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/subpen_wood.tif.png"
+  },
+  "m81truck_trailer": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/TM82_TXR-20dac8702e-79c826f0/m81truck_trailer.tif.png"
+  },
+  "m81truckwheel": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/TM82_TXR-20dac8702e-79c826f0/m81truckwheel.tif.png"
+  },
+  "m81truck_grill": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/TM82_TXR-20dac8702e-79c826f0/m81truck_grill.tif.png"
+  },
+  "m81truck_cabside": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/TM82_TXR-20dac8702e-79c826f0/m81truck_cabside.tif.png"
+  },
+  "m81truck_light": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/TM82_TXR-20dac8702e-79c826f0/m81truck_light.tif.png"
+  },
+  "sign_northstar": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/sign_northstar.tif.png"
+  },
+  "cement": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/cement.tif.png"
+  },
+  "gen_window": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/gen_window.tif.png"
+  },
+  "shadow_rectangular": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/shadow_rectangular.tif.png"
+  },
+  "floor1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/floor1.tif.png"
+  },
+  "wall_metal01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/wall_metal01.tif.png"
+  },
+  "wall_corigate": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/wall_corigate.tif.png"
+  },
+  "garage_door": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/garage_door.tif.png"
+  },
+  "framing": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/framing.tif.png"
+  },
+  "shiny_dentedmetal": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/shiny_dentedmetal.tif.png"
+  },
+  "subpen_light": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/subpen_light.tif.png"
+  },
+  "m82_grate_trans": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m82_grate_trans.tif.png"
+  },
+  "m82_snowyroad": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m82_snowyroad.TIF.png"
+  },
+  "interior_ceiling": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/interior_ceiling.tif.png"
+  },
+  "metal_siding1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/metal_siding1.tif.png"
+  },
+  "icicles": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/icicles.tif.png"
+  },
+  "tex_alarm": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_alarm.tif.png"
+  },
+  "tex_alarmpull": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/VM82_TXR-f3630359ca-23cea32b/tex_alarmpull.tif.png"
+  },
+  "roadcement1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/roadcement1.tif.png"
+  },
+  "interiorwall": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/interiorwall.tif.png"
+  },
+  "subpen_cement": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/subpen_cement.tif.png"
+  },
+  "lightbeam_rectangular": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/lightbeam_rectangular.tif.png"
+  },
+  "subpen_framework": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/subpen_framework.tif.png"
+  },
+  "rock": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/rock.tif.png"
+  },
+  "flare_red": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/flare_red.tif.png"
+  },
+  "door": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/door.tif.png"
+  },
+  "tex_palette": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_palette.tif.png"
+  },
+  "sign_caution": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/sign_caution.tif.png"
+  },
+  "tex_uraniumcask": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_uraniumcask.tif.png"
+  },
+  "light_siren_orange": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/light_siren_orange.tif.png"
+  },
+  "flare_orange": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/flare_orange.tif.png"
+  },
+  "m82_pipejoint1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m82_pipejoint1.tif.png"
+  },
+  "m82_cloudlayer": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/TM82_TXR-20dac8702e-79c826f0/m82_cloudlayer.tif.png"
+  },
+  "notepaper": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/notepaper.tif.png"
+  },
+  "null_xmas": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/JUNK_TXR-3c84199ff9-direct/null_xmas.bmp.png"
+  },
+  "tex_computer4": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_computer4.tif.png"
+  },
+  "tex_computer3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_computer3.tif.png"
+  },
+  "sign_silo1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/sign_silo1.tif.png"
+  },
+  "sign_silo2": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/sign_silo2.tif.png"
+  },
+  "sign_exitleft": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/sign_exitleft.tif.png"
+  },
+  "sign_exitright1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/sign_exitright1.tif.png"
+  },
+  "m82_metalc1b": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/VM82_TXR-f3630359ca-23cea32b/m82_metalc1b.tif.png"
+  },
+  "m82_concflr1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/VM82_TXR-f3630359ca-23cea32b/m82_concflr1.tif.png"
+  },
+  "m82_drain": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/VM82_TXR-f3630359ca-23cea32b/m82_drain.tif.png"
+  },
+  "pipe_rusty": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/pipe_rusty.tif.png"
+  },
+  "white_smooth": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/white_smooth.tif.png"
+  },
+  "m82_ustrut": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m82_ustrut.tif.png"
+  },
+  "m82_concbroken": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m82_concbroken.tif.png"
+  },
+  "m82_flolight": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/VM82_TXR-f3630359ca-23cea32b/m82_flolight.tif.png"
+  },
+  "m82_blastdoor": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m82_blastdoor.tif.png"
+  },
+  "m82_blastdoorh": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m82_blastdoorh.tif.png"
+  },
+  "sign_exitright": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/sign_exitright.tif.png"
+  },
+  "sign_exitleft1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/sign_exitleft1.tif.png"
+  },
+  "m82_dplate": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/VM82_TXR-f3630359ca-23cea32b/m82_dplate.tif.png"
+  },
+  "m82_concwall": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/VM82_TXR-f3630359ca-23cea32b/m82_concwall.tif.png"
+  },
+  "m82_ibeamplate": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m82_ibeamplate.tif.png"
+  },
+  "ice": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/ice.tif.png"
+  },
+  "tex_pipewheel": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_pipewheel.tif.png"
+  },
+  "m82_clipboard": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m82_clipboard.tif.png"
+  },
+  "m82_pipe": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m82_pipe.tif.png"
+  },
+  "tex_vent": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_vent.tif.png"
+  },
+  "m82_airduct": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/VM82_TXR-f3630359ca-23cea32b/m82_airduct.tif.png"
+  },
+  "m82_airductg": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m82_airductg.tif.png"
+  },
+  "shadow_pipes": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/shadow_pipes.tif.png"
+  },
+  "sign_nosmoking": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/sign_nosmoking.tif.png"
+  },
+  "sign_stairs": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/sign_stairs.tif.png"
+  },
+  "waterdrips": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/waterdrips.tif.png"
+  },
+  "chainlink": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/TM82_TXR-20dac8702e-79c826f0/chainlink.tif.png"
+  },
+  "tile_floor": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tile_floor.tif.png"
+  },
+  "monitor_screen": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/monitor_screen.tif.png"
+  },
+  "h_grate": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/h-grate.tif.png"
+  },
+  "tex_fan": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/M82/VM82_TXR-f3630359ca-23cea32b/tex_fan.tif.png"
+  },
+  "tex_mtldoor": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_mtldoor.tif.png"
+  },
+  "firtreebark": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/firtreebark.tif.png"
+  },
+  "snowytreelimb01": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/snowytreelimb01.tif.png"
+  },
+  "snowycedar_branch": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/snowycedar_branch.tif.png"
+  },
+  "birchbark": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/birchbark.tif.png"
+  },
+  "pipe_yellow_crusty": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/pipe_yellow_crusty.tif.png"
+  },
+  "pipe_swirl_rusty": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/pipe_swirl_rusty.tif.png"
+  },
+  "tank_green": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tank_green.tif.png"
+  },
+  "m81truck_canvas": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/m81truck_canvas.tif.png"
+  },
+  "tex_computercol": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_computercol.tif.png"
+  },
+  "tex_computer5": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_computer5.tif.png"
+  },
+  "tex_computer1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_computer1.tif.png"
+  },
+  "barrel01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/barrel01.tif.png"
+  },
+  "tex_crate1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_crate1.tif.png"
+  },
+  "tex_crate2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_crate2.tif.png"
+  },
+  "tex_computer2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_computer2.tif.png"
+  },
+  "tex_computerspkr": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/M82/M82_TXR-bbd673bd5c-3948b09e/tex_computerspkr.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 273969,
+  "sky_triangles": 86,
+  "collision_triangles": 12083,
+  "dropped_faces": 142,
+  "skipped_collision_polygons": 86
+ }
+}

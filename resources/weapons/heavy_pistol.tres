@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1")
+recovered_model = "desert_eagle"
 display_name = "HEAVY PISTOL"
 automatic = false
 magazine_size = 7

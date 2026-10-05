@@ -1,0 +1,304 @@
+{
+ "id": "MP64",
+ "name": "Shadow Falls",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp64.glb",
+ "source": "converted/levels/MP64/level.obj",
+ "source_origin": [
+  988.21875,
+  0.0,
+  1517.34375
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -158.72,
+   -6.5,
+   -195.0
+  ],
+  [
+   158.72,
+   71.21,
+   195.0
+  ]
+ ],
+ "kill_height": -16.5,
+ "ambience": {
+  "night": true,
+  "ambient": [
+   0.0745,
+   0.0784,
+   0.0863
+  ],
+  "lights": [
+   {
+    "color": [
+     0.3137,
+     0.3137,
+     0.3137
+    ],
+    "direction": [
+     1.0,
+     -0.5,
+     -1.0
+    ]
+   },
+   {
+    "color": [
+     0.2353,
+     0.2353,
+     0.2353
+    ],
+    "direction": [
+     0.31,
+     -0.92,
+     -0.25
+    ]
+   },
+   {
+    "color": [
+     0.0392,
+     0.0392,
+     0.0392
+    ],
+    "direction": [
+     -0.36,
+     0.74,
+     0.57
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.0745,
+    0.0784,
+    0.0863
+   ],
+   "begin": 10.0,
+   "end": 60.0
+  },
+  "far_clip": 120.0
+ },
+ "sky": {
+  "triangles": 80,
+  "source": "level",
+  "radius": 270.94,
+  "height": [
+   5.93,
+   124.56
+  ]
+ },
+ "spawns": [
+  {
+   "name": "The Falls",
+   "source": [
+    1552.0,
+    9.320938110351562,
+    1560.0
+   ],
+   "position": [
+    56.378,
+    0.932,
+    4.266
+   ],
+   "facing": [
+    0.383,
+    0.924
+   ]
+  },
+  {
+   "name": "Map centre",
+   "source": [
+    964.8562825520834,
+    10.0,
+    1774.8348795572917
+   ],
+   "position": [
+    -2.336,
+    1.0,
+    25.749
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "name": "Map centre 2",
+   "source": [
+    948.3628336588541,
+    18.436917622884113,
+    1503.79248046875
+   ],
+   "position": [
+    -3.986,
+    1.844,
+    -1.355
+   ],
+   "facing": [
+    0.0,
+    1.0
+   ]
+  }
+ ],
+ "materials": {
+  "mp64_skycap": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/mp64_skycap.tif.png"
+  },
+  "hut03_moss02": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/hut03_moss02.tif.png"
+  },
+  "mp64_dirt": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/mp64_dirt.tif.png"
+  },
+  "shrub_backdrop": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/shrub_backdrop.tif.png"
+  },
+  "congo3r_woodboards": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/congo3r_woodboards.tif.png"
+  },
+  "camo_net": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/camo_net.tif.png"
+  },
+  "treetrunk": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/treetrunk.tif.png"
+  },
+  "rope": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/rope.tif.png"
+  },
+  "sandbags01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/sandbags01.tif.png"
+  },
+  "cave_ceiling": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP64/VP64_TXR-735d9e4b30-389940a5/cave_ceiling.tif.png"
+  },
+  "congo_reed": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/congo_reed.tif.png"
+  },
+  "leaf": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/leaf.tif.png"
+  },
+  "tree_trunk01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/tree_trunk01.tif.png"
+  },
+  "fernfrond": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/fernfrond.tif.png"
+  },
+  "fernfrond2": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/fernfrond2.tif.png"
+  },
+  "leaf2": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/leaf2.tif.png"
+  },
+  "lilypad": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/lilypad.tif.png"
+  },
+  "leaves1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/leaves1.tif.png"
+  },
+  "treeshrub2": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/treeshrub2.tif.png"
+  },
+  "treeshrub": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/treeshrub.tif.png"
+  },
+  "congo_water_clear": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/congo_water_clear.tif.png"
+  },
+  "congo3r_ground1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/congo3r_ground1.tif.png"
+  },
+  "mp64_riverbed1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/mp64_riverbed1.tif.png"
+  },
+  "ground_rock_trans": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/ground_rock_trans.tif.png"
+  },
+  "mp64_dirtpath": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP64/MP64_TXR-422998649a-33ae198c/mp64_dirtpath.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 83308,
+  "sky_triangles": 80,
+  "collision_triangles": 12142,
+  "dropped_faces": 0,
+  "skipped_collision_polygons": 663
+ }
+}

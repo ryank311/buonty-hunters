@@ -327,7 +327,7 @@ func _build_menu() -> void:
 	_label(menu_box, "Paused · LB / RB change page · ↑ / ↓ select · ← / → adjust · A confirm · B back", Vector2.ZERO, 13, MUTED)
 	var tabs := HBoxContainer.new()
 	menu_box.add_child(tabs)
-	for title: String in ["Movement", "Camera", "Controller", "Rifle recoil", "Pistol recoil", "Accuracy"]:
+	for title: String in ["Movement", "Camera", "Controller", "Rifle recoil", "Pistol recoil", "Accuracy", "Maps"]:
 		var index := page_buttons.size()
 		page_buttons.append(_button(tabs, title, func() -> void: show_page(index)))
 	_page("Grounded movement")
@@ -370,6 +370,7 @@ func _build_menu() -> void:
 		_slider(prefix + "/walk_spread", prefix.capitalize() + " walking spread (°)", 0.0, 2.5, 0.05)
 		_slider(prefix + "/run_spread", prefix.capitalize() + " running spread (°)", 2.5, 10.0, 0.1)
 		_slider(prefix + "/max_bloom", prefix.capitalize() + " maximum shot bloom (°)", 0.5, 6.0, 0.1)
+	_build_map_page()
 	var row := HBoxContainer.new()
 	menu_box.add_child(row)
 	common_controls.append(_button(row, "Resume / Start", func() -> void: session.set_modal(false)))
@@ -383,9 +384,33 @@ func _build_menu() -> void:
 	common_controls.append(_button(bottom, "Choose class", func() -> void: session.set_modal(false); session.player.weapon.director.open_class_menu()))
 	common_controls.append(_button(bottom, "Restore all defaults", func() -> void: session.reset_tuning()))
 	common_controls.append(_button(bottom, "Quit", func() -> void: session._save_settings(); get_tree().quit()))
-	_label(menu_box, "C / B: tap crouch · hold prone · hold while running forward to dive\nX / R reload · D-pad ← rifle / → pistol / ↑ spawn / ↓ reset · L3 / Shift walk", Vector2.ZERO, 13, MUTED)
+	_label(menu_box, "C / B: tap crouch · hold prone · hold while running forward to dive\nX / R reload · D-pad ← rifle / → pistol / ↑ spawn / ↓ reset · Stick: walk → jog → sprint · Shift walk", Vector2.ZERO, 13, MUTED)
 	show_page(0, false)
 	refresh_settings()
+
+## Recovered disc maps installed by tools/recovery/prepare_level.py.
+func _build_map_page() -> void:
+	_page("Recovered maps · original geometry, sky, lighting and fog")
+	var scroll := ScrollContainer.new()
+	slider_parent.add_child(scroll)
+	scroll.custom_minimum_size = Vector2(0, 222)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.follow_focus = true
+	var grid := GridContainer.new()
+	scroll.add_child(grid)
+	grid.columns = 3
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var maps := RecoveredMap.catalogue()
+	if maps.is_empty():
+		_label(grid, "No recovered maps installed yet", Vector2.ZERO, 14, MUTED)
+	for entry: Dictionary in maps:
+		var id: String = entry.id
+		var button := _button(grid, "%s · %s" % [entry.name, "MP" if entry.mode == "Multiplayer" else "Campaign"], func() -> void: session.load_map(id); session.set_modal(false))
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.custom_minimum_size.y = 30
+		button.add_theme_font_size_override("font_size", 13)
+		button.tooltip_text = "%s · %s" % [id, entry.mode]
+		page_controls.back().append(button)
 
 func _settings_for(key: String) -> Resource:
 	if "/" in key:

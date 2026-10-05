@@ -1,0 +1,495 @@
+{
+ "id": "MP2",
+ "name": "Frostfire",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp2.glb",
+ "source": "converted/levels/MP2/level.obj",
+ "source_origin": [
+  941.125,
+  0.0,
+  832.84375
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -361.06,
+   -28.36,
+   -361.06
+  ],
+  [
+   361.06,
+   47.97,
+   361.06
+  ]
+ ],
+ "kill_height": -38.36,
+ "ambience": {
+  "night": false,
+  "ambient": [
+   0.0588,
+   0.0588,
+   0.0667
+  ],
+  "lights": [
+   {
+    "color": [
+     0.6275,
+     0.6275,
+     0.6392
+    ],
+    "direction": [
+     -0.81,
+     -0.2,
+     0.55
+    ]
+   },
+   {
+    "color": [
+     0.4078,
+     0.4078,
+     0.4196
+    ],
+    "direction": [
+     0.42,
+     0.74,
+     -0.53
+    ]
+   },
+   {
+    "color": [
+     0.0275,
+     0.0275,
+     0.0275
+    ],
+    "direction": [
+     -0.35,
+     -0.83,
+     0.43
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.0275,
+    0.0275,
+    0.0471
+   ],
+   "begin": 20.0,
+   "end": 64.0
+  },
+  "far_clip": 64.0
+ },
+ "sky": {
+  "triangles": 132,
+  "source": "level",
+  "radius": 361.06,
+  "height": [
+   -28.36,
+   144.27
+  ]
+ },
+ "spawns": [
+  {
+   "name": "SEAL Start",
+   "source": [
+    979.0,
+    160.0,
+    689.0
+   ],
+   "position": [
+    3.788,
+    16.0,
+    -14.384
+   ],
+   "facing": [
+    0.383,
+    0.924
+   ]
+  },
+  {
+   "name": "Warehouse",
+   "source": [
+    948.0,
+    100.0,
+    752.0
+   ],
+   "position": [
+    0.688,
+    10.0,
+    -8.084
+   ],
+   "facing": [
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "name": "Catwalks",
+   "source": [
+    462.0,
+    100.0,
+    521.0
+   ],
+   "position": [
+    -47.912,
+    10.0,
+    -31.184
+   ],
+   "facing": [
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "name": "Terrorist Start",
+   "source": [
+    673.0,
+    100.0,
+    1256.0
+   ],
+   "position": [
+    -26.812,
+    10.0,
+    42.316
+   ],
+   "facing": [
+    0.383,
+    -0.924
+   ]
+  }
+ ],
+ "materials": {
+  "cuba1a_sky01": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/cuba1a_sky01.tif.png"
+  },
+  "a_water": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_water.tif.png"
+  },
+  "a_steel23": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_steel23.tif.png"
+  },
+  "a_brushed_metal": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_brushed_metal.tif.png"
+  },
+  "door": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/door.tif.png"
+  },
+  "interiorwall": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/interiorwall.tif.png"
+  },
+  "floortile": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/floortile.tif.png"
+  },
+  "a_ceiling": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_ceiling.tif.png"
+  },
+  "wall_metal01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/wall_metal01.tif.png"
+  },
+  "tunnel_botm": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/tunnel_botm.tif.png"
+  },
+  "wall_galvanized": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/wall_galvanized.tif.png"
+  },
+  "monitor_01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/monitor_01.tif.png"
+  },
+  "wallsidingdull": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/wallsidingdull.tif.png"
+  },
+  "monitor_02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/monitor_02.tif.png"
+  },
+  "monitor_03": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/monitor_03.tif.png"
+  },
+  "monitor_04": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/monitor_04.tif.png"
+  },
+  "a_steel26": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_steel26.tif.png"
+  },
+  "a_shadow": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_shadow.tif.png"
+  },
+  "h_grate_low": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/h-grate_low.tif.png"
+  },
+  "a_iron": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_iron.tif.png"
+  },
+  "metal_siding1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/metal_siding1.tif.png"
+  },
+  "trestlegirder": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/trestlegirder.tif.png"
+  },
+  "lightDark": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/lightDark.tif.png"
+  },
+  "floor_oilgrime": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/floor_oilgrime.tif.png"
+  },
+  "lightpole01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/lightpole01.tif.png"
+  },
+  "a_concrete01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_concrete01.tif.png"
+  },
+  "tunnel_top": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/tunnel_top.tif.png"
+  },
+  "light_tunnel": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/light_tunnel.tif.png"
+  },
+  "lightrays": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/lightrays.tif.png"
+  },
+  "valve_cover1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/valve_cover1.tif.png"
+  },
+  "tunnel_top_red": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/tunnel_top_red.tif.png"
+  },
+  "tunnel_botm_red": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/tunnel_botm_red.tif.png"
+  },
+  "pipe_swirl_rusty": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/pipe_swirl_rusty.tif.png"
+  },
+  "lightglow01": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/lightglow01.tif.png"
+  },
+  "steeldeckstructure": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/steeldeckstructure.tif.png"
+  },
+  "lightglow02": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/lightglow02.tif.png"
+  },
+  "a_steel20": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_steel20.tif.png"
+  },
+  "a_brushed_metal02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_brushed_metal02.tif.png"
+  },
+  "tank_green": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/tank_green.tif.png"
+  },
+  "crane4": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/crane4.tif.png"
+  },
+  "crane5": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/crane5.tif.png"
+  },
+  "a_window": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_window.tif.png"
+  },
+  "red_white": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/red_white.tif.png"
+  },
+  "container_door1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/container_door1.tif.png"
+  },
+  "barrel": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/barrel.tif.png"
+  },
+  "vent1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/vent1.tif.png"
+  },
+  "barrel_top": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/barrel_top.tif.png"
+  },
+  "a_cieling_light": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_cieling_light.tif.png"
+  },
+  "pipe_bolts": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/pipe_bolts.tif.png"
+  },
+  "sign04": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/sign04.tif.png"
+  },
+  "sign_25": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/sign_25.tif.png"
+  },
+  "a_dumpster": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/a_dumpster.tif.png"
+  },
+  "crane1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/crane1.tif.png"
+  },
+  "h_grate": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP2/MP2_TXR-9b1595e664-4aa57fed/h-grate.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 16410,
+  "sky_triangles": 132,
+  "collision_triangles": 4906,
+  "dropped_faces": 0,
+  "skipped_collision_polygons": 19
+ }
+}

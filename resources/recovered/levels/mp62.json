@@ -1,0 +1,328 @@
+{
+ "id": "MP62",
+ "name": "Enowapi",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp62.glb",
+ "source": "converted/levels/MP62/level.obj",
+ "source_origin": [
+  1677.5,
+  0.0,
+  1440.0
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -151.75,
+   -3.31,
+   -144.0
+  ],
+  [
+   151.75,
+   42.14,
+   144.0
+  ]
+ ],
+ "kill_height": -13.31,
+ "ambience": {
+  "night": false,
+  "ambient": [
+   0.0196,
+   0.0196,
+   0.0275
+  ],
+  "lights": [
+   {
+    "color": [
+     0.4314,
+     0.3373,
+     0.2745
+    ],
+    "direction": [
+     -0.6,
+     -1.0,
+     -0.2
+    ]
+   },
+   {
+    "color": [
+     0.0392,
+     0.0392,
+     0.0784
+    ],
+    "direction": [
+     1.0,
+     -0.3,
+     0.2
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.3922,
+    0.3804,
+    0.3843
+   ],
+   "begin": 3.0,
+   "end": 60.0
+  },
+  "far_clip": 120.0
+ },
+ "sky": {
+  "triangles": 68,
+  "source": "level",
+  "radius": 376.52,
+  "height": [
+   216.18,
+   332.89
+  ]
+ },
+ "spawns": [
+  {
+   "name": "SEAL Start",
+   "source": [
+    1301.0,
+    -25.124991249903175,
+    808.0
+   ],
+   "position": [
+    -37.65,
+    -2.512,
+    -63.2
+   ],
+   "facing": [
+    -0.383,
+    0.924
+   ]
+  },
+  {
+   "name": "Western Slope",
+   "source": [
+    856.0,
+    15.583362587104048,
+    1525.0
+   ],
+   "position": [
+    -82.15,
+    1.558,
+    8.5
+   ],
+   "facing": [
+    0.707,
+    -0.707
+   ]
+  },
+  {
+   "name": "Map centre",
+   "source": [
+    1616.5230305989583,
+    232.7935791015625,
+    1366.1576334635417
+   ],
+   "position": [
+    -6.098,
+    23.279,
+    -7.384
+   ],
+   "facing": [
+    0.707,
+    0.707
+   ]
+  }
+ ],
+ "materials": {
+  "sky": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/sky.tif.png"
+  },
+  "water": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/water.tif.png"
+  },
+  "lightbulb": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/lightbulb.tif.png"
+  },
+  "cocaine_brick": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/cocaine_brick.tif.png"
+  },
+  "gray": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/gray.tif.png"
+  },
+  "side": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/side.tif.png"
+  },
+  "metalhole": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/metalhole.tif.png"
+  },
+  "palmtrunk01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/palmtrunk01.tif.png"
+  },
+  "leaf2": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/leaf2.tif.png"
+  },
+  "palmtrunk02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/palmtrunk02.tif.png"
+  },
+  "metallight": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/metallight.tif.png"
+  },
+  "rock": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/rock.tif.png"
+  },
+  "chainlink": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/chainlink.tif.png"
+  },
+  "chrome": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/chrome.tif.png"
+  },
+  "f18_low_poly": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/f18_low_poly.tif.png"
+  },
+  "tree_trunk01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/tree_trunk01.tif.png"
+  },
+  "treeshrub": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/treeshrub.tif.png"
+  },
+  "moss": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/moss.tif.png"
+  },
+  "drugfloor": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/drugfloor.tif.png"
+  },
+  "barrel01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/barrel01.tif.png"
+  },
+  "fusebox": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/fusebox.tif.png"
+  },
+  "metalbarrel": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/metalbarrel.tif.png"
+  },
+  "metal_wall02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/metal_wall02.tif.png"
+  },
+  "leaves1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/leaves1.tif.png"
+  },
+  "grass": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/grass.tif.png"
+  },
+  "ground": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/ground.tif.png"
+  },
+  "dirtbed": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/dirtbed.tif.png"
+  },
+  "rockbottom": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/rockbottom.tif.png"
+  },
+  "ground_grass": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/ground_grass.tif.png"
+  },
+  "rockbed": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/rockbed.tif.png"
+  },
+  "camonet": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP62/MP62_TXR-f94069fc0e-aeae8853/camonet.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 65625,
+  "sky_triangles": 68,
+  "collision_triangles": 6916,
+  "dropped_faces": 1221,
+  "skipped_collision_polygons": 550
+ }
+}

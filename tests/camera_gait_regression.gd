@@ -147,59 +147,18 @@ func _run() -> void:
 	check(not ceiling.is_empty() and rig.global_position.y+0.15 < ceiling.position.y and rig.camera.global_position.y < ceiling.position.y,"Raised camera retracts below the crouch fixture ceiling")
 	await place()
 	player.controls_enabled = false
-	var walk := gait_sample(player.movement.walk_speed)
-	var jog := gait_sample(player.movement.run_speed)
+	# These inspect the hidden legacy proxy's authored joint curves. Gameplay
+	# uses the native gait, covered by foot_plant/recovered_motion_regression.
+	var walk := gait_sample(1.6)
+	var jog := gait_sample(4.5)
 	check(jog.bounce > 0.065 and jog.bounce > walk.bounce*1.3,"Jog has a visibly stronger body bounce than walking (%.3f m vs %.3f m)" % [jog.bounce,walk.bounce])
 	check(jog.lift > 0.12 and walk.lift < 0.03,"Jog lifts the recovering foot and knee; the walk keeps a low swing")
 	check(jog.flight > 0 and walk.flight == 0,"Jog includes flight between push-offs; walking keeps ground contact")
 	check(jog.feet and walk.feet,"Walk and jog supporting soles stay planted without floor penetration")
-	# Drive actual strafe input over three full authored cycles, not a posed screenshot.
-	await place(2)
-	var start := player.position
-	var slow := INF
-	var fast := 0.0
-	var reach_hand := 0.0
-	var reach_foot := 0.0
-	var reach_distance := 0.0
-	var limbs := true
-	var floor_clear := true
-	player.test_command = {"move":Vector2.RIGHT}
-	for i: int in range(207):
-		await frames()
-		slow = minf(slow,player.velocity.x)
-		fast = maxf(fast,player.velocity.x)
-		if i < 15:
-			reach_hand = maxf(reach_hand,player.soldier.arm_joints.R[2].x)
-			reach_foot = maxf(reach_foot,player.soldier.leg_joints.R[2].x)
-			reach_distance = player.position.x-start.x
-		for side: String in ["L","R"]:
-			var arm: Array = player.soldier.arm_joints[side]
-			var leg: Array = player.soldier.leg_joints[side]
-			limbs = limbs and absf(arm[0].distance_to(arm[1])-SoldierProxy.UPPER_ARM_LENGTH) < 0.001 and absf(arm[1].distance_to(arm[2])-SoldierProxy.FOREARM_LENGTH) < 0.001 and absf(leg[0].distance_to(leg[1])-SoldierProxy.THIGH_LENGTH) < 0.001 and absf(leg[1].distance_to(leg[2])-SoldierProxy.SHIN_LENGTH) < 0.001
-			floor_clear = floor_clear and arm[1].y > 0.06 and leg[2].y >= 0.109
-	var right_distance := player.position.x-start.x
-	check(fast > slow*8 and slow < 0.06 and fast > 0.5,"Prone side movement pulses between reaching and pulling (%.3f–%.3f m/s)" % [slow,fast])
-	check(reach_hand > 0.40 and reach_foot > 0.36 and reach_distance < 0.025,"Leading hand and leg reach sideways before the body follows (%.3f / %.3f / %.3f m)" % [reach_hand,reach_foot,reach_distance])
-	check(absf(right_distance/3.45 - player.movement.prone_speed*0.65*0.95) < 0.015,"Pulsed strafe preserves its slow average travel speed")
-	check(limbs and floor_clear,"Prone reaching preserves limb lengths, grounded feet and clear elbows")
-	var stopping := player.position
-	player.test_command = {}
-	await frames(15)
-	check(player.position.distance_to(stopping) < 0.005,"Releasing prone strafe stops body travel without a residual slide")
-	await place(2)
-	player.test_command = {"move":Vector2.LEFT}
-	start = player.position
-	await frames(207)
-	check(absf((start.x-player.position.x)-right_distance) < 0.01,"Left and right strafe travel mirror each other")
-	player.test_command = {"move":Vector2.RIGHT}
-	var previous: Vector3 = player.soldier.arm_joints.L[2]
-	var max_step := 0.0
-	for i: int in range(30):
-		await frames()
-		var current: Vector3 = player.soldier.arm_joints.L[2]
-		max_step = maxf(max_step,current.distance_to(previous))
-		previous = current
-	check(max_step < 0.13,"Reversing a crawl blends the reaching hand back without a pose snap (%.3f m)" % max_step)
+	# The original left/right crawl takes are asymmetric, with different travel
+	# per cycle. recovered_lean_prone_regression now checks the visible native
+	# poses, shared movement phase, pull speed, release and reversal. The old
+	# fixed 1.15-second mirrored proxy curve is no longer the gameplay motion.
 	await place(2)
 	wall = box_at(Vector3(1,0.5,25),Vector3(0.1,1,4))
 	await frames(3)

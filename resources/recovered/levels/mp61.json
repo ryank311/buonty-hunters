@@ -1,0 +1,724 @@
+{
+ "id": "MP61",
+ "name": "Sujo",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp61.glb",
+ "source": "converted/levels/MP61/level.obj",
+ "source_origin": [
+  798.0,
+  0.0,
+  1280.0
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -64.2,
+   -8.69,
+   -128.0
+  ],
+  [
+   64.2,
+   35.8,
+   128.0
+  ]
+ ],
+ "kill_height": -18.69,
+ "ambience": {
+  "night": true,
+  "ambient": [
+   0.0667,
+   0.0667,
+   0.0588
+  ],
+  "lights": [
+   {
+    "color": [
+     0.0863,
+     0.0863,
+     0.098
+    ],
+    "direction": [
+     -0.5,
+     -0.4,
+     -0.4
+    ]
+   },
+   {
+    "color": [
+     0.2392,
+     0.2392,
+     0.2588
+    ],
+    "direction": [
+     0.5,
+     -0.4,
+     0.4
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.0392,
+    0.0392,
+    0.0392
+   ],
+   "begin": 25.0,
+   "end": 80.0
+  },
+  "far_clip": 100.0
+ },
+ "sky": {
+  "triangles": 378,
+  "source": "level",
+  "radius": 614.58,
+  "height": [
+   -98.31,
+   167.4
+  ]
+ },
+ "spawns": [
+  {
+   "name": "Terrorist Base",
+   "source": [
+    632.0,
+    -11.917901992797852,
+    2311.0
+   ],
+   "position": [
+    -16.6,
+    -1.192,
+    103.1
+   ],
+   "facing": [
+    -0.383,
+    0.924
+   ]
+  },
+  {
+   "name": "Barricade 4",
+   "source": [
+    601.0,
+    -0.3366995676256886,
+    1274.0
+   ],
+   "position": [
+    -19.7,
+    -0.034,
+    -0.6
+   ],
+   "facing": [
+    1.0,
+    -0.0
+   ]
+  },
+  {
+   "name": "Map centre",
+   "source": [
+    724.0,
+    50.0,
+    1391.9999593098958
+   ],
+   "position": [
+    -7.4,
+    5.0,
+    11.2
+   ],
+   "facing": [
+    0.707,
+    0.707
+   ]
+  }
+ ],
+ "materials": {
+  "lightglow": {
+   "mode": "ADDITIVE_4",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/lightglow.tif.png"
+  },
+  "stucco_256": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/stucco_256.tif.png"
+  },
+  "wall_ivy": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/wall_ivy.tif.png"
+  },
+  "cocaine_brick": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/cocaine_brick.tif.png"
+  },
+  "window02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/window02.tif.png"
+  },
+  "concrete_floor": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/concrete_floor.tif.png"
+  },
+  "window01": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/window01.tif.png"
+  },
+  "ironrail": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/ironrail.tif.png"
+  },
+  "wall_white": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/wall_white.tif.png"
+  },
+  "grass": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/grass.tif.png"
+  },
+  "garbage": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/garbage.tif.png"
+  },
+  "sign_street": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/sign_street.tif.png"
+  },
+  "wall_stone": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/wall_stone.tif.png"
+  },
+  "wall_chip": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/wall_chip.tif.png"
+  },
+  "window_closed": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/window_closed.tif.png"
+  },
+  "wood_panel2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/wood_panel2.tif.png"
+  },
+  "roof": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/roof.tif.png"
+  },
+  "signs3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/signs3.tif.png"
+  },
+  "stairs_blue": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/stairs_blue.tif.png"
+  },
+  "dirt": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/dirt.tif.png"
+  },
+  "poster02": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/poster02.tif.png"
+  },
+  "null_xmas": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/JUNK_TXR-131debae57-5cf22c19/null_xmas.bmp.png"
+  },
+  "wall_dirty07": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/wall_dirty07.tif.png"
+  },
+  "corrugated_metal": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/corrugated_metal.tif.png"
+  },
+  "window_closed2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/window_closed2.tif.png"
+  },
+  "water": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/water.tif.png"
+  },
+  "dumpster1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/dumpster1.tif.png"
+  },
+  "pipe_drain_rusty": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/pipe_drain_rusty.tif.png"
+  },
+  "sign2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/sign2.tif.png"
+  },
+  "humvee_back": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/humvee_back.tif.png"
+  },
+  "humvee_front": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/humvee_front.tif.png"
+  },
+  "humvee_metal": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/humvee_metal.tif.png"
+  },
+  "humvee_panel": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/humvee_panel.tif.png"
+  },
+  "humvee_pipe": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/humvee_pipe.tif.png"
+  },
+  "humvee_side": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/humvee_side.tif.png"
+  },
+  "woodfloor02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/woodfloor02.tif.png"
+  },
+  "humvee_tire": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/humvee_tire.tif.png"
+  },
+  "humvee_tread": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/humvee_tread.tif.png"
+  },
+  "light01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/light01.tif.png"
+  },
+  "laundry1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/laundry1.tif.png"
+  },
+  "laundry3": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/laundry3.tif.png"
+  },
+  "haytruck_bucket": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/haytruck_bucket.tif.png"
+  },
+  "truck_seat": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/truck_seat.tif.png"
+  },
+  "truck_blue_grill": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/truck_blue_grill.tif.png"
+  },
+  "truck_blue_hood": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/truck_blue_hood.tif.png"
+  },
+  "truck_blue_side": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/truck_blue_side.tif.png"
+  },
+  "propaganda": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/propaganda.tif.png"
+  },
+  "bumper2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/bumper2.tif.png"
+  },
+  "veh_shadow_rect": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/veh_shadow_rect.tif.png"
+  },
+  "truck_window": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/truck_window.tif.png"
+  },
+  "comet_bumper": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/comet_bumper.tif.png"
+  },
+  "mb_wheel": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/mb_wheel.tif.png"
+  },
+  "wall_brick": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/wall_brick.tif.png"
+  },
+  "bedblanket": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/bedblanket.tif.png"
+  },
+  "crates01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/crates01.tif.png"
+  },
+  "signs7": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/signs7.tif.png"
+  },
+  "signs8": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/signs8.tif.png"
+  },
+  "window_far": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/window_far.tif.png"
+  },
+  "wallpaper03": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/wallpaper03.tif.png"
+  },
+  "wallpaper02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/wallpaper02.tif.png"
+  },
+  "shadow_round": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/shadow_round.tif.png"
+  },
+  "padlock_old": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/padlock_old.tif.png"
+  },
+  "barrel01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/barrel01.tif.png"
+  },
+  "lightbulb": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/lightbulb.tif.png"
+  },
+  "door03": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/door03.tif.png"
+  },
+  "clouds": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/clouds.tif.png"
+  },
+  "signs4": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/signs4.tif.png"
+  },
+  "graffiti_exile": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/graffiti_exile.tif.png"
+  },
+  "signs6": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/signs6.tif.png"
+  },
+  "signs5": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/signs5.tif.png"
+  },
+  "crates02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/crates02.tif.png"
+  },
+  "canopy": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/canopy.tif.png"
+  },
+  "comet_panelside": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/comet_panelside.tif.png"
+  },
+  "comet_missingpanel": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/comet_missingpanel.tif.png"
+  },
+  "comet_seat": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/comet_seat.tif.png"
+  },
+  "concrete_trim": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/concrete_trim.tif.png"
+  },
+  "comet_dash": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/comet_dash.tif.png"
+  },
+  "comet_wheel": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/comet_wheel.tif.png"
+  },
+  "comet_trimlogo": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/comet_trimlogo.tif.png"
+  },
+  "comet_panelrear": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/comet_panelrear.tif.png"
+  },
+  "comet_grill_rear": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/comet_grill_rear.tif.png"
+  },
+  "comet_grill_front": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/comet_grill_front.tif.png"
+  },
+  "comet_doorhandle": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/shared/MP61/BCAR_TXR-10a6f9b826-630e11ee/comet_doorhandle.tif.png"
+  },
+  "framing": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/framing.tif.png"
+  },
+  "sandbags01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/sandbags01.tif.png"
+  },
+  "chickenmesh": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/chickenmesh.tif.png"
+  },
+  "wood_panel": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/wood_panel.tif.png"
+  },
+  "pigeon": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/pigeon.tif.png"
+  },
+  "chrome": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/chrome.tif.png"
+  },
+  "tree_trunk01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/tree_trunk01.tif.png"
+  },
+  "treeshrub": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/treeshrub.tif.png"
+  },
+  "grass2": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/grass2.tif.png"
+  },
+  "palmstalk": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/palmstalk.tif.png"
+  },
+  "palmfrond": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/palmfrond.tif.png"
+  },
+  "palmtrunk01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/palmtrunk01.tif.png"
+  },
+  "palmtrunk02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/palmtrunk02.tif.png"
+  },
+  "trashcan": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP61/MP61_TXR-03a9017b34-d21dd078/trashcan.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 37566,
+  "sky_triangles": 378,
+  "collision_triangles": 7320,
+  "dropped_faces": 1780,
+  "skipped_collision_polygons": 166
+ }
+}

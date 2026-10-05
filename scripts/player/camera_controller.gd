@@ -72,7 +72,7 @@ func update_view(body: CharacterBody3D, eye_height: float, lean: float, aiming: 
 	center.y = body.global_position.y + safe_height
 	var lean_query := PhysicsShapeQueryParameters3D.new()
 	lean_query.shape = lean_probe
-	lean_query.transform = Transform3D(Basis.IDENTITY, center)
+	lean_query.transform = Transform3D(Basis.IDENTITY, body.global_position + Vector3.UP * eye_height)
 	# The recovered step-and-lean reaches farther than the old proxy tilt.
 	lean_query.motion = body.global_basis.x * lean * 0.75
 	lean_query.collision_mask = 1

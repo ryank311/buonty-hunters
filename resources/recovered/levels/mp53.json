@@ -1,0 +1,346 @@
+{
+ "id": "MP53",
+ "name": "Foxhunt",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp53.glb",
+ "source": "converted/levels/MP53/level.obj",
+ "source_origin": [
+  2300.0,
+  0.0,
+  2913.5625
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -230.0,
+   -5.87,
+   -251.36
+  ],
+  [
+   230.0,
+   204.59,
+   251.36
+  ]
+ ],
+ "kill_height": -15.87,
+ "ambience": {
+  "night": false,
+  "ambient": [
+   0.1725,
+   0.1686,
+   0.1569
+  ],
+  "lights": [
+   {
+    "color": [
+     0.7294,
+     0.6902,
+     0.6431
+    ],
+    "direction": [
+     1.0,
+     -0.6,
+     -0.7
+    ]
+   },
+   {
+    "color": [
+     0.1725,
+     0.1569,
+     0.1176
+    ],
+    "direction": [
+     -0.36,
+     0.74,
+     0.57
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.549,
+    0.549,
+    0.5098
+   ],
+   "begin": 25.0,
+   "end": 110.0
+  },
+  "far_clip": 160.0
+ },
+ "sky": {
+  "triangles": 204,
+  "source": "previous/recovery/converted/models/shared/MP53/SP53_MDL-80a7fb53eb/sky.obj",
+  "radius": 376.52,
+  "height": [
+   -3.94,
+   222.89
+  ]
+ },
+ "spawns": [
+  {
+   "name": "Map centre",
+   "source": [
+    2876.6666666666665,
+    75.8169174194336,
+    3214.13232421875
+   ],
+   "position": [
+    57.667,
+    7.582,
+    30.057
+   ],
+   "facing": [
+    -0.924,
+    -0.383
+   ]
+  },
+  {
+   "name": "Map centre 2",
+   "source": [
+    2979.2855631510415,
+    203.53767903645831,
+    2697.2578125
+   ],
+   "position": [
+    67.929,
+    20.354,
+    -21.63
+   ],
+   "facing": [
+    -0.924,
+    0.383
+   ]
+  },
+  {
+   "name": "Map centre 3",
+   "source": [
+    2466.6666666666665,
+    6.534599304199219,
+    3158.4178059895835
+   ],
+   "position": [
+    16.667,
+    0.653,
+    24.486
+   ],
+   "facing": [
+    -0.707,
+    -0.707
+   ]
+  }
+ ],
+ "materials": {
+  "clifftex02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/clifftex02.tif.png"
+  },
+  "ground_grass02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/ground_grass02.tif.png"
+  },
+  "building10_brick": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/building10_brick.tif.png"
+  },
+  "wood_nails": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/wood_nails.tif.png"
+  },
+  "church_floor": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/church_floor.tif.png"
+  },
+  "wall_dirt1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/wall_dirt1.tif.png"
+  },
+  "fence_metal": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/fence_metal.tif.png"
+  },
+  "pipe_rusted": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/pipe_rusted.tif.png"
+  },
+  "m51_wall_dirty03": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/m51_wall_dirty03.tif.png"
+  },
+  "stone01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/stone01.tif.png"
+  },
+  "concrete2_base": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/concrete2_base.tif.png"
+  },
+  "ivy": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/ivy.tif.png"
+  },
+  "riverbed1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/riverbed1.tif.png"
+  },
+  "wood_barnwall": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/wood_barnwall.tif.png"
+  },
+  "wood_oldplank": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/wood_oldplank.tif.png"
+  },
+  "rooftile": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/rooftile.tif.png"
+  },
+  "gas_pump02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/gas_pump02.tif.png"
+  },
+  "garage_sign": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/garage_sign.tif.png"
+  },
+  "roof_metal": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/roof_metal.tif.png"
+  },
+  "metal_rusted": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/metal_rusted.tif.png"
+  },
+  "door_wood": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/door_wood.tif.png"
+  },
+  "wall_black_brick": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/wall_black_brick.tif.png"
+  },
+  "grassclump1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP53/VP53_TXR-27f9be883a-b6a37d51/grassclump1.tif.png"
+  },
+  "ground_gravel02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/ground_gravel02.tif.png"
+  },
+  "stone_wall": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/stone_wall.tif.png"
+  },
+  "sunglow": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/sunglow.tif.png"
+  },
+  "water": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/water.tif.png"
+  },
+  "oaktrunk": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/oaktrunk.tif.png"
+  },
+  "garage_door": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/garage_door.tif.png"
+  },
+  "tanstone_base": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/tanstone_base.tif.png"
+  },
+  "woodfloor": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/woodfloor.tif.png"
+  },
+  "building10_wood": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP53/MP53_TXR-c3559d0138-53a19222/building10_wood.tif.png"
+  },
+  "sky02": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP53/SP53_TXR-8f132a13e2-b2366709/sky02.tif.png"
+  },
+  "foggy": {
+   "mode": "ALPHACLIP",
+   "sky": true,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/shared/MP53/SP53_TXR-8f132a13e2-b2366709/foggy.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 30245,
+  "sky_triangles": 204,
+  "collision_triangles": 9379,
+  "dropped_faces": 0,
+  "skipped_collision_polygons": 83
+ }
+}

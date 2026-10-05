@@ -13,14 +13,29 @@ extends Resource
 @export var dive_speed: float = 5.6
 ## Launch push over the speed carried into the dive.
 @export var dive_boost: float = 1.3
-@export var dive_lift: float = 4.0
+## Keeps the dive's 0.44 s flight under the original gravity.
+@export var dive_lift: float = 5.2
 @export var dive_recovery_seconds: float = 0.45
 ## The original reached nine tenths of its run in 0.18 s, which this acceleration gives.
 @export var acceleration: float = 32.0
 @export var braking: float = 35.0
 @export_range(0.0, 2.0) var body_weight: float = 1.0
-@export var gravity: float = 18.0
-@export var jump_height: float = 0.65
+## The original's dynamics.rdr: gravity 235 source units/s² (23.5 m/s²). Its jump clip
+## lifts the root 0.46 m from the crouched takeoff and jump_factor scales that by 0.85,
+## a 0.39 m apex and 0.36 s in the air, which is the clip's own airborne span.
+@export var gravity: float = 23.5
+@export var jump_height: float = 0.39
+## dynamics.rdr step_height 6.5 units: ledges up to this are walked onto without a climb.
+@export var step_height: float = 0.65
+## dynamics.rdr max_slope: the steepest walkable ground.
+@export var max_slope_degrees: float = 50.0
+## dynamics.rdr climb heights (metres, matching the clips' root rise): a ledge up to low
+## plays "Climb crate", up to medium "Climb medium", and up to high hangs and climbs up.
+@export var low_climb_height: float = 1.3
+@export var medium_climb_height: float = 2.15
+@export var high_climb_height: float = 2.65
+## dynamics.rdr min_stand_height: headroom needed on top of a ledge to climb onto it.
+@export var climb_headroom: float = 1.0
 ## Sideways and backward speed as a share of forward speed, in each stance. The original
 ## ran 6.5 m/s sideways and 3.7 back, crouch-walked 1.5 and 1.35, and crawled 0.55 and 1.1.
 @export var strafe_multiplier: float = 1.0

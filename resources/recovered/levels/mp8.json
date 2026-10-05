@@ -1,0 +1,316 @@
+{
+ "id": "MP8",
+ "name": "Rat's Nest",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp8.glb",
+ "source": "converted/levels/MP8/level.obj",
+ "source_origin": [
+  1279.40625,
+  0.0,
+  827.8125
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -127.94,
+   -100.0,
+   -77.22
+  ],
+  [
+   127.94,
+   76.19,
+   77.22
+  ]
+ ],
+ "kill_height": -110.0,
+ "ambience": {
+  "night": true,
+  "ambient": [
+   0.0824,
+   0.0706,
+   0.1451
+  ],
+  "lights": [
+   {
+    "color": [
+     0.2314,
+     0.2706,
+     0.3529
+    ],
+    "direction": [
+     1.0,
+     -0.3,
+     -1.5
+    ]
+   },
+   {
+    "color": [
+     0.0941,
+     0.1216,
+     0.1647
+    ],
+    "direction": [
+     -1.0,
+     -0.2,
+     1.5
+    ]
+   },
+   {
+    "color": [
+     0.1333,
+     0.1176,
+     0.0902
+    ],
+    "direction": [
+     0.0,
+     1.0,
+     0.0
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "begin": 2.0,
+   "end": 72.0
+  },
+  "far_clip": 72.0
+ },
+ "sky": {
+  "triangles": 174,
+  "source": "level",
+  "radius": 317.24,
+  "height": [
+   28.28,
+   123.88
+  ]
+ },
+ "spawns": [
+  {
+   "name": "Crate Room",
+   "source": [
+    868.0,
+    61.01506423950195,
+    993.0
+   ],
+   "position": [
+    -41.141,
+    6.102,
+    16.519
+   ],
+   "facing": [
+    0.383,
+    -0.924
+   ]
+  },
+  {
+   "name": "Map centre",
+   "source": [
+    909.9769897460938,
+    68.74796295166016,
+    841.2916463216146
+   ],
+   "position": [
+    -36.943,
+    6.875,
+    1.348
+   ],
+   "facing": [
+    0.383,
+    0.924
+   ]
+  },
+  {
+   "name": "Map centre 2",
+   "source": [
+    760.5604248046875,
+    74.01506042480469,
+    857.74365234375
+   ],
+   "position": [
+    -51.885,
+    7.402,
+    2.993
+   ],
+   "facing": [
+    0.924,
+    -0.383
+   ]
+  }
+ ],
+ "materials": {
+  "gen_cloudy_blue_sky": {
+   "mode": "ALPHACLIP",
+   "sky": true,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/gen_cloudy_blue_sky.tif.png"
+  },
+  "star": {
+   "mode": "ALPHACLIP",
+   "sky": true,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/star.tif.png"
+  },
+  "cavewall": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/cavewall.tif.png"
+  },
+  "rustycorr": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/rustycorr.tif.png"
+  },
+  "rustvents": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/rustvents.tif.png"
+  },
+  "box_lightwood_side1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/box_lightwood_side1.tif.png"
+  },
+  "box_lightwood_top": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/box_lightwood_top.tif.png"
+  },
+  "box_wood_light1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/box_wood_light1.tif.png"
+  },
+  "box_wood_dark1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/box_wood_dark1.tif.png"
+  },
+  "rope01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/rope01.tif.png"
+  },
+  "planks01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/planks01.tif.png"
+  },
+  "containerside01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/containerside01.tif.png"
+  },
+  "null_xmas": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP8/JUNK_TXR-d9caa079c2-direct/null_xmas.bmp.png"
+  },
+  "containerdoor01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/containerdoor01.tif.png"
+  },
+  "crate01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/crate01.tif.png"
+  },
+  "woodboards3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/woodboards3.tif.png"
+  },
+  "cratewood1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/cratewood1.tif.png"
+  },
+  "afg1s_woodframe": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/afg1s_woodframe.tif.png"
+  },
+  "bigwoodboards": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/bigwoodboards.tif.png"
+  },
+  "woodboard2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/woodboard2.tif.png"
+  },
+  "woodboards": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/woodboards.tif.png"
+  },
+  "afganrock1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/afganrock1.tif.png"
+  },
+  "tred": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/tred.tif.png"
+  },
+  "steel01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/steel01.tif.png"
+  },
+  "gasLight_flare": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/gasLight_flare.tif.png"
+  },
+  "ground": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/ground.tif.png"
+  },
+  "rockwall2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP8/MP8_TXR-8e4dd77205-076814ec/rockwall2.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 28088,
+  "sky_triangles": 174,
+  "collision_triangles": 13564,
+  "dropped_faces": 0,
+  "skipped_collision_polygons": 0
+ }
+}

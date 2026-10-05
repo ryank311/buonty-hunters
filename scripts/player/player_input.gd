@@ -1,6 +1,10 @@
 class_name PlayerInput
 extends RefCounted
 
+# Some controllers reach only ~0.9 at the gate. Preserve the inner deadzone,
+# then use the remaining travel for the complete walk/jog/sprint speed range.
+const MOVE_OUTER_LIMIT: float = 0.90
+
 const KEYS: Dictionary = {
 	"move_forward": KEY_W, "move_back": KEY_S,
 	"move_left": KEY_A, "move_right": KEY_D,
@@ -60,7 +64,10 @@ static func setup() -> void:
 	_button("next_spawn", JOY_BUTTON_DPAD_UP)
 	_button("reset_player", JOY_BUTTON_DPAD_DOWN)
 	_button("start_lap", JOY_BUTTON_Y)
-	_button("walk", JOY_BUTTON_LEFT_STICK)
+	# Also remove the old binding when setup runs after a live script reload.
+	for event: InputEvent in InputMap.action_get_events("walk"):
+		if event is InputEventJoypadButton and event.button_index == JOY_BUTTON_LEFT_STICK:
+			InputMap.action_erase_event("walk", event)
 	_button("debug_view", JOY_BUTTON_RIGHT_STICK)
 	# Explicit UI bindings keep menu navigation independent of gameplay actions.
 	for action: String in ["menu_previous", "menu_next"]:
@@ -108,6 +115,12 @@ static func _axis(action: String, axis: JoyAxis, value: float) -> void:
 	event.axis_value = value
 	if not InputMap.action_has_event(action, event):
 		InputMap.action_add_event(action, event)
+
+static func move_vector(deadzone: float) -> Vector2:
+	var value := Input.get_vector("move_left", "move_right", "move_forward", "move_back", deadzone)
+	# get_vector has already removed and rescaled the radial inner deadzone.
+	var outer := maxf(0.01, (MOVE_OUTER_LIMIT - deadzone) / (1.0 - deadzone))
+	return (value / outer).limit_length()
 
 static func look_vector(deadzone: float) -> Vector2:
 	var value := Input.get_vector("look_left", "look_right", "look_up", "look_down", deadzone)

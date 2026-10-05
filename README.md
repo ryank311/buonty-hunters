@@ -10,6 +10,10 @@ Open `project.godot` in **Godot 4.7** and click the **Play ▶** button (or pres
 
 **Cmd+1 / F1 → Recovery Lab**, then **Tab**, opens a searchable collection of **202 recovered character models and 402 motion clips**. The selected character and your playable character share a native clip and clock. Pause, scrub, step frames or turn the models. Click **Use selected character for player**, then close the browser to play; **[ / ]** switches characters anywhere. Selection survives respawn and level changes during the run. **Cmd+6 / F6** changes the clip, **Cmd+7 / F7** pauses, **Cmd+9 / F9** steps one animation frame, and **Cmd+8 / F8** shows recovered collision. **N** cycles inspection spawns. See the [character guide](tools/recovery/CHARACTERS.md), [map/weapon pilot](tools/recovery/PILOT.md), and [agent asset handoff](docs/ASSET_RECOVERY_HANDOFF.md).
 
+**Recovery Lab → Tab → Guns** browses all **43 recovered gun designs (73 source variants)**. Search, filter, rotate and equip firearms; the standard loadouts also use their recovered models. Gun selection uses the existing prototype weapon tuning. Launchers are available for model inspection. See the [gun collection guide](tools/recovery/WEAPONS.md).
+
+**F1/Start → Maps** loads any of the original game's maps that have been installed: the 22 multiplayer maps and 12 campaign missions, at native scale with their original geometry, collision, sky dome, lighting and fog. **Next spawn** cycles the map's spawns: the original named views on multiplayer maps, open ground near the centre on campaign maps. There are no soldiers or objectives on these maps yet. See the [recovered maps guide](tools/recovery/LEVELS.md).
+
 The entire game renders at a fixed **640×480 (4:3)**, including the HUD and menus. Resizing only enlarges that finished image; every monitor shows the same framing, detail, and HUD proportions. Black bars fill unused space without cropping or stretching. The camera sits above and slightly right of the soldier, framing him just left of the reticle with the aiming area clear. The window opens at twice the render size (in screen points, so Retina displays are not halved), stepping down only to fit the screen. **F1/Start → Camera → Camera height above stance** and **Camera side offset** adjust that framing; ceiling and wall probes keep it within the level.
 
 | Action | Keyboard / mouse |
@@ -19,13 +23,13 @@ The entire game renders at a fixed **640×480 (4:3)**, including the HUD and men
 | Crouch / stand | Tap C |
 | Prone / stand | Hold C, or Z |
 | Dive forward into prone | Hold C while running forward |
-| Jump / rise from a lower stance | Space |
+| Jump / climb the ledge in front / rise from a lower stance | Space |
 | Lean | Hold Q / E |
 | Fire / focus aim | Left / right mouse button |
 | Reload | R |
 | Equip primary / pistol | 1 / 2 |
 | Equip equipment (grenades, claymores) | 3 / 4 |
-| Throw a grenade / set a claymore | Left mouse button with it equipped |
+| Throw a grenade / set a claymore | Left mouse button with it equipped: hold longer to throw further |
 | Scope zoom (sniper rifle, while aiming) | Mouse wheel, or = / - |
 | Search a body | F |
 | Choose class | F4 / Cmd+4 |
@@ -38,9 +42,11 @@ The entire game renders at a fixed **640×480 (4:3)**, including the HUD and men
 | Next spawn | N |
 | Start / stop route timer | T |
 
-Gamepad bindings use left/right sticks for movement/look, A for jump, B tap for crouch or hold for prone, LB/RB for lean, LT/RT for aim/fire, and X for reload. **D-pad left equips the primary; right equips the pistol, and pressed again steps through the equipment.** D-pad up cycles spawns; down resets/refills; while looking through the scope they zoom instead. Y searches a body within reach and otherwise controls the timer, LB/RB switch view while eliminated, **Choose class** is in the Start menu, L3 holds slow walk, and R3 toggles diagnostics. Labels use Xbox names; the corresponding positions on PlayStation controllers work through Godot's mappings.
+Gamepad bindings use left/right sticks for movement/look, A for jump, B tap for crouch or hold for prone, LB/RB for lean, LT/RT for aim/fire, and X for reload. **With a grenade in hand, how far you squeeze RT is how far it goes:** the arc follows the squeeze, easing off shortens it, and letting go throws. **D-pad left equips the primary; right equips the pistol, and pressed again steps through the equipment.** D-pad up cycles spawns; down resets/refills; while looking through the scope they zoom instead. Y searches a body within reach and otherwise controls the timer, LB/RB switch view while eliminated, **Choose class** is in the Start menu, and R3 toggles diagnostics. Left-stick travel controls stop → walk → jog → sprint continuously; full sprint starts at 90% travel, without clicking L3. Shift still holds slow walk on keyboard. Footfalls follow the recovered leg contacts, with quiet walking, firmer jogging and heavier, louder sprinting. Labels use Xbox names; the corresponding positions on PlayStation controllers work through Godot's mappings.
 
-**Hold C/B for 0.35 seconds** to lie prone; hold while running forward to dive. The dive uses swept collision and lands prone, with a brief settling period before firing or changing stance. Prone crawls at **0.38 m/s**. Sideways prone travel averages about 0.23 m/s using the existing movement curve; the recovered strafe clip supplies the visible pose. Matching its foot/hand contacts to that curve remains follow-up work. Tap C/B to rise to crouch, or Space/A to stand. Walking and running use their original full-body clips. Jump and dive clips follow the controller’s flight phase and blend into recovered landing/prone poses.
+**Hold C/B for 0.35 seconds** to lie prone; hold while running forward to dive. The dive uses swept collision and lands prone, with a brief settling period before firing or changing stance. Prone crawls at **1.1 m/s**. Sideways prone travel averages about 0.55 m/s using the existing movement curve; the recovered strafe clip supplies the visible pose. Matching its foot/hand contacts to that curve remains follow-up work. Tap C/B to rise to crouch, or Space/A to stand. Walking and running use their original full-body clips. Jump and dive clips follow the controller’s flight phase and blend into recovered landing/prone poses.
+
+Movement speeds are the original game's, read from its own motion table: **6.5 m/s** running forward or sideways, **3.7** backing up, **2.6** walking (Shift), **1.5** crouched, and **1.1** crawling. The legs turn by ground covered, not by a clock. Each recovered gait clip carries the distance its stride travels; the clip for the current speed comes from the original's speed bands, two clips share an overlap, and forward and strafe clips are mixed by direction. A planted foot therefore stays where it was put at any speed, including one you retune in F1. With the weapon raised, forward and backward movement takes the original's "Fire" variants, and strafes keep their own poses, which already hold the weapon on aim.
 
 **Start** or **Back/Select** opens tuning. **LB/RB** changes pages; **up/down** selects a control; **left/right** adjusts a slider; **A** confirms; **B/Start** resumes. Level switching and every tuning setting are available through this menu without a mouse. Bindings are currently fixed; look speed, focused aim sensitivity, dead zone, inversion, and vibration are adjustable. Actual hardware feel still needs a playtest.
 
@@ -82,7 +88,7 @@ Soldiers have 100 health. A hit to the head does about three times a weapon's da
 | Machine pistol | 16 | 40% | 10 and 35 m |
 
 - **Sniper rifle.** Hold the right mouse button (LT) to look through the scope; the wheel, **=** / **-**, or D-pad up/down steps through ×3, ×6, and ×12. The bullet leaves at 380 m/s and falls under gravity, so a distant or moving target needs lead and hold-over; the ticks under the scope's centre are for that. Fired without the scope it is inaccurate.
-- **Frag grenade.** Thrown where you aim, bounces, and explodes 3.5 seconds later. It kills at the centre and does nothing beyond 8 m or behind cover. It hurts you and teammates too.
+- **Frag grenade.** Thrown where you aim, bounces, and explodes 3.5 seconds later. It does not know who threw it: it kills anyone within about 4 m, you and your teammates included, wounds out to 8 m, and does nothing behind cover. The lightest toss on level ground comes down about 9 m away; aimed at the ground ahead it stops within 4 m.
 - **Smoke grenade.** Bursts after 2 seconds into a cloud about 9 m across that lasts 18 seconds.
 - **Flashbang.** Goes off after 1.8 seconds and whites out the view of anyone within 14 m who can see it, for up to 4.5 seconds: less with distance and when facing away, and not at all behind cover.
 - **Claymore.** Set on the ground a pace ahead, facing the way you face, and armed a second later. You cannot set it off yourself: it fires when an **enemy** walks within 4.5 m of its front. The blast is a cone to the front that hurts anyone in it, including you.

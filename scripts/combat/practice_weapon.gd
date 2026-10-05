@@ -14,6 +14,11 @@ const THROW_CHARGE_SECONDS := 1.1
 ## Strength at which a throw stops being a lob, and at which it becomes a full throw.
 const LOB_BELOW := 0.3
 const FULL_FROM := 0.9
+## An analog trigger sets the strength by how far it is squeezed. Easing off counts once
+## the trigger has rested this long; until then it is taken as the start of letting go.
+const SQUEEZE_SETTLE_SECONDS := 0.12
+## A trigger moving less than this in a tick is being held, not moved.
+const SQUEEZE_STILL := 0.015
 ## Where the hand lets go of each throw, from the soldier's feet (x right, z back) when standing.
 const RELEASE_POINTS: Array[Vector3] = [Vector3(0.22, 0.85, -0.5), Vector3(0.48, 1.25, -0.4), Vector3(0.22, 1.85, -0.35), Vector3(0.2, 1.8, -0.6)]
 const ITEM_COLOURS := {"frag": Color("3f4a33"), "smoke": Color("8a8d86"), "flash": Color("c9cfd4"), "claymore": Color("4d5a3a")}
@@ -35,6 +40,9 @@ var reserve: int:
 var cooldown: float = 0.0
 var reload_remaining: float = 0.0
 var draw_remaining: float = 0.0
+## The native swap layer follows this draw, including rapid re-equips and pickups.
+var draw_from: WeaponProfile
+var draw_serial := 0
 var hit_flash: float = 0.0
 var blocked: bool = false
 var shots_fired: int = 0
@@ -62,6 +70,11 @@ var pad_cycle: bool = false
 ## Grenade throwing: the strength built while the button is held (-1 when not holding),
 ## and once let go, the throw in motion and the seconds until the hand releases it.
 var throw_charge: float = -1.0
+## Whether fire last came from an analog trigger, and that trigger's travel: where it is,
+## and how long since it last moved toward a harder squeeze.
+var fire_analog: bool = false
+var squeeze: float = 0.0
+var squeeze_rested: float = 0.0
 var throw_style: int = 0
 var throw_strength: float = 0.0
 var throw_release: float = -1.0
@@ -123,6 +136,8 @@ func reset() -> void:
 	cooldown = 0.0
 	reload_remaining = 0.0
 	draw_remaining = 0.0
+	draw_from = null
+	draw_serial += 1
 	hit_flash = 0.0
 	shots_fired = 0
 	hits = 0
@@ -155,6 +170,8 @@ func equip(slot: int) -> bool:
 	reload_remaining = 0.0
 	set_scope(false)
 	_cancel_throw()
+	draw_from = profile
+	draw_serial += 1
 	active_slot = slot
 	draw_remaining = profile.draw_seconds
 	cooldown = maxf(cooldown, draw_remaining)
@@ -171,6 +188,9 @@ func equip(slot: int) -> bool:
 
 ## Puts another weapon in a slot, as when one is taken from a body.
 func receive(slot: int, taken: WeaponProfile, loaded: int, spare: int) -> void:
+	if slot == active_slot:
+		draw_from = profile
+		draw_serial += 1
 	profiles[slot] = taken
 	magazines[slot] = loaded
 	reserves[slot] = spare
@@ -185,13 +205,16 @@ func receive(slot: int, taken: WeaponProfile, loaded: int, spare: int) -> void:
 
 func _show_weapon() -> void:
 	# Recovered weapons keep their source dimensions and native attachment transform.
-	# Other long-gun profiles borrow the M4 until their own models are imported.
 	var soldier := player.soldier
 	var firearm := profile.kind == "firearm"
 	var long_gun := profile.hold == "long"
 	soldier.set_weapon(0 if long_gun else 1)
 	soldier.rifle_mesh.visible = firearm and long_gun
 	soldier.pistol_mesh.visible = firearm and not long_gun
+	if soldier.soldier_skin != null:
+		for carried: WeaponProfile in profiles:
+			if carried.kind == "firearm":
+				soldier.soldier_skin.set_weapon_model(soldier, carried.recovered_model, carried.hold)
 	if soldier.soldier_skin == null:
 		soldier.rifle_mesh.scale = profile.visual_scale if long_gun else Vector3.ONE
 		soldier.pistol_mesh.scale = Vector3.ONE if long_gun else profile.visual_scale
@@ -199,6 +222,12 @@ func _show_weapon() -> void:
 	held_item.visible = not firearm and ammo > 0
 	if not firearm:
 		item_paint.albedo_color = ITEM_COLOURS.get(profile.kind, Color.DIM_GRAY)
+	if soldier.soldier_skin != null and draw_remaining > 0.0 and draw_from != null:
+		# Keep the already-posed source visible until the next native pose tick.
+		# The target carrier may still have its previous (or initial) transform.
+		soldier.rifle_mesh.visible = draw_from.kind == "firearm" and draw_from.hold == "long"
+		soldier.pistol_mesh.visible = draw_from.kind == "firearm" and draw_from.hold == "pistol"
+		held_item.hide()
 
 func stability() -> float:
 	var stance_factor: float = [1.0, 0.80, 0.50][player.stance.current]
@@ -418,6 +447,10 @@ func _update_scope(delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton and event.pressed and event.button_index == JOY_BUTTON_DPAD_RIGHT:
 		pad_cycle = true
+	# A pad's trigger is the one fire input with travel; a mouse button or key has none.
+	# Only a press decides, so a trigger twitching at rest cannot take over a held button.
+	if event.is_action_pressed("fire", true):
+		fire_analog = event is InputEventJoypadMotion
 	if not scoped:
 		return
 	# While scoped the wheel, +/-, and D-pad up/down zoom instead of their usual jobs.
@@ -440,14 +473,18 @@ func _tick_equipment(fresh_press: bool, fire: bool, delta: float) -> void:
 			_throw()
 	# The grenade stays in hand through the wind-up and is gone from the release until
 	# the follow-through ends.
-	held_item.visible = throw_release >= 0.0 or (ammo > 0 and not player.soldier.throwing())
+	held_item.visible = draw_remaining <= 0.0 and (throw_release >= 0.0 or (ammo > 0 and not player.soldier.throwing()))
 	if throw_charge >= 0.0:
 		if not player.can_fire():
 			_cancel_throw()
 		elif fire:
-			# Holding builds strength; the arc shows where the grenade goes if let go now.
-			throw_charge = minf(1.0, throw_charge + delta / THROW_CHARGE_SECONDS)
-			var style := throw_style_for(throw_charge)
+			# The arc shows where the grenade goes if let go now. A button builds strength
+			# by being held; a trigger sets it by how far it is squeezed.
+			if fire_analog:
+				throw_charge = _squeezed(Input.get_action_strength("fire"), delta)
+			else:
+				throw_charge = minf(1.0, throw_charge + delta / THROW_CHARGE_SECONDS)
+			var style := throw_style_for(throw_charge, player.soldier.throw_hold_style if fire_analog else -1)
 			player.soldier.hold_throw(style)
 			var launch := throw_launch(throw_charge, style)
 			throw_arc.show_flight(THROW_ARC.predict(player.get_world_3d(), launch.origin, launch.velocity), view_origin())
@@ -468,13 +505,33 @@ func _tick_equipment(fresh_press: bool, fire: bool, delta: float) -> void:
 		held_item.visible = ammo > 0
 		return
 	throw_charge = 0.0
+	squeeze = 0.0
+	squeeze_rested = 0.0
+
+## The strength an analog trigger at `travel` (0 to 1) asks for. A harder squeeze counts
+## at once. A lighter one counts only after the trigger has rested there, because letting
+## go passes through every lighter squeeze on the way: the throw is the squeeze that was
+## being held, not whatever the trigger read as it came up.
+func _squeezed(travel: float, delta: float) -> float:
+	if travel > squeeze + SQUEEZE_STILL:
+		squeeze_rested = SQUEEZE_SETTLE_SECONDS
+	elif travel < squeeze - SQUEEZE_STILL:
+		squeeze_rested = 0.0
+	else:
+		squeeze_rested += delta
+	squeeze = travel
+	return travel if squeeze_rested >= SQUEEZE_SETTLE_SECONDS else maxf(throw_charge, travel)
 
 ## The throw a hold of `strength` makes: a lob when brief, a full throw at the top, and
-## between them a sidearm sling on the run or an overhand throw otherwise.
-func throw_style_for(strength: float) -> int:
-	if strength < LOB_BELOW:
+## between them a sidearm sling on the run or an overhand throw otherwise. `held` is the
+## throw already drawn back into, if any: a squeeze hovering at a boundary keeps it.
+func throw_style_for(strength: float, held: int = -1) -> int:
+	var margin := 0.04
+	var lob_below := LOB_BELOW + (margin if held == SoldierProxy.Throw.LOB else -margin if held >= 0 else 0.0)
+	var full_from := FULL_FROM - (margin if held == SoldierProxy.Throw.FULL else -margin if held >= 0 else 0.0)
+	if strength < lob_below:
 		return SoldierProxy.Throw.LOB
-	if strength >= FULL_FROM:
+	if strength >= full_from:
 		return SoldierProxy.Throw.FULL
 	return SoldierProxy.Throw.SIDEARM if running_fraction() > 0.5 else SoldierProxy.Throw.OVERHAND
 
@@ -497,7 +554,8 @@ func throw_launch(strength: float, style: int) -> Dictionary:
 	return {"origin": origin, "velocity": (flat * cos(pitch) + Vector3.UP * sin(pitch)) * speed + player.velocity * 0.5}
 
 func _commit_throw() -> void:
-	throw_style = throw_style_for(throw_charge)
+	# A trigger throws the throw it was drawn back into, so the arc shown is the arc flown.
+	throw_style = throw_style_for(throw_charge, player.soldier.throw_hold_style if fire_analog else -1)
 	throw_strength = throw_charge
 	throw_charge = -1.0
 	throw_arc.hide_flight()

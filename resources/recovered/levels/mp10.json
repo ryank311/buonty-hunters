@@ -1,0 +1,352 @@
+{
+ "id": "MP10",
+ "name": "Blood Lake",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp10.glb",
+ "source": "converted/levels/MP10/level.obj",
+ "source_origin": [
+  1463.28125,
+  0.0,
+  1283.9375
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -142.34,
+   -0.96,
+   -142.34
+  ],
+  [
+   142.34,
+   84.06,
+   142.34
+  ]
+ ],
+ "kill_height": -10.98,
+ "ambience": {
+  "night": false,
+  "ambient": [
+   0.098,
+   0.1373,
+   0.098
+  ],
+  "lights": [
+   {
+    "color": [
+     0.3098,
+     0.3098,
+     0.3098
+    ],
+    "direction": [
+     0.21,
+     -0.63,
+     -0.74
+    ]
+   },
+   {
+    "color": [
+     0.2863,
+     0.2667,
+     0.2667
+    ],
+    "direction": [
+     0.31,
+     -0.92,
+     -0.25
+    ]
+   },
+   {
+    "color": [
+     0.1569,
+     0.1765,
+     0.1569
+    ],
+    "direction": [
+     -0.36,
+     0.74,
+     0.57
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.1961,
+    0.2353,
+    0.251
+   ],
+   "begin": 1.0,
+   "end": 70.0
+  },
+  "far_clip": 76.0
+ },
+ "sky": {
+  "triangles": 82,
+  "source": "level",
+  "radius": 173.97,
+  "height": [
+   -1.12,
+   120.0
+  ]
+ },
+ "spawns": [
+  {
+   "name": "Central Overlook",
+   "source": [
+    1324.0,
+    158.3968791540546,
+    1210.0
+   ],
+   "position": [
+    -13.928,
+    15.84,
+    -7.394
+   ],
+   "facing": [
+    0.924,
+    0.383
+   ]
+  },
+  {
+   "name": "Map centre",
+   "source": [
+    1450.6666666666667,
+    5.0,
+    1450.6666666666667
+   ],
+   "position": [
+    -1.261,
+    0.5,
+    16.673
+   ],
+   "facing": [
+    0.924,
+    -0.383
+   ]
+  },
+  {
+   "name": "Map centre 2",
+   "source": [
+    1221.041748046875,
+    34.850826263427734,
+    1460.883544921875
+   ],
+   "position": [
+    -24.224,
+    3.485,
+    17.695
+   ],
+   "facing": [
+    0.707,
+    -0.707
+   ]
+  }
+ ],
+ "materials": {
+  "ground_rock_trans": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/ground_rock_trans.tif.png"
+  },
+  "congo3r_ground1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/congo3r_ground1.tif.png"
+  },
+  "dirt": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/dirt.tif.png"
+  },
+  "congo_bkdrp": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/congo_bkdrp.tif.png"
+  },
+  "canvas_tent": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/canvas_tent.tif.png"
+  },
+  "rope": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/rope.tif.png"
+  },
+  "metal_roof05": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/metal_roof05.tif.png"
+  },
+  "treetrunk": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/treetrunk.tif.png"
+  },
+  "treetrunk2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/treetrunk2.tif.png"
+  },
+  "treebranch": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/treebranch.tif.png"
+  },
+  "treebranch_noleafs": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/treebranch_noleafs.tif.png"
+  },
+  "hut03_moss02": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/hut03_moss02.tif.png"
+  },
+  "sandbags": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/sandbags.tif.png"
+  },
+  "congo2_leaves7": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/congo2_leaves7.tif.png"
+  },
+  "m19_skycap01": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/m19_skycap01.tif.png"
+  },
+  "Kalashnikov_pkm": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP10/TLMG_TXR-d47bec69df-78d2c40a/Kalashnikov_pkm.tif.png"
+  },
+  "null_xmas": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP10/JUNK_TXR-40c5f25716-direct/null_xmas.bmp.png"
+  },
+  "mark03": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/weapons/MP10/WEAP_TXR-71587bc1d1-ef426640/mark03.tif.png"
+  },
+  "Minimi": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP10/TLMG_TXR-d47bec69df-78d2c40a/Minimi.tif.png"
+  },
+  "Rusn_ammo01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP10/TLMG_TXR-d47bec69df-78d2c40a/Rusn_ammo01.tif.png"
+  },
+  "bullets01": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP10/TLMG_TXR-d47bec69df-78d2c40a/bullets01.tif.png"
+  },
+  "BMMG_f2k": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/weapons/MP10/WEAP_TXR-71587bc1d1-ef426640/BMMG_f2k.tif.png"
+  },
+  "branch2": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/branch2.tif.png"
+  },
+  "dirtpath": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/dirtpath.tif.png"
+  },
+  "leaf": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/leaf.tif.png"
+  },
+  "congo_reed": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/congo_reed.tif.png"
+  },
+  "congo_grass": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/congo_grass.tif.png"
+  },
+  "camo_net": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/camo_net.tif.png"
+  },
+  "fern": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/fern.tif.png"
+  },
+  "congo3r_woodboards": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/congo3r_woodboards.tif.png"
+  },
+  "congo_forest_canopy": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/congo_forest_canopy.tif.png"
+  },
+  "lakebed": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/lakebed.tif.png"
+  },
+  "congo_water": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP10/MP10_TXR-70e4a9ae53-246fdbe8/congo_water.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 60171,
+  "sky_triangles": 82,
+  "collision_triangles": 8449,
+  "dropped_faces": 0,
+  "skipped_collision_polygons": 21
+ }
+}

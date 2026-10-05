@@ -2,6 +2,7 @@ class_name PrototypePlayer
 extends CharacterBody3D
 
 const RecoveredProne = preload("res://scripts/actors/recovered_prone.gd")
+const FootstepAudio = preload("res://scripts/player/footstep_audio.gd")
 
 signal message(text: String)
 @export var max_health: float = 100.0
@@ -19,7 +20,7 @@ var controls_enabled: bool = true
 var aiming: bool = false
 var move_input := Vector2.ZERO
 var jump_cooldown: float = 0.0
-var step_distance: float = 0.0
+var step_audio: RefCounted
 var pad_stance_time: float = 0.0
 var pad_hold_consumed: bool = false
 var stance_was_down: bool = false
@@ -36,13 +37,15 @@ var pending_mouse := Vector2.ZERO
 var input_armed: bool = true
 var local_acceleration := Vector3.ZERO
 var look_scale: float = 1.0 # Below one while a scope is zoomed in, so aim speed tracks the magnification.
+var traversal := Traversal.new()
+## Height still to ease out of the soldier after stepping onto a ledge.
+var step_offset: float = 0.0
 
 func _ready() -> void:
 	movement = movement.duplicate()
 	camera_settings = camera_settings.duplicate()
 	stance.apply(collider)
 	camera_rig.initialize(self, camera_settings)
-	footsteps.stream = preload("res://audio/step.wav")
 	weapon.initialize(self)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -126,13 +129,16 @@ func _physics_process(delta: float) -> void:
 		yaw_input = clampf(yaw_input,-movement.prone_turn_speed * delta,movement.prone_turn_speed * delta)
 	turn(yaw_input)
 	camera_rig.add_pitch(look.y * camera_settings.pad_sensitivity * delta)
-	move_input = Input.get_vector("move_left", "move_right", "move_forward", "move_back", camera_settings.pad_deadzone)
+	move_input = PlayerInput.move_vector(camera_settings.pad_deadzone)
 	if not test_command.is_empty():
 		move_input = test_command.get("move", Vector2.ZERO)
 	if not input_armed:
 		input_armed = true
 		for action: String in ["fire", "jump", "crouch", "prone", "pad_stance", "reload", "equip_rifle", "equip_pistol"]:
 			input_armed = input_armed and not Input.is_action_pressed(action)
+		return
+	if traversal.active:
+		_climb(delta)
 		return
 	# Modified number shortcuts must not also change the equipped weapon.
 	if Input.is_action_just_pressed("equip_rifle", true):
@@ -197,14 +203,31 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 0.0
 	jump_cooldown = maxf(0.0, jump_cooldown - delta)
 	if (Input.is_action_just_pressed("jump") or test_command.get("jump", false)) and is_on_floor() and jump_cooldown <= 0.0 and not diving and dive_recovery <= 0:
+		# As in the original, the jump button climbs whatever ledge is in front.
+		var ledge := Traversal.find_ledge(self, movement) if stance.current != StanceController.Stance.PRONE else {}
+		if not ledge.is_empty() and traversal.begin(self, stance, soldier.soldier_skin.motion, ledge, soldier.weapon_slot == 1):
+			_climb(0.0)
+			return
 		if stance.current != StanceController.Stance.STAND:
 			request_stance(StanceController.Stance.STAND)
 		elif stance.has_clearance(self, 0, rotation.y):
-			velocity.y = sqrt(2.0 * movement.gravity * movement.jump_height)
+			# Launch speed for the apex under per-tick integration, which adds half a
+			# tick of rise to the continuous v²/2g.
+			var half_step := movement.gravity * delta * 0.5
+			velocity.y = sqrt(half_step * half_step + 2.0 * movement.gravity * movement.jump_height) - half_step
 			soldier.begin_jump(velocity.y)
 			jump_cooldown = 0.25
 	var was_grounded := is_on_floor()
 	var impact_speed := -velocity.y
+	floor_max_angle = deg_to_rad(movement.max_slope_degrees)
+	if was_grounded and not diving and stance.current != StanceController.Stance.PRONE:
+		# Walk up kerbs, steps and low ledges; the soldier and camera ease up after the body.
+		var lifted := Traversal.step_up(self, Vector3(velocity.x, 0.0, velocity.z) * delta, movement.step_height, movement.max_slope_degrees)
+		if lifted > 0.0:
+			step_offset += lifted
+			camera_rig.position.y -= lifted
+	step_offset *= exp(-14.0 * delta)
+	soldier.position.y = -step_offset
 	move_and_slide()
 	if not was_grounded and is_on_floor():
 		soldier.land(impact_speed, movement.body_weight)
@@ -223,14 +246,25 @@ func _physics_process(delta: float) -> void:
 	soldier.pose(stance.current, speed_now, Vector2(local_velocity.x, local_velocity.z), camera_rig.aim_pitch(), camera_rig.actual_lean, delta, movement.body_weight, local_acceleration, is_on_floor(), weapon.recoil.visual_kick, weapon.draw_remaining / weapon.profile.draw_seconds, aiming, 1.0 if diving else 0.0, prone_strafe_phase, prone_strafe_amount, clampf((movement.dive_lift - velocity.y) / (2.0 * movement.dive_lift),0.0,1.0), velocity.y)
 	soldier.set_close_fade(camera_rig.arm.get_hit_length() < 0.70)
 	weapon.tick(delta, Input.is_action_pressed("fire"), Input.is_action_just_pressed("reload"))
-	if is_on_floor() and speed_now > 0.25 and stance.current != StanceController.Stance.PRONE:
-		step_distance += speed_now * delta
-		if step_distance > (1.65 if stance.current == 0 else 1.2):
-			step_distance = 0.0
-			footsteps.pitch_scale = 0.95 + randf() * 0.1
-			footsteps.volume_db = -16.0 if stance.current == 0 else -24.0
-			if DisplayServer.get_name() != "headless":
-				footsteps.play()
+	if step_audio == null:
+		step_audio = FootstepAudio.new()
+	step_audio.update(soldier.soldier_skin, footsteps, speed_now, movement.run_speed, stance.current, is_on_floor(), delta)
+
+## One tick of a climb: the body follows the clip's root and the skin plays it.
+func _climb(delta: float) -> void:
+	var going := traversal.update(self, soldier.soldier_skin.motion, delta)
+	soldier.traversal_clip = traversal.clip if going else ""
+	soldier.traversal_time = traversal.clip_time
+	soldier.traversal_root = traversal.root_height
+	velocity = Vector3.ZERO
+	if not going:
+		if stance.current != traversal.end_stance:
+			stance.current = traversal.end_stance
+			stance.apply(collider)
+		apply_floor_snap()
+	camera_rig.update_view(self, StanceController.EYE_HEIGHTS[stance.current], 0.0, false, delta)
+	soldier.pose(stance.current, 0.0, Vector2.ZERO, camera_rig.aim_pitch(), 0.0, delta, movement.body_weight, Vector3.ZERO, true)
+	weapon.tick(delta, false, false)
 
 func _stance_input(delta: float) -> void:
 	var down := Input.is_action_pressed("crouch") or Input.is_action_pressed("pad_stance")
@@ -255,7 +289,8 @@ func reset_at(spawn_transform: Transform3D) -> void:
 	camera_rig.reset_view()
 	weapon.reset()
 	jump_cooldown = 0.0
-	step_distance = 0.0
+	if step_audio != null:
+		step_audio.reset()
 	pad_stance_time = 0.0
 	pad_hold_consumed = false
 	stance_was_down = false
@@ -267,6 +302,10 @@ func reset_at(spawn_transform: Transform3D) -> void:
 	prone_strafe_phase = 0.0
 	prone_strafe_amount = 0.0
 	floor_snap_length = 0.25
+	traversal.active = false
+	soldier.traversal_clip = ""
+	step_offset = 0.0
+	soldier.position.y = 0.0
 	input_armed = true
 	local_acceleration = Vector3.ZERO
 	soldier.reset_pose()

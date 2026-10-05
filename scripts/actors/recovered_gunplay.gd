@@ -18,6 +18,13 @@ var reload_upper_only := false
 var socket := Transform3D.IDENTITY
 var last_slot := -1
 var last_shots := 0
+## Set by the locomotion driver when the gait it hands over is already raised. The
+## original's strafes, crouch walks and crawls hold the weapon on aim themselves, and
+## its forward and backward clips have each taken their own fire variant (gait_fire is
+## the leading one, "" when the lead aims by itself).
+var gait_raised := false
+var gait_fire := ""
+var gait_fire_time := 0.0
 var shot_age := RECOIL_SECONDS
 
 func reset() -> void:
@@ -35,7 +42,7 @@ func reset() -> void:
 	last_shots = 0
 	shot_age = RECOIL_SECONDS
 
-func apply(motion: Node, pose: Array[Transform3D], base_clip: String, seconds: float, weapon: PracticeWeapon, stance: int, moving: bool, allowed: bool, focused: bool, pitch: float, delta: float, leaning: bool = false) -> void:
+func apply(motion: Node, pose: Array[Transform3D], base_clip: String, seconds: float, weapon: PracticeWeapon, stance: int, moving: bool, allowed: bool, focused: bool, pitch: float, delta: float, lean: RefCounted = null) -> void:
 	# The visual child receives _ready before the player initializes its loadout.
 	if weapon != null and weapon.profiles.is_empty():
 		weapon = null
@@ -68,11 +75,21 @@ func apply(motion: Node, pose: Array[Transform3D], base_clip: String, seconds: f
 	var fire_length: float = motion.get_animation(fire_clip).length
 	fire_clock += delta
 	var fire_time: float = fmod(fire_clock, FIRE_SECONDS.get(fire_clip, fire_length)) * fire_length / float(FIRE_SECONDS.get(fire_clip, fire_length)) if not moving else seconds / motion.get_animation(base_clip).length * fire_length
-	# Lean transitions already contain the raised weapon pose. Replacing that
-	# torso with the ordinary fire stance would erase the recovered lean.
-	if fire_blend > 0.0 and not leaning:
-		blend_pose(motion, pose, motion.sample(fire_clip, fire_time), fire_blend, upper_only, fire_clip)
+	# A raised gait must not also take the standing fire stance: that stance turns the
+	# torso 60 degrees right, which over left-strafing hips is a twist of more than 100.
+	# Side crawls already carry the weapon and use the free arm to pull. An
+	# idle firing torso would erase that reach even with the legs in sync.
+	var side_crawl := base_clip in ["seal_prone_lstrafe", "seal_prone_rstrafe"]
+	if fire_blend > 0.0 and not gait_raised and not side_crawl:
+		blend_pose(motion, pose, motion.sample(fire_clip, fire_time), fire_blend, upper_only or (moving and lean != null and lean.weight > 0.0), fire_clip)
 		socket = socket.interpolate_with(motion.weapon_track(fire_clip, fire_time, attachment), fire_blend)
+	elif fire_blend > 0.0 and gait_fire != "":
+		socket = socket.interpolate_with(motion.weapon_track(gait_fire, gait_fire_time, attachment), fire_blend)
+	# The lean owns its raised-weapon pose, but blends back to this fire stance
+	# when released. Applying it before recoil/pitch preserves those additions.
+	if lean != null and lean.weight > 0.0:
+		lean.apply(motion, pose, self, moving)
+		socket = socket.interpolate_with(motion.weapon_track(lean.clip, lean.time, attachment), lean.weight)
 	# The two authored recoil poses are rest and kick. Apply their local delta
 	# above the hips so firing never replaces the stride or changes stance height.
 	recoil_weight = 0.0

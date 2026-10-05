@@ -6,6 +6,9 @@
 # Agent tooling output (tools/dev): logs and screenshots
 .agent/
 
+# Local export templates, versioned builds, build logs, and deployment bundles
+.build/
+
 # Personal Claude Code settings
 .claude/settings.local.json
 

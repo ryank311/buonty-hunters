@@ -61,16 +61,18 @@ The keyboard and gamepad are both supported. Keyboard controls are the first imp
 
 Tap/hold stance inputs must not trigger both actions. Interact/reload/weapon bindings are reserved in M0 and become active with their systems. Equipment selection and push-to-talk receive bindings when introduced, rather than overloading the initial controller scheme.
 
-### Initial movement values
+### Movement values
 
-| Parameter | Starting value | Purpose |
+Speeds are the original game's, read from its motion table (`motion.rdr`: each gait's top speed and the bands its clips play in) at 0.1 m to the source unit. The recovered gait clips are rate-matched to the body's actual speed, so these can be retuned without the feet sliding.
+
+| Parameter | Value | Purpose |
 | --- | --- | --- |
-| Standing run | 4.5 m/s | Ordinary travel speed; no separate sprint. |
-| Slow walk | 1.6 m/s | Fine movement with a slower, deliberate stride. |
-| Crouch movement | 2.5 m/s | Useful repositioning behind cover. |
-| Prone crawl | 0.38 m/s | Slow, low shimmy; sideways and backward travel are slower still. |
-| Strafe / backward multiplier | 0.95 / 0.80 | Preserve mobile fights; test direction changes. |
-| Ground acceleration / braking | 18 / 24 m/s² | Build momentum and settle without teleporting velocity. |
+| Standing run | 6.5 m/s | Ordinary travel speed; no separate sprint. |
+| Slow walk | 2.6 m/s | What half a push of the original's stick gave; the original had no walk button. |
+| Crouch movement | 1.48 m/s | A deliberate crouch walk behind cover. |
+| Prone crawl | 1.1 m/s | Low crawl, forward or back; sideways is half as fast. |
+| Strafe / backward multiplier | 1.0 / 0.57 standing, 1.0 / 0.91 crouched, 0.5 / 1.0 prone | The original ran 6.5 m/s sideways and 3.7 backwards. |
+| Ground acceleration / braking | 32 / 35 m/s² | The original reached nine tenths of its run in 0.18 s. It stopped at once; braking keeps a short settle. |
 | Jump apex / gravity | 0.65 m / 18 m/s² | Small purposeful jumps; derive launch speed from these. |
 | Jump rules | Grounded only; 0.25 s minimum between takeoffs | No speed gain from repeated jumping. |
 | Stand / crouch body height | 1.80 / 1.15 m | Establish cover and door dimensions. |

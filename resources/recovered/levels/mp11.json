@@ -1,0 +1,292 @@
+{
+ "id": "MP11",
+ "name": "Death Trap",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp11.glb",
+ "source": "converted/levels/MP11/level.obj",
+ "source_origin": [
+  960.0,
+  0.0,
+  1040.0
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -96.0,
+   -14.01,
+   -104.0
+  ],
+  [
+   96.0,
+   72.87,
+   104.0
+  ]
+ ],
+ "kill_height": -24.01,
+ "ambience": {
+  "night": true,
+  "ambient": [
+   0.0392,
+   0.0392,
+   0.0392
+  ],
+  "lights": [
+   {
+    "color": [
+     0.6745,
+     0.5412,
+     0.4039
+    ],
+    "direction": [
+     0.0,
+     -1.0,
+     3.0
+    ]
+   },
+   {
+    "color": [
+     0.1176,
+     0.1569,
+     0.1569
+    ],
+    "direction": [
+     0.0,
+     -1.0,
+     0.0
+    ]
+   },
+   {
+    "color": [
+     0.0784,
+     0.1137,
+     0.1216
+    ],
+    "direction": [
+     0.2,
+     0.1,
+     0.1
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.1961,
+    0.2157,
+    0.1843
+   ],
+   "begin": 0.0,
+   "end": 100.0
+  },
+  "far_clip": 170.0
+ },
+ "sky": {
+  "triangles": 132,
+  "source": "level",
+  "radius": 325.48,
+  "height": [
+   -2.71,
+   167.4
+  ]
+ },
+ "spawns": [
+  {
+   "name": "Hostage Room",
+   "source": [
+    1312.0,
+    -100.0,
+    784.0
+   ],
+   "position": [
+    35.2,
+    -10.0,
+    -25.6
+   ],
+   "facing": [
+    -0.707,
+    -0.707
+   ]
+  },
+  {
+   "name": "Column Room",
+   "source": [
+    1547.0,
+    -100.0,
+    502.0
+   ],
+   "position": [
+    58.7,
+    -10.0,
+    -53.8
+   ],
+   "facing": [
+    -0.924,
+    -0.383
+   ]
+  },
+  {
+   "name": "Map centre",
+   "source": [
+    1015.8256429036459,
+    -99.99519602457683,
+    768.5454711914062
+   ],
+   "position": [
+    5.583,
+    -10.0,
+    -27.145
+   ],
+   "facing": [
+    -0.383,
+    -0.924
+   ]
+  }
+ ],
+ "materials": {
+  "rock": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/rock.tif.png"
+  },
+  "ground": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/ground.tif.png"
+  },
+  "lightglow01": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/lightglow01.tif.png"
+  },
+  "lightbulb": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/lightbulb.tif.png"
+  },
+  "a_ball_pipe": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/a_ball_pipe.tif.png"
+  },
+  "tree_root": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/tree_root.tif.png"
+  },
+  "treebranch": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/treebranch.tif.png"
+  },
+  "moss": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/moss.tif.png"
+  },
+  "treetrunk1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/treetrunk1.tif.png"
+  },
+  "metal_rust_trim": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/metal_rust_trim.tif.png"
+  },
+  "sky_top": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/sky_top.tif.png"
+  },
+  "sky": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/sky.tif.png"
+  },
+  "gras05S": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/gras05S.tif.png"
+  },
+  "vent": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/vent.tif.png"
+  },
+  "congo_grass": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/congo_grass.tif.png"
+  },
+  "branch1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/branch1.tif.png"
+  },
+  "congo4s_concrete02r": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/congo4s_concrete02r.tif.png"
+  },
+  "congo4s_concrete_floor01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/congo4s_concrete_floor01.tif.png"
+  },
+  "chainlink": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/chainlink.tif.png"
+  },
+  "woodboards": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/woodboards.tif.png"
+  },
+  "crate01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/crate01.tif.png"
+  },
+  "null_xmas": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP11/JUNK_TXR-a18b20459a-direct/null_xmas.bmp.png"
+  },
+  "congo4s_concrete_floor02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP11/MP11_TXR-25a9a648bc-b3cb7454/congo4s_concrete_floor02.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 27025,
+  "sky_triangles": 132,
+  "collision_triangles": 4728,
+  "dropped_faces": 188,
+  "skipped_collision_polygons": 6
+ }
+}

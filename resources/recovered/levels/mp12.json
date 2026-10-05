@@ -1,0 +1,304 @@
+{
+ "id": "MP12",
+ "name": "The Ruins",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp12.glb",
+ "source": "converted/levels/MP12/level.obj",
+ "source_origin": [
+  1320.9962158,
+  0.0,
+  1283.89624025
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -118.7,
+   -2.68,
+   -110.39
+  ],
+  [
+   118.7,
+   44.22,
+   110.39
+  ]
+ ],
+ "kill_height": -12.68,
+ "ambience": {
+  "night": false,
+  "ambient": [
+   0.1373,
+   0.1373,
+   0.149
+  ],
+  "lights": [
+   {
+    "color": [
+     0.498,
+     0.4588,
+     0.3765
+    ],
+    "direction": [
+     -0.99,
+     -0.16,
+     0.0
+    ]
+   },
+   {
+    "color": [
+     0.4196,
+     0.4,
+     0.3098
+    ],
+    "direction": [
+     0.5,
+     -30.0,
+     0.0
+    ]
+   },
+   {
+    "color": [
+     0.2392,
+     0.2392,
+     0.2196
+    ],
+    "direction": [
+     1.0,
+     0.1,
+     -2.0
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.0902,
+    0.0941,
+    0.102
+   ],
+   "begin": 20.0,
+   "end": 80.0
+  },
+  "far_clip": 80.0
+ },
+ "sky": {
+  "triangles": 216,
+  "source": "level",
+  "radius": 245.68,
+  "height": [
+   71.56,
+   155.28
+  ]
+ },
+ "spawns": [
+  {
+   "name": "Satchel Area",
+   "source": [
+    1365.0,
+    53.7982292175293,
+    1285.0
+   ],
+   "position": [
+    4.4,
+    5.38,
+    0.11
+   ],
+   "facing": [
+    0.0,
+    1.0
+   ]
+  },
+  {
+   "name": "Northwest Overlook",
+   "source": [
+    2071.0,
+    70.86679077148438,
+    1800.0
+   ],
+   "position": [
+    75.0,
+    7.087,
+    51.61
+   ],
+   "facing": [
+    -0.707,
+    -0.707
+   ]
+  },
+  {
+   "name": "Northeast Overlook",
+   "source": [
+    972.0,
+    35.494956970214844,
+    1897.0
+   ],
+   "position": [
+    -34.9,
+    3.549,
+    61.31
+   ],
+   "facing": [
+    0.924,
+    -0.383
+   ]
+  }
+ ],
+ "materials": {
+  "rockwall3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/rockwall3.tif.png"
+  },
+  "sky01": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/sky01.tif.png"
+  },
+  "thai3r_palmtrunk1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/thai3r_palmtrunk1.tif.png"
+  },
+  "thai2r_palmstalk": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/thai2r_palmstalk.tif.png"
+  },
+  "thai3r_palmfrond1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/thai3r_palmfrond1.tif.png"
+  },
+  "congotree": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/congotree.tif.png"
+  },
+  "rockwall2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/rockwall2.tif.png"
+  },
+  "rubblwall3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/rubblwall3.tif.png"
+  },
+  "hills": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/hills.tif.png"
+  },
+  "bldgtexcheditop": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/bldgtexcheditop.tif.png"
+  },
+  "column": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/column.tif.png"
+  },
+  "moss": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/moss.tif.png"
+  },
+  "bldgtex": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/bldgtex.tif.png"
+  },
+  "water": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/water.tif.png"
+  },
+  "shrub1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/shrub1.tif.png"
+  },
+  "congo_reed": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/congo_reed.tif.png"
+  },
+  "grasstex": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/grasstex.tif.png"
+  },
+  "barkstem5": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/barkstem5.tif.png"
+  },
+  "leaf32": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/leaf32.tif.png"
+  },
+  "crates_metal": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/crates_metal.tif.png"
+  },
+  "crate_wood01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/crate_wood01.tif.png"
+  },
+  "treetrunk3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/treetrunk3.tif.png"
+  },
+  "hills2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/hills2.tif.png"
+  },
+  "seal_radio_pole": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/seal_radio_pole.tif.png"
+  },
+  "thai3r_palmtrunk2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP12/MP12_TXR-afcbf3e78b-8f049909/thai3r_palmtrunk2.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 45406,
+  "sky_triangles": 216,
+  "collision_triangles": 9924,
+  "dropped_faces": 1075,
+  "skipped_collision_polygons": 135
+ }
+}

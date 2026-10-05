@@ -4,3 +4,4 @@
 
 [resource]
 script = ExtResource("1")
+recovered_model = "m4acarbine"

@@ -1,0 +1,556 @@
+{
+ "id": "MP1",
+ "name": "Blizzard",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp1.glb",
+ "source": "converted/levels/MP1/level.obj",
+ "source_origin": [
+  1863.46875,
+  0.0,
+  2240.0
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -133.65,
+   1.53,
+   -192.0
+  ],
+  [
+   133.65,
+   139.31,
+   192.0
+  ]
+ ],
+ "kill_height": -8.47,
+ "ambience": {
+  "night": true,
+  "ambient": [
+   0.0588,
+   0.0588,
+   0.0667
+  ],
+  "lights": [
+   {
+    "color": [
+     0.2,
+     0.2,
+     0.2196
+    ],
+    "direction": [
+     0.47,
+     -0.3,
+     0.47
+    ]
+   },
+   {
+    "color": [
+     0.0784,
+     0.0784,
+     0.0863
+    ],
+    "direction": [
+     -5.0,
+     -2.0,
+     0.0
+    ]
+   },
+   {
+    "color": [
+     0.0588,
+     0.0588,
+     0.0667
+    ],
+    "direction": [
+     0.0,
+     0.0,
+     -5.0
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.1255,
+    0.1373,
+    0.1569
+   ],
+   "begin": 0.1,
+   "end": 70.0
+  },
+  "far_clip": 72.0
+ },
+ "sky": {
+  "triangles": 116,
+  "source": "level",
+  "radius": 407.54,
+  "height": [
+   -3.81,
+   232.89
+  ]
+ },
+ "spawns": [
+  {
+   "name": "SEAL Base Overlook",
+   "source": [
+    2244.0,
+    87.65133666992188,
+    2783.0
+   ],
+   "position": [
+    38.053,
+    8.765,
+    54.3
+   ],
+   "facing": [
+    -0.707,
+    -0.707
+   ]
+  },
+  {
+   "name": "Terrorist Base Overlook",
+   "source": [
+    1817.0,
+    64.1747001300395,
+    1697.0
+   ],
+   "position": [
+    -4.647,
+    6.417,
+    -54.3
+   ],
+   "facing": [
+    0.707,
+    0.707
+   ]
+  },
+  {
+   "name": "Map centre",
+   "source": [
+    1825.3792317708333,
+    155.24310302734375,
+    2334.1775716145835
+   ],
+   "position": [
+    -3.809,
+    15.524,
+    9.418
+   ],
+   "facing": [
+    0.383,
+    -0.924
+   ]
+  }
+ ],
+ "materials": {
+  "alaska4d_mountians02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_mountians02.tif.png"
+  },
+  "alaska4d_snow02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_snow02.tif.png"
+  },
+  "alaska4d_lightbulb": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_lightbulb.tif.png"
+  },
+  "alaska4d_sky01": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_sky01.tif.png"
+  },
+  "alaska4d_dredgewood01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgewood01.tif.png"
+  },
+  "alaska4d_wood_indoor01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_wood_indoor01.tif.png"
+  },
+  "alaska4d_dredgemech03": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgemech03.tif.png"
+  },
+  "alaska4d_dredgewood04": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgewood04.tif.png"
+  },
+  "alaska4d_rustedsteel01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_rustedsteel01.tif.png"
+  },
+  "null_xmas": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP1/JUNK_TXR-0858e80270-direct/null_xmas.bmp.png"
+  },
+  "flare_red": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/flare_red.tif.png"
+  },
+  "alaska4d_roof03": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_roof03.tif.png"
+  },
+  "alaska4d_mountians": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_mountians.tif.png"
+  },
+  "alaska4d_dredgeoutside01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgeoutside01.tif.png"
+  },
+  "alaska4d_dredgemech06": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgemech06.tif.png"
+  },
+  "alaska4d_dredgewood03": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgewood03.tif.png"
+  },
+  "alaska4d_roof02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_roof02.tif.png"
+  },
+  "alaska4d_roof01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_roof01.tif.png"
+  },
+  "alaska4d_woodplank_int": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_woodplank_int.tif.png"
+  },
+  "alaska4d_window01": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_window01.tif.png"
+  },
+  "alaska4d_stovestack": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_stovestack.tif.png"
+  },
+  "alaska4d_mil_bed4": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_mil_bed4.tif.png"
+  },
+  "alaska4d_mil_bed1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_mil_bed1.tif.png"
+  },
+  "bush_snowy": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/bush_snowy.tif.png"
+  },
+  "alaska4d_mil_bed3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_mil_bed3.tif.png"
+  },
+  "alaska4d_shadow": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_shadow.tif.png"
+  },
+  "alaska4d_stove_side": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_stove_side.tif.png"
+  },
+  "alaska4d_stove_front": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_stove_front.tif.png"
+  },
+  "alaska4d_stove_top": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_stove_top.tif.png"
+  },
+  "box_lightwood_side1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/box_lightwood_side1.tif.png"
+  },
+  "box_lightwood_top": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/box_lightwood_top.tif.png"
+  },
+  "lensflare": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/lensflare.tif.png"
+  },
+  "woodpile": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/woodpile.tif.png"
+  },
+  "alaska4d_signnotres03": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_signnotres03.tif.png"
+  },
+  "alaska4d_woodtrim01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_woodtrim01.tif.png"
+  },
+  "alaska4d_signnotres01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_signnotres01.tif.png"
+  },
+  "alaska4d_signnotres02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_signnotres02.tif.png"
+  },
+  "alaska4d_tpole": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_tpole.tif.png"
+  },
+  "alaska4d_hinge01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_hinge01.tif.png"
+  },
+  "alaska4d_horns": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_horns.tif.png"
+  },
+  "alaska4d_hinge02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_hinge02.tif.png"
+  },
+  "alaska4d_dredgemech02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgemech02.tif.png"
+  },
+  "alaska4d_dredgemech04": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgemech04.tif.png"
+  },
+  "alaska4d_dredgemech08": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgemech08.tif.png"
+  },
+  "alaska4d_steelbeam01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_steelbeam01.tif.png"
+  },
+  "alaska4d_dredgewood02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgewood02.tif.png"
+  },
+  "alaska4d_dredgemech01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgemech01.tif.png"
+  },
+  "alaska4d_dredgemech05": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgemech05.tif.png"
+  },
+  "alaska4d_dredgemech07": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_dredgemech07.tif.png"
+  },
+  "alaska4d_tube01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_tube01.tif.png"
+  },
+  "alaska4d_gen01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_gen01.tif.png"
+  },
+  "srtap01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/srtap01.tif.png"
+  },
+  "dynobox01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/dynobox01.tif.png"
+  },
+  "dynobox02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/dynobox02.tif.png"
+  },
+  "dynamite01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/dynamite01.tif.png"
+  },
+  "alaska4d_woodpanels01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_woodpanels01.tif.png"
+  },
+  "alaska4d_woodplank": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_woodplank.tif.png"
+  },
+  "metaldirt": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/metaldirt.tif.png"
+  },
+  "radiofrnt": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/radiofrnt.tif.png"
+  },
+  "radiofrnt2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/radiofrnt2.tif.png"
+  },
+  "radiofrnt3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/radiofrnt3.tif.png"
+  },
+  "metalhole": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/metalhole.tif.png"
+  },
+  "alaska4d_treelimb01": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_treelimb01.tif.png"
+  },
+  "alaska4d_treebark": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_treebark.tif.png"
+  },
+  "alaska4d_beamoutdoor01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_beamoutdoor01.tif.png"
+  },
+  "alaska4d_rooftrim01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_rooftrim01.tif.png"
+  },
+  "alaska4d_snowt_spot01": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP1/MP1_TXR-2cbbcf2bef-7d86f9f2/alaska4d_snowt_spot01.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 74540,
+  "sky_triangles": 116,
+  "collision_triangles": 8947,
+  "dropped_faces": 1206,
+  "skipped_collision_polygons": 104
+ }
+}

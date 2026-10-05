@@ -1,0 +1,304 @@
+{
+ "id": "MP5",
+ "name": "Abandoned",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp5.glb",
+ "source": "converted/levels/MP5/level.obj",
+ "source_origin": [
+  1072.10192465,
+  0.0,
+  1380.0
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -76.79,
+   1.41,
+   -106.0
+  ],
+  [
+   76.79,
+   51.51,
+   106.0
+  ]
+ ],
+ "kill_height": -8.59,
+ "ambience": {
+  "night": true,
+  "ambient": [
+   0.0314,
+   0.0353,
+   0.0314
+  ],
+  "lights": [
+   {
+    "color": [
+     0.1804,
+     0.1804,
+     0.2431
+    ],
+    "direction": [
+     -0.59,
+     -0.59,
+     -0.55
+    ]
+   },
+   {
+    "color": [
+     0.0549,
+     0.0588,
+     0.0667
+    ],
+    "direction": [
+     0.63,
+     -0.58,
+     0.51
+    ]
+   },
+   {
+    "color": [
+     0.0314,
+     0.0314,
+     0.0235
+    ],
+    "direction": [
+     0.58,
+     -0.73,
+     -0.37
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "begin": 25.0,
+   "end": 55.0
+  },
+  "far_clip": 80.0
+ },
+ "sky": {
+  "triangles": 288,
+  "source": "level",
+  "radius": 245.68,
+  "height": [
+   79.31,
+   165.28
+  ]
+ },
+ "spawns": [
+  {
+   "name": "Central Overlook",
+   "source": [
+    841.0,
+    20.5,
+    1432.0
+   ],
+   "position": [
+    -23.11,
+    2.05,
+    5.2
+   ],
+   "facing": [
+    0.924,
+    -0.383
+   ]
+  },
+  {
+   "name": "Map centre",
+   "source": [
+    1049.2760416666667,
+    20.5,
+    1331.3505859375
+   ],
+   "position": [
+    -2.283,
+    2.05,
+    -4.865
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ]
+  },
+  {
+   "name": "Map centre 2",
+   "source": [
+    979.9151814778646,
+    448.8497314453125,
+    1192.328857421875
+   ],
+   "position": [
+    -9.219,
+    44.885,
+    -18.767
+   ],
+   "facing": [
+    0.383,
+    0.924
+   ]
+  }
+ ],
+ "materials": {
+  "a_rock02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/a_rock02.tif.png"
+  },
+  "ground01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/ground01.tif.png"
+  },
+  "moon": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/moon.tif.png"
+  },
+  "broken_wall": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/broken_wall.tif.png"
+  },
+  "barkpeel": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/barkpeel.tif.png"
+  },
+  "a_water": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/a_water.tif.png"
+  },
+  "a_bamboo": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/a_bamboo.tif.png"
+  },
+  "mossblend": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/mossblend.tif.png"
+  },
+  "thai2r_palmstalk": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/thai2r_palmstalk.tif.png"
+  },
+  "leafbig": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/leafbig.tif.png"
+  },
+  "thai3r_tree_banana1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/thai3r_tree_banana1.tif.png"
+  },
+  "thai3r_tree_banana2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/thai3r_tree_banana2.tif.png"
+  },
+  "stone01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/stone01.tif.png"
+  },
+  "thai2r_leaf_big1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/thai2r_leaf_big1.tif.png"
+  },
+  "fern": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/fern.tif.png"
+  },
+  "thai3r_palmfrond1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/thai3r_palmfrond1.tif.png"
+  },
+  "thai3r_palmtrunk1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/thai3r_palmtrunk1.tif.png"
+  },
+  "thai3r_palmtrunk2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/thai3r_palmtrunk2.tif.png"
+  },
+  "wall01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/wall01.tif.png"
+  },
+  "moss": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/moss.tif.png"
+  },
+  "dirt": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/dirt.tif.png"
+  },
+  "wood": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/wood.tif.png"
+  },
+  "treebranch": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/treebranch.tif.png"
+  },
+  "treetrunk": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/treetrunk.tif.png"
+  },
+  "sky01": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP5/MP5_TXR-b33d5aa802-ebf447db/sky01.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 35187,
+  "sky_triangles": 288,
+  "collision_triangles": 8357,
+  "dropped_faces": 0,
+  "skipped_collision_polygons": 37
+ }
+}

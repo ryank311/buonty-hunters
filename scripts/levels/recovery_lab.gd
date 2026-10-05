@@ -4,6 +4,7 @@ extends Node3D
 
 const CLIPS: Array[String] = ["seal_stand", "seal_walk", "seal_run", "seal_crouch"]
 const Library = preload("res://scripts/levels/recovery_library.gd")
+const Guns = preload("res://scripts/combat/recovered_weapons.gd")
 @onready var character: Node3D = $Character
 @onready var weapon: Node3D = $Weapon
 @onready var retargeted: Node3D = $Retargeted
@@ -19,6 +20,9 @@ var playback_paused: bool = false
 var collision_visible: bool = false
 var collision_overlay: MeshInstance3D
 var caption: Label3D
+var weapon_caption: Label3D
+var weapon_index := 0
+var guns: Array = []
 
 func _ready() -> void:
 	_prepare_materials(self)
@@ -43,7 +47,7 @@ func _ready() -> void:
 	# Both players advance from the same inspection clock.
 	caption = _label("", character.position + Vector3(0, 2.37, 0), 24)
 	_label("PLAYER • ORIGINAL RIG", retargeted.position + Vector3(0, 2.15, 0), 24)
-	_label("M4 CARBINE", weapon.position + Vector3(0, 0.8, 0), 24)
+	weapon_caption = _label("M4 CARBINE", weapon.position + Vector3(0, 0.8, 0), 24)
 	_label("CROSSROADS • RECOVERED PLAZA", Vector3(0, 3.1, 0), 28)
 	_box("WeaponStand", Vector3(1.5, 0.9, 0.65), weapon.position - Vector3(0, 0.45, 0), Color("535c58"))
 	_box("CharacterStand", Vector3(1.5, 0.08, 1.5), character.position - Vector3(0, 0.04, 0), Color("535c58"))
@@ -54,10 +58,43 @@ func _ready() -> void:
 		_label("INSPECTION BOUNDARY", Vector3(28.8 * side, 2, 0), 24)
 		_label("INSPECTION BOUNDARY", Vector3(0, 2, 28.8 * side), 24)
 	set_clip(clip_index)
+	guns = Guns.catalogue()
+	for index: int in range(guns.size()):
+		if guns[index].id == "m4acarbine":
+			set_gun(index)
+			break
 	browser = preload("res://scripts/ui/recovery_browser.gd").new()
 	browser.lab = self
 	add_child(browser)
 	update_player_preview()
+
+func set_gun(index: int) -> void:
+	weapon_index = posmod(index, guns.size())
+	var entry: Dictionary = guns[weapon_index]
+	var angle := weapon.rotation.y
+	remove_child(weapon)
+	weapon.queue_free()
+	weapon = Node3D.new()
+	weapon.name = "Weapon"
+	weapon.position = Vector3(5, 0.94, 8)
+	weapon.rotation.y = angle
+	add_child(weapon)
+	var model := load(entry.path).instantiate() as Node3D
+	var low := Guns.vector(entry.bounds_min)
+	var high := Guns.vector(entry.bounds_max)
+	model.position = -Vector3((low.x + high.x) * 0.5, low.y, (low.z + high.z) * 0.5)
+	weapon.add_child(model)
+	_prepare_materials(model)
+	weapon_caption.text = entry.name.to_upper()
+
+func equip_gun() -> void:
+	var profile := Guns.profile_for(guns[weapon_index].id)
+	if profile == null:
+		return
+	var combat: PracticeWeapon = get_parent().player.weapon
+	var slot := 1 if profile.hold == "pistol" else 0
+	combat.receive(slot, profile, profile.magazine_size, profile.starting_reserve)
+	combat.equip(slot)
 
 func update_player_preview() -> void:
 	var skin: SoldierSkin = get_parent().player.soldier.soldier_skin

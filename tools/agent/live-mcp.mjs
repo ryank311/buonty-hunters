@@ -13,7 +13,9 @@
 //   live-mcp.mjs call <tool> ['<json>']   call one tool and print the answer
 //   live-mcp.mjs launch [--play]          start a hidden sandbox game (or a visible one)
 //   live-mcp.mjs stop [port]              stop games started by `launch`
-//   --port=<n> on `call` picks the game when more than one is running.
+//   --port=<n> on `call` picks the game when more than one is running, and on `launch`
+//   asks for that port. Set SOCOM_LIVE_AGENT to a name of your own when several agents
+//   use these commands at once: each then sees and stops only the sandboxes it started.
 import { spawn } from "node:child_process";
 import { randomBytes } from "node:crypto";
 import { mkdirSync, openSync, readdirSync, readFileSync, rmSync } from "node:fs";
@@ -29,8 +31,10 @@ const manifestPath = join(root, "scripts/live/tools.json");
 const commands = ["status", "tools", "call", "launch", "stop"];
 const command = commands.includes(process.argv[2]) ? process.argv[2] : null;
 // Games remember who started them. Each agent's server is its own owner, so one agent
-// never stops another's game; the command line shares one name across invocations.
-const owner = command ? "cli" : `${process.argv[2] || "agent"}-${process.pid}`;
+// never stops another's game. The command line keeps one name across invocations:
+// "cli", or "cli:<SOCOM_LIVE_AGENT>" so that two agents at their shells stay apart.
+const cliName = (process.env.SOCOM_LIVE_AGENT || "").replace(/[^A-Za-z0-9_]/g, "");
+const owner = command ? (cliName ? `cli:${cliName}` : "cli") : `${process.argv[2] || "agent"}-${process.pid}`;
 const SANDBOX_PORTS = [47210, 47240];
 const NO_GAME =
   "No game with the live link is running. The player can start theirs (F5 in the Godot editor, or `tools/dev play`), " +
@@ -93,7 +97,7 @@ const mine = (game) => game.launched_by === owner;
 // A sandbox whose owner has gone is nobody's; anyone may use or stop it.
 const orphaned = (game) => {
   const pid = Number(String(game.launched_by).split("-").pop());
-  return game.launched_by !== "" && game.launched_by !== "cli" && Number.isInteger(pid) && !alive(pid);
+  return game.launched_by !== "" && !String(game.launched_by).startsWith("cli") && Number.isInteger(pid) && !alive(pid);
 };
 // What this agent may drive: the player's game, and sandboxes it started (or orphans).
 const usable = (game) => game.role === "player" || mine(game) || orphaned(game);
@@ -145,7 +149,7 @@ async function post(game, message, timeoutMs) {
   return await reply.json();
 }
 
-function freePort() {
+function freePort(wanted = 0) {
   const tryPort = (port) =>
     new Promise((done) => {
       const probe = createServer();
@@ -154,6 +158,10 @@ function freePort() {
     });
   return (async () => {
     const taken = new Set(registered().map((entry) => entry.port));
+    if (wanted) {
+      if (!taken.has(wanted) && (await tryPort(wanted))) return wanted;
+      throw new Problem(`Port ${wanted} is in use.`);
+    }
     for (let port = SANDBOX_PORTS[0]; port < SANDBOX_PORTS[1]; port += 1) {
       if (!taken.has(port) && (await tryPort(port))) return port;
     }
@@ -161,9 +169,9 @@ function freePort() {
   })();
 }
 
-async function launch(mode) {
+async function launch(mode, wanted = 0) {
   const play = mode === "play";
-  const port = await freePort();
+  const port = await freePort(wanted);
   const logs = join(registry, "logs");
   mkdirSync(logs, { recursive: true });
   const output = join(logs, `game-${port}.log`);
@@ -371,7 +379,7 @@ if (command) {
     } else if (command === "tools") {
       for (const tool of [...ownTools, ...gameTools()]) console.log(`${tool.name.padEnd(13)} ${tool.description.split(". ")[0]}.`);
     } else if (command === "launch") {
-      const game = await launch(rest.includes("--play") ? "play" : "sandbox");
+      const game = await launch(rest.includes("--play") ? "play" : "sandbox", flag("port") ? Number(flag("port")) : 0);
       console.log(`${game.role} game on port ${game.port} (pid ${game.pid})`);
     } else if (command === "stop") {
       const stopped = await stop(words[0] ? Number(words[0]) : 0);

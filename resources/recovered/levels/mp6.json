@@ -1,0 +1,424 @@
+{
+ "id": "MP6",
+ "name": "Desert Glory",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp6.glb",
+ "source": "converted/levels/MP6/level.obj",
+ "source_origin": [
+  2000.03125,
+  0.0,
+  2285.03125
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -282.07,
+   -3.34,
+   -296.55
+  ],
+  [
+   282.07,
+   21.33,
+   296.55
+  ]
+ ],
+ "kill_height": -13.35,
+ "ambience": {
+  "night": false,
+  "ambient": [
+   0.2196,
+   0.2,
+   0.1686
+  ],
+  "lights": [
+   {
+    "color": [
+     0.4078,
+     0.3765,
+     0.349
+    ],
+    "direction": [
+     1.0,
+     -0.6,
+     -0.7
+    ]
+   },
+   {
+    "color": [
+     0.1882,
+     0.1686,
+     0.1373
+    ],
+    "direction": [
+     -0.36,
+     0.74,
+     0.57
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.1804,
+    0.1843,
+    0.2314
+   ],
+   "begin": 30.0,
+   "end": 59.0
+  },
+  "far_clip": 60.0
+ },
+ "sky": {
+  "triangles": 103,
+  "source": "level",
+  "radius": 261.07,
+  "height": [
+   25.84,
+   143.46
+  ]
+ },
+ "spawns": [
+  {
+   "name": "Central Overlook",
+   "source": [
+    1779.0,
+    0.0,
+    1766.0
+   ],
+   "position": [
+    -22.103,
+    0.0,
+    -51.903
+   ],
+   "facing": [
+    -1.0,
+    0.0
+   ]
+  },
+  {
+   "name": "Hostage Building",
+   "source": [
+    1535.0,
+    80.0,
+    1598.0
+   ],
+   "position": [
+    -46.503,
+    8.0,
+    -68.703
+   ],
+   "facing": [
+    0.924,
+    0.383
+   ]
+  },
+  {
+   "name": "Hostage Cell",
+   "source": [
+    1776.0,
+    50.0,
+    1251.0
+   ],
+   "position": [
+    -22.403,
+    5.0,
+    -103.403
+   ],
+   "facing": [
+    -0.383,
+    -0.924
+   ]
+  }
+ ],
+ "materials": {
+  "low_poly": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/low_poly.tif.png"
+  },
+  "mp6_woodstairs": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_woodstairs.tif.png"
+  },
+  "afghan2r_truck_exhaust": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_truck_exhaust.tif.png"
+  },
+  "afghan2r_truck_fueltank": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_truck_fueltank.tif.png"
+  },
+  "afghan2r_truck_bumper": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_truck_bumper.tif.png"
+  },
+  "afghan2r_woodframe": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_woodframe.tif.png"
+  },
+  "gen_woodfloor_rotted": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/gen_woodfloor_rotted.tif.png"
+  },
+  "mp6_paint_can": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_paint_can.tif.png"
+  },
+  "flare_orange": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/flare_orange.tif.png"
+  },
+  "null_xmas": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP6/JUNK_TXR-7a346b3858-direct/null_xmas.bmp.png"
+  },
+  "mp6_grass_bushy": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_grass_bushy.tif.png"
+  },
+  "afghan2r_shadow_soft": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_shadow_soft.tif.png"
+  },
+  "gen_bottle": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/gen_bottle.tif.png"
+  },
+  "gen_plywood_wpaint": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/gen_plywood_wpaint.tif.png"
+  },
+  "mp6_shadow_square": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_shadow_square.tif.png"
+  },
+  "gen_cigarette": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/gen_cigarette.tif.png"
+  },
+  "afghan2r_truck_cabside": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_truck_cabside.tif.png"
+  },
+  "afghan2r_metal_rusted": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_metal_rusted.tif.png"
+  },
+  "barrelside": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/barrelside.tif.png"
+  },
+  "barrel_brown": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/barrel_brown.tif.png"
+  },
+  "mp6_wall_tile1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_wall_tile1.tif.png"
+  },
+  "gen_cloud_n_sun_256x256": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/gen_cloud_n_sun_256x256.tif.png"
+  },
+  "bomb_glow": {
+   "mode": "ALPHACLIP",
+   "sky": true,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/bomb_glow.tif.png"
+  },
+  "mp6_rubble_dirt": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_rubble_dirt.tif.png"
+  },
+  "afghan2r_floor_dirty": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_floor_dirty.tif.png"
+  },
+  "afghan2r_rock1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_rock1.tif.png"
+  },
+  "afghan2r_wall_dirty": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_wall_dirty.tif.png"
+  },
+  "orando_wheel_front": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/orando_wheel_front.tif.png"
+  },
+  "afghan2r_wallrock": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_wallrock.tif.png"
+  },
+  "afghan2r_truck_trailer": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_truck_trailer.tif.png"
+  },
+  "afghan2r_truck_canopy": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_truck_canopy.tif.png"
+  },
+  "afghan2r_truck_canopyback": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_truck_canopyback.tif.png"
+  },
+  "beam_rusty": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/beam_rusty.tif.png"
+  },
+  "beam_steel_end": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/beam_steel_end.tif.png"
+  },
+  "beam_steel_top": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/beam_steel_top.tif.png"
+  },
+  "beam_steel_side": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/beam_steel_side.tif.png"
+  },
+  "afghan2r_sign_stayout": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_sign_stayout.tif.png"
+  },
+  "afghan2r_oilstain1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_oilstain1.tif.png"
+  },
+  "orando_tread": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/orando_tread.tif.png"
+  },
+  "mp6_stepstain2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_stepstain2.tif.png"
+  },
+  "mp6_stepstain1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_stepstain1.tif.png"
+  },
+  "mp6_balcony_rail": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_balcony_rail.tif.png"
+  },
+  "mp6_interiorwall": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_interiorwall.tif.png"
+  },
+  "mp6_shadow_jailbars": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_shadow_jailbars.tif.png"
+  },
+  "mp6_fire_coals": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_fire_coals.tif.png"
+  },
+  "mp6_wall_bullets": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/mp6_wall_bullets.tif.png"
+  },
+  "afghan2r_wall_top": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP6/MP6_TXR-5a9bad0104-86f5b977/afghan2r_wall_top.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 21410,
+  "sky_triangles": 103,
+  "collision_triangles": 7533,
+  "dropped_faces": 5135,
+  "skipped_collision_polygons": 423
+ }
+}

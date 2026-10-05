@@ -124,19 +124,27 @@ func load_recovery() -> void:
 	_replace_level(load("res://scenes/levels/recovery_lab.tscn"), "recovery")
 	hud.notify("Recovery Lab • %s animation · %s pause · %s collision · %s step" % [PlayerInput.function_key_hint(6), PlayerInput.function_key_hint(7), PlayerInput.function_key_hint(8), PlayerInput.function_key_hint(9)])
 
-func _replace_level(scene: PackedScene, key: String) -> void:
+## A recovered disc map, by id (MP72, M51...); see scripts/levels/recovered_map.gd.
+func load_map(id: String) -> void:
+	_replace_level(null, "map:" + id.to_upper(), RecoveredMap.new(id.to_upper()))
+	var spawn := level.get_node("Spawns").get_child(0)
+	hud.notify("%s • %s • %d spawns · %s cycles them" % [level.data.name, spawn.name, level.get_node("Spawns").get_child_count(), "Next spawn"])
+
+func _replace_level(scene: PackedScene, key: String, node: Node3D = null) -> void:
 	if is_instance_valid(level):
 		remove_child(level)
 		level.queue_free()
 	current_level = key
 	in_lab = key == "lab"
 	spawn_index = 0
-	level = scene.instantiate()
+	level = node if node != null else scene.instantiate()
 	add_child(level)
 	level.process_mode = Node.PROCESS_MODE_DISABLED if modal else Node.PROCESS_MODE_INHERIT
 	reset_player()
 
 func level_title() -> String:
+	if current_level.begins_with("map:"):
+		return level.data.name.to_upper()
 	return "RECOVERY LAB" if current_level == "recovery" else "MOVEMENT LAB" if in_lab else "OLD QUARTER"
 
 func reset_player() -> void:
@@ -173,7 +181,7 @@ func _process(delta: float) -> void:
 		elapsed += delta
 		if lap_running:
 			lap_time += delta
-		if player.global_position.y < -8:
+		if player.global_position.y < level.get_meta("kill_height", -8.0):
 			reset_player()
 			hud.notify("Returned to spawn")
 	hud.update_display(delta)

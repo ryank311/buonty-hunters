@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1")
+recovered_model = "mp5"
 display_name = "SUBMACHINE GUN"
 automatic = true
 magazine_size = 30

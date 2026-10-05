@@ -26,6 +26,11 @@ Usage: tools/dev <command>
                         --step='<json>', --out=<dir>.
   import                Re-import assets and rebuild the global class cache. Needed
                         after adding an asset or a new `class_name`.
+  build linux [--debug]  Export, audit and smoke-test a native Linux x86_64 build.
+                        Downloads matching, checksum-verified templates on first use.
+  deploy linux USER@HOST [--port PORT] [--build DIR]
+                        Install the latest build over SSH, headless-test it on Linux,
+                        then select it for the stable Steam launcher.
   blender <command>     The agents' Blender and the .blend -> .glb pipeline: status,
                         start, stop, export, preview. `tools/dev blender help` lists them.
   doctor                Check the toolchain, the MCP setup, and who else is using the project.
@@ -331,6 +336,7 @@ case "$command" in
 	test) cmd_test "$@" ;;
 	shot) cmd_shot "$@" ;;
 	import) cmd_import ;;
+	build|deploy) exec python3 "$root/tools/build/linux.py" "$command" "$@" ;;
 	doctor) cmd_doctor ;;
 	blender)
 		source "$root/tools/agent/blender/commands.sh"

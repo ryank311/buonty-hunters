@@ -63,7 +63,8 @@ func _run() -> void:
 	var start := player.position
 	await walk(Vector2(0,-1), 60)
 	var forward_distance := start.distance_to(player.position)
-	check(forward_distance > 3.85 and forward_distance < 4.1, "Weighted acceleration reaches the run speed (%.3f m / first second)" % forward_distance)
+	# The original covered 5.90 m in its first second from rest (59.04 source units).
+	check(forward_distance > 5.8 and forward_distance < 6.0, "Weighted acceleration reaches the run speed (%.3f m / first second)" % forward_distance)
 	await place(Vector3(0, 0.1, 25))
 	start = player.position
 	await walk(Vector2(1,-1), 60)
@@ -79,7 +80,7 @@ func _run() -> void:
 	for index: int in range(65):
 		await frames(1)
 		peak = maxf(peak, player.position.y)
-	check(peak > 0.55 and peak < 0.8 and player.is_on_floor(), "Jump reaches target height and lands (%.3f m)" % peak)
+	check(peak > 0.32 and peak < 0.46 and player.is_on_floor(), "Jump reaches the original 0.39 m apex and lands (%.3f m)" % peak)
 	check(player.request_stance(1), "Crouch transition succeeds in open space")
 	player.global_position = Vector3(-10, 0.08, 2)
 	await frames(15)
@@ -156,11 +157,12 @@ func _run() -> void:
 	check(player.stance.current == 0 and player.weapon.ammo == 30 and player.velocity.length() < 1.0, "Repeated resets restore stance and ammunition")
 	session.load_level(false)
 	await frames(10)
+	# Long enough to climb and stand on the balcony, not so long as to run off its far edge.
 	await place(Vector3(-5,0.1,-26), PI)
-	await walk(Vector2(0,-1), 195)
+	await walk(Vector2(0,-1), 135)
 	check(player.position.y > 3.0 and player.position.z > -15.1, "Town west stair reaches balcony (%s)" % player.position)
 	await place(Vector3(17,0.1,-26), PI)
-	await walk(Vector2(0,-1), 195)
+	await walk(Vector2(0,-1), 135)
 	check(player.position.y > 3.0 and player.position.z > -15.1, "Town east stair reaches balcony (%s)" % player.position)
 	var all_spawns_clear := true
 	for marker: Marker3D in session.level.get_node("Spawns").get_children():

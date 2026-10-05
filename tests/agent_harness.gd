@@ -33,7 +33,8 @@ func _run() -> void:
 	await H.scenario(self, "lab_start")
 	var run: Dictionary = await H.step(self, 60, {"forward": 1.0})
 	var distance: float = 26.0 - run.player.pos[2]
-	check(distance > 3.85 and distance < 4.1, "Sixty ticks of forward input cover the first-second distance (%.3f m)" % distance)
+	# The original covered 5.90 m in its first second from rest (59.04 source units).
+	check(distance > 5.8 and distance < 6.0, "Sixty ticks of forward input cover the first-second distance (%.3f m)" % distance)
 	await H.scenario(self, "lab_start")
 	var fast: Dictionary = await H.step(self, 60, {"forward": 1.0, "speed": 4})
 	check(fast.player.pos == run.player.pos, "Fast-forward lands on the same position as real time (%s)" % str(fast.player.pos))
@@ -42,7 +43,7 @@ func _run() -> void:
 	var peak := 0.0
 	for sample: Array in jump.trace:
 		peak = maxf(peak, sample[2])
-	check(peak > 0.5 and jump.player.on_floor, "A tapped jump leaves the floor and lands (%.2f m)" % peak)
+	check(peak > 0.32 and jump.player.on_floor, "A tapped jump leaves the floor and lands (%.2f m)" % peak)
 	var low: Dictionary = await H.scenario(self, "lab_low_ceiling")
 	var rise: Dictionary = await H.step(self, 20, {"tap": ["jump"]})
 	check(low.player.stance == "crouch" and rise.player.stance == "crouch", "Real input cannot stand under the low ceiling")

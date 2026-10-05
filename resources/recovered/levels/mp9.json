@@ -1,0 +1,454 @@
+{
+ "id": "MP9",
+ "name": "Bitter Jungle",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp9.glb",
+ "source": "converted/levels/MP9/level.obj",
+ "source_origin": [
+  1865.4109681,
+  0.0,
+  1143.8203174999999
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -151.83,
+   -0.78,
+   -99.11
+  ],
+  [
+   151.83,
+   42.85,
+   99.11
+  ]
+ ],
+ "kill_height": -10.78,
+ "ambience": {
+  "night": false,
+  "ambient": [
+   0.0902,
+   0.098,
+   0.0902
+  ],
+  "lights": [
+   {
+    "color": [
+     0.251,
+     0.251,
+     0.2314
+    ],
+    "direction": [
+     1.0,
+     -2.0,
+     1.0
+    ]
+   },
+   {
+    "color": [
+     0.098,
+     0.0902,
+     0.1255
+    ],
+    "direction": [
+     -1.0,
+     0.0,
+     -1.0
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.4157,
+    0.4353,
+    0.2941
+   ],
+   "begin": 2.0,
+   "end": 90.0
+  },
+  "far_clip": 180.0
+ },
+ "sky": {
+  "triangles": 216,
+  "source": "level",
+  "radius": 414.89,
+  "height": [
+   130.48,
+   293.35
+  ]
+ },
+ "spawns": [
+  {
+   "name": "Southern Cave",
+   "source": [
+    2533.0,
+    39.237707307662774,
+    1592.0
+   ],
+   "position": [
+    66.759,
+    3.924,
+    44.818
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  },
+  {
+   "name": "Map centre",
+   "source": [
+    1916.2985026041667,
+    7.970454692840581,
+    1143.464111328125
+   ],
+   "position": [
+    5.089,
+    0.797,
+    -0.036
+   ],
+   "facing": [
+    -0.707,
+    -0.707
+   ]
+  },
+  {
+   "name": "Map centre 2",
+   "source": [
+    2011.4499918619792,
+    6.1712958017984985,
+    1019.0066935221354
+   ],
+   "position": [
+    14.604,
+    0.617,
+    -12.481
+   ],
+   "facing": [
+    -0.924,
+    0.383
+   ]
+  }
+ ],
+ "materials": {
+  "treetop3": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/treetop3.tif.png"
+  },
+  "facadetrees": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/facadetrees.tif.png"
+  },
+  "congo2_ground01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo2_ground01.tif.png"
+  },
+  "congo2_ground02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo2_ground02.tif.png"
+  },
+  "red_bark": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/red_bark.tif.png"
+  },
+  "woodgreenpaint": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/woodgreenpaint.tif.png"
+  },
+  "metalroof": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/metalroof.tif.png"
+  },
+  "box_lightwood_side1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/box_lightwood_side1.tif.png"
+  },
+  "box_lightwood_top": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/box_lightwood_top.tif.png"
+  },
+  "barrel_brown": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/barrel_brown.tif.png"
+  },
+  "dynamite01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/dynamite01.tif.png"
+  },
+  "congo2_rock01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo2_rock01.tif.png"
+  },
+  "null_xmas": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP9/JUNK_TXR-9ce7d070c1-direct/null_xmas.bmp.png"
+  },
+  "congo2_cave03": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo2_cave03.tif.png"
+  },
+  "congo_reed": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo_reed.tif.png"
+  },
+  "leaf": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/leaf.tif.png"
+  },
+  "palmtrunk": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/palmtrunk.tif.png"
+  },
+  "barkpeel": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/barkpeel.tif.png"
+  },
+  "congo4s_leaf04": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo4s_leaf04.tif.png"
+  },
+  "congo2_trunk01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo2_trunk01.tif.png"
+  },
+  "tree_root": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/tree_root.tif.png"
+  },
+  "branch1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/branch1.tif.png"
+  },
+  "treetrunk": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/treetrunk.tif.png"
+  },
+  "congo2_leaves7": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo2_leaves7.tif.png"
+  },
+  "leaf_small1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/leaf_small1.tif.png"
+  },
+  "leaves01": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/leaves01.tif.png"
+  },
+  "ammobox": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/ammobox.tif.png"
+  },
+  "sandbag2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/sandbag2.tif.png"
+  },
+  "treetrunk2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/treetrunk2.tif.png"
+  },
+  "bamboo_wall": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/bamboo_wall.tif.png"
+  },
+  "roof1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/roof1.tif.png"
+  },
+  "congo2_light1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo2_light1.tif.png"
+  },
+  "congo2_water1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo2_water1.tif.png"
+  },
+  "wood_dark": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/wood_dark.tif.png"
+  },
+  "treebranch": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/treebranch.tif.png"
+  },
+  "congo3r_woodboards": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo3r_woodboards.tif.png"
+  },
+  "gen_plywood_wpaint": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/gen_plywood_wpaint.tif.png"
+  },
+  "dust01": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/dust01.tif.png"
+  },
+  "hut03_moss02": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/hut03_moss02.tif.png"
+  },
+  "congo3r_camo_net": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo3r_camo_net.tif.png"
+  },
+  "srtap01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/srtap01.tif.png"
+  },
+  "dynobox01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/dynobox01.tif.png"
+  },
+  "dynobox02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/dynobox02.tif.png"
+  },
+  "treetrunk3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/treetrunk3.tif.png"
+  },
+  "plywood1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/plywood1.tif.png"
+  },
+  "map2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/map2.tif.png"
+  },
+  "map1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/map1.tif.png"
+  },
+  "congo18_sky01": {
+   "mode": "ALPHACLIP",
+   "sky": true,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo18_sky01.tif.png"
+  },
+  "treebranch2": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/treebranch2.tif.png"
+  },
+  "congo2_cave02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo2_cave02.tif.png"
+  },
+  "congo2_cave01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/congo2_cave01.tif.png"
+  },
+  "rock3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP9/MP9_TXR-dee09b4434-48eb6447/rock3.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 65622,
+  "sky_triangles": 216,
+  "collision_triangles": 13237,
+  "dropped_faces": 2421,
+  "skipped_collision_polygons": 125
+ }
+}

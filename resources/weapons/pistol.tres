@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1")
+recovered_model = "baretta_m9"
 display_name = "SERVICE PISTOL"
 automatic = false
 magazine_size = 12

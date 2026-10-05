@@ -80,7 +80,8 @@ func _run() -> void:
 				await H.step(self, 30, {"right": side, "hold": gait})
 				var aim := direction(skin)
 				var legs: float = driver.last_pose[thigh].basis.get_rotation_quaternion().angle_to(driver.last_base_pose[thigh].basis.get_rotation_quaternion())
-				check("strafe" in driver.active_clip and gun.fire_blend > 0.99 and aim.z < -0.95 and absf(aim.x) < 0.2 and legs < 0.002, "Aimed %s %s strafe keeps the torso and weapon facing forward over the strafe legs (aim %s, clip %s)" % [weapon, "left" if side < 0 else "right", aim, driver.active_clip])
+				var sideways: bool = "strafe" in driver.active_clip or "_run_90" in driver.active_clip
+				check(sideways and gun.fire_blend > 0.99 and aim.z < -0.95 and absf(aim.x) < 0.2 and legs < 0.002, "Aimed %s %s strafe keeps the torso and weapon facing forward over the strafe legs (aim %s, clip %s)" % [weapon, "left" if side < 0 else "right", aim, driver.active_clip])
 	await H.scenario(self, "lab_start", {"roster": false, "freeze": true, "stance": "prone", "pitch": 0.0})
 	await H.step(self, 20, {"hold": ["aim"]})
 	await H.step(self, 5, {"tap": ["fire"], "hold": ["aim"]})

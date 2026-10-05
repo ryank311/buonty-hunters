@@ -1,0 +1,610 @@
+{
+ "id": "MP73",
+ "name": "Sandstorm",
+ "mode": "Multiplayer",
+ "model": "res://art/models/recovered_map_mp73.glb",
+ "source": "converted/levels/MP73/level.obj",
+ "source_origin": [
+  1678.71875,
+  0.0,
+  1453.6875
+ ],
+ "scale": 0.1,
+ "bounds": [
+  [
+   -288.04,
+   -8.81,
+   -311.79
+  ],
+  [
+   288.04,
+   100.15,
+   311.79
+  ]
+ ],
+ "kill_height": -18.81,
+ "ambience": {
+  "night": true,
+  "ambient": [
+   0.1137,
+   0.1098,
+   0.102
+  ],
+  "lights": [
+   {
+    "color": [
+     0.251,
+     0.2392,
+     0.2196
+    ],
+    "direction": [
+     -1.0,
+     -0.5,
+     -0.3
+    ]
+   },
+   {
+    "color": [
+     0.0314,
+     0.0353,
+     0.0392
+    ],
+    "direction": [
+     0.5,
+     -0.3,
+     -1.0
+    ]
+   }
+  ],
+  "fog": {
+   "enabled": true,
+   "color": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "begin": 10.0,
+   "end": 70.0
+  },
+  "far_clip": 90.0
+ },
+ "sky": {
+  "triangles": 182,
+  "source": "level",
+  "radius": 282.94,
+  "height": [
+   9.56,
+   155.96
+  ]
+ },
+ "spawns": [
+  {
+   "name": "Communication Center",
+   "source": [
+    946.0,
+    105.0,
+    1092.0
+   ],
+   "position": [
+    -73.272,
+    10.5,
+    -36.169
+   ],
+   "facing": [
+    -0.707,
+    0.707
+   ]
+  },
+  {
+   "name": "Map centre",
+   "source": [
+    1385.0935465494792,
+    98.44673665364584,
+    1520.7669677734375
+   ],
+   "position": [
+    -29.363,
+    9.845,
+    6.708
+   ],
+   "facing": [
+    -0.924,
+    -0.383
+   ]
+  },
+  {
+   "name": "Map centre 2",
+   "source": [
+    1267.7831624348958,
+    73.76827494303383,
+    1404.994140625
+   ],
+   "position": [
+    -41.094,
+    7.377,
+    -4.869
+   ],
+   "facing": [
+    0.0,
+    -1.0
+   ]
+  }
+ ],
+ "materials": {
+  "afghan2r_wall_dirty": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/afghan2r_wall_dirty.tif.png"
+  },
+  "afghan2r_wall_top": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/afghan2r_wall_top.tif.png"
+  },
+  "congo4s_metal02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/congo4s_metal02.tif.png"
+  },
+  "metal_corigated": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/metal_corigated.tif.png"
+  },
+  "barrelside": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/barrelside.tif.png"
+  },
+  "sandbag2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/sandbag2.tif.png"
+  },
+  "camonet": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/camonet.tif.png"
+  },
+  "congo4s_pipe1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/congo4s_pipe1.tif.png"
+  },
+  "afg1s_sidewalk": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/afg1s_sidewalk.tif.png"
+  },
+  "afg1s_concrete_edge": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/afg1s_concrete_edge.tif.png"
+  },
+  "afg1s_floorconc": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/afg1s_floorconc.tif.png"
+  },
+  "congo4s_concrete_floor02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/congo4s_concrete_floor02.tif.png"
+  },
+  "woodwall_white": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/woodwall_white.tif.png"
+  },
+  "cinder_base_stain": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/cinder_base_stain.tif.png"
+  },
+  "metal_bars": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/metal_bars.tif.png"
+  },
+  "beach_back": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/beach_back.tif.png"
+  },
+  "shadow_shelves": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/shadow_shelves.tif.png"
+  },
+  "shadow1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/shadow1.tif.png"
+  },
+  "metallight": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/metallight.tif.png"
+  },
+  "window01": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/window01.tif.png"
+  },
+  "ammobox": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/ammobox.tif.png"
+  },
+  "radio3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/radio3.tif.png"
+  },
+  "congo4s_barrel01_top": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/congo4s_barrel01_top.tif.png"
+  },
+  "radio1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/radio1.tif.png"
+  },
+  "lightbulb": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/lightbulb.tif.png"
+  },
+  "sky_star": {
+   "mode": "ALPHACLIP",
+   "sky": true,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/shared/MP73/C73_TXR-1cf663fcf4-1ee24184/sky_star.tif.png"
+  },
+  "desk2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/desk2.tif.png"
+  },
+  "afg1s_floor1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/afg1s_floor1.tif.png"
+  },
+  "newspaper": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/newspaper.tif.png"
+  },
+  "electpanel": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/electpanel.tif.png"
+  },
+  "quilt": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/quilt.tif.png"
+  },
+  "door_old": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/door_old.tif.png"
+  },
+  "wood_crate01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/wood_crate01.tif.png"
+  },
+  "barrel_body": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/barrel_body.tif.png"
+  },
+  "wood_crate02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/wood_crate02.tif.png"
+  },
+  "binder01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/binder01.tif.png"
+  },
+  "wiremesh": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/wiremesh.tif.png"
+  },
+  "woodframe": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/woodframe.tif.png"
+  },
+  "metalhole": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/metalhole.tif.png"
+  },
+  "palette_stak1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/palette_stak1.tif.png"
+  },
+  "palette_stak2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/palette_stak2.tif.png"
+  },
+  "palette_stak3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/palette_stak3.tif.png"
+  },
+  "sand": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/sand.tif.png"
+  },
+  "congo4s_concrete02r": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/congo4s_concrete02r.tif.png"
+  },
+  "wood_old_64": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/wood_old_64.tif.png"
+  },
+  "congo4s_concrete03r": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/congo4s_concrete03r.tif.png"
+  },
+  "waterdirty": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/waterdirty.tif.png"
+  },
+  "thai2r_tire_old": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/thai2r_tire_old.tif.png"
+  },
+  "vent01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/vent01.tif.png"
+  },
+  "aagun01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/aagun01.tif.png"
+  },
+  "utilitybox01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/utilitybox01.tif.png"
+  },
+  "messy_ground": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/messy_ground.tif.png"
+  },
+  "dirtroad": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/dirtroad.tif.png"
+  },
+  "afghan2r_wallrock": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/afghan2r_wallrock.tif.png"
+  },
+  "rock3": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/rock3.tif.png"
+  },
+  "rock_broken": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/rock_broken.tif.png"
+  },
+  "null_xmas": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP73/JUNK_TXR-38371a9bf0-direct/null_xmas.bmp.png"
+  },
+  "comet": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/comet.tif.png"
+  },
+  "gazelleall": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/gazelleall.tif.png"
+  },
+  "gen_cloudy_blue_sky": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP73/C73_TXR-1cf663fcf4-1ee24184/gen_cloudy_blue_sky.tif.png"
+  },
+  "gen_cloudy_blue_top": {
+   "mode": "OPAQUE",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP73/C73_TXR-1cf663fcf4-1ee24184/gen_cloudy_blue_top.tif.png"
+  },
+  "mountain": {
+   "mode": "ALPHACLIP",
+   "sky": true,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/shared/MP73/C73_TXR-1cf663fcf4-1ee24184/mountain.tif.png"
+  },
+  "bomb_glow": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/shared/MP73/C73_TXR-1cf663fcf4-1ee24184/bomb_glow.tif.png"
+  },
+  "radio2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/radio2.tif.png"
+  },
+  "congo4s_metal04": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/congo4s_metal04.tif.png"
+  },
+  "map01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/map01.tif.png"
+  },
+  "afg1s_wall2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/afg1s_wall2.tif.png"
+  },
+  "mosque_trim1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/mosque_trim1.tif.png"
+  },
+  "mosque_rug1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/mosque_rug1.tif.png"
+  },
+  "crate_wood01": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/crate_wood01.tif.png"
+  },
+  "can1": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/can1.tif.png"
+  },
+  "can2": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/can2.tif.png"
+  },
+  "rtower1": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/rtower1.tif.png"
+  },
+  "utilitybox02": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/utilitybox02.tif.png"
+  },
+  "grass_thick": {
+   "mode": "ALPHACLIP",
+   "sky": false,
+   "translucent": true,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/grass_thick.tif.png"
+  },
+  "woodboards": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/woodboards.tif.png"
+  },
+  "grass_single": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/grass_single.tif.png"
+  },
+  "woodsides": {
+   "mode": "OPAQUE",
+   "sky": false,
+   "translucent": false,
+   "texture": "previous/recovery/converted/textures/levels/MP73/MP73_TXR-d1a6a39795-0dc8d63d/woodsides.tif.png"
+  }
+ },
+ "counts": {
+  "triangles": 64088,
+  "sky_triangles": 182,
+  "collision_triangles": 16195,
+  "dropped_faces": 1954,
+  "skipped_collision_polygons": 135
+ }
+}

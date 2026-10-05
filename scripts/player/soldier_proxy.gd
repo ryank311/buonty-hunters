@@ -77,6 +77,11 @@ var landing_strength: float = 0.0
 var landing_time: float = 1.0
 var landing_feet: Array[Transform3D] = []
 var jump_active: bool = false
+## A climb playing (scripts/player/traversal.gd): its clip, time, and the root height
+## the skin shows while the body carries the rise. Empty when not climbing.
+var traversal_clip: String = ""
+var traversal_time: float = 0.0
+var traversal_root: float = 0.0
 var jump_launch_speed: float = 1.0
 var jump_phase: float = 0.0
 var jump_blend: float = 0.0

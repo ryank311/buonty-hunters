@@ -4,6 +4,7 @@
 
 [resource]
 script = ExtResource("1")
+recovered_model = "remington870"
 display_name = "COMBAT SHOTGUN"
 automatic = false
 magazine_size = 6
