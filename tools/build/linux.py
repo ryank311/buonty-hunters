@@ -11,6 +11,7 @@ import shlex
 import shutil
 import subprocess
 import sys
+import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -117,12 +118,26 @@ def validate_bundle(directory):
 
 
 def build(args):
+    # tools/dev is a shell script in a shared checkout. Snapshot its bytes so a
+    # concurrent edit cannot change the commands a running shell reads next.
+    # A script in .build/ resolves its parent as the same repository root.
+    with tempfile.NamedTemporaryFile(prefix="dev-build-", dir=CACHE, delete=False) as stream:
+        snapshot = Path(stream.name)
+        stream.write(DEV.read_bytes())
+    snapshot.chmod(0o755)
+    try:
+        return _build(args, snapshot)
+    finally:
+        snapshot.unlink(missing_ok=True)
+
+
+def _build(args, dev):
     if "McpBridge=" in (ROOT / "project.godot").read_text():
         raise RuntimeError("An MCP bridge is active in project.godot. Finish that agent session before exporting; do not ship its temporary autoload.")
-    version = output([DEV, "godot", "--version"])
+    version = output([dev, "godot", "--version"])
     templates(version)
-    run([DEV, "import"])
-    run([DEV, "check"])
+    run([dev, "import"])
+    run([dev, "check"])
     revision = output(["git", "rev-parse", "--short=10", "HEAD"])
     status = output(["git", "status", "--porcelain", "--untracked-files=normal"])
     mode = "debug" if args.debug else "release"
@@ -135,7 +150,7 @@ def build(args):
     logs = CACHE / "logs" / build_id
     logs.mkdir(parents=True)
     print(f"Exporting {build_id} ({len(resources)} runtime resources)...", flush=True)
-    logged([DEV, "godot", "--headless", "--path", ROOT, "--export-" + mode, "Linux", directory / "socom.x86_64"], logs / "export.log")
+    logged([dev, "godot", "--headless", "--path", ROOT, "--export-" + mode, "Linux", directory / "socom.x86_64"], logs / "export.log")
     with (directory / "socom.x86_64").open("rb") as stream:
         header = stream.read(20)
     if header[:6] != b"\x7fELF\x02\x01" or int.from_bytes(header[18:20], "little") != 62:
@@ -146,8 +161,8 @@ def build(args):
     # The editor can read the platform-neutral PCK on this Mac. Use --main-pack so
     # missing packed files cannot silently fall back to the source checkout.
     print("Auditing packed JSON/models and starting the packaged game headlessly...", flush=True)
-    logged([DEV, "godot", "--headless", "--path", directory, "--main-pack", directory / "socom.pck", "--script", Path(__file__).with_name("verify_pack.gd"), "--", directory / "build-info.json"], logs / "audit.log", required="0 failures", timeout=120)
-    logged([DEV, "godot", "--headless", "--path", directory, "--main-pack", directory / "socom.pck", "--quit-after", "90", "--", "--qa"], logs / "smoke.log", timeout=120)
+    logged([dev, "godot", "--headless", "--path", directory, "--main-pack", directory / "socom.pck", "--script", Path(__file__).with_name("verify_pack.gd"), "--", directory / "build-info.json"], logs / "audit.log", required="0 failures", timeout=120)
+    logged([dev, "godot", "--headless", "--path", directory, "--main-pack", directory / "socom.pck", "--quit-after", "90", "--", "--qa"], logs / "smoke.log", timeout=120)
     checksums(directory)
     validate_bundle(directory)
     link = directory.parent / ".latest-new"
@@ -156,6 +171,7 @@ def build(args):
     link.replace(directory.parent / "latest")
     size = sum(p.stat().st_size for p in directory.iterdir() if p.is_file()) / (1024 * 1024)
     print(f"BUILD: ok ({size:.1f} MiB)\n{directory}\nLogs: {logs}", flush=True)
+    return directory
 
 
 def ssh_command(target, port, script, *args):
@@ -228,9 +244,13 @@ echo "STEAM_LAUNCHER: $base/play.sh"
 '''
 
 
-def deploy(args):
-    if not re.fullmatch(r"[A-Za-z0-9_][A-Za-z0-9_.-]*(?:@[A-Za-z0-9][A-Za-z0-9_.-]*)?", args.target):
+def validate_target(target):
+    if not re.fullmatch(r"[A-Za-z0-9_][A-Za-z0-9_.-]*(?:@[A-Za-z0-9][A-Za-z0-9_.-]*)?", target):
         raise RuntimeError("Use a plain SSH alias or user@hostname/IP (no shell arguments). Configure keys/proxies in ~/.ssh/config.")
+
+
+def deploy(args):
+    validate_target(args.target)
     directory = Path(args.build).expanduser().resolve() if args.build else (CACHE / "linux/latest").resolve()
     info = validate_bundle(directory)
     build_id = info["build_id"]
@@ -239,6 +259,30 @@ def deploy(args):
     print(f"Transferring {build_id} to {args.target}...", flush=True)
     run(["rsync", "-az", "--partial", "-e", transport, str(directory) + "/", f"{args.target}:Games/socom/.incoming-{build_id}/"])
     ssh_command(args.target, args.port, ACTIVATE, build_id)
+
+
+def ship(args):
+    """Build this checkout, deploy the exact result, then register its Steam tile."""
+    validate_target(args.target)
+    art = ROOT / "concept-art/Socom_2_Box_Art.jpg"
+    if not art.is_file():
+        raise RuntimeError(f"Steam box art is missing: {art}")
+    # A deploy request should fail fast if the intended machine is unreachable.
+    ssh_command(args.target, args.port, "set -eu\ncommand -v python3 >/dev/null\ntest \"$(uname -m)\" = x86_64\necho STEAMOS_READY\n")
+    if args.build:
+        args.build = str(Path(args.build).expanduser().resolve())
+    else:
+        args.build = str(build(args))
+    deploy(args)
+    transport = shlex.join(["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", "-o", "StrictHostKeyChecking=accept-new", "-p", str(args.port)])
+    run(["rsync", "-az", "-e", transport, art, f"{args.target}:Games/socom/steam-box-art.jpg"])
+    remote_args = ["python3", "-", "--art-sha256", digest(art)]
+    if args.steam_user:
+        remote_args += ["--steam-user", args.steam_user]
+    if args.restart_steam:
+        remote_args += ["--restart-steam"]
+    output_with_input(["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=10", "-o", "StrictHostKeyChecking=accept-new", "-p", str(args.port), args.target, shlex.join(remote_args)],
+                      Path(__file__).with_name("steam_shortcut.py").read_text())
 
 
 def main():
@@ -252,13 +296,21 @@ def main():
     transfer.add_argument("target", help="SSH alias or user@hostname/IP")
     transfer.add_argument("--port", type=int, default=22)
     transfer.add_argument("--build", help="Use a particular build folder instead of .build/linux/latest")
+    delivery = sub.add_parser("ship", help="Build, deploy and register SOCOM Playtest in Steam")
+    delivery.add_argument("platform", choices=["steam"])
+    delivery.add_argument("--target", default="deck@192.168.86.121")
+    delivery.add_argument("--port", type=int, default=22)
+    delivery.add_argument("--build", help="Deploy this verified bundle without rebuilding")
+    delivery.add_argument("--debug", action="store_true")
+    delivery.add_argument("--steam-user", help="Steam userdata account ID (auto-selects a single profile)")
+    delivery.add_argument("--restart-steam", action="store_true", help="Refresh Steam for shortcut/art changes only, refusing while a Steam game is running")
     args = parser.parse_args()
-    if args.command == "deploy" and not 1 <= args.port <= 65535:
+    if args.command in ("deploy", "ship") and not 1 <= args.port <= 65535:
         parser.error("Port must be between 1 and 65535")
     CACHE.mkdir(exist_ok=True)
     with (CACHE / "linux.lock").open("w") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
-        (build if args.command == "build" else deploy)(args)
+        {"build": build, "deploy": deploy, "ship": ship}[args.command](args)
 
 
 if __name__ == "__main__":

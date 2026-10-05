@@ -41,6 +41,7 @@ This is a prototype whose feel and features change daily. Looking at a change is
 
 ## Skills
 
+- `steam-deploy`: build Linux, deploy to `deck@192.168.86.121`, and maintain SOCOM Playtest under Steam's Non-Steam games with the box art from `concept-art/`; shared by Codex and Claude.
 - `godot-dev-loop`: the check, test, look loop with `tools/dev`, the Godot pitfalls that cost time here, which suite covers what, and when a test is worth writing.
 - `godot-playtest`: driving the running game through the `godot` MCP server and the scenario harness: any level, spawn, stance, weapon, or menu state; tick-exact input; state digests; screenshots.
 - `live-game`: working on the game while it runs and is played, through the `game` MCP server: what the player just did in numbers, live tuning of feel, pictures and filmstrips from any angle, slow motion, editing any variable, hot-reloading edited scripts, restarting in place.

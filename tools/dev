@@ -34,6 +34,9 @@ Usage: tools/dev <command>
   deploy linux USER@HOST [--port PORT] [--build DIR]
                         Install the latest build over SSH, headless-test it on Linux,
                         then select it for the stable Steam launcher.
+  ship steam [options]   Build and deploy to deck@192.168.86.121, register SOCOM Playtest
+                        in Steam with concept-art/Socom_2_Box_Art.jpg. --restart-steam
+                        refreshes Steam only when the shortcut/art needs an update.
   blender <command>     The agents' Blender and the .blend -> .glb pipeline: status,
                         start, stop, export, preview. `tools/dev blender help` lists them.
   doctor                Check the toolchain, the MCP setup, and who else is using the project.
@@ -369,7 +372,7 @@ case "$command" in
 	test) cmd_test "$@" ;;
 	shot) cmd_shot "$@" ;;
 	import) cmd_import ;;
-	build|deploy) exec python3 "$root/tools/build/linux.py" "$command" "$@" ;;
+	build|deploy|ship) exec python3 "$root/tools/build/linux.py" "$command" "$@" ;;
 	doctor) cmd_doctor ;;
 	blender)
 		source "$root/tools/agent/blender/commands.sh"

@@ -124,7 +124,7 @@ On this Mac the executable is `/Applications/Godot.app/Contents/MacOS/Godot`. Th
 
 ## Linux and SteamOS builds
 
-`tools/dev build linux` creates a native x86_64 release with the recovered runtime assets. It downloads matching verified templates on first use and audits the packaged data. `tools/dev deploy linux deck@STEAMOS_HOST` copies the latest build over SSH, tests the actual Linux executable, and installs **SOCOM Playtest** in KDE with a stable `~/Games/socom/play.sh` launcher for Steam. Quit and relaunch to pick up updates. See [Linux playtesting](docs/LINUX_PLAYTEST.md) for setup, logs, rollback and native development.
+Use the shared [steam-deploy skill](.agents/skills/steam-deploy/SKILL.md) in Codex or Claude, or run `tools/dev ship steam --restart-steam`. It builds Linux, deploys to **deck@192.168.86.121**, and installs **SOCOM Playtest** under **Library → Non-Steam**, using `concept-art/Socom_2_Box_Art.jpg` as its library art. One stable shortcut follows future releases; Steam refreshes only when its shortcut/art changes and no Steam game is running. Quit and relaunch the game to pick up updates. See [Linux playtesting](docs/LINUX_PLAYTEST.md) for setup, logs, rollback and native development.
 
 ## Working on the game with an AI while it runs
 

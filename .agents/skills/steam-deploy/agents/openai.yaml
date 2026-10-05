@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deploy to SteamOS"
+  short_description: "Build and ship SOCOM to the SteamOS library"
+  default_prompt: "Use $steam-deploy to ship the current game to my SteamOS machine with its box art."
