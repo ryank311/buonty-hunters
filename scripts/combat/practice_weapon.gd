@@ -119,6 +119,7 @@ func reset_profiles() -> void:
 	for defaults: WeaponProfile in soldier_class.weapons():
 		var loaded := defaults.duplicate() as WeaponProfile
 		Guns.apply_stats(loaded)
+		preload("res://scripts/combat/weapon_tuning.gd").apply(loaded)
 		profiles.append(loaded)
 	magazines.resize(profiles.size())
 	reserves.resize(profiles.size())
@@ -299,7 +300,7 @@ func mode_caption() -> String:
 func fire_interval() -> float:
 	if profile.recovered_stats.is_empty():
 		return 60.0 / profile.rounds_per_minute
-	return float(profile.recovered_stats.fire_wait) * (0.8 if fire_mode() >= 2 else 1.0)
+	return 60.0 / maxf(profile.rounds_per_minute, 1.0) * (0.8 if fire_mode() >= 2 else 1.0)
 
 func cycle_fire_mode() -> bool:
 	if scoped or profile.kind != "firearm" or profile.recovered_stats.is_empty():

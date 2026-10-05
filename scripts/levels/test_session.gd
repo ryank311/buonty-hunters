@@ -3,6 +3,7 @@ extends Node3D
 const TOWN := preload("res://scenes/levels/old_quarter.tscn")
 const LAB := preload("res://scenes/levels/movement_lab.tscn")
 const SETTINGS_PATH := "user://prototype_settings.cfg"
+const WeaponTuning := preload("res://scripts/combat/weapon_tuning.gd")
 @onready var player: PrototypePlayer = $Player
 @onready var hud: PrototypeHUD = $HUD
 var level: Node3D
@@ -217,22 +218,24 @@ func location_name() -> String:
 	return result
 
 func reset_tuning() -> void:
+	WeaponTuning.overrides.clear()
 	player.movement = load("res://resources/movement/default_movement.tres").duplicate()
 	player.camera_settings = load("res://resources/camera/default_camera.tres").duplicate()
 	player.camera_rig.profile = player.camera_settings
 	player.weapon.reset_profiles()
 	hud.refresh_settings()
 
-func _save_settings() -> void:
+func _save_settings() -> Error:
 	if qa_mode:
-		return
+		return ERR_UNAVAILABLE
 	var error := settings_config().save(SETTINGS_PATH)
 	if error != OK:
 		push_warning("Could not save prototype tuning: %s" % error_string(error))
+	return error
 
 func settings_config() -> ConfigFile:
 	var config := ConfigFile.new()
-	config.set_value("meta", "version", 6)
+	config.set_value("meta", "version", 7)
 	for key: String in ["run_speed", "acceleration", "braking", "body_weight", "prone_speed"]:
 		config.set_value("movement", key, player.movement.get(key))
 	for key: String in ["field_of_view", "distance", "shoulder_offset", "height_offset", "mouse_sensitivity", "pad_sensitivity", "pad_deadzone", "pad_aim_multiplier", "vibration", "invert_y", "hud_opacity"]:
@@ -240,6 +243,9 @@ func settings_config() -> ConfigFile:
 	for slot: int in range(2):
 		for key: String in WeaponProfile.TUNING_KEYS:
 			config.set_value("weapon_%d" % slot, key, player.weapon.profiles[slot].get(key))
+	for profile: WeaponProfile in player.weapon.profiles:
+		WeaponTuning.capture(profile)
+	config.set_value("weapon_tuning", "profiles", WeaponTuning.overrides.duplicate(true))
 	return config
 
 func _load_settings() -> void:
@@ -251,6 +257,8 @@ func _load_settings() -> void:
 	apply_settings_config(config)
 
 func apply_settings_config(config: ConfigFile) -> void:
+	var saved: Variant = config.get_value("weapon_tuning", "profiles", {})
+	WeaponTuning.overrides = saved.duplicate(true) if saved is Dictionary else {}
 	for key: String in ["run_speed", "acceleration", "braking", "body_weight", "prone_speed"]:
 		# Saved speeds and ramps from before version 6 predate the original game's own
 		# values becoming the baseline; they would put the old pace back.
@@ -263,12 +271,17 @@ func apply_settings_config(config: ConfigFile) -> void:
 			continue
 		player.camera_settings.set(key, config.get_value("camera", key, player.camera_settings.get(key)))
 	for slot: int in range(2):
+		if config.get_value("meta", "version", 1) >= 7:
+			continue # New tuning belongs to a gun, never to whichever gun occupies this slot.
 		for key: String in WeaponProfile.TUNING_KEYS:
 			var settings: WeaponProfile = player.weapon.profiles[slot]
 			# Migrate the earlier low-spread prototype preset once; preserve later tuning.
 			if config.get_value("meta", "version", 1) < 3 and key in ["spread_per_shot", "max_climb", "max_bloom", "vertical_kick"]:
 				continue
 			settings.set(key, config.get_value("weapon_%d" % slot, key, settings.get(key)))
+	for profile: WeaponProfile in player.weapon.profiles:
+		WeaponTuning.apply(profile)
+		WeaponTuning.capture(profile)
 
 func _capture_preview() -> void:
 	# Engine-rendered screenshots for visual QA; invoked explicitly by CLI only.

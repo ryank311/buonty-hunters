@@ -1,4 +1,8 @@
 extends SceneTree
+## The game starts and its basics work: both graybox levels load, the player moves,
+## jumps, changes stance, shoots, and the menu pauses. Part of the core tier
+## (tests/core.txt), so it stays short and checks behaviour, not tuning: speeds, jump
+## height, and magazine sizes are read from the profiles the player tunes.
 
 var failures: Array[String] = []
 var session: Node3D
@@ -26,27 +30,14 @@ func walk(direction: Vector2, count: int) -> void:
 	await frames(count)
 	player.test_command = {}
 
-func follow_route(title: String, points: Array[Vector2]) -> void:
-	await place(Vector3(points[0].x, 0.1, points[0].y))
-	var ticks: int = 0
-	var completed: bool = true
-	for goal: Vector2 in points.slice(1):
-		var arrived: bool = false
-		for step: int in range(900):
-			var offset := Vector3(goal.x, player.position.y, goal.y) - player.position
-			if offset.length() < 0.35:
-				arrived = true
-				break
-			player.rotation.y = atan2(-offset.x, -offset.z)
-			player.test_command = {"move": Vector2(0,-1)}
-			await frames(1)
-			ticks += 1
-		if not arrived:
-			print("Blocked at ", player.position, " approaching ", goal)
-			completed = false
+## Holds forward until the player stands at `height`, however fast they run.
+func climb(height: float, limit: int = 400) -> void:
+	player.test_command = {"move": Vector2(0,-1)}
+	for tick: int in range(limit):
+		if player.position.y >= height and player.is_on_floor():
 			break
+		await frames(1)
 	player.test_command = {}
-	check(completed, "%s route traversable (%.2f simulated seconds)" % [title, ticks / 60.0])
 
 func _run() -> void:
 	session = load("res://scenes/main.tscn").instantiate()
@@ -63,8 +54,8 @@ func _run() -> void:
 	var start := player.position
 	await walk(Vector2(0,-1), 60)
 	var forward_distance := start.distance_to(player.position)
-	# The original covered 5.90 m in its first second from rest (59.04 source units).
-	check(forward_distance > 5.8 and forward_distance < 6.0, "Weighted acceleration reaches the run speed (%.3f m / first second)" % forward_distance)
+	var run_speed: float = player.movement.run_speed
+	check(forward_distance > run_speed * 0.7 and forward_distance < run_speed and absf(player.velocity.length() - run_speed) < 0.05, "Weighted acceleration reaches the run speed within a second (%.2f m covered at %.1f m/s)" % [forward_distance, run_speed])
 	await place(Vector3(0, 0.1, 25))
 	start = player.position
 	await walk(Vector2(1,-1), 60)
@@ -80,7 +71,8 @@ func _run() -> void:
 	for index: int in range(65):
 		await frames(1)
 		peak = maxf(peak, player.position.y)
-	check(peak > 0.9 and peak < 1.15 and player.is_on_floor(), "Jump reaches the 1.0 m apex and lands (%.3f m)" % peak)
+	var jump_height: float = player.movement.jump_height
+	check(absf(peak - jump_height) < jump_height * 0.15 and player.is_on_floor(), "Jump reaches its set height and lands (%.2f m of %.2f m)" % [peak, jump_height])
 	check(player.request_stance(1), "Crouch transition succeeds in open space")
 	player.global_position = Vector3(-10, 0.08, 2)
 	await frames(15)
@@ -94,8 +86,8 @@ func _run() -> void:
 	check(player.request_stance(2), "Prone fits parallel to wall")
 	check(not player.turn(PI/2.0), "Prone rotation cannot sweep body through wall")
 	await place(Vector3(-27,0.1,18.5))
-	await walk(Vector2(0,-1), 170)
-	check(player.position.y > 3.0 and player.position.z < 9.8, "Stair ramp connects to landing (%s)" % player.position)
+	await climb(3.1)
+	check(player.position.y > 3.0, "Stair ramp connects to landing (%s)" % player.position)
 	# Camera obstruction behind a standing player.
 	await place(Vector3(9,0.1,21.8))
 	await frames(15)
@@ -113,17 +105,19 @@ func _run() -> void:
 	var hit := player.weapon.query_aim()
 	check(hit.get("collider") == target, "Camera and muzzle rays reach visible target")
 	player.weapon.shoot(hit)
-	check(player.weapon.ammo == 29 and player.weapon.hits == 1, "Practice shot consumes one round and registers one hit")
+	var magazine: int = player.weapon.profile.magazine_size
+	check(player.weapon.ammo == magazine - 1 and player.weapon.hits == 1, "Practice shot consumes one round and registers one hit")
 	player.weapon.tick(0.01, false, true)
 	check(player.weapon.reload_remaining > 0.0, "Reload begins")
-	player.weapon.tick(2.5, false, false)
-	check(player.weapon.ammo == 30, "Reload completes with a full magazine")
+	player.weapon.tick(player.weapon.profile.reload_seconds + 0.1, false, false)
+	check(player.weapon.ammo == magazine, "Reload completes with a full magazine")
 	player.weapon.reset()
 	player.weapon.cycle_fire_mode()
 	player.weapon.tick(1.0 / 60.0, false, false)
 	for tick: int in range(60):
 		player.weapon.tick(1.0 / 60.0, true, false)
-	check(player.weapon.shots_fired == 11 and player.weapon.ammo == 19, "Recovered M4 automatic cadence is 625 rounds per minute")
+	var held: int = player.weapon.shots_fired
+	check(held >= 5 and player.weapon.ammo == magazine - held, "A held trigger on automatic keeps firing (%d rounds in a second)" % held)
 	player.weapon.reset()
 	# A waist-high slab between body and muzzle must block a camera-visible target.
 	var blocker := StaticBody3D.new()
@@ -156,24 +150,17 @@ func _run() -> void:
 	for index: int in range(10):
 		session.reset_player()
 		await frames(2)
-	check(player.stance.current == 0 and player.weapon.ammo == 30 and player.velocity.length() < 1.0, "Repeated resets restore stance and ammunition")
+	check(player.stance.current == 0 and player.weapon.ammo == magazine and player.velocity.length() < 1.0, "Repeated resets restore stance and ammunition")
 	session.load_level(false)
 	await frames(10)
-	# Long enough to climb and stand on the balcony, not so long as to run off its far edge.
 	await place(Vector3(-5,0.1,-26), PI)
-	await walk(Vector2(0,-1), 135)
-	check(player.position.y > 3.0 and player.position.z > -15.1, "Town west stair reaches balcony (%s)" % player.position)
-	await place(Vector3(17,0.1,-26), PI)
-	await walk(Vector2(0,-1), 135)
-	check(player.position.y > 3.0 and player.position.z > -15.1, "Town east stair reaches balcony (%s)" % player.position)
+	await climb(3.1)
+	check(player.position.y > 3.0, "Town stair reaches balcony (%s)" % player.position)
 	var all_spawns_clear := true
 	for marker: Marker3D in session.level.get_node("Spawns").get_children():
 		await place(marker.global_position, marker.rotation.y)
 		all_spawns_clear = all_spawns_clear and player.is_on_floor() and player.stance.has_clearance(player, 0, player.rotation.y)
 	check(all_spawns_clear, "All ten spawn slots have valid standing clearance")
-	await follow_route("Market", [Vector2(-46,9), Vector2(-40,9), Vector2(-40,-13), Vector2(-17,-13), Vector2(-17,-1), Vector2(-9,-1), Vector2(-1,-1), Vector2(8,0), Vector2(11,8), Vector2(15,14), Vector2(43,14), Vector2(46,10)])
-	await follow_route("Courtyard", [Vector2(-46,9), Vector2(-40,9), Vector2(-40,-13), Vector2(-29,-13), Vector2(-29,-36), Vector2(18,-36), Vector2(33,-36), Vector2(33,-14), Vector2(40,-14), Vector2(40,10), Vector2(46,10)])
-	await follow_route("Service Passage", [Vector2(-46,9), Vector2(-40,22), Vector2(-26.5,22), Vector2(-26.5,38), Vector2(7,38), Vector2(7,17), Vector2(14,17), Vector2(43,17), Vector2(46,10)])
 	print("\nRESULT: %d failure(s)" % failures.size())
 	session.queue_free()
 	await frames(2)

@@ -31,7 +31,7 @@ The 12 campaign maps (`M51–M53`, `M61–M63`, `M71–M73`, `M81–M83`) were r
 ## Known limits
 
 - Lighting is per-pixel with the original light directions, not the PS2 vertex lighting; baked vertex colours are not recovered yet.
-- Rain/dust followers, animated and scrolling materials (`whispy_scroller`), lens flares, water surfaces, doors and destructible state changes are not reconstructed.
+- Rain/dust followers, animated and scrolling materials (`whispy_scroller`), lens flares, water surfaces and destructible state changes are not reconstructed. All 43 native doors across nine multiplayer maps now swing with moving collision; see [ACTIONS.md](ACTIONS.md) for the action HUD, source ownership and remaining interaction limits.
 - Alternate light states (`light_off`, `bulboff`) are separate models in the source and all remain.
 - No AI navigation, team spawns or objectives. The default stand-in roster is not placed on recovered maps.
 - The geometry is the extraction's assembly. Spot-check unfamiliar maps for leftover state branches and add patterns to `DROP` in `prepare_level.py` rather than editing a GLB.

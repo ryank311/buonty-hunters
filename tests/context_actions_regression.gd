@@ -99,12 +99,25 @@ func _run() -> void:
 	check(not door.opened and not door.busy and door.transform.is_equal_approx(closed_transform), "Closing restores the exact original hinge transform")
 	hit = player.get_world_3d().direct_space_state.intersect_ray(ray)
 	check(not hit.is_empty() and hit.collider == door, "Closing restores a solid door in the original passage")
+	var blocker := box(Vector3(0.5, 1.6, 0.5), center)
+	blocker.collision_layer = 2  # The same layer as a soldier occupying the swing.
+	await H.step(self, 2)
+	door.activate()
+	await H.step(self, 15)
+	check(door.blocked and door.busy and door.transform.is_equal_approx(closed_transform), "Door waits when the swing would intersect a soldier")
+	blocker.queue_free()
+	await H.step(self, 70)
+	check(not door.blocked and not door.busy and door.opened, "Door resumes its swing when the soldier clears it")
+	door.activate()
+	await H.step(self, 70)
 	await H.apply(self, {"pos": [feet.x, feet.y, feet.z], "look_at": [center.x, center.y, center.z], "settle": 15})
 	door.spec.initial = 99
 	context.refresh()
 	check(not context.offers.is_empty() and not context.offers[0].enabled and context.offers[0].reason == "LOCKED" and not context.activate(), "Recovered valve 99 displays a disabled locked action")
 	door.spec.initial = 0
 	# The action must also work through the actual controller event mapping.
+	# Real device events are ignored while the harness has the tree frozen.
+	paused = false
 	var button := InputEventJoypadButton.new()
 	button.button_index = JOY_BUTTON_Y
 	button.pressed = true
@@ -115,6 +128,7 @@ func _run() -> void:
 	button.pressed = false
 	Input.parse_input_event(button)
 	Input.flush_buffered_events()
+	paused = true
 	check(door.opened and door.busy and not session.lap_running, "Controller Y executes the selected door action without a timer side effect")
 	player.position = feet + normal * 1.0
 	await H.step(self, 70)
@@ -129,10 +143,29 @@ func _run() -> void:
 	session.hud.update_display(0.1)
 	check(not session.hud.context_hud.visible and not context.activate(), "Pause menu hides and disables world actions")
 	session.set_modal(false)
-	await H.scenario(self, "lab_start", {"roster": false, "freeze": true, "actors": [{"team": 1, "pos": [0, 0, 24.6], "dead": true, "name": "BODY"}]})
+	await H.scenario(self, "lab_start", {"roster": false, "freeze": true, "actors": [{"team": 1, "pos": [0.8, 0, 25.5], "dead": true, "name": "BODY"}]})
 	await H.step(self, 5)
 	context.refresh()
 	check(not context.offers.is_empty() and context.offers[0].kind == "body", "Body search shares the recovered pickup prompt")
+	obstacle = box(Vector3(3, 1, 3), player.position + Vector3(0, 0.5, -2.2))
+	await H.step(self, 3)
+	check(context.offers.size() == 2, "Nearby body and ledge share one context selection")
+	await H.step(self, 3, {"tap": ["context_next"]})
+	check(context.offers[context.selected].kind == "climb", "Tab selects the alternate climb action")
+	var spawn_before: int = session.spawn_index
+	paused = false
+	button = InputEventJoypadButton.new()
+	button.button_index = JOY_BUTTON_DPAD_UP
+	button.pressed = true
+	Input.parse_input_event(button)
+	Input.flush_buffered_events()
+	await H.step(self, 2)
+	button = button.duplicate()
+	button.pressed = false
+	Input.parse_input_event(button)
+	Input.flush_buffered_events()
+	paused = true
+	check(context.offers[context.selected].kind == "body" and session.spawn_index == spawn_before, "D-pad selects the body without triggering the debug spawn shortcut")
 	await H.step(self, 3, {"tap": ["interact"]})
 	check(player.weapon.director.loot_open, "Selected body search opens the existing weapon-exchange menu")
 	print("RESULT: %d failure(s)" % failures.size())

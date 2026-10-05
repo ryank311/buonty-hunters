@@ -151,5 +151,6 @@ func _choose(index: int, slot: int) -> void:
 				selected = defaults.duplicate()
 	if selected == null:
 		return
+	preload("res://scripts/combat/weapon_tuning.gd").apply(selected)
 	weapon.receive(slot, selected, selected.magazine_size, selected.starting_reserve)
 	hud.refresh_settings()

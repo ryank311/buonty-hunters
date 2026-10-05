@@ -34,7 +34,9 @@ Extraction yielded 15,270 texture entries (3,398 distinct PNG hashes), 4,813 sta
 
 ### HUD and crosshairs
 
-Read [HUD.md](../tools/recovery/HUD.md). All 174 distinct HUD/HUD2/HUDW textures are committed under `art/ui/recovered/`, with a searchable `index.html` and `resources/recovered/hud_catalogue.json` provenance. Rebuild with `python3 tools/recovery/prepare_hud.py`; no Blender step is needed for these 2D source images. Rifle, sidearm, shotgun, grenade and scope reticles are connected to gameplay, including team tint and the muzzle-obstruction pip. Other HUD icons are catalogued but not yet connected. Preserve source padding, alpha and the original 640×448 coordinate mapping. The current angular spread/recoil system is still an approximation; the guide distinguishes recovered constants from adaptations.
+The bottom-center context HUD now uses the recovered action icons for functional doors, ledge climbs and body search. All 43 doors across nine multiplayer maps use their native hinge programs and moving collision. Read [ACTIONS.md](../tools/recovery/ACTIONS.md) for controls, reconstruction evidence and remaining mission-action limits.
+
+Read [HUD.md](../tools/recovery/HUD.md). All 174 distinct HUD/HUD2/HUDW textures are committed under `art/ui/recovered/`, with a searchable `index.html` and `resources/recovered/hud_catalogue.json` provenance. Rebuild with `python3 tools/recovery/prepare_hud.py`; no Blender step is needed for these 2D source images. Rifle, sidearm, shotgun, grenade and scope reticles are connected to gameplay, including team tint and the muzzle-obstruction pip. Context action icons are connected as described above; other unused HUD icons remain catalogued. Preserve source padding, alpha and the original 640×448 coordinate mapping. The current angular spread/recoil system is still an approximation; the guide distinguishes recovered constants from adaptations.
 
 ### Characters and animations
 
@@ -77,7 +79,7 @@ Import original collision separately from render geometry. Recovered concave col
 | --- | --- |
 | Firearms | Collection installed; remaining work includes optional suppressor/thermal-scope configurations, per-gun tuning, launcher firing and underbarrel alternate fire |
 | Props | Curate reusable doors, crates, cover and furnishings, retain materials/origins, add appropriate collision and a preview scene |
-| Levels | All 22 multiplayer maps are installed. Next: decode team spawns and objectives, PS2 vertex lighting, rain/dust followers, animated/scrolling and additive materials, water, doors and destructible states, AI navigation |
+| Levels | All 22 multiplayer maps are installed. Next: decode team spawns and objectives, PS2 vertex lighting, rain/dust followers, animated/scrolling and additive materials, water and destructible states, AI navigation |
 | Actions | Extend the working aim/fire/recoil/reload layers with weapon swap, throw and interaction events; review remaining partial clips and one-shots without changing native proportions |
 | Materials/effects | Reconstruct validated PS2 alpha/vertex-lighting cases per material type; preserve original base textures |
 

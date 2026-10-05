@@ -35,6 +35,7 @@ static func apply_stats(profile: WeaponProfile, record_id: int = -1) -> void:
 	profile.fire_mode = 2 if profile.hold == "long" and modes.has(2) else int(modes.back())
 	profile.automatic = modes.has(3)
 	profile.rounds_per_minute = 60.0 / float(selected.fire_wait)
+	preload("res://scripts/combat/weapon_tuning.gd").apply(profile)
 
 static func catalogue() -> Array:
 	if _entries.is_empty():

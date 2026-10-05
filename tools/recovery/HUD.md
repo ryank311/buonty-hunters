@@ -19,6 +19,7 @@ The preparation script verifies the recovered hashes before copying, rejects con
 
 ## Runtime behavior
 
+- The original bottom-center action icons now offer doors, ledge climbs and body search through a shared selection. See [ACTIONS.md](ACTIONS.md) for recovered placement, pulse, controls, source door records and supported interactions.
 - `scripts/ui/spread_reticle.gd` selects rifle/SMG/unscoped sniper, sidearm, shotgun or equipment from the equipped profile. The original rifle uses a 64×64 fixed disc and four 32×32 arm quads; the pistol uses 32×32 and 16×16. The visible rifle stripe lies 1.5 pixels inside its texture's right edge, and the pistol stripe 1 pixel inside. Center these stripes on the cardinal axes; centering the entire bitmap produces a pinwheel.
 - Coordinates map the original 640×448 HUD into the project's fixed 640×480 presentation, independently of window size. Recovered recoil moves the disc and arms together in native pixels while the unscoped camera stays still. The source third-person convention halves the native accuracy size, including the shotgun's stance table. The disc never scales with bloom.
 - Arms use recovered engine color readings: neutral `(200,200,24)`, friendly `(24,200,44)`, enemy `(200,24,44)`. The tint queries the real unobstructed muzzle/aim ray, recognizes living combat actors within 32 m, and stays neutral for dead actors or practice boards. It is not an aim assist or a hit-confirmation flash.
