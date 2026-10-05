@@ -1,6 +1,8 @@
 class_name PrototypePlayer
 extends CharacterBody3D
 
+const RecoveredProne = preload("res://scripts/actors/recovered_prone.gd")
+
 signal message(text: String)
 @export var max_health: float = 100.0
 var health: float = 100.0:
@@ -142,29 +144,35 @@ func _physics_process(delta: float) -> void:
 	_stance_input(delta)
 	aiming = Input.is_action_pressed("aim")
 	var speed := movement.run_speed
+	var strafe := movement.strafe_multiplier
+	var backward := movement.backward_multiplier
 	if stance.current == StanceController.Stance.CROUCH:
 		speed = movement.crouch_speed
+		strafe = movement.crouch_strafe_multiplier
+		backward = movement.crouch_backward_multiplier
 	elif stance.current == StanceController.Stance.PRONE:
 		speed = movement.prone_speed
+		strafe = movement.prone_strafe_multiplier
+		backward = movement.prone_backward_multiplier
 	elif Input.is_action_pressed("walk"):
 		speed = movement.walk_speed
 	var local_input := move_input.limit_length()
-	local_input.x *= movement.strafe_multiplier
+	local_input.x *= strafe
 	if local_input.y > 0.0:
-		local_input.y *= movement.backward_multiplier
-	if stance.current == StanceController.Stance.PRONE:
-		local_input.x *= 0.65
-		if local_input.y > 0:
-			local_input.y *= 0.75
+		local_input.y *= backward
 	var previous_strafe := prone_strafe_amount
-	prone_strafe_amount = move_input.limit_length().x if stance.current == StanceController.Stance.PRONE and is_on_floor() and not diving and dive_recovery <= 0 else 0.0
+	var sideways := absf(move_input.x) > absf(move_input.y) * 1.4
+	prone_strafe_amount = move_input.limit_length().x if sideways and stance.current == StanceController.Stance.PRONE and is_on_floor() and not diving and dive_recovery <= 0 else 0.0
 	if signf(previous_strafe) != signf(prone_strafe_amount):
 		prone_strafe_phase = 0.0
 	if absf(prone_strafe_amount) > 0.05:
-		# An authored reach/pull/settle clock drives both displacement and the pose.
-		# This is kinematic movement, not forces, limb simulation, or root-motion drift.
-		prone_strafe_phase = fposmod(prone_strafe_phase + delta * absf(prone_strafe_amount) / movement.prone_strafe_seconds, 1.0)
-		local_input.x *= SoldierProxy.sample_prone_strafe(prone_strafe_phase).speed
+		# Travel per authored cycle sets the cadence, just as for the other native
+		# gaits. The pull curve distributes that travel without feeding pulsed
+		# velocity back into the clock that produced it.
+		var distance := RecoveredProne.cycle_distance(soldier.soldier_skin.motion, prone_strafe_amount)
+		var next_phase := prone_strafe_phase + delta * absf(local_input.x) * speed / distance
+		local_input.x *= RecoveredProne.speed_scale(soldier.soldier_skin.motion, prone_strafe_amount, prone_strafe_phase, next_phase)
+		prone_strafe_phase = fposmod(next_phase, 1.0)
 	else:
 		prone_strafe_phase = 0.0
 	var desired := basis * Vector3(local_input.x, 0, local_input.y) * speed
@@ -208,7 +216,7 @@ func _physics_process(delta: float) -> void:
 			floor_snap_length = 0.25
 		if impact_speed > 3.0:
 			PlayerInput.vibrate(camera_settings.vibration * 0.45, 0.10)
-	var lean := Input.get_axis("lean_left", "lean_right") if stance.current != StanceController.Stance.PRONE else 0.0
+	var lean := Input.get_axis("lean_left", "lean_right")
 	camera_rig.update_view(self, StanceController.EYE_HEIGHTS[stance.current], lean, aiming, delta)
 	var speed_now := Vector2(velocity.x, velocity.z).length()
 	var local_velocity := basis.inverse() * Vector3(velocity.x, 0, velocity.z)

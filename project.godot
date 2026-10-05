@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 
 Live="*res://scripts/live/live_boot.gd"
 
-McpBridge="*res://.mcp/godot-runtime/bridge/mcp_bridge.gd"
 [display]
 
 window/size/viewport_width=640

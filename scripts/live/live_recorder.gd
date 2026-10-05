@@ -231,7 +231,10 @@ func summary(seconds: float, rows: int = 0) -> Dictionary:
 		var stride := Vector2(now[X] - was[X], now[Z] - was[Z]).length()
 		if stride < 2.0:
 			distance += stride
-		turn = maxf(turn, absf(wrapf(now[YAW] - was[YAW], -180.0, 180.0)) * TICKS)
+		# A respawn or a set facing is not the player turning.
+		var swing := absf(wrapf(now[YAW] - was[YAW], -180.0, 180.0))
+		if stride < 2.0 and swing < 45.0:
+			turn = maxf(turn, swing * TICKS)
 		shots += maxf(0.0, now[SHOTS] - was[SHOTS])
 		hits += maxf(0.0, now[HITS] - was[HITS])
 		var pushing := Vector2(now[INPUT_X], now[INPUT_Y]).length() > 0.1
@@ -347,6 +350,12 @@ func logged(mark: int = 0, level: String = "all", limit: int = 50) -> Array:
 				line[key] = entry[key]
 		found.append(line)
 	return found.slice(maxi(0, found.size() - limit))
+
+## Drops what was logged after `mark`: the output of something tried on purpose.
+func forget(mark: int) -> void:
+	capture.lock.lock()
+	capture.entries = capture.entries.filter(func(entry: Dictionary) -> bool: return entry.seq <= mark)
+	capture.lock.unlock()
 
 func clear_log() -> void:
 	capture.lock.lock()

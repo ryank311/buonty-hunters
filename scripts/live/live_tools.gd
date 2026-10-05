@@ -80,7 +80,7 @@ func call_tool(tool: String, arguments: Dictionary) -> Dictionary:
 		data = {"error": "The tool stopped on a script error before it could answer."}
 	# Errors the game raised while the tool ran belong with its answer.
 	var raised: Array = recorder.logged(mark, "errors", 6)
-	if not raised.is_empty():
+	if not raised.is_empty() and not data.has("problems"):
 		data["script_errors"] = raised
 	return _reply(data)
 
@@ -453,39 +453,64 @@ func _tool_call(arguments: Dictionary) -> Dictionary:
 
 func _tool_eval(arguments: Dictionary) -> Dictionary:
 	var code := str(arguments.get("code", "")).strip_edges(false, true)
-	if code.strip_edges() == "":
+	var line := code.strip_edges()
+	if line == "":
 		return {"error": "No code given."}
 	var s := session()
 	var scope: Array = [self, s, s.player if s != null else null, s.level if s != null else null, get_tree()]
 	recorder.note("AI: ran code")
-	# One line is tried as an expression first: it hands back its value, and it reports a
-	# mistake as text instead of an engine error. Anything else is compiled as statements.
-	if not "\n" in code.strip_edges():
-		var expression := Expression.new()
-		if expression.parse(code.strip_edges(), ["live", "session", "player", "level", "tree"]) == OK:
-			var value: Variant = expression.execute(scope, self, false)
-			if expression.has_execute_failed():
-				return {"error": expression.get_error_text()}
-			if value is Object and value.get_class() == "GDScriptFunctionState":
-				value = await value
-			return {"result": Codec.encode(value, 2)}
-	var source := "extends RefCounted\n\nfunc run(live: Node, session: Node, player: Node, level: Node, tree: SceneTree) -> Variant:\n"
-	for line: String in code.split("\n"):
-		source += "\t" + line + "\n"
-	source += "\treturn null\n"
-	var mark: int = recorder.log_mark()
-	var script := GDScript.new()
-	script.source_code = source
-	if script.reload() != OK:
-		var problems: Array = []
-		for entry: Dictionary in recorder.logged(mark, "errors", 4):
-			# The snippet starts three lines into the script built around it.
-			var where := str(entry.get("where", ":0"))
-			problems.append("line %d: %s" % [maxi(where.get_slice(":", where.get_slice_count(":") - 1).to_int() - 3, 1), entry.text])
+	var bodies: Array[String] = [code]
+	if not "\n" in line and not _is_statement(line):
+		# One line that only reads the game is an Expression: it hands back its value and
+		# reports a mistake as text, with nothing compiled. It cannot name engine classes
+		# (Engine, Input, Vector3.UP), so a line that does is compiled as `return <line>`,
+		# and as a bare statement if that is refused (a call that returns nothing).
+		if RegEx.create_from_string("\\b[A-Z]\\w*\\.").search(line) == null:
+			var expression := Expression.new()
+			if expression.parse(line, ["live", "session", "player", "level", "tree"]) == OK:
+				var value: Variant = expression.execute(scope, self, false)
+				if expression.has_execute_failed():
+					var why := expression.get_error_text()
+					return {"error": why + (" no such method, or the wrong arguments." if why.ends_with(":") else "")}
+				if value is Object and value.get_class() == "GDScriptFunctionState":
+					value = await value
+				return {"result": Codec.encode(value, 2)}
+		bodies = ["return " + line, line]
+	var script: GDScript
+	var problems: Array = []
+	for body: String in bodies:
+		var mark: int = recorder.log_mark()
+		script = _compile(body)
+		if script != null:
+			break
+		if problems.is_empty():
+			for entry: Dictionary in recorder.logged(mark, "errors", 4):
+				# The snippet starts three lines into the script built around it.
+				var where := str(entry.get("where", ":0"))
+				problems.append("line %d: %s" % [maxi(where.get_slice(":", where.get_slice_count(":") - 1).to_int() - 3, 1), entry.text])
+		# The attempt is reported here; it is not something the game did wrong.
+		recorder.forget(mark)
+	if script == null:
 		return {"error": "The code did not compile.", "problems": problems}
 	var runner: RefCounted = script.new()
 	var result: Variant = await runner.run(scope[0], scope[1], scope[2], scope[3], scope[4])
 	return {"result": Codec.encode(result, 2)}
+
+func _compile(body: String) -> GDScript:
+	var source := "extends RefCounted\n\nfunc run(live: Node, session: Node, player: Node, level: Node, tree: SceneTree) -> Variant:\n"
+	for line: String in body.split("\n"):
+		source += "\t" + line + "\n"
+	source += "\treturn null\n"
+	var script := GDScript.new()
+	script.source_code = source
+	return script if script.reload() == OK else null
+
+static func _is_statement(line: String) -> bool:
+	for keyword: String in ["var ", "for ", "if ", "while ", "match ", "return", "pass", "await "]:
+		if line.begins_with(keyword):
+			return true
+	# An assignment: a name or member, then = (but not ==, <=, >=, !=).
+	return RegEx.create_from_string("^[\\w\\.\\[\\]\"']+\\s*[-+*/]?=[^=]").search(line) != null
 
 func _tool_reload(arguments: Dictionary) -> Dictionary:
 	var now := _scan()
@@ -504,6 +529,7 @@ func _tool_reload(arguments: Dictionary) -> Dictionary:
 	var failed: Dictionary = {}
 	var others: Dictionary = {}
 	var seeded: Dictionary = {}
+	var unfilled: Dictionary = {}
 	var pending: Array[String] = []
 	for path: String in targets:
 		if path.get_extension() == "gd":
@@ -525,6 +551,8 @@ func _tool_reload(arguments: Dictionary) -> Dictionary:
 				others[path] = outcome.status
 			if not outcome.get("new_vars", []).is_empty():
 				seeded[path] = outcome.new_vars
+			if not outcome.get("unfilled", []).is_empty():
+				unfilled[path] = outcome.unfilled
 		if again.is_empty() or again.size() == pending.size():
 			break
 		pending = again
@@ -548,7 +576,10 @@ func _tool_reload(arguments: Dictionary) -> Dictionary:
 	var notes: Array[String] = []
 	if not seeded.is_empty():
 		data["new_variables"] = seeded
-		notes.append("New variables were given their declared default where the engine knows it; code in _ready that sets them up has not run. restart if something depends on that.")
+		notes.append("New variables took their declared starting value on the nodes already in the game. Code in _ready or _init that sets them up has not run again.")
+	if not unfilled.is_empty():
+		data["still_empty"] = unfilled
+		notes.append("The variables in still_empty hold an object (or nothing) and are null on existing nodes; restart before relying on them.")
 	if others.values().has("refreshed"):
 		notes.append("A refreshed scene or resource is used the next time it is instanced or copied: setup {\"level\": ..., \"reload\": true} rebuilds the level, and tuning_set {\"reset\": true} re-reads tuning defaults.")
 	if not notes.is_empty():
@@ -939,6 +970,8 @@ func _scan(directory: String = "res://", found: Dictionary = {}) -> Dictionary:
 func _reload_script(path: String) -> Dictionary:
 	if not FileAccess.file_exists(path):
 		return {"error": "no such file"}
+	if not ResourceLoader.has_cached(path):
+		return {"status": "not loaded by this game; it is read from disk when first used"}
 	var script := load(path) as GDScript
 	if script == null:
 		return {"error": "did not load"}
@@ -960,17 +993,28 @@ func _reload_script(path: String) -> Dictionary:
 			why = "%s (%s)" % [raised[0].text, raised[0].get("where", path)]
 		return {"error": why + "; the game kept the version it had"}
 	var added: Array = _members(script).filter(func(member: String) -> bool: return not member in known)
-	if not added.is_empty():
-		_seed(script, added)
-	return {"status": "reloaded", "new_vars": added}
+	return {"status": "reloaded", "new_vars": added, "unfilled": _seed(script, added) if not added.is_empty() else []}
 
 static func _members(script: Script) -> Array:
 	return script.get_script_property_list().map(func(property: Dictionary) -> String: return property.name)
 
-# A reload leaves variables added by the edit empty on objects that already exist.
-func _seed(script: Script, added: Array) -> void:
+# A reload leaves variables added by the edit empty on objects that already exist. Plain
+# values are copied from a fresh instance; anything that is an object is left for a
+# restart, since each owner would need its own. Returns the variables it could not fill.
+func _seed(script: GDScript, added: Array) -> Array:
+	var fresh: Object = script.new() if script.can_instantiate() else null
+	var initial: Dictionary = {}
+	var unfilled: Array = []
+	for member: String in added:
+		var value: Variant = fresh.get(member) if fresh != null else null
+		if value == null or value is Object:
+			unfilled.append(member)
+		else:
+			initial[member] = value
+	if fresh is Node:
+		fresh.free()
 	var waiting: Array[Node] = [get_tree().root]
-	while not waiting.is_empty():
+	while not waiting.is_empty() and not initial.is_empty():
 		var node: Node = waiting.pop_back()
 		waiting.append_array(node.get_children())
 		var attached: Variant = node.get_script()
@@ -978,7 +1022,7 @@ func _seed(script: Script, added: Array) -> void:
 			attached = attached.get_base_script()
 		if attached != script:
 			continue
-		for member: String in added:
-			var initial: Variant = script.get_property_default_value(member)
-			if node.get(member) == null and initial != null:
-				node.set(member, initial)
+		for member: String in initial:
+			if node.get(member) == null:
+				node.set(member, initial[member].duplicate(true) if initial[member] is Array or initial[member] is Dictionary else initial[member])
+	return unfilled

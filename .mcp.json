@@ -7,6 +7,13 @@
         "exec \"$(git rev-parse --show-toplevel 2>/dev/null || pwd)/tools/agent/mcp\""
       ]
     },
+    "game": {
+      "command": "sh",
+      "args": [
+        "-c",
+        "PATH=\"$PATH:/usr/local/bin:/opt/homebrew/bin\" exec node \"$(git rev-parse --show-toplevel 2>/dev/null || pwd)/tools/agent/live-mcp.mjs\" claude"
+      ]
+    },
     "blender": {
       "command": "sh",
       "args": [

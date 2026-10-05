@@ -59,6 +59,18 @@ approval_mode = "approve"
 [mcp_servers.godot.tools.simulate_input]
 approval_mode = "approve"
 
+# The live link: the running game's own MCP server (scripts/live), reached through a
+# front that stays up between games. It inspects and changes a game while it is played;
+# the godot server above works on the project and its own hidden sessions.
+[mcp_servers.game]
+command = "sh"
+args = ["-c", "PATH=\"$PATH:/usr/local/bin:/opt/homebrew/bin\" exec node \"$(git rev-parse --show-toplevel 2>/dev/null || pwd)/tools/agent/live-mcp.mjs\" codex"]
+startup_timeout_sec = 30
+tool_timeout_sec = 300
+
+# No tool is pre-approved here: which of these may run without a prompt is the owner's
+# call. state, telemetry, logs, screenshot, inspect, tuning_get and game_status only read.
+
 # Blender MCP server (mcp-for-blender) through the project proxy, which starts this
 # agent's own Blender on demand. Codex uses port 9887; Claude Code uses 9886.
 # The asset-library and AI-generation tools are left out: docs/DESIGN.md asks for

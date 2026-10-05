@@ -335,7 +335,7 @@ func _build_menu() -> void:
 	_slider("acceleration", "Acceleration (m/s²)", 10.0, 60.0, 1.0)
 	_slider("braking", "Braking (m/s²)", 10.0, 70.0, 1.0)
 	_slider("body_weight", "Body weight / compression", 0.0, 2.0, 0.1)
-	_slider("prone_speed", "Prone crawl speed (m/s)", 0.15, 0.65, 0.05)
+	_slider("prone_speed", "Prone crawl speed (m/s)", 0.3, 1.6, 0.05)
 	_label(slider_parent, "Lower acceleration builds speed more gradually.\nBody weight controls stride loading and landing compression.", Vector2.ZERO, 14, MUTED)
 	_page("Third-person view")
 	_slider("field_of_view", "Vertical field of view", 50.0, 80.0, 1.0)

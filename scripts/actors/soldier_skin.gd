@@ -68,8 +68,8 @@ static func prepare_materials(root: Node) -> void:
 		for surface: int in range(local_mesh.get_surface_count()):
 			mesh.set_surface_override_material(surface, null)
 
-func pose(proxy: SoldierProxy, stance: int, speed: float, movement: Vector2, grounded: bool, pitch: float, delta: float, focused: bool = false) -> void:
-	driver.drive(self, proxy, stance, speed, movement, grounded, pitch, delta, focused)
+func pose(proxy: SoldierProxy, stance: int, speed: float, movement: Vector2, grounded: bool, pitch: float, delta: float, focused: bool = false, lean: float = 0.0, strafe_phase: float = -1.0, strafe_intent: float = 0.0) -> void:
+	driver.drive(self, proxy, stance, speed, movement, grounded, pitch, delta, focused, lean, strafe_phase, strafe_intent)
 
 func place_weapon(proxy: SoldierProxy, clip: String, seconds: float, socket: Variant = null) -> void:
 	var attachment: Transform3D = motion.attachment(clip, seconds, "pistol" if proxy.weapon_slot == 1 else "rifle") if socket == null else motion.native_worlds[motion.rig.names.find("rhand")] * socket

@@ -113,6 +113,19 @@ tools/dev shot town_market lab_range --full
 
 On this Mac the executable is `/Applications/Godot.app/Contents/MacOS/Godot`. The suites exercise character motion/collision, all three town routes, visible limb endpoints and posture, controller input events and menu navigation, ammunition conservation, recoil/recovery, persistent surface impacts, and the class loadouts, weapon damage, bullet flight, grenades, claymores, elimination, and body searches. QA mode ignores saved tuning; headless runs skip audio playback and vibration. The project retains Mobile rendering and Jolt Physics.
 
+## Working on the game with an AI while it runs
+
+While you play (F5 in the editor, or `tools/dev play`), the game serves an MCP endpoint on this machine, and the `game` MCP server registered for Claude Code and Codex connects an agent to it. Say what you feel ("walking is slow", "the jump is floaty", "that reload looks wrong") and the agent can:
+
+- read what you just did: speed in each movement state, how long starts and stops took, jump height, turn rate;
+- change movement, camera, and weapon values at once. A notice on the HUD names each change, and the F1 menu shows the new value;
+- look at the soldier from any side, capture a filmstrip of a motion, slow time down, or freeze a moment (Esc releases a freeze);
+- place you anywhere, change class, weapon, health, or the other soldiers, and read or set any variable;
+- bring edited scripts into the running game without restarting it, or restart it in place and put you back where you were;
+- write the values you settle on into the default resources.
+
+The link listens on 127.0.0.1 only, needs a token only your user account can read (`.agent/live/`), and is absent from exported builds. `SOCOM_LIVE=0` turns it off. `tools/dev live status` lists the running games it can reach; `.agents/skills/live-game/SKILL.md` describes the tools.
+
 ## Design and research
 
 - [Game design](docs/DESIGN.md) — experience, controls, movement, camera, combat, round rules, level design, and visual direction.

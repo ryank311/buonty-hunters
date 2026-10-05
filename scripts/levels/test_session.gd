@@ -204,7 +204,7 @@ func _save_settings() -> void:
 
 func settings_config() -> ConfigFile:
 	var config := ConfigFile.new()
-	config.set_value("meta", "version", 5)
+	config.set_value("meta", "version", 6)
 	for key: String in ["run_speed", "acceleration", "braking", "body_weight", "prone_speed"]:
 		config.set_value("movement", key, player.movement.get(key))
 	for key: String in ["field_of_view", "distance", "shoulder_offset", "height_offset", "mouse_sensitivity", "pad_sensitivity", "pad_deadzone", "pad_aim_multiplier", "vibration", "invert_y", "hud_opacity"]:
@@ -224,8 +224,9 @@ func _load_settings() -> void:
 
 func apply_settings_config(config: ConfigFile) -> void:
 	for key: String in ["run_speed", "acceleration", "braking", "body_weight", "prone_speed"]:
-		# Earlier saved acceleration/braking values predate the heavier baseline.
-		if config.get_value("meta", "version", 1) < 2 and key in ["acceleration", "braking"]:
+		# Saved speeds and ramps from before version 6 predate the original game's own
+		# values becoming the baseline; they would put the old pace back.
+		if config.get_value("meta", "version", 1) < 6 and key != "body_weight":
 			continue
 		player.movement.set(key, config.get_value("movement", key, player.movement.get(key)))
 	for key: String in ["field_of_view", "distance", "shoulder_offset", "height_offset", "mouse_sensitivity", "pad_sensitivity", "pad_deadzone", "pad_aim_multiplier", "vibration", "invert_y", "hud_opacity"]:

@@ -35,7 +35,7 @@ func reset() -> void:
 	last_shots = 0
 	shot_age = RECOIL_SECONDS
 
-func apply(motion: Node, pose: Array[Transform3D], base_clip: String, seconds: float, weapon: PracticeWeapon, stance: int, moving: bool, allowed: bool, focused: bool, pitch: float, delta: float) -> void:
+func apply(motion: Node, pose: Array[Transform3D], base_clip: String, seconds: float, weapon: PracticeWeapon, stance: int, moving: bool, allowed: bool, focused: bool, pitch: float, delta: float, leaning: bool = false) -> void:
 	# The visual child receives _ready before the player initializes its loadout.
 	if weapon != null and weapon.profiles.is_empty():
 		weapon = null
@@ -68,7 +68,9 @@ func apply(motion: Node, pose: Array[Transform3D], base_clip: String, seconds: f
 	var fire_length: float = motion.get_animation(fire_clip).length
 	fire_clock += delta
 	var fire_time: float = fmod(fire_clock, FIRE_SECONDS.get(fire_clip, fire_length)) * fire_length / float(FIRE_SECONDS.get(fire_clip, fire_length)) if not moving else seconds / motion.get_animation(base_clip).length * fire_length
-	if fire_blend > 0.0:
+	# Lean transitions already contain the raised weapon pose. Replacing that
+	# torso with the ordinary fire stance would erase the recovered lean.
+	if fire_blend > 0.0 and not leaning:
 		blend_pose(motion, pose, motion.sample(fire_clip, fire_time), fire_blend, upper_only, fire_clip)
 		socket = socket.interpolate_with(motion.weapon_track(fire_clip, fire_time, attachment), fire_blend)
 	# The two authored recoil poses are rest and kick. Apply their local delta
@@ -117,6 +119,20 @@ func upper_bone(name: String) -> bool:
 	return name not in ["skel_root", "hips", "rthigh", "rcalf", "rfoot", "rtoe", "lthigh", "lcalf", "lfoot", "ltoe", "body"]
 
 func blend_pose(motion: Node, pose: Array[Transform3D], layer: Array[Transform3D], weight: float, upper_only: bool, clip: String) -> void:
+	# aimnodes cancels its own clip's hip yaw (a bladed fire stance turns the
+	# hips 60 degrees). Over other legs, keep the layer's model-space facing
+	# instead of its local value, or the torso twists by the hip difference.
+	var base_worlds: Array[Transform3D] = []
+	var layer_worlds: Array[Transform3D] = []
+	if upper_only:
+		base_worlds = motion.worlds(pose)
+		layer_worlds = motion.worlds(layer)
 	for index: int in range(pose.size()):
-		if motion.has_track(clip, motion.rig.names[index]) and (not upper_only or upper_bone(motion.rig.names[index])):
-			pose[index] = pose[index].interpolate_with(layer[index], smoothstep(0.0, 1.0, weight))
+		var bone: String = motion.rig.names[index]
+		if not motion.has_track(clip, bone) or (upper_only and not upper_bone(bone)):
+			continue
+		var target := layer[index]
+		var parent: int = motion.rig.parents[index]
+		if upper_only and parent >= 0 and not upper_bone(motion.rig.names[parent]):
+			target = Transform3D(base_worlds[parent].basis.inverse() * layer_worlds[index].basis, pose[index].origin)
+		pose[index] = pose[index].interpolate_with(target, smoothstep(0.0, 1.0, weight))

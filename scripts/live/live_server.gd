@@ -155,6 +155,10 @@ func _taken(candidate: int) -> bool:
 		if probe.get_status() != StreamPeerTCP.STATUS_CONNECTING:
 			break
 		OS.delay_msec(5)
+	# On macOS a refused connection reads as connected for one poll. A real one stays.
+	for attempt: int in range(3):
+		OS.delay_msec(5)
+		probe.poll()
 	var answered := probe.get_status() == StreamPeerTCP.STATUS_CONNECTED
 	probe.disconnect_from_host()
 	return answered

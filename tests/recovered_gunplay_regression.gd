@@ -71,6 +71,16 @@ func _run() -> void:
 	check(gun.fire_clip == "seal_pfp_run" and difference < 0.002, "Partial pistol fire poses retain the native leg cycle")
 	await H.step(self, 5, {"tap": ["fire"], "hold": ["aim"]})
 	check(gun.recoil_clip == "seal_p_recoil" and gun.recoil_weight > 0.05, "Pistol fire uses the original pistol recoil")
+	# No fire-pose strafe exists; the standing fire upper body rides the strafe
+	# legs. Its aimnodes local cancels the fire stance's own hip yaw, not the strafe's.
+	for weapon: String in ["primary", "secondary"]:
+		for gait: Array in [["aim"], ["aim", "walk"]]:
+			for side: float in [-1.0, 1.0]:
+				await H.scenario(self, "lab_start", {"roster": false, "freeze": true, "weapon": weapon, "pitch": 0.0})
+				await H.step(self, 30, {"right": side, "hold": gait})
+				var aim := direction(skin)
+				var legs: float = driver.last_pose[thigh].basis.get_rotation_quaternion().angle_to(driver.last_base_pose[thigh].basis.get_rotation_quaternion())
+				check("strafe" in driver.active_clip and gun.fire_blend > 0.99 and aim.z < -0.95 and absf(aim.x) < 0.2 and legs < 0.002, "Aimed %s %s strafe keeps the torso and weapon facing forward over the strafe legs (aim %s, clip %s)" % [weapon, "left" if side < 0 else "right", aim, driver.active_clip])
 	await H.scenario(self, "lab_start", {"roster": false, "freeze": true, "stance": "prone", "pitch": 0.0})
 	await H.step(self, 20, {"hold": ["aim"]})
 	await H.step(self, 5, {"tap": ["fire"], "hold": ["aim"]})
