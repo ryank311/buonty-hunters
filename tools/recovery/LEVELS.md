@@ -7,6 +7,7 @@ The project includes only the disc's multiplayer maps: original geometry, collis
 | Step | Command | Output |
 | --- | --- | --- |
 | Prepare | `previous/recovery/.venv/bin/python tools/recovery/prepare_level.py MP72` (or `--all`) | `previous/recovery/staging/levels/<ID>/` OBJ/MTL inputs; textures in `art/blender/textures/recovered_map_<id>/`; committed `resources/recovered/levels/<id>.json` |
+| Local lights | `previous/recovery/.venv/bin/python tools/recovery/prepare_lights.py --verify` | `resources/recovered/lighting.json`; all installed MP maps, no Blender rebuild |
 | Build | `prepare_level.py --batch MP72 MP1 ...`, then submit `staging/levels/batch_call.py` to the Blender MCP `execute_blender_code` tool | `art/blender/recovered_map_<id>.blend` |
 | Export | `tools/dev blender export recovered_map_mp72 ...` then `tools/dev import` | `art/models/recovered_map_<id>.glb` |
 | Verify | `tools/dev test recovered_maps_regression`, `tools/dev shot level=map:MP72 spawn=1` | |
@@ -30,8 +31,39 @@ The 12 campaign maps (`M51–M53`, `M61–M63`, `M71–M73`, `M81–M83`) were r
 
 ## Known limits
 
-- Lighting is per-pixel with the original light directions, not the PS2 vertex lighting; baked vertex colours are not recovered yet.
+- Lighting is per-pixel with the original directional and local light records, not the PS2 vertex lighting; baked vertex colours are not recovered yet. See local-light recovery below for fallback sources and rendering limits.
 - Rain/dust followers, animated and scrolling materials (`whispy_scroller`), lens flares, water surfaces and destructible state changes are not reconstructed. All 43 native doors across nine multiplayer maps now swing with moving collision; see [ACTIONS.md](ACTIONS.md) for the action HUD, source ownership and remaining interaction limits.
 - Alternate light states (`light_off`, `bulboff`) are separate models in the source and all remain.
 - No AI navigation, team spawns or objectives. The default stand-in roster is not placed on recovered maps.
 - The geometry is the extraction's assembly. Spot-check unfamiliar maps for leftover state branches and add patterns to `DROP` in `prepare_level.py` rather than editing a GLB.
+
+## Local-light recovery — 2026-10-05
+
+`prepare_lights.py` audits all 22 installed multiplayer maps. It reads the native `<MAP>_GEO.ZED` archive through `native/indexes/`, expands only instances reachable from `worldmodel`, and recovers **248 placed CLight nodes** (native node type 8). The mesh extractor omitted these nonvisual nodes. An additional **103 fixture-based approximations** supply the clearly lit lamps and fires whose models have no CLight record. The committed catalogue has 351 emitters across 14 maps; the other eight maps were audited and have no confirmed active local emitters in this pass. Campaign maps remain excluded.
+
+| Map | Native | Fixture approximation |
+| --- | ---: | ---: |
+| Blizzard (MP1) | 37 | 0 |
+| Death Trap (MP11) | 16 | 0 |
+| Frostfire (MP2) | 35 | 1 |
+| Desert Glory (MP6) | 1 | 21 |
+| Sujo (MP61) | 27 | 0 |
+| Enowapi (MP62) | 6 | 0 |
+| Shadow Falls (MP64) | 27 | 0 |
+| Night Stalker (MP7) | 23 | 1 |
+| Crossroads (MP72) | 0 | 16 |
+| Sandstorm (MP73) | 5 | 0 |
+| Rat's Nest (MP8) | 20 | 0 |
+| Chain Reaction (MP81) | 0 | 30 |
+| Guidance (MP82) | 2 | 34 |
+| Requiem (MP83) | 49 | 0 |
+
+Native evidence is preserved per emitter: archive path, scene path, payload-relative `nparams_offset`, position, normalized RGB, inner range, outer range and `evidence: native`. The 96-byte `nparams` contains a row-vector transform, six-float bounds, type and flags. `diffuse` is three normalized floats (do **not** apply the global PS2 255/128 multiplier); `min_range` is a source-unit radius and `max_range_sq` is the squared outer radius. Child transforms compose as `local @ parent`, including the referenced prototype root. Positions use the installed map's `source_origin` and `scale`; radii use its scale. `--verify` checks these composed transforms against recovered mesh placements before writing (7,604 matched placements, maximum discrepancy 0.0001221 source units on the current archive).
+
+Fallback profiles are explicit in `FIXTURES`, never a broad name search. They cover Crossroads bright/dim bulbs, Chain Reaction fluorescents, Guidance hanging lamps/posts, Desert Glory lamps and burning rubble/barrel, Night Stalker's firepit and Frostfire's tower-flame marker. Crossroads and Chain Reaction retain spherical light-influence bounds that guide their positions/ranges; other offsets and all fallback colors/energies are estimates. Each entry is labeled `evidence: fixture`. Off/no-source fixtures, inactive branches, unplaced library prototypes, destroyed branches and generic `fire_effects` attached to demolition objectives do not gain fallback lights. Baked bright patches, skylights and pale textures alone are insufficient evidence for an emitter.
+
+`scripts/levels/recovered_lighting.gd`, installed by `RecoveredMap`, owns six reusable shadowed OmniLights. This is deliberate: the [Mobile renderer limits each mesh to eight omni lights](https://docs.godotengine.org/en/latest/tutorials/3d/lights_and_shadows.html), and the recovered world meshes span the map because they are merged per texture. The pool favors nearby influence volumes, reserves two slots for combat effects, fades replacements and uses selection hysteresis. Walls block the local lights. All catalogue sources become eligible as the camera approaches, but only six contribute at once; distant illuminated rooms can therefore lose local illumination. Do not instantiate every light permanently without first splitting the map meshes or changing the rendering approach.
+
+The original inner plateau is approximated by Godot's smooth attenuation curve. Fire/torch sources get subtle deterministic energy variation; flame particles, destructible switching and emissive-surface reconstruction are separate work. Source light positions are preserved even when the original emitter is placed well below its bulb. The runtime needs only the committed JSON; Linux exports already include and audit it. Reload the map after regenerating the catalogue.
+
+Validated with `tools/dev check`, the three core suites and `recovered_maps_regression` (all 22 maps and their spawns), plus hidden in-game captures in Frostfire, Requiem, Shadow Falls, Chain Reaction, Crossroads and Desert Glory. Identical-camera comparisons with the light controller hidden confirmed the tunnel, warehouse, torch and rubble illumination. SteamOS has not been rebuilt for this pass.

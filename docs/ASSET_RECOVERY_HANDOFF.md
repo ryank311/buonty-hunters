@@ -75,6 +75,8 @@ Import original collision separately from render geometry. Recovered concave col
 
 **Whole multiplayer maps are installed.** [LEVELS.md](../tools/recovery/LEVELS.md) covers the pipeline: `prepare_level.py` (state/sky/collision selection, original lighting, fog, blend modes and spawns into `resources/recovered/levels/<id>.json`), the batched Blender MCP recipe `blender_level.py`, export, and `scripts/levels/recovered_map.gd` (`RecoveredMap`), which the session loads with `load_map(id)` and the menu lists under **Maps**. `recovered_maps_regression` loads every installed map, checks its fog, sky shader and two-sided collision, and grounds the player at every spawn. Selection rules are name/texture patterns over the assembled OBJ, not the scene graph; spot-check each map and extend `DROP`/`SKY` rather than editing a GLB.
 
+**Local lights are installed.** `prepare_lights.py --verify` rebuilds `resources/recovered/lighting.json` from reachable native CLight nodes and explicit fixture profiles: 248 native lights plus 103 documented approximations across 14 maps, with all 22 MP maps audited. `recovered_lighting.gd` supplies nearby shadowed lamps, tunnel lights and gently varying fire/torch illumination. Read the [local-light evidence and limits](../tools/recovery/LEVELS.md#local-light-recovery--2026-10-05) before editing: preserve native transforms/colors/ranges, keep off fixtures and demolished-objective fire markers dark, and respect the six-light pool required by map-wide meshes on the Mobile renderer. No Blender export is needed for catalogue changes. Flame particles and original baked vertex lighting remain unrecovered.
+
 ## Suggested next work batches
 
 | Batch | Concrete completion criteria |

@@ -57,6 +57,7 @@ func _ready() -> void:
 		_prepare_sky()
 	_add_spawns()
 	_apply_ambience()
+	preload("res://scripts/levels/recovered_lighting.gd").new().install(self, map_id)
 
 func _exit_tree() -> void:
 	var session := get_parent()

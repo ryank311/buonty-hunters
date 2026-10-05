@@ -14,6 +14,8 @@ Open `project.godot` in **Godot 4.7** and click the **Play ▶** button (or pres
 
 **F1/Start → Maps** loads all **22 recovered multiplayer maps**, at native scale with their original geometry, collision, sky dome, lighting and fog. **Next spawn** cycles grounded spawns from the original named views, supplemented with clear central positions where needed. Campaign maps are excluded from the project and builds; their sources remain in the offline recovery archive. There are no soldiers or objectives on these maps yet. See the [recovered maps guide](tools/recovery/LEVELS.md).
 
+Recovered maps now include local illumination from **351 lamps, bulbs, fluorescents, torches and fire sources**: 248 original light records and 103 documented fixture approximations. Nearby lights cast shadows and firelight varies gently; off fixtures stay dark. The [lighting guide](tools/recovery/LEVELS.md#local-light-recovery--2026-10-05) records the per-map audit, rebuild command and six-light rendering budget.
+
 The entire game renders at a fixed **640×480 (4:3)**, including the HUD and menus. Resizing only enlarges that finished image; every monitor shows the same framing, detail, and HUD proportions. Black bars fill unused space without cropping or stretching. The camera sits above and slightly right of the soldier, framing him just left of the reticle with the aiming area clear. The window opens at twice the render size (in screen points, so Retina displays are not halved), stepping down only to fit the screen. **F1/Start → Camera → Camera height above stance** and **Camera side offset** adjust that framing; ceiling and wall probes keep it within the level.
 
 | Action | Keyboard / mouse |
