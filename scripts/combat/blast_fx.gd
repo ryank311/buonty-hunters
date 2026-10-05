@@ -44,6 +44,29 @@ func start(colour: Color, radius: float, duration: float, pitch: float = 0.38, r
 	add_child(light)
 	_process(0.0)
 
+## Shapes the burst as a cone `length` metres long opening `half_angle` degrees out of
+## the node's -Z, instead of a ball: a directional charge.
+func cone(length: float, half_angle: float) -> void:
+	reach = length
+	var mesh := CylinderMesh.new()
+	mesh.height = 1.0
+	mesh.bottom_radius = 0.02
+	mesh.top_radius = tan(deg_to_rad(half_angle))
+	mesh.radial_segments = 16
+	mesh.rings = 1
+	var shape := MeshInstance3D.new()
+	shape.mesh = mesh
+	shape.material_override = material
+	shape.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	# The apex at the node, the wide end ahead; it grows out from the apex.
+	shape.position = Vector3(0.0, 0.0, -0.5)
+	shape.rotation_degrees.x = -90.0
+	material.cull_mode = BaseMaterial3D.CULL_DISABLED
+	ball.mesh = null
+	ball.add_child(shape)
+	light.position = Vector3(0.0, 0.0, -length * 0.3)
+	_process(0.0)
+
 func _process(delta: float) -> void:
 	age += delta
 	var progress := clampf(age / seconds, 0.0, 1.0)

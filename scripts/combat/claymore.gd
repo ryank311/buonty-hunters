@@ -9,6 +9,9 @@ const BLAST_FX := preload("res://scripts/combat/blast_fx.gd")
 const MODEL := preload("res://art/models/recovered_claymore.glb")
 const GROUP := &"claymores"
 const BLAST_DOT := 0.35
+## The visible fan; the damage cone is BLAST_DOT wide and profile.effect_radius long.
+const FX_LENGTH := 5.0
+const FX_HALF_ANGLE := 40.0
 ## The recovered .M18_CLAYMORE report, three sequencer choices.
 const REPORTS: Array[AudioStream] = [preload("res://audio/claymore/m18_claymore_1.wav"), preload("res://audio/claymore/m18_claymore_2.wav"), preload("res://audio/claymore/m18_claymore_3.wav")]
 var profile: WeaponProfile
@@ -34,7 +37,8 @@ func detonate() -> void:
 	Combat.blast(get_tree(), global_position + Vector3.UP * 0.15, profile.effect_radius, profile.damage, info, -global_basis.z, BLAST_DOT)
 	var fx := BLAST_FX.new()
 	Combat.spawn(get_parent(), fx)
-	# The fireball leaves the face, not the legs.
-	fx.global_position = global_position + Vector3.UP * 0.2 - global_basis.z * 0.6
+	# The blast leaves the convex face in a fan, away from the soldier who set it.
+	fx.global_transform = Transform3D(global_basis, global_position + Vector3.UP * 0.2)
 	fx.start(Color("ffcf7a"), 3.0, 0.4, 1.0, REPORTS.pick_random())
+	fx.cone(FX_LENGTH, FX_HALF_ANGLE)
 	queue_free()

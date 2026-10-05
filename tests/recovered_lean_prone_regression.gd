@@ -66,11 +66,7 @@ func _run() -> void:
 		previous = motion.native_worlds[head].origin
 	check(driver.lean.clip == "seal_stand2rlean" and largest < 0.15, "Reversing lean passes through neutral without a pose snap (%.3f m)" % largest)
 	await H.step(self, 40, {"forward": 1.0, "hold": ["lean_right", "aim"]})
-	var legs_match := true
-	for bone: String in ["hips", "lthigh", "lcalf", "rthigh", "rcalf"]:
-		var index: int = motion.rig.names.find(bone)
-		legs_match = legs_match and driver.last_pose[index].is_equal_approx(driver.last_base_pose[index])
-	check(legs_match and driver.lean.weight > 0.99, "Moving lean retains the distance-driven leg gait")
+	check(player.camera_rig.actual_lean == 0.0 and driver.lean.weight == 0.0, "Moving cancels the camera and native lean")
 	await place()
 	await H.step(self, 40, {"hold": ["lean_right", "aim"]})
 	await H.step(self, 5, {"tap": ["fire"], "hold": ["lean_right", "aim"]})

@@ -256,21 +256,23 @@ func _equipment() -> void:
 
 func _claymore() -> void:
 	await scenario("lab_start", {"class": "pointman", "weapon": "claymore"})
-	var placed: Dictionary = await H.step(self, 6, {"tap": ["fire"]})
-	var mine: Node3D = get_nodes_in_group(Combat.SPAWNED_GROUP).filter(func(node: Node) -> bool: return node.has_method("detonate")).front()
-	check(placed.weapon.ammo == 1 and placed.live.get("claymore", 0) == 1 and absf(mine.global_position.z - 25.1) < 0.1 and mine.global_position.y < 0.05, "A claymore is set on the ground a pace ahead, facing forward")
-	# The soldier who set it and their teammates can stand in front of it.
-	await H.apply(self, {"pos": [0.5, 0.1, 22.5], "actors": [{"team": 0, "pos": [-1.0, 0.0, 22.5], "name": "FRIEND"}]})
-	var waiting: Dictionary = await H.step(self, 150, {})
-	check(mine.is_armed() and waiting.live.get("claymore", 0) == 1 and is_equal_approx(player.health, 100.0), "Its owner and their teammates do not set it off")
-	# An enemy pacing into the arc does. The friend standing in the blast is hurt too.
-	await H.apply(self, {"pos": [0.0, 0.1, 28.0], "actors": [{"team": 1, "pos": [5.5, 0.0, 22.5], "travel": 4.5, "yaw": 180.0, "name": "INTRUDER"}]})
-	var intruder := actor("INTRUDER")
-	var safe: Dictionary = await H.step(self, 30, {})
-	check(safe.live.get("claymore", 0) == 1 and intruder.alive, "An enemy outside the arc is ignored (%.1f m away)" % intruder.global_position.distance_to(mine.global_position))
-	var tripped: Dictionary = await H.step(self, 600, {"speed": 4})
-	check(tripped.get("live", {}).get("claymore", 0) == 0 and not intruder.alive, "An enemy who walks into the arc sets it off and dies")
-	check(actor("FRIEND").health < 100.0 and is_equal_approx(player.health, 100.0), "The blast is a cone: the friend in front is hurt, the owner behind it is not (friend %.0f health)" % actor("FRIEND").health)
+	# The soldier kneels to set it down; the remote comes up once it is on the ground.
+	var kneeling: Dictionary = await H.step(self, 30, {"tap": ["fire"]})
+	check(kneeling.get("live", {}).get("claymore", 0) == 0 and kneeling.weapon.ammo == 2, "A claymore is not down until the soldier has knelt to set it")
+	var placed: Dictionary = await H.step(self, 90, {})
+	var mines := get_nodes_in_group(&"claymores")
+	var mine: Node3D = mines.front() if mines.size() == 1 else null
+	var carried: Array = placed.carried.map(func(item: Dictionary) -> String: return item.name)
+	check(mine != null and mine.global_position.y < 0.05 and mine.global_position.z < player.global_position.z and (-mine.global_basis.z).dot(-player.global_basis.z) > 0.99, "A claymore is set on the ground ahead, facing away from the soldier")
+	check(placed.weapon.name == "CLAYMORE REMOTE" and carried.back() == "CLAYMORE REMOTE" and placed.carried[3].ammo == 1, "Placing one adds the claymore remote and brings it up (%s)" % ", ".join(carried))
+	# It has no trigger of its own: an enemy in front waits there unharmed.
+	await H.apply(self, {"actors": [{"team": 1, "pos": [0.2, 0.0, 22.5], "yaw": 180.0, "name": "INTRUDER"}]})
+	var waiting: Dictionary = await H.step(self, 60, {})
+	check(waiting.get("live", {}).get("claymore", 0) == 1 and actor("INTRUDER").alive, "An enemy in front does not set it off")
+	var fired: Dictionary = await H.step(self, 6, {"tap": ["fire"]})
+	check(fired.get("live", {}).get("claymore", 0) == 0 and not actor("INTRUDER").alive and is_equal_approx(player.health, 100.0), "The remote sets it off: the enemy in front dies, the soldier behind it is unhurt")
+	var after: Array = fired.carried.map(func(item: Dictionary) -> String: return item.name)
+	check(fired.weapon.name == "CLAYMORE" and fired.weapon.ammo == 1 and not after.has("CLAYMORE REMOTE"), "With none left down the remote goes and the claymore comes back up")
 
 func _elimination() -> void:
 	await scenario("lab_start", {"actors": [

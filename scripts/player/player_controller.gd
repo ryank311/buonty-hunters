@@ -304,6 +304,9 @@ func _physics_process(delta: float) -> void:
 		if impact_speed > 3.0:
 			PlayerInput.vibrate(camera_settings.vibration * 0.45, 0.10)
 	var lean := Input.get_axis("lean_left", "lean_right")
+	# Movement cancels leaning, including the braking time after input releases.
+	if not move_input.is_zero_approx() or not Vector2(velocity.x, velocity.z).is_zero_approx() or not is_on_floor():
+		lean = 0.0
 	camera_rig.update_view(self, StanceController.EYE_HEIGHTS[stance.current], lean, aiming, delta)
 	# Lying down, the soldier and the prone box lie along the surface under them, at its
 	# angle. A dive stays level until it lands.

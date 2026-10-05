@@ -216,9 +216,9 @@ func _draw_weapon_icon() -> void:
 	if kind == "smoke":
 		weapon_icon.draw_texture_rect(preload("res://art/ui/recovered/hudw/grenade_smoke_icon.png"), Rect2(41, 0, 42, 42), false, color)
 	elif kind == "claymore":
-		weapon_icon.draw_rect(Rect2(34, 9, 56, 20), color)
-		weapon_icon.draw_line(Vector2(45, 29), Vector2(39, 41), color, 3)
-		weapon_icon.draw_line(Vector2(79, 29), Vector2(85, 41), color, 3)
+		weapon_icon.draw_texture_rect(preload("res://art/ui/recovered/hudw/claymore_icon.png"), Rect2(30, 0, 84, 42), false, color)
+	elif kind == "detonator":
+		weapon_icon.draw_texture_rect(preload("res://art/ui/recovered/hudw/detonator_icon.png"), Rect2(41, 0, 42, 42), false, color)
 	elif kind != "firearm":
 		weapon_icon.draw_circle(Vector2(62, 27), 13, color)
 		weapon_icon.draw_rect(Rect2(56, 6, 12, 10), color)
@@ -487,7 +487,7 @@ func update_display(delta: float) -> void:
 	mode_label.text = "GEAR" if equipment else player.weapon.mode_caption()
 	mode_label.tooltip_text = "B / L3: change firing mode"
 	ammo_label.text = "x %d" % player.weapon.ammo if equipment else "%02d / %02d" % [player.weapon.ammo, player.weapon.reserve]
-	ammo_caption.text = "CARRIED" if equipment else "%d MAGS" % ceili(float(player.weapon.reserve) / player.weapon.profile.magazine_size)
+	ammo_caption.text = ("PLACED" if player.weapon.profile.kind == "detonator" else "CARRIED") if equipment else "%d MAGS" % ceili(float(player.weapon.reserve) / player.weapon.profile.magazine_size)
 	var pad := not Input.get_connected_joypads().is_empty()
 	if player.weapon.reload_remaining > 0.0:
 		weapon_state_label.text = "RELOADING  %.1f s" % player.weapon.reload_remaining

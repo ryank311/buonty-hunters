@@ -125,6 +125,8 @@ func initialize(owner_player: PrototypePlayer) -> void:
 	held_item.add_child(claymore_model)
 	claymore_model.hide()
 	detonator_model = preload("res://art/models/recovered_detonator.glb").instantiate()
+	# Turned so the clacker's body sits under the fingers of the native hand.
+	detonator_model.rotation_degrees.y = 90.0
 	held_item.add_child(detonator_model)
 	detonator_model.hide()
 	gear_sound.bus = &"World"
@@ -615,10 +617,13 @@ func sizing_throw(delta: float) -> bool:
 	return profile.kind in ["frag", "smoke", "flash"] and ammo > 0 and not fire_was_down and not require_trigger_release and _equipment_ready(delta)
 
 func _equipment_ready(delta: float = 0.0) -> bool:
-	return player.can_fire() and cooldown <= delta + 0.00001 and draw_remaining <= delta and throw_release < 0.0
+	return player.can_fire() and cooldown <= delta + 0.00001 and draw_remaining <= delta and throw_release < 0.0 and place_release < 0.0
 
 func _tick_equipment(fresh_press: bool, fire: bool, delta: float) -> void:
 	query_aim()
+	if place_release >= 0.0:
+		_tick_place(delta)
+		return
 	if throw_release >= 0.0:
 		throw_release -= delta
 		if throw_release <= 0.00001:
@@ -645,16 +650,16 @@ func _tick_equipment(fresh_press: bool, fire: bool, delta: float) -> void:
 		return
 	if not fresh_press or require_trigger_release or not _equipment_ready():
 		return
+	if profile.kind == "detonator":
+		_detonate_claymores()
+		return
 	if ammo <= 0:
 		if not empty_notified:
 			empty_notified = true
 			player.message.emit("No %s left" % profile.display_name.to_lower())
 		return
 	if profile.kind == "claymore":
-		ammo -= 1
-		cooldown = 60.0 / profile.rounds_per_minute
-		_place_claymore()
-		held_item.visible = ammo > 0
+		_begin_place()
 		return
 	throw_charge = 0.0
 	squeeze = 0.0
@@ -739,13 +744,127 @@ func _throw() -> void:
 	Combat.spawn(_spawn_parent(), grenade)
 	grenade.launch(player, profile, launch.origin, launch.velocity)
 
+# --- Claymores and the remote -------------------------------------------------
+
+func _begin_place() -> void:
+	if _claymores_down().size() >= MAX_CLAYMORES:
+		player.message.emit("Unable to deploy: max equipment items placed (%d)" % MAX_CLAYMORES)
+		return
+	if _ground_speed() > PLACE_STILL_SPEED:
+		player.message.emit("Stand still to place a claymore")
+		return
+	place_release = player.soldier.begin_place()
+	cooldown = player.soldier.place_duration
+
+func _tick_place(delta: float) -> void:
+	held_item.visible = draw_remaining <= 0.0
+	# Moving off or being stopped takes the claymore back up before it is down.
+	if not player.can_fire() or _ground_speed() > PLACE_STILL_SPEED:
+		_cancel_place()
+		return
+	place_release -= delta
+	if place_release <= 0.00001:
+		place_release = -1.0
+		_place_claymore()
+
+## Only a claymore not yet down is taken back; once it is, the kneel plays out.
+func _cancel_place() -> void:
+	if place_release < 0.0:
+		return
+	place_release = -1.0
+	cooldown = 0.0
+	if player:
+		player.soldier.cancel_place()
+
+func _ground_speed() -> float:
+	return Vector2(player.velocity.x, player.velocity.z).length()
+
 func _place_claymore() -> void:
-	# On the ground a pace ahead, facing the way the soldier faces.
+	# Under the right hand as it reaches the ground, facing the way the soldier faces,
+	# so the blast goes away from them.
 	var forward := -player.global_basis.z
-	var above := player.global_position + forward * 0.9 + Vector3.UP * 1.0
-	var query := PhysicsRayQueryParameters3D.create(above, above + Vector3.DOWN * 3.0, Combat.WORLD_MASK)
+	forward = Vector3(forward.x, 0.0, forward.z).normalized()
+	var hand := player.global_position + forward * 0.5
+	var skin := player.soldier.soldier_skin
+	if skin != null and not skin.motion.native_worlds.is_empty():
+		hand = player.soldier.global_transform * skin.motion.native_worlds[skin.motion.rig.names.find("rhand")].origin
+	var query := PhysicsRayQueryParameters3D.create(hand + Vector3.UP * 0.5, hand + Vector3.DOWN * 2.0, Combat.WORLD_MASK, [player.get_rid()])
 	var ground := player.get_world_3d().direct_space_state.intersect_ray(query)
-	var where: Vector3 = ground.get("position", player.global_position + forward * 0.9)
+	# As in the original: nothing is placed on ground more than a metre below the feet.
+	if ground.is_empty() or ground.position.y < player.global_position.y - 1.0:
+		player.message.emit("No ground here to set a claymore on")
+		return
+	ammo -= 1
 	var mine := CLAYMORE.new()
 	Combat.spawn(_spawn_parent(), mine)
-	mine.place(player, profile, Transform3D(Basis.looking_at(forward, Vector3.UP), where))
+	mine.place(player, profile, Transform3D(Basis.looking_at(forward, Vector3.UP), ground.position))
+	_play_gear(PLACE_SOUND)
+	# The remote comes up as soon as the claymore is down.
+	_sync_remote()
+	equip(_remote_slot())
+
+func _detonate_claymores() -> void:
+	cooldown = 60.0 / profile.rounds_per_minute
+	_play_gear(DETONATOR_CLICK)
+	var fired := 0
+	for mine: Node3D in _claymores_down():
+		if mine.global_position.distance_to(player.global_position) <= REMOTE_RANGE:
+			mine.detonate()
+			fired += 1
+	if fired == 0:
+		player.message.emit("No claymore within %d m of the remote" % REMOTE_RANGE)
+		return
+	PlayerInput.vibrate(player.camera_settings.vibration)
+	_sync_remote()
+	# Back to the claymores, or the rifle when none are left.
+	if active_slot == _remote_slot():
+		var claymores := _slot_of("claymore")
+		equip(claymores if claymores >= 0 and magazines[claymores] > 0 else 0)
+
+## The soldier's claymores still waiting to be set off.
+func _claymores_down() -> Array:
+	if not is_inside_tree():
+		return []
+	return get_tree().get_nodes_in_group(CLAYMORE.GROUP).filter(func(mine: Node) -> bool: return mine.belongs_to(player) and not mine.is_queued_for_deletion())
+
+func _slot_of(kind: String) -> int:
+	for slot: int in range(profiles.size()):
+		if profiles[slot].kind == kind:
+			return slot
+	return -1
+
+func _remote_slot() -> int:
+	return _slot_of("detonator")
+
+## The remote is carried exactly while a claymore of the soldier's is down, after the
+## class's own slots, and counts how many are.
+func _sync_remote() -> void:
+	var down := _claymores_down().size()
+	var slot := _remote_slot()
+	if down > 0 and slot < 0:
+		profiles.append(REMOTE.duplicate() as WeaponProfile)
+		magazines.append(down)
+		reserves.append(0)
+	elif down == 0 and slot >= 0:
+		_remove_remote()
+	elif slot >= 0:
+		magazines[slot] = down
+
+func _remove_remote() -> void:
+	var slot := _remote_slot()
+	if slot < 0:
+		return
+	if active_slot == slot:
+		var claymores := _slot_of("claymore")
+		equip(claymores if claymores >= 0 and magazines[claymores] > 0 else 0)
+	profiles.remove_at(slot)
+	magazines.remove_at(slot)
+	reserves.remove_at(slot)
+	if active_slot > slot:
+		active_slot -= 1
+
+func _play_gear(stream: AudioStream) -> void:
+	gear_sound.global_position = player.global_position + Vector3.UP * 0.5
+	gear_sound.stream = stream
+	if DisplayServer.get_name() != "headless":
+		gear_sound.play()
