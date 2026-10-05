@@ -29,6 +29,8 @@ var notice_label: Label
 var debug_label: Label
 var crosshair: Control
 var context_hud: Control
+## Red marks around the reticle toward enemy gunfire within earshot.
+var gunfire_indicator: Control
 var menu: Control
 var menu_box: VBoxContainer
 var sliders: Dictionary = {}
@@ -172,6 +174,10 @@ func _build_hud() -> void:
 	context_hud = preload("res://scripts/ui/context_hud.gd").new()
 	root.add_child(context_hud)
 	context_hud.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	gunfire_indicator = preload("res://scripts/ui/gunfire_indicator.gd").new()
+	gunfire_indicator.player = session.player
+	root.add_child(gunfire_indicator)
+	gunfire_indicator.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 
 func _layout_hud() -> void:
 	var viewport_size := root.size
@@ -513,3 +519,4 @@ func update_display(delta: float) -> void:
 	weapon_icon.queue_redraw()
 	crosshair.update_weapon(player.weapon, delta, session.modal)
 	context_hud.update_actions(player.interactions, delta)
+	gunfire_indicator.update_marks(delta)

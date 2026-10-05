@@ -188,331 +188,429 @@
    {
     "weapon": "9x19P",
     "fire_anim": "muzzle_glock",
-    "flash": "flash_fire_med"
+    "flash": "flash_fire_med",
+    "sound_radius_m": 70.0,
+    "suppressed": false
    }
   ],
   "a_mark23": [
    {
     "weapon": "Mark 23",
     "fire_anim": "muzzle_mark23",
-    "flash": "flash_fire_med"
+    "flash": "flash_fire_med",
+    "sound_radius_m": 60.0,
+    "suppressed": false
    }
   ],
   "fiveseven": [
    {
     "weapon": "F57",
     "fire_anim": "muzzle_fiveseven",
-    "flash": "flash_fire_med"
+    "flash": "flash_fire_med",
+    "sound_radius_m": 60.0,
+    "suppressed": false
    }
   ],
   "desert_eagle": [
    {
     "weapon": "DE .50",
     "fire_anim": "muzzle_deserteagle",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 80.0,
+    "suppressed": false
    }
   ],
   "baretta_m9": [
    {
     "weapon": "M9",
     "fire_anim": "muzzle_Beretta_M9",
-    "flash": "flash_fire_small"
+    "flash": "flash_fire_small",
+    "sound_radius_m": 60.0,
+    "suppressed": false
    }
   ],
   "sig226": [
    {
     "weapon": "226",
     "fire_anim": "muzzle_p226",
-    "flash": "flash_fire_small"
+    "flash": "flash_fire_small",
+    "sound_radius_m": 45.0,
+    "suppressed": false
    },
    {
     "weapon": "SR-1 Gyurza",
     "fire_anim": "muzzle_p226",
-    "flash": "flash_fire_small"
+    "flash": "flash_fire_small",
+    "sound_radius_m": 60.0,
+    "suppressed": false
    }
   ],
   "a_mark23sd": [
    {
     "weapon": "Mark 23SD",
     "fire_anim": "muzzle_mark23_sd",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 4.5,
+    "suppressed": true
    }
   ],
   "hkp9s": [
    {
     "weapon": "9mm Pistol",
     "fire_anim": "muzzle_H&K_P9S",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 4.0,
+    "suppressed": true
    }
   ],
   "m11_p228": [
    {
     "weapon": "P228",
     "fire_anim": "muzzle_p226",
-    "flash": "flash_fire_small"
+    "flash": "flash_fire_small",
+    "sound_radius_m": 50.0,
+    "suppressed": false
    }
   ],
   "spas12": [
    {
     "weapon": "Spas 12",
     "fire_anim": "muzzle_shotgun",
-    "flash": "shotgun_fire"
+    "flash": "shotgun_fire",
+    "sound_radius_m": 65.0,
+    "suppressed": false
    }
   ],
   "jackhammer": [
    {
     "weapon": "JACKHAMMER",
     "fire_anim": "muzzle_shotgun",
-    "flash": "shotgun_fire"
+    "flash": "shotgun_fire",
+    "sound_radius_m": 65.0,
+    "suppressed": false
    }
   ],
   "remington870": [
    {
     "weapon": "870",
     "fire_anim": "muzzle_shotgun",
-    "flash": "shotgun_fire"
+    "flash": "shotgun_fire",
+    "sound_radius_m": 65.0,
+    "suppressed": false
    }
   ],
   "m16a2": [
    {
     "weapon": "M16A2",
     "fire_anim": "muzzle_M16A2",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 60.0,
+    "suppressed": false
    }
   ],
   "m16_m203": [
    {
     "weapon": "M16A2-M203",
     "fire_anim": "muzzle_M16A2",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 60.0,
+    "suppressed": false
    }
   ],
   "m4acarbine": [
    {
     "weapon": "M4A1",
     "fire_anim": "muzzle_m4",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 100.0,
+    "suppressed": false
    }
   ],
   "m4acarbine_sd": [
    {
     "weapon": "M4A1 SD",
     "fire_anim": "muzzle_m4SD",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 10.0,
+    "suppressed": true
    }
   ],
   "m4acarbine_203": [
    {
     "weapon": "M4A1-M203",
     "fire_anim": "muzzle_m4",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 65.0,
+    "suppressed": false
    }
   ],
   "sig_commando": [
    {
     "weapon": "552",
     "fire_anim": "muzzle_sigcom",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 65.0,
+    "suppressed": false
    },
    {
     "weapon": "552SD",
     "fire_anim": "muzzle_m4SD",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 40.0,
+    "suppressed": true
    }
   ],
   "ak47": [
    {
     "weapon": "AK-47",
     "fire_anim": "muzzle_ak47",
-    "flash": "flash_fire_break_big"
+    "flash": "flash_fire_break_big",
+    "sound_radius_m": 100.0,
+    "suppressed": false
    }
   ],
   "aks74": [
    {
     "weapon": "AKS-74",
     "fire_anim": "muzzle_aks74",
-    "flash": "flash_fire_break_big"
+    "flash": "flash_fire_break_big",
+    "sound_radius_m": 155.0,
+    "suppressed": false
    }
   ],
   "m14_gun": [
    {
     "weapon": "M14",
     "fire_anim": "muzzle_M14",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 150.0,
+    "suppressed": false
    }
   ],
   "bmmg_f2k": [
    {
     "weapon": "F2000",
     "fire_anim": "muzzle_m4",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 65.0,
+    "suppressed": false
    }
   ],
   "iw80a2": [
    {
     "weapon": "SA-80 A2",
     "fire_anim": "muzzle_m4",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 60.0,
+    "suppressed": false
    }
   ],
   "ak105": [
    {
     "weapon": "AK-105",
     "fire_anim": "muzzle_aks74",
-    "flash": "flash_fire_break_big"
+    "flash": "flash_fire_break_big",
+    "sound_radius_m": 100.0,
+    "suppressed": false
    }
   ],
   "ra14_groza": [
    {
     "weapon": "KBP OTs-14 Groza",
     "fire_anim": "muzzle_aks74",
-    "flash": "flash_fire_break_big"
+    "flash": "flash_fire_break_big",
+    "sound_radius_m": 125.0,
+    "suppressed": false
    }
   ],
   "m60e": [
    {
     "weapon": "M60E3",
     "fire_anim": "muzzle_rifle_m60",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 110.0,
+    "suppressed": false
    }
   ],
   "stoner_m63a": [
    {
     "weapon": "M63A",
     "fire_anim": "muzzle_rifle_stoner",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 500.0,
+    "suppressed": false
    },
    {
     "weapon": ".PKM",
     "fire_anim": "muzzle_rifle_stoner",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 500.0,
+    "suppressed": false
    },
    {
     "weapon": "PKM TURRET",
     "fire_anim": "muzzle_turret_RMG",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 500.0,
+    "suppressed": false
    },
    {
     "weapon": "LMG TURRET",
     "fire_anim": "muzzle_turret_LMG",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 500.0,
+    "suppressed": false
    }
   ],
   "mp5": [
    {
     "weapon": "HK5",
     "fire_anim": "muzzle_mp5",
-    "flash": "flash_fire_med"
+    "flash": "flash_fire_med",
+    "sound_radius_m": 70.0,
+    "suppressed": false
    }
   ],
   "mp5sd": [
    {
     "weapon": "HK5SD",
     "fire_anim": "muzzle_mp5sd",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 5.0,
+    "suppressed": true
    }
   ],
   "fnp90": [
    {
     "weapon": "F90",
     "fire_anim": "muzzle_mp5",
-    "flash": "flash_fire_med"
+    "flash": "flash_fire_med",
+    "sound_radius_m": 70.0,
+    "suppressed": false
    }
   ],
   "uzi": [
    {
     "weapon": "9mm Sub",
     "fire_anim": "muzzle_uzi",
-    "flash": "flash_fire_med"
+    "flash": "flash_fire_med",
+    "sound_radius_m": 70.0,
+    "suppressed": false
    }
   ],
   "steyr_aug9": [
    {
     "weapon": "Steyr Aug",
     "fire_anim": "muzzle_uzi",
-    "flash": "flash_fire_med"
+    "flash": "flash_fire_med",
+    "sound_radius_m": 70.0,
+    "suppressed": false
    }
   ],
   "hk5k": [
    {
     "weapon": "MP5K",
     "fire_anim": "muzzle_uzi",
-    "flash": "flash_fire_med"
+    "flash": "flash_fire_med",
+    "sound_radius_m": 70.0,
+    "suppressed": false
    }
   ],
   "barretm82a1": [
    {
     "weapon": "M82A1A",
     "fire_anim": "muzzle_Barret-M82a1",
-    "flash": "flash_fire_hider"
+    "flash": "flash_fire_hider",
+    "sound_radius_m": 135.0,
+    "suppressed": false
    }
   ],
   "remington700": [
    {
     "weapon": "M40A1",
     "fire_anim": "muzzle_rifle_model_700",
-    "flash": "flash_fire_big"
+    "flash": "flash_fire_big",
+    "sound_radius_m": 170.0,
+    "suppressed": false
    }
   ],
   "mcmillanm87": [
    {
     "weapon": "M87ELR",
     "fire_anim": "muzzle_McMillan",
-    "flash": "flash_fire_big"
+    "flash": "flash_fire_big",
+    "sound_radius_m": 175.0,
+    "suppressed": false
    }
   ],
   "stoner_sr25": [
    {
     "weapon": "SR-25 SD",
     "fire_anim": "muzzle_stoner_SR25SD",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 10.0,
+    "suppressed": true
    },
    {
     "weapon": "SR-25",
     "fire_anim": "muzzle_stoner_SR25",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 130.0,
+    "suppressed": false
    }
   ],
   "dragunov": [
    {
     "weapon": "Dragunov",
     "fire_anim": "muzzle_rifle_dragunov",
-    "flash": "flash_fire_big"
+    "flash": "flash_fire_big",
+    "sound_radius_m": 160.0,
+    "suppressed": false
    }
   ],
   "(null)": [
    {
     "weapon": "M203",
     "fire_anim": "muzzle_m203",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 3.0,
+    "suppressed": true
    }
   ],
   "mglmk1": [
    {
     "weapon": "MGL",
     "fire_anim": "muzzle_m203",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 3.0,
+    "suppressed": true
    }
   ],
   "m79": [
    {
     "weapon": "M79",
     "fire_anim": "muzzle_m203",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 3.0,
+    "suppressed": true
    }
   ],
   "at4": [
    {
     "weapon": "LAW",
     "fire_anim": "muzzle_law",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 3.0,
+    "suppressed": true
    }
   ],
   "rpg7": [
    {
     "weapon": "RPG LAUNCHER",
     "fire_anim": "muzzle_RPG",
-    "flash": null
+    "flash": null,
+    "sound_radius_m": 3.0,
+    "suppressed": true
    }
   ]
  }

@@ -78,6 +78,9 @@ var throw_hold_style: int = -1
 var throw_style: int = -1
 var throw_time: float = 0.0
 var throw_duration: float = 0.0
+## Setting a claymore down: how far into it, or -1.
+var place_time: float = -1.0
+var place_duration: float = 0.0
 
 func _ready() -> void:
 	var cloth := _material(Color("898874"))
@@ -191,6 +194,7 @@ func reset_pose() -> void:
 	throw_style = -1
 	throw_time = 0.0
 	throw_duration = 0.0
+	place_time = -1.0
 	lean_shift = 0.0
 	lean_roll = 0.0
 	focus_blend = 0.0
@@ -227,6 +231,22 @@ func _advance_throw(delta: float) -> void:
 		throw_time += delta
 		if throw_time >= throw_duration:
 			throw_style = -1
+	if place_time >= 0.0:
+		place_time += delta
+		if place_time >= place_duration:
+			place_time = -1.0
+
+## Kneels to set a claymore down. Returns the seconds until it is on the ground.
+func begin_place() -> float:
+	place_time = 0.0
+	place_duration = soldier_skin.driver.place.duration(soldier_skin.motion)
+	return soldier_skin.driver.place.begin(get_parent().stance.current)
+
+func cancel_place() -> void:
+	place_time = -1.0
+
+func placing() -> bool:
+	return place_time >= 0.0
 
 func begin_jump(launch_speed: float) -> void:
 	jump_active = true

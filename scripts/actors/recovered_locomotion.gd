@@ -24,11 +24,13 @@ var gunplay := preload("res://scripts/actors/recovered_gunplay.gd").new()
 var lean := preload("res://scripts/actors/recovered_lean.gd").new()
 var swap := preload("res://scripts/actors/recovered_swap.gd").new()
 var grenade := preload("res://scripts/actors/recovered_throw.gd").new()
+var place := preload("res://scripts/actors/recovered_place.gd").new()
 var active_clip: String = ""
 var time: float = 0.0
 var base_time: float = 0.0
 var transition: float = 1.0
 var from_pose: Array[Transform3D] = []
+var from_socket := Transform3D.IDENTITY
 var last_pose: Array[Transform3D] = []
 var last_base_pose: Array[Transform3D] = []
 var was_grounded: bool = true
@@ -64,6 +66,7 @@ func reset() -> void:
 	lean.reset()
 	swap.reset()
 	grenade.reset()
+	place.reset()
 	was_grounded = true
 	was_diving = false
 	landing_time = -1.0
@@ -239,6 +242,7 @@ func drive(skin: SoldierSkin, proxy: SoldierProxy, stance: int, speed: float, mo
 	var playing: String = clip if mix.is_empty() else "gait " + prefix + ("standing" if stance == 0 else str(mix[0][0]))
 	if playing != play:
 		from_pose = last_base_pose.duplicate()
+		from_socket = gunplay.socket
 		transition = 0.0
 		play = playing
 		# One gait hands its place in the stride to the next, as the original does.
@@ -292,10 +296,16 @@ func drive(skin: SoldierSkin, proxy: SoldierProxy, stance: int, speed: float, mo
 	gunplay.apply(player, pose, clip, time, weapon, stance, moving, allowed, focused or lean.weight > 0.0, pitch, delta, lean)
 	swap.apply(player, pose, weapon, stance, moving, grounded, diving, delta, gunplay)
 	grenade.apply(player, pose, proxy, weapon, stance, moving, grounded, delta, gunplay)
+	place.apply(player, pose, proxy, stance, moving, grounded, delta, gunplay)
 	last_pose = pose.duplicate()
 	player.current_animation_position = time
 	player.apply_pose(pose)
-	skin.place_weapon(proxy, clip, time, gunplay.socket)
+	var socket := gunplay.socket
+	if climbing and transition < 1:
+		# Climb clips carry the slung weapon far from the hand that holds its socket, each
+		# at its own offset: between two of them the socket blends with the pose.
+		socket = from_socket.interpolate_with(socket, smoothstep(0, 1, transition))
+	skin.place_weapon(proxy, clip, time, socket)
 
 ## Advances the gait by the ground covered this tick and returns its blended pose.
 func _step(player: Node, pistol: bool, movement: Vector2, delta: float, strafe_phase: float = -1.0) -> Array[Transform3D]:

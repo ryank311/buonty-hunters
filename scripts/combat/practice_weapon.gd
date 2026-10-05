@@ -7,6 +7,15 @@ const Loadouts := preload("res://scripts/combat/loadouts.gd")
 const BULLET := preload("res://scripts/combat/bullet.gd")
 const THROWABLE := preload("res://scripts/combat/throwable.gd")
 const CLAYMORE := preload("res://scripts/combat/claymore.gd")
+## Given while a claymore of the soldier's is down; it sets them all off.
+const REMOTE := preload("res://resources/weapons/claymore_remote.tres")
+## The original's limits: four charges down per soldier, the remote reaches 500 units,
+## and a claymore is not set down while moving faster than 3.2 units/s.
+const MAX_CLAYMORES := 4
+const REMOTE_RANGE := 50.0
+const PLACE_STILL_SPEED := 0.32
+const DETONATOR_CLICK := preload("res://audio/claymore/detonator_click.wav")
+const PLACE_SOUND := preload("res://audio/claymore/place_charge.wav")
 const DIRECTOR := preload("res://scripts/combat/combat_director.gd")
 const THROW_ARC := preload("res://scripts/combat/throw_arc.gd")
 const Guns := preload("res://scripts/combat/recovered_weapons.gd")
@@ -70,6 +79,11 @@ var scope_camera := Camera3D.new()
 var held_item := MeshInstance3D.new()
 var item_mesh := SphereMesh.new()
 var smoke_model: Node3D
+var claymore_model: Node3D
+var detonator_model: Node3D
+## Seconds until the kneeling soldier's claymore is on the ground, or -1.
+var place_release: float = -1.0
+var gear_sound := AudioStreamPlayer3D.new()
 var item_paint := StandardMaterial3D.new()
 var director: Node
 var pad_cycle: bool = false
@@ -105,6 +119,18 @@ func initialize(owner_player: PrototypePlayer) -> void:
 	smoke_model = preload("res://art/models/recovered_smoke_grenade.glb").instantiate()
 	held_item.add_child(smoke_model)
 	smoke_model.hide()
+	claymore_model = preload("res://art/models/recovered_claymore.glb").instantiate()
+	# Carried by its top edge, face out.
+	claymore_model.position = Vector3(0.0, -0.3, 0.0)
+	held_item.add_child(claymore_model)
+	claymore_model.hide()
+	detonator_model = preload("res://art/models/recovered_detonator.glb").instantiate()
+	held_item.add_child(detonator_model)
+	detonator_model.hide()
+	gear_sound.bus = &"World"
+	gear_sound.unit_size = 4.0
+	gear_sound.max_distance = 30.0
+	add_child(gear_sound)
 	throw_arc = THROW_ARC.new()
 	add_child(throw_arc)
 	director = DIRECTOR.new()
@@ -139,6 +165,8 @@ func reset() -> void:
 	if is_inside_tree():
 		Combat.clear_spawned(get_tree())
 	active_slot = 0
+	_cancel_place()
+	_remove_remote()
 	for slot: int in range(profiles.size()):
 		magazines[slot] = profiles[slot].magazine_size
 		reserves[slot] = profiles[slot].starting_reserve
@@ -181,6 +209,7 @@ func equip(slot: int) -> bool:
 	weapon_audio.cancel_reload()
 	set_scope(false)
 	_cancel_throw()
+	_cancel_place()
 	draw_from = profile
 	draw_serial += 1
 	active_slot = slot
@@ -204,6 +233,7 @@ func receive(slot: int, taken: WeaponProfile, loaded: int, spare: int) -> void:
 	if slot == active_slot:
 		# Return/cancel a held grenade before replacing the old slot's inventory.
 		_cancel_throw()
+		_cancel_place()
 		weapon_audio.cancel_reload()
 		draw_from = profile
 		draw_serial += 1
@@ -241,8 +271,10 @@ func _show_weapon() -> void:
 		soldier.pistol_mesh.scale = Vector3.ONE if long_gun else profile.visual_scale
 		soldier.muzzle.position.z = -profile.muzzle_length
 	held_item.visible = not firearm and ammo > 0
-	held_item.mesh = null if profile.kind == "smoke" else item_mesh
+	held_item.mesh = null if profile.kind in ["smoke", "claymore", "detonator"] else item_mesh
 	smoke_model.visible = profile.kind == "smoke"
+	claymore_model.visible = profile.kind == "claymore"
+	detonator_model.visible = profile.kind == "detonator"
 	if not firearm:
 		item_paint.albedo_color = ITEM_COLOURS.get(profile.kind, Color.DIM_GRAY)
 	if soldier.soldier_skin != null and draw_remaining > 0.0 and draw_from != null:
@@ -391,7 +423,8 @@ func tick(delta: float, fire: bool, reload_requested: bool) -> void:
 		scope_dropped = false
 	var fresh_press := fire and not fire_was_down
 	fire_was_down = fire
-	for item: int in range(2):
+	_sync_remote()
+	for item: int in range(3):
 		if Input.is_action_just_pressed("equip_item_%d" % (item + 1), true):
 			equip(2 + item)
 	pad_cycle = false
@@ -438,6 +471,8 @@ func shoot(result: Dictionary) -> void:
 	muzzle_timer = 0.045
 	weapon_audio.fire(profile)
 	player.soldier.flash.fire(profile.recovered_model)
+	var muzzle: Vector3 = player.soldier.muzzle.global_position
+	Gunfire.fired(player, muzzle, result.get("position", muzzle + aim_direction() * Gunfire.TRACER_REACH), profile.recovered_model, 0)
 	if profile.muzzle_velocity > 0.0:
 		_fire_bullet(result)
 	else:
@@ -570,6 +605,18 @@ func _input(event: InputEvent) -> void:
 
 # --- Equipment ----------------------------------------------------------------
 
+## Movement runs before the weapon tick. Include a throw starting this tick so
+## a running approach is already walking when the grenade is drawn back.
+func sizing_throw(delta: float) -> bool:
+	if not Input.is_action_pressed("fire") or not player.can_fire():
+		return false
+	if throw_charge >= 0.0:
+		return true
+	return profile.kind in ["frag", "smoke", "flash"] and ammo > 0 and not fire_was_down and not require_trigger_release and _equipment_ready(delta)
+
+func _equipment_ready(delta: float = 0.0) -> bool:
+	return player.can_fire() and cooldown <= delta + 0.00001 and draw_remaining <= delta and throw_release < 0.0
+
 func _tick_equipment(fresh_press: bool, fire: bool, delta: float) -> void:
 	query_aim()
 	if throw_release >= 0.0:
@@ -596,7 +643,7 @@ func _tick_equipment(fresh_press: bool, fire: bool, delta: float) -> void:
 		else:
 			_commit_throw()
 		return
-	if not fresh_press or require_trigger_release or not player.can_fire() or cooldown > 0.00001 or draw_remaining > 0.0 or throw_release >= 0.0:
+	if not fresh_press or require_trigger_release or not _equipment_ready():
 		return
 	if ammo <= 0:
 		if not empty_notified:

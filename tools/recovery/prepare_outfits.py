@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
 """Compile native character LOD choices, worn gear and untouched recovered meshes.
 
-No modelling: the already decoded, assembled OBJ triangles are packaged as glTF
+The already decoded, assembled OBJ triangles are staged as glTF for Blender,
 at the original attachment origin. character.rdr supplies the bone and offset.
 """
 import hashlib
 import json
 import re
-import struct
 from pathlib import Path
 
 import numpy as np
@@ -16,6 +15,7 @@ from prepare_pilot import ROOT, RECOVERY, materials, read_obj, triangulate
 from prepare_characters import Gltf
 
 READER = 'native/scripts/disc/READERC.ZAR-1b7df1c973/00005-character.rdr.json'
+STAGING = RECOVERY / 'staging/outfits'
 
 
 def fields(row):
@@ -92,15 +92,12 @@ def mesh(asset, cache):
                            'material': index, 'mode': 4})
     data['meshes'] = [{'name': asset['name'], 'primitives': primitives}]
     data.pop('animations', None)
-    data['buffers'] = [{'byteLength': len(doc.binary)}]
-    raw = json.dumps(data, separators=(',', ':')).encode()
-    raw += b' ' * (-len(raw) % 4)
-    binary = bytes(doc.binary) + b'\0' * (-len(doc.binary) % 4)
-    target = ROOT / 'art/models' / (name + '.glb')
-    target.write_bytes(struct.pack('<III', 0x46546c67, 2, 28 + len(raw) + len(binary)) +
-                       struct.pack('<II', len(raw), 0x4e4f534a) + raw +
-                       struct.pack('<II', len(binary), 0x004e4942) + binary)
-    result = dict(path='res://art/models/' + target.name, source=asset['path'],
+    STAGING.mkdir(parents=True, exist_ok=True)
+    target = STAGING / (name + '.gltf')
+    data['buffers'] = [{'uri': name + '.bin', 'byteLength': len(doc.binary)}]
+    target.with_suffix('.bin').write_bytes(doc.binary)
+    target.write_text(json.dumps(data, separators=(',', ':')) + '\n')
+    result = dict(path='res://art/models/' + name + '.glb', blend='art/blender/' + name + '.blend', source=asset['path'],
                   triangles=len(seen), sha256=digest)
     cache[digest] = result
     return result
@@ -170,12 +167,13 @@ def main():
     output = dict(reader=READER, characters=characters, excluded=excluded, gear=gear,
                   missing_gear=missing, weapon_sockets=sockets, grenades=grenades, assets=list(cache.values()))
     (ROOT / 'resources/recovered/outfits.json').write_text(json.dumps(output, indent=2) + '\n')
-    # Disable Godot's generated distance LODs too, not only the archive variants.
-    for path in list(characters) + [a['path'] for a in cache.values()]:
-        sidecar = ROOT / (path.removeprefix('res://') + '.import')
-        if sidecar.exists():
-            text = sidecar.read_text()
-            sidecar.write_text(text.replace('meshes/generate_lods=true', 'meshes/generate_lods=false'))
+    names = [Path(a['path']).stem for a in cache.values()]
+    (STAGING / 'export_names.txt').write_text('\n'.join(names) + '\n')
+    recipe = (ROOT / 'tools/recovery/blender_outfits.py').read_text()
+    for start in range(0, len(names), 8):
+        code = recipe.replace("NAMES = []", 'NAMES = ' + repr(names[start:start + 8]))
+        code = code.replace("ROOT = '__ROOT__'", 'ROOT = ' + repr(str(ROOT)))
+        (STAGING / ('build_%02d.py' % (start // 8))).write_text(code)
     print(f'{len(characters)} full-detail characters; {len(excluded)} LODs excluded; {len(gear)} gear definitions; {len(cache)} textured assets')
     print('Unavailable source gear:', ', '.join(missing))
 

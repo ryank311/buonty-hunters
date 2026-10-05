@@ -1,0 +1,54 @@
+{
+  "source": "previous/recovery/native/audio/disc/BNKSTORE.ZAR-06e793c85d/00001-M51_am.bnk.bin",
+  "sha256": "1af29f5688123a13f15d7620ee47aec9967824c905ae99bdefa45be840537a67",
+  "decoder": "previous/recovery/research/socom-unzipped/web/redotcom/packages/sound/src",
+  "recipe": "tools/recovery/prepare_ladder_audio.ts",
+  "note": "The rung is the original STEP_LADDER, played at each \"ladder_rung\" callback of the climb cycle. The slide is one pass of LADDER_SLIDE; runtime loops it while sliding.",
+  "outputs": [
+    {
+      "file": "rung_1.wav",
+      "sound": ".STEP_LADDER",
+      "choice": 0.1,
+      "sampleOffsets": [
+        720304
+      ],
+      "seconds": 0.3407291666666667,
+      "peak": 0.85,
+      "rms": 0.059038726755465176
+    },
+    {
+      "file": "rung_2.wav",
+      "sound": ".STEP_LADDER",
+      "choice": 0.5,
+      "sampleOffsets": [
+        720304
+      ],
+      "seconds": 0.3322083333333333,
+      "peak": 0.85,
+      "rms": 0.05918581480689779
+    },
+    {
+      "file": "rung_3.wav",
+      "sound": ".STEP_LADDER",
+      "choice": 0.9,
+      "sampleOffsets": [
+        720304
+      ],
+      "seconds": 0.3239166666666667,
+      "peak": 0.85,
+      "rms": 0.059441133154187115
+    },
+    {
+      "file": "slide.wav",
+      "sound": "~LADDER_SLIDE",
+      "choice": 0.5,
+      "sampleOffsets": [
+        145216,
+        156992
+      ],
+      "seconds": 4,
+      "peak": 0.5456195569522643,
+      "rms": 0.09
+    }
+  ]
+}

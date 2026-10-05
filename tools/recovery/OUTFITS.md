@@ -8,7 +8,9 @@
 
 `previous/recovery/native/scripts/disc/READERC.ZAR-1b7df1c973/00005-character.rdr.json` supplies inherited character presets, `model_name`, `lods`, `default_gear`, and each piece's `ofs` (bone, translation, angles). `resources/recovered/outfits.json` records the selected source preset for every full-detail body and retains unavailable definitions. When several presets share a body, its source map's preset is preferred, then deterministic name order. Source-map texture variants are preserved.
 
-The 38 available gear definitions include separate eyes, hats/helmets, goggles, belts, holsters, pouches, knives and satchels. There are 32 distinct textured assets including three carried grenade models. The preparation packages already decoded and assembled OBJ triangles into glTF at their original attachment origins, with the original PNG bytes. It does not remodel or normalize them, and does not require Blender. Original source triangles remain under `previous/recovery/`; the runtime only reads committed assets.
+The 38 available gear definitions include separate eyes, hats/helmets, goggles, belts, holsters, pouches, knives and satchels. There are 32 distinct textured assets including three carried grenade models. Preparation stages already decoded and assembled OBJ triangles as glTF at their original attachment origins, with the original PNGs. Blender MCP imports these into 32 editable `.blend` sources; `tools/dev blender export` produces the runtime GLBs. No geometry is remodelled or normalized. Original source triangles remain under `previous/recovery/`; the runtime only reads committed assets.
+
+Export notes about an origin above/below the floor or missing collision are expected for these worn pieces: they retain their recovered bone attachment origins and do not need separate physics collision.
 
 Local research `previous/recovery/research/socom-unzipped/web/redotcom/docs/research/78-character-mesh-and-skeleton.md`, §5, establishes offset order: fixed-axis X then Y then Z, yielding `Rz * Ry * Rx` for column vectors. Translation is scaled by the same 0.1 metres per native unit as the body. Runtime placement is the final native bone transform times that offset. This runs after locomotion, aim, lean, reload, swap and throw layers. The parent scene transform carries world movement, turning and terrain alignment. Ragdoll gear uses the final skeleton pose with its import-axis calibration removed. Recovery Lab previews also update worn gear when seeking a clip.
 
@@ -22,9 +24,8 @@ Eight named source pieces have no corresponding decoded equipment mesh: `seal_he
 
 ```sh
 previous/recovery/.venv/bin/python tools/recovery/prepare_outfits.py
-tools/dev import
-# A first import creates sidecars; repeat preparation to disable generated LODs.
-previous/recovery/.venv/bin/python tools/recovery/prepare_outfits.py
+# Submit staging/outfits/build_00.py through build_03.py to Blender MCP, then:
+xargs tools/dev blender export < previous/recovery/staging/outfits/export_names.txt
 tools/dev import
 tools/dev check
 tools/dev test debug_loadout_regression recovered_collection_regression hud_layout recovered_actions_regression ragdoll_regression

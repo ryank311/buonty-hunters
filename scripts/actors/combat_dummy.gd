@@ -1,6 +1,8 @@
 extends StaticBody3D
 ## A stand-in soldier for the practice build: a teammate or an enemy with a class,
-## health, and a body that stays where it falls. It does not think or shoot. Real
+## health, and a body that stays where it falls. It does not think. With a fire_interval
+## it fires harmless bursts that land beside the player (muzzle flash, tracers, the
+## sound the HUD's gunfire marks report); its rounds never hurt anyone. Real
 ## players and bots will replace it; the combat code relies only on what is declared
 ## here (team, alive, display_name, apply_damage, the loot and view helpers).
 
@@ -18,6 +20,13 @@ const TEAM_TINT := {0: Color("5f7f96"), 1: Color("9a5a44")}
 ## Metres walked either side of the start, along the dummy's own left-right axis.
 @export var travel: float = 0.0
 @export var walk_speed: float = 1.4
+## Seconds between harmless three-round bursts fired near the player; 0 never fires.
+@export var fire_interval: float = 0.0
+const BURST := 3
+const BURST_GAP := 0.11
+var fire_clock: float = 0.0
+var burst_left: int = 0
+var rounds_fired: int = 0
 var max_health: float = 100.0
 var health: float = 100.0
 var alive: bool = true
@@ -61,8 +70,11 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	flashed = maxf(0.0, flashed - delta)
+	soldier.flash.advance(delta)
 	if not alive:
 		return
+	if fire_interval > 0.0:
+		_fire_bursts(delta)
 	var sideways := 0.0
 	if travel > 0.0:
 		elapsed += delta
@@ -71,6 +83,31 @@ func _physics_process(delta: float) -> void:
 		sideways = cos(phase) * walk_speed
 		drift = start.basis.x * sideways
 	soldier.pose(0, absf(sideways), Vector2(sideways, 0.0), 0.0, 0.0, delta)
+
+## One harmless round toward `point`: flash, gunfire report and sometimes a tracer
+## (always the first after a pause; see Gunfire).
+func fire_at(point: Vector3) -> void:
+	if not alive or carried.is_empty():
+		return
+	var profile: WeaponProfile = carried[0].profile
+	rounds_fired += 1
+	soldier.flash.fire(profile.recovered_model)
+	Gunfire.fired(self, soldier.muzzle.global_position, point, profile.recovered_model, team)
+
+func _fire_bursts(delta: float) -> void:
+	fire_clock -= delta
+	if fire_clock > 0.0:
+		return
+	var camera := get_viewport().get_camera_3d()
+	if camera == null:
+		return
+	if burst_left <= 0:
+		burst_left = BURST
+	# Wide of the player's view point, so the rounds pass close and land beside them.
+	var target := camera.global_position + camera.global_basis.x * (2.0 if rounds_fired % 2 == 0 else -2.0) + Vector3.DOWN * 1.2
+	fire_at(target)
+	burst_left -= 1
+	fire_clock = BURST_GAP if burst_left > 0 else fire_interval
 
 func apply_damage(amount: float, info: Dictionary = {}) -> float:
 	if not alive:

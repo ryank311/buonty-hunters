@@ -78,7 +78,8 @@ static func scenario(tree: SceneTree, title: String, overrides: Dictionary = {})
 ##   weapon "primary"|"secondary"|"frag"|"smoke"|"flash"|"claymore"|slot index
 ##   ammo int, reserve int                health float (0 eliminates the player)
 ##   hold ["aim", ...] (kept down until the next call)
-##   actors [{"team": 0|1, "class": id, "pos": [x,y,z], "yaw": deg, "travel": m, "name": text, "dead": bool}]
+##   actors [{"team": 0|1, "class": id, "pos": [x,y,z], "yaw": deg, "travel": m, "name": text, "dead": bool,
+##            "fire": seconds between harmless bursts near the player}]
 ##   roster bool (false removes the level's default soldiers; a reset brings them back)
 ##   panel "class"|"search" (open the class menu, or search the body in reach)
 ##   tuning {"movement"|"camera"|"weapon": {property: value}}
@@ -144,6 +145,7 @@ static func apply(tree: SceneTree, spec: Dictionary) -> Dictionary:
 		dummy.team = int(item.get("team", 1))
 		dummy.soldier_class = str(item.get("class", "rifleman"))
 		dummy.travel = float(item.get("travel", 0.0))
+		dummy.fire_interval = float(item.get("fire", 0.0))
 		dummy.display_name = str(item.get("name", "TEAMMATE" if dummy.team == 0 else "ENEMY"))
 		dummy.add_to_group(PLACED_GROUP)
 		dummy.position = _vec(item.get("pos", [0.0, 0.0, 0.0]))
@@ -381,6 +383,7 @@ static func state(tree: SceneTree) -> Dictionary:
 			"alive": Combat.is_alive(p),
 			"aiming": p.aiming,
 			"diving": p.get("diving") == true,
+			"on_ladder": p.get("ladder") != null and p.ladder.active,
 		},
 		"class": Loadouts.IDS[maxi(0, Loadouts.CLASSES.find(w.soldier_class))],
 		"weapon": {

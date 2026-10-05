@@ -87,7 +87,7 @@ Walks `[[x, z], ...]` in order: faces each point and holds forward until within 
   "level": "lab", "location": "RIFLE RANGE", "spawn": "Start",
   "menu": false, "frozen": false, "tick": 771,
   "player": {"pos": [23, 0, 5], "yaw": 1.1, "pitch": -2.3, "speed": 0, "vertical_speed": 0,
-             "stance": "stand", "on_floor": true, "health": 100, "alive": true, "aiming": false, "diving": false},
+             "stance": "stand", "on_floor": true, "health": 100, "alive": true, "aiming": false, "diving": false, "on_ladder": false},
   "class": "rifleman",
   "weapon": {"name": "FIELD RIFLE", "slot": 0, "ammo": 24, "reserve": 90, "reloading": false,
              "shots": 6, "hits": 2, "spread": 0.25, "last_damage": 34.0, "scoped": false},

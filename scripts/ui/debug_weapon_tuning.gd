@@ -79,10 +79,13 @@ func _build_fields() -> void:
 		else:
 			keys.append_array(["vertical_kick", "horizontal_kick", "recovery_delay", "recovery_speed", "max_climb", "base_spread", "walk_spread", "run_spread", "spread_per_shot", "max_bloom", "unaimed_spread", "pellet_spread", "weapon_kick"])
 		keys.append_array(["rounds_per_minute", "damage", "magazine_size", "starting_reserve", "reload_seconds", "draw_seconds", "range_metres", "falloff_start", "falloff_end", "minimum_damage", "pellets", "impact_diameter", "muzzle_velocity", "bullet_gravity", "sound_pitch"])
+	elif edited_profile.kind == "detonator":
+		keys.append("draw_seconds")
+	elif edited_profile.kind == "claymore":
+		# Placed and set off by remote: no fuse, no lingering effect, not thrown.
+		keys.append_array(["magazine_size", "draw_seconds", "damage", "effect_radius"])
 	else:
-		keys.append_array(["magazine_size", "draw_seconds", "rounds_per_minute", "damage", "fuse_seconds", "effect_radius", "effect_seconds"])
-		if edited_profile.kind != "claymore":
-			keys.append_array(["throw_speed_min", "throw_speed"])
+		keys.append_array(["magazine_size", "draw_seconds", "rounds_per_minute", "damage", "fuse_seconds", "effect_radius", "effect_seconds", "throw_speed_min", "throw_speed"])
 	for key: String in keys:
 		_editor(key, Tuning.FIELDS[key])
 	for index: int in range(edited_profile.scope_fovs.size()):
@@ -161,6 +164,8 @@ func reset_selected() -> void:
 		defaults = Guns.profile_for(edited_profile.recovered_model, int(edited_profile.recovered_stats.id))
 	elif edited_profile.kind in ["frag", "smoke", "flash", "claymore"]:
 		defaults = load("res://resources/weapons/%s.tres" % edited_profile.kind).duplicate()
+	elif edited_profile.kind == "detonator":
+		defaults = load("res://resources/weapons/claymore_remote.tres").duplicate()
 	else:
 		defaults = hud.session.player.weapon.soldier_class.weapons()[slot]
 	for key: String in Tuning.FIELDS:

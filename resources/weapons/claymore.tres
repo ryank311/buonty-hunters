@@ -13,5 +13,4 @@ starting_reserve = 0
 rounds_per_minute = 40.0
 draw_seconds = 0.4
 damage = 260.0
-fuse_seconds = 1.0
 effect_radius = 10.0

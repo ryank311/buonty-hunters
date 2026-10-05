@@ -3272,192 +3272,224 @@
   "assets": [
     {
       "path": "res://art/models/recovered_gear_seal_hat_d1f281b69643.glb",
+      "blend": "art/blender/recovered_gear_seal_hat_d1f281b69643.blend",
       "source": "converted/models/equipment/MP10/FLIB_MDL-19f7a147fd/seal_hat.obj",
       "triangles": 86,
       "sha256": "d1f281b69643"
     },
     {
       "path": "res://art/models/recovered_gear_seal_black_hat_9628317e57ab.glb",
+      "blend": "art/blender/recovered_gear_seal_black_hat_9628317e57ab.blend",
       "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/seal_black_hat.obj",
       "triangles": 120,
       "sha256": "9628317e57ab"
     },
     {
       "path": "res://art/models/recovered_gear_seal_des_hat_59dc6d68b83f.glb",
+      "blend": "art/blender/recovered_gear_seal_des_hat_59dc6d68b83f.blend",
       "source": "converted/models/equipment/M71/FLIB_MDL-ef3b75b531/seal_des_hat.obj",
       "triangles": 86,
       "sha256": "59dc6d68b83f"
     },
     {
       "path": "res://art/models/recovered_gear_flak_helmet_maya_7ae6f682822d.glb",
+      "blend": "art/blender/recovered_gear_flak_helmet_maya_7ae6f682822d.blend",
       "source": "converted/models/equipment/M52/FLIB_MDL-186b2dfc6b/flak_helmet_maya.obj",
       "triangles": 132,
       "sha256": "7ae6f682822d"
     },
     {
       "path": "res://art/models/recovered_gear_seal_hat_tiger_cd77f3df0ed1.glb",
+      "blend": "art/blender/recovered_gear_seal_hat_tiger_cd77f3df0ed1.blend",
       "source": "converted/models/equipment/M53/FLIB_MDL-38ce11a086/seal_hat_tiger.obj",
       "triangles": 86,
       "sha256": "cd77f3df0ed1"
     },
     {
       "path": "res://art/models/recovered_gear_black_battle_helmet_7c8c1ec2063c.glb",
+      "blend": "art/blender/recovered_gear_black_battle_helmet_7c8c1ec2063c.blend",
       "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/black_battle_helmet.obj",
       "triangles": 212,
       "sha256": "7c8c1ec2063c"
     },
     {
       "path": "res://art/models/recovered_gear_seal_goggles_bc123d927c4b.glb",
+      "blend": "art/blender/recovered_gear_seal_goggles_bc123d927c4b.blend",
       "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/seal_goggles.obj",
       "triangles": 84,
       "sha256": "bc123d927c4b"
     },
     {
       "path": "res://art/models/recovered_gear_gear_holster_73d46ff40505.glb",
+      "blend": "art/blender/recovered_gear_gear_holster_73d46ff40505.blend",
       "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/gear_holster.obj",
       "triangles": 46,
       "sha256": "73d46ff40505"
     },
     {
       "path": "res://art/models/recovered_gear_seal_aslt_gear_c8ade8432358.glb",
+      "blend": "art/blender/recovered_gear_seal_aslt_gear_c8ade8432358.blend",
       "source": "converted/models/equipment/MP10/FLIB_MDL-19f7a147fd/seal_aslt_gear.obj",
       "triangles": 246,
       "sha256": "c8ade8432358"
     },
     {
       "path": "res://art/models/recovered_gear_seal_aslt_gear_defa6841755e.glb",
+      "blend": "art/blender/recovered_gear_seal_aslt_gear_defa6841755e.blend",
       "source": "converted/models/equipment/MP5/FLIB_MDL-55b460823d/seal_aslt_gear.obj",
       "triangles": 246,
       "sha256": "defa6841755e"
     },
     {
       "path": "res://art/models/recovered_gear_seal_woodland_gear_83a71f77248f.glb",
+      "blend": "art/blender/recovered_gear_seal_woodland_gear_83a71f77248f.blend",
       "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/seal_woodland_gear.obj",
       "triangles": 242,
       "sha256": "83a71f77248f"
     },
     {
       "path": "res://art/models/recovered_gear_seal_woodland_gear_393f770051af.glb",
+      "blend": "art/blender/recovered_gear_seal_woodland_gear_393f770051af.blend",
       "source": "converted/models/equipment/M53/FLIB_MDL-38ce11a086/seal_woodland_gear.obj",
       "triangles": 242,
       "sha256": "393f770051af"
     },
     {
       "path": "res://art/models/recovered_gear_gear_mag01_f7c4577bbb05.glb",
+      "blend": "art/blender/recovered_gear_gear_mag01_f7c4577bbb05.blend",
       "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/gear_mag01.obj",
       "triangles": 36,
       "sha256": "f7c4577bbb05"
     },
     {
       "path": "res://art/models/recovered_gear_seal_d_hp_19c5c568dc64.glb",
+      "blend": "art/blender/recovered_gear_seal_d_hp_19c5c568dc64.blend",
       "source": "converted/models/equipment/M71/FLIB_MDL-ef3b75b531/seal_d_hp.obj",
       "triangles": 162,
       "sha256": "19c5c568dc64"
     },
     {
       "path": "res://art/models/recovered_gear_seal_d_ch_front_fb39cabbc0db.glb",
+      "blend": "art/blender/recovered_gear_seal_d_ch_front_fb39cabbc0db.blend",
       "source": "converted/models/equipment/M71/FLIB_MDL-ef3b75b531/seal_d_ch_front.obj",
       "triangles": 144,
       "sha256": "fb39cabbc0db"
     },
     {
       "path": "res://art/models/recovered_gear_gear_m60_ammo_be1590fe89da.glb",
+      "blend": "art/blender/recovered_gear_gear_m60_ammo_be1590fe89da.blend",
       "source": "converted/models/equipment/M71/FLIB_MDL-ef3b75b531/gear_m60_ammo.obj",
       "triangles": 112,
       "sha256": "be1590fe89da"
     },
     {
       "path": "res://art/models/recovered_gear_seal_scuba_aslt_gear_48f08f1eb91f.glb",
+      "blend": "art/blender/recovered_gear_seal_scuba_aslt_gear_48f08f1eb91f.blend",
       "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/seal_scuba_aslt_gear.obj",
       "triangles": 230,
       "sha256": "48f08f1eb91f"
     },
     {
       "path": "res://art/models/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.glb",
+      "blend": "art/blender/recovered_gear_seal_scuba_aslt_gear_b5d5fbc9368d.blend",
       "source": "converted/models/equipment/M53/FLIB_MDL-38ce11a086/seal_scuba_aslt_gear.obj",
       "triangles": 230,
       "sha256": "b5d5fbc9368d"
     },
     {
       "path": "res://art/models/recovered_gear_seal_scuba_aslt_gear_fef2f906ef2a.glb",
+      "blend": "art/blender/recovered_gear_seal_scuba_aslt_gear_fef2f906ef2a.blend",
       "source": "converted/models/equipment/M61/FLIB_MDL-93b387104a/seal_scuba_aslt_gear.obj",
       "triangles": 230,
       "sha256": "fef2f906ef2a"
     },
     {
       "path": "res://art/models/recovered_gear_seal_scuba_knife_681594a7745f.glb",
+      "blend": "art/blender/recovered_gear_seal_scuba_knife_681594a7745f.blend",
       "source": "converted/models/equipment/M83/FLIB_MDL-e2aa4f5496/seal_scuba_knife.obj",
       "triangles": 83,
       "sha256": "681594a7745f"
     },
     {
       "path": "res://art/models/recovered_gear_satchel_3e3a968958fb.glb",
+      "blend": "art/blender/recovered_gear_satchel_3e3a968958fb.blend",
       "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/Satchel.obj",
       "triangles": 76,
       "sha256": "3e3a968958fb"
     },
     {
       "path": "res://art/models/recovered_gear_cigarette_c6e9a16700bd.glb",
+      "blend": "art/blender/recovered_gear_cigarette_c6e9a16700bd.blend",
       "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/cigarette.obj",
       "triangles": 32,
       "sha256": "c6e9a16700bd"
     },
     {
       "path": "res://art/models/recovered_gear_handheld_7aeba4dff16d.glb",
+      "blend": "art/blender/recovered_gear_handheld_7aeba4dff16d.blend",
       "source": "converted/models/equipment/M61/FLIB_MDL-93b387104a/handheld.obj",
       "triangles": 71,
       "sha256": "7aeba4dff16d"
     },
     {
       "path": "res://art/models/recovered_gear_left_eye_7395d9202732.glb",
+      "blend": "art/blender/recovered_gear_left_eye_7395d9202732.blend",
       "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/left_eye.obj",
       "triangles": 95,
       "sha256": "7395d9202732"
     },
     {
       "path": "res://art/models/recovered_gear_right_eye_4d36c6917395.glb",
+      "blend": "art/blender/recovered_gear_right_eye_4d36c6917395.blend",
       "source": "converted/models/equipment/M51/FLIB_MDL-49c1763582/right_eye.obj",
       "triangles": 95,
       "sha256": "4d36c6917395"
     },
     {
       "path": "res://art/models/recovered_gear_left_eye_blue_958e453286f6.glb",
+      "blend": "art/blender/recovered_gear_left_eye_blue_958e453286f6.blend",
       "source": "converted/models/equipment/M83/FLIB_MDL-e2aa4f5496/left_eye_blue.obj",
       "triangles": 95,
       "sha256": "958e453286f6"
     },
     {
       "path": "res://art/models/recovered_gear_right_eye_blue_36491cc0a2f2.glb",
+      "blend": "art/blender/recovered_gear_right_eye_blue_36491cc0a2f2.blend",
       "source": "converted/models/equipment/M83/FLIB_MDL-e2aa4f5496/right_eye_blue.obj",
       "triangles": 95,
       "sha256": "36491cc0a2f2"
     },
     {
       "path": "res://art/models/recovered_gear_left_eye_brown_large_9169ee1fd487.glb",
+      "blend": "art/blender/recovered_gear_left_eye_brown_large_9169ee1fd487.blend",
       "source": "converted/models/equipment/M53/FLIB_MDL-38ce11a086/left_eye_brown_large.obj",
       "triangles": 95,
       "sha256": "9169ee1fd487"
     },
     {
       "path": "res://art/models/recovered_gear_right_eye_brown_large_6a5d0f315ce3.glb",
+      "blend": "art/blender/recovered_gear_right_eye_brown_large_6a5d0f315ce3.blend",
       "source": "converted/models/equipment/M53/FLIB_MDL-38ce11a086/right_eye_brown_large.obj",
       "triangles": 95,
       "sha256": "6a5d0f315ce3"
     },
     {
       "path": "res://art/models/recovered_gear_grenade_808334717219.glb",
+      "blend": "art/blender/recovered_gear_grenade_808334717219.blend",
       "source": "converted/models/weapons/M51/WEAP_MDL-c1758fb7a5/grenade.obj",
       "triangles": 82,
       "sha256": "808334717219"
     },
     {
       "path": "res://art/models/recovered_gear_flashbang_dde2c43502bc.glb",
+      "blend": "art/blender/recovered_gear_flashbang_dde2c43502bc.blend",
       "source": "converted/models/weapons/M51/WEAP_MDL-c1758fb7a5/flashbang.obj",
       "triangles": 64,
       "sha256": "dde2c43502bc"
     },
     {
       "path": "res://art/models/recovered_gear_a_smoke_grenade_2ea67a028caa.glb",
+      "blend": "art/blender/recovered_gear_a_smoke_grenade_2ea67a028caa.blend",
       "source": "converted/models/weapons/M51/WEAP_MDL-c1758fb7a5/a_smoke_grenade.obj",
       "triangles": 50,
       "sha256": "2ea67a028caa"

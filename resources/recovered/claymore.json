@@ -1,0 +1,52 @@
+{
+  "recipe": "tools/recovery/prepare_claymore.py",
+  "scale": 0.1,
+  "models": {
+    "claymore": {
+      "model": {
+        "type": "model",
+        "category": "weapons",
+        "name": "claymore",
+        "source": "archives/MP2/RUN/COMMON/WEAP_MDL.ZED",
+        "path": "converted/models/weapons/MP2/WEAP_MDL-1194dd4322/claymore.obj",
+        "vertices": 96,
+        "triangles": 80,
+        "lineStrips": 0,
+        "missingTextures": [],
+        "normals": "Recompute on import; native normals preserved in source",
+        "coordinates": "Y-up, original game units; OBJ V = 1 - source V",
+        "failedChunks": 0,
+        "assembly": "GEO prototype transforms",
+        "status": "converted"
+      },
+      "model_sha256": "1e7be1ebac91b11c0fdfebd5a6b82a5d71b96a9c72ebbc0ccde41260d287429f",
+      "use": "placed",
+      "path": "res://art/models/recovered_claymore.glb",
+      "triangles": 80,
+      "origin": "Native origin; Y-up kept, front (source -Z) is Godot -Z"
+    },
+    "detonator": {
+      "model": {
+        "type": "model",
+        "category": "weapons",
+        "name": "detonator",
+        "source": "archives/MP2/RUN/COMMON/WEAP_MDL.ZED",
+        "path": "converted/models/weapons/MP2/WEAP_MDL-1194dd4322/detonator.obj",
+        "vertices": 130,
+        "triangles": 74,
+        "lineStrips": 0,
+        "missingTextures": [],
+        "normals": "Recompute on import; native normals preserved in source",
+        "coordinates": "Y-up, original game units; OBJ V = 1 - source V",
+        "failedChunks": 0,
+        "assembly": "GEO prototype transforms",
+        "status": "converted"
+      },
+      "model_sha256": "cc087df997919b3e065c89bfbf90087b8b1adcddd1efe3196629414b8d722900",
+      "use": "held",
+      "path": "res://art/models/recovered_detonator.glb",
+      "triangles": 74,
+      "origin": "Native attachment origin; source +X becomes Godot -Z"
+    }
+  }
+}

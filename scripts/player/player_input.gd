@@ -15,7 +15,7 @@ const KEYS: Dictionary = {
 	"pause": KEY_ESCAPE, "tuning": KEY_F1, "debug_view": KEY_F3,
 	"switch_level": KEY_F2, "start_lap": KEY_T, "next_spawn": KEY_N,
 	"equip_rifle": KEY_1, "equip_pistol": KEY_2,
-	"equip_item_1": KEY_3, "equip_item_2": KEY_4,
+	"equip_item_1": KEY_3, "equip_item_2": KEY_4, "equip_item_3": KEY_5,
 	"interact": KEY_F, "context_next": KEY_TAB, "class_menu": KEY_F4,
 	"recovery_clip": KEY_F6, "recovery_pause": KEY_F7,
 	"recovery_collision": KEY_F8, "recovery_step": KEY_F9,

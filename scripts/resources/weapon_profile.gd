@@ -49,7 +49,7 @@ var fire_mode: int = 0
 @export var scope_fovs: PackedFloat32Array = PackedFloat32Array()
 
 @export_group("Carry")
-@export_enum("firearm", "frag", "smoke", "flash", "claymore") var kind: String = "firearm"
+@export_enum("firearm", "frag", "smoke", "flash", "claymore", "detonator") var kind: String = "firearm"
 @export_enum("long", "pistol") var hold: String = "long"
 @export var recovered_model: String = ""
 # Metres from the weapon pivot to the muzzle, and a stretch applied to the stand-in mesh.

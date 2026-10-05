@@ -42,6 +42,11 @@ var local_acceleration := Vector3.ZERO
 var look_scale: float = 1.0 # Below one while a scope is zoomed in, so aim speed tracks the magnification.
 var traversal := Traversal.new()
 var ladder := LadderClimb.new()
+## The original's rung and slide sounds (audio/ladder), played from the soldier's hips.
+var ladder_audio: AudioStreamPlayer3D
+var ladder_rungs: Array[AudioStream] = []
+var ladder_slide: AudioStream
+var rungs_climbed: int = 0
 var interactions: Node
 ## Height still to ease out of the soldier after stepping onto a ledge.
 var step_offset: float = 0.0
@@ -55,6 +60,18 @@ func _ready() -> void:
 	interactions = preload("res://scripts/player/context_actions.gd").new()
 	interactions.player = self
 	add_child(interactions)
+	ladder_audio = AudioStreamPlayer3D.new()
+	ladder_audio.name = "LadderAudio"
+	ladder_audio.bus = footsteps.bus
+	ladder_audio.unit_size = footsteps.unit_size
+	ladder_audio.max_distance = footsteps.max_distance
+	ladder_audio.position.y = 1.0
+	add_child(ladder_audio)
+	for title: String in ["rung_1", "rung_2", "rung_3"]:
+		if ResourceLoader.exists("res://audio/ladder/%s.wav" % title):
+			ladder_rungs.append(load("res://audio/ladder/%s.wav" % title))
+	if ResourceLoader.exists("res://audio/ladder/slide.wav"):
+		ladder_slide = load("res://audio/ladder/slide.wav")
 
 func try_climb() -> bool:
 	if not controls_enabled or not is_on_floor() or traversal.active or diving or dive_recovery > 0.0 or stance.current == StanceController.Stance.PRONE:
@@ -82,6 +99,7 @@ func leave_ladder() -> void:
 	if ladder.active:
 		ladder.cancel()
 		soldier.traversal_clip = ""
+		ladder_audio.stop()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if not controls_enabled:
@@ -201,6 +219,9 @@ func _physics_process(delta: float) -> void:
 		backward = movement.prone_backward_multiplier
 	elif Input.is_action_pressed("walk"):
 		speed = movement.walk_speed
+	var sizing_throw := weapon.sizing_throw(delta)
+	if sizing_throw:
+		speed = minf(speed, movement.walk_speed)
 	var local_input := move_input.limit_length()
 	local_input.x *= strafe
 	if local_input.y > 0.0:
@@ -233,6 +254,9 @@ func _physics_process(delta: float) -> void:
 	elif dive_recovery > 0:
 		# A short belly skid bleeds off the landing speed.
 		horizontal = before_horizontal.move_toward(Vector3.ZERO,9.0 * delta)
+	if sizing_throw:
+		# A running start must not carry running speed into a held throw.
+		horizontal = horizontal.limit_length(speed)
 	velocity.x = horizontal.x
 	velocity.z = horizontal.z
 	local_acceleration = basis.inverse() * (horizontal - before_horizontal) / delta
@@ -322,6 +346,17 @@ func _on_ladder(delta: float) -> void:
 	soldier.traversal_root = ladder.root_height
 	velocity = Vector3.ZERO
 	aiming = false
+	# A rung under a hand or a boot twice a cycle; the rails while sliding.
+	var sliding: bool = ladder.phase == LadderClimb.Phase.SLIDE
+	if sliding and ladder_slide != null and not (ladder_audio.playing and ladder_audio.stream == ladder_slide):
+		ladder_audio.stream = ladder_slide
+		ladder_audio.play()
+	elif not sliding and ladder_audio.playing and ladder_audio.stream == ladder_slide:
+		ladder_audio.stop()
+	if ladder.rungs > 0 and not ladder_rungs.is_empty():
+		rungs_climbed += 1
+		ladder_audio.stream = ladder_rungs[rungs_climbed % ladder_rungs.size()]
+		ladder_audio.play()
 	if not going:
 		if stance.current != ladder.end_stance:
 			stance.current = ladder.end_stance
@@ -371,6 +406,8 @@ func reset_at(spawn_transform: Transform3D) -> void:
 	floor_snap_length = 0.25
 	traversal.active = false
 	ladder.cancel()
+	if ladder_audio != null:
+		ladder_audio.stop()
 	soldier.traversal_clip = ""
 	step_offset = 0.0
 	soldier.position.y = 0.0

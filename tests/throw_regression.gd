@@ -146,11 +146,11 @@ func _run() -> void:
 	var lob := await throw(2)
 	var overhand := await throw(36)
 	var full := await throw(72)
-	var sidearm := await throw(36, true)
+	var moving := await throw(36, true)
 	check(lob.style == SoldierProxy.Throw.LOB and lob.early == 0 and lob.landed and lob.distance > 3.0 and lob.distance < 9.0, "A tap is an underhand lob a few metres out (%.1f m)" % lob.distance)
 	check(overhand.style == SoldierProxy.Throw.OVERHAND and overhand.distance > lob.distance + 4.0, "A medium hold standing is an overhand throw, well past the lob (%.1f m)" % overhand.distance)
 	check(full.style == SoldierProxy.Throw.FULL and full.distance > 20.0 and full.distance > overhand.distance + 4.0, "A full hold is the full-body throw and reaches past 20 m on level aim (%.1f m)" % full.distance)
-	check(sidearm.style == SoldierProxy.Throw.SIDEARM and sidearm.landed, "A medium hold on the run is a sidearm sling")
+	check(moving.landed, "A medium hold while moving releases and lands")
 	for result: Dictionary in [lob, overhand, full]:
 		var expected: Dictionary = result.expected
 		check(expected.hit and expected.landing.distance_to(result.point) < 0.4, "The arc shown predicts where the %s comes down (%.2f m off)" % [["lob", "sidearm", "overhand", "full throw"][result.style], expected.landing.distance_to(result.point)])

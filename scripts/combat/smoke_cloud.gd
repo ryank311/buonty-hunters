@@ -9,7 +9,7 @@ const NOISE := preload("res://resources/smoke_noise.tres")
 const PUFF := preload("res://art/effects/recovered/cloudpuff01.png")
 ## Native cap is 10 cm above the attachment origin, laid on its side at runtime.
 const VENT := Vector3(-0.10, 0.0, 0.0)
-var radius: float = 4.5
+var radius: float = 8.0
 var seconds: float = 18.0
 var age: float = 0.0
 var emitter: Node3D
@@ -26,9 +26,11 @@ func start(cloud_radius: float, duration: float, source_node: Node3D = null) -> 
 		add_child(canister)
 		canister.rotation.z = PI * 0.5
 	var box := BoxMesh.new()
-	box.size = Vector3(2.8, 2.0, 2.8) * radius
+	# Wider screens spread along the ground instead of becoming twice as tall.
+	var height := minf(radius, 4.5)
+	box.size = Vector3(radius * 2.8, height * 2.0, radius * 2.8)
 	volume.mesh = box
-	volume.position.y = radius * 0.9
+	volume.position.y = height * 0.9
 	volume.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	material.shader = SHADER
 	material.set_shader_parameter("billows", NOISE)

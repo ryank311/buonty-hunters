@@ -1,0 +1,88 @@
+{
+  "recipe": "tools/recovery/prepare_claymore_audio.ts",
+  "source": "previous/recovery/native/audio/disc/BNKSTORE.ZAR-06e793c85d/00053-MP2_fx.bnk.bin",
+  "sha256": "8044041d14b277c083682d054d5ab728ace9b2ba270f237aed01156552182b15",
+  "decoder": "previous/recovery/research/socom-unzipped/web/redotcom/packages/sound/src",
+  "note": "Dry mono 48 kHz PCM at bank gain; deterministic sequencer choices. No PS2 room reverb.",
+  "sounds": {
+    ".M18_CLAYMORE": {
+      "index": 8,
+      "files": [
+        {
+          "path": "res://audio/claymore/m18_claymore_1.wav",
+          "choice": 0.1,
+          "seconds": 3.2163541666666666,
+          "peak": 0.4054471254348755,
+          "sample_offsets": [
+            131856,
+            89280,
+            39296,
+            516928,
+            516928
+          ],
+          "sha256": "d4a36c61416359e48464c7d61f14ea6edccbdfca31e95134010ace84d99da1d9"
+        },
+        {
+          "path": "res://audio/claymore/m18_claymore_2.wav",
+          "choice": 0.5,
+          "seconds": 2.8013541666666666,
+          "peak": 0.42931056022644043,
+          "sample_offsets": [
+            131856,
+            89280,
+            39296,
+            516928,
+            516928
+          ],
+          "sha256": "2e3b6ee6f146e093176628d66a7b584688e0a6f9ca7ebc1f215cb6e0bac47bf5"
+        },
+        {
+          "path": "res://audio/claymore/m18_claymore_3.wav",
+          "choice": 0.9,
+          "seconds": 2.5541666666666667,
+          "peak": 0.42820611596107483,
+          "sample_offsets": [
+            131856,
+            89280,
+            39296,
+            516928,
+            516928
+          ],
+          "sha256": "e04d0150b66585335056ae3c2a547558c8e08819a0b8a66890965ad84dbce16a"
+        }
+      ]
+    },
+    ".PLACE_CHARGE": {
+      "index": 18,
+      "files": [
+        {
+          "path": "res://audio/claymore/place_charge.wav",
+          "choice": 0.1,
+          "seconds": 0.4237916666666667,
+          "peak": 0.045081641525030136,
+          "sample_offsets": [
+            402976,
+            392736
+          ],
+          "sha256": "0dca9d3a402f602b64c3136b5d4a8b90540259e81db5bf6de5e6fe98e52728db"
+        }
+      ]
+    },
+    ".GUN_EMPTY": {
+      "index": 15,
+      "note": "Adaptation: no detonator event exists in the banks",
+      "files": [
+        {
+          "path": "res://audio/claymore/detonator_click.wav",
+          "choice": 0.1,
+          "seconds": 0.20716666666666667,
+          "peak": 0.059803616255521774,
+          "sample_offsets": [
+            36672
+          ],
+          "sha256": "0982c88b57edaa6d3c288d6435872f4b9e830b875e6881ec50745504f4c30682"
+        }
+      ]
+    }
+  }
+}

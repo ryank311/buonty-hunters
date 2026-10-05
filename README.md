@@ -26,6 +26,7 @@ The entire game renders at a fixed **640×480 (4:3)**, including the HUD and men
 | Prone / stand | Hold C, or Z |
 | Dive forward into prone | Hold C while running forward |
 | Jump / climb the ledge in front / rise from a lower stance | Space |
+| Climb a ladder (at its foot or its head) / slide down it | F, then W and S on the ladder; F again slides |
 | Lean | Hold Q / E |
 | Fire / focus aim | Left / right mouse button |
 | Reload | R |
@@ -93,10 +94,10 @@ Soldiers have 100 health. A hit to the head does about three times a weapon's da
 | Model 18 | 16 | 40% | 10 and 35 m |
 
 - **M40A1.** Hold the right mouse button (LT) to look through the scope; the wheel, **=** / **-**, or D-pad up/down steps through ×3, ×6, and ×12. The bullet leaves at 380 m/s and falls under gravity, so a distant or moving target needs lead and hold-over; the ticks under the scope's centre are for that. Fired without the scope it is inaccurate.
-Grenades use the recovered standing throw/toss, crouched throw and prone throw/toss clips on the original character rig. Holding winds up the native motion; releasing continues through the hand release and follow-through. Running throws preserve the locomotion legs. The arc and projectile share the recovered release-hand position.
+Grenades use the recovered standing throw/toss, crouched throw and prone throw/toss clips on the original character rig. Holding winds up the native motion and caps movement at walking speed; crouching and crawling stay slower. Releasing restores normal movement and continues through the hand release and follow-through. Moving throws preserve the locomotion legs. The arc and projectile share the recovered release-hand position.
 
 - **Frag grenade.** Thrown where you aim, bounces, and explodes 3.5 seconds later. It does not know who threw it: it kills anyone within about 4 m, you and your teammates included, wounds out to 8 m, and does nothing behind cover. The lightest toss on level ground comes down about 9 m away; aimed at the ground ahead it stops within 4 m.
-- **Smoke grenade.** Starts venting after 2 seconds. Smoke grows from the recovered canister into a dense, rolling volume about 9 m across, then drifts and thins away over the end of its 18-second life. A burning canister still falls and bounces until it settles. The model, HUD icon and puff texture come from the recovery; see [the smoke notes](tools/recovery/SMOKE.md).
+- **Smoke grenade.** Starts venting after 2 seconds. Smoke grows from the recovered canister into a dense, pixelated volume about 16 m across, spreading low around the source, then drifts and thins away over the end of its 18-second life. A burning canister still falls and bounces until it settles. The model, HUD icon and puff texture come from the recovery; see [the smoke notes](tools/recovery/SMOKE.md).
 - **Flashbang.** Goes off after 1.8 seconds with the original Mk141 report and whites out the view of anyone within 14 m who can see it, for up to 6 seconds: less with distance and when facing away, and not at all behind cover. The screen holds solid white for the first part before the after-image fades. A flashed player's ears ring (the original ringing loop) for twice as long, and every other sound is muffled and quietened until hearing returns.
 - **Claymore.** Set on the ground a pace ahead, facing the way you face, and armed a second later. You cannot set it off yourself: it fires when an **enemy** walks within 4.5 m of its front. The blast is a cone to the front that hurts anyone in it, including you.
 

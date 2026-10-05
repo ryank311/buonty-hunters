@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
 """Decode the original muzzle flashes into resources/recovered/muzzle_flashes.json.
 
+Each weapon entry also carries its Sound_Radius (zweapon.rdr; read as metres: rifles
+100-170, pistols 45-80, suppressed guns 4-40) and whether it is suppressed (its fire
+sequence shows no flash and it is quieter than 45 m), which
+decide tracers and who hears the shot. The tracer streak texture (EFFE_TXR
+tracer.tif: a red row and a green row, bright at the head) is copied to
+art/effects/recovered_tracer.png.
+
 Each weapon record in ZWEAPON.ZAR (zweapon.rdr) names a FireAnimName such as
 muzzle_glock. That zAnim sequence (CZANIM.ZAR, Anim_Sets/common) spawns a
 flash_fire_* effect, which in turn shows one of three flash models
@@ -17,11 +24,15 @@ Run with python3 from the repository root; needs previous/recovery/.
 import json
 from pathlib import Path
 import re
+import shutil
 import struct
 
 ROOT = Path(__file__).resolve().parents[2]
 RECOVERY = ROOT / 'previous/recovery'
 OUT = ROOT / 'resources/recovered/muzzle_flashes.json'
+TRACER = ROOT / 'art/effects/recovered_tracer.png'
+# The suppressed guns' Sound_Radius is 4-40; the quietest open gun's is 45.
+QUIET_BELOW = 45.0
 SCALE = 0.1
 
 
@@ -87,14 +98,19 @@ def main():
     text = json.dumps(record)
     weapons = {}
     flashes = {}
-    for name, model, fire in re.findall(r'"InternalName", \["([^"]*)"\].*?"ModelName", \["([^"]*)"\], "FireAnimName", \["([^"]*)"\]', text):
+    for name, radius, model, fire in re.findall(r'"InternalName", \["([^"]*)"\].*?"Sound_Radius", \["([^"]*)"\].*?"ModelName", \["([^"]*)"\], "FireAnimName", \["([^"]*)"\]', text):
         if not fire.startswith('muzzle_') or fire not in anims:
             continue
         effect = next((r for r in anims[fire]['refs'] if r in ('flash_fire', 'shotgun_fire') or r.startswith('flash_fire_')), None)
         if effect and effect not in flashes:
             flashes[effect] = flash(anims[effect])
-        entry = {'weapon': name, 'fire_anim': fire, 'flash': effect}
+        entry = {'weapon': name, 'fire_anim': fire, 'flash': effect, 'sound_radius_m': float(radius),
+                 # A suppressed gun has no flash in its fire sequence and is quiet; the
+                 # SR-25 and the turrets also lack a flash_fire but are loud.
+                 'suppressed': effect is None and float(radius) < QUIET_BELOW}
         weapons.setdefault(model.lower(), []).append(entry)
+    TRACER.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(next((RECOVERY / 'converted/textures/effects').glob('*/EFFE_TXR-*/tracer.tif.png')), TRACER)
     OUT.write_text(json.dumps({'source': 'ZWEAPON.ZAR zweapon.rdr FireAnimName -> CZANIM.ZAR Anim_Sets/common',
                                'flashes': flashes, 'weapons': weapons}, indent=1) + '\n')
     for effect, spec in sorted(flashes.items()):
