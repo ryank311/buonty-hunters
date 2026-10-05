@@ -2,7 +2,7 @@
 
 An original tactical third-person shooter focused on the feel of PS2-era SOCOM, with an eventual 5v5, single-life multiplayer format.
 
-The playable graybox has an original town, a measured movement lab, four soldier classes and a controllable recovered character. It runs locally with one player. The default SEAL and 201 switchable variants retain their original proportions and rigs; recovered full-body animations drive their basic locomotion. The existing controller supplies movement and collision. Aim layers, weapon-specific visuals and action events are still being integrated.
+The playable graybox has an original town, a measured movement lab, four soldier classes and a controllable recovered character. It runs locally with one player. The default SEAL and 201 switchable variants retain their original proportions and rigs; recovered full-body animations drive their basic locomotion. The existing controller supplies movement and collision. Original aim/fire poses, recoil and reloads are hooked up; weapon-specific visuals and remaining action events are still being integrated.
 
 ## Play
 
@@ -47,6 +47,8 @@ Gamepad bindings use left/right sticks for movement/look, A for jump, B tap for 
 **Old Quarter** has three traversable routes, ten spawn markers, cover, an arch, market, courtyard, balconies, and a covered service passage. **Movement Lab** has distance markers, ramps, stairs, narrow doorways, stance-clearance fixtures, camera corners, and static/moving practice targets.
 
 The rifle starts with **30 loaded / 90 reserve** rounds; the semi-auto pistol has **12 / 36**. Each keeps its own ammunition across swaps. A swap cancels an unfinished reload without transferring rounds. Reset refills both. Recoil combines aim climb, sideways kick, recovery, expanding shot spread, weapon movement, and optional controller vibration. Those are the rifleman's weapons; the other classes are described under [Classes, weapons, and round rules](#classes-weapons-and-round-rules). Bots, objectives, round flow, and online multiplayer are future work.
+
+Holding aim raises the recovered firing pose; firing also keeps the gun ready for five seconds. Rifle and pistol shots use their original recoil poses, and reload animations follow the ammunition timer while preserving movement. Idle breathing uses the original slower playback settings.
 
 Every firearm except the sniper rifle uses **instant hitscan**; the sniper rifle fires a bullet that takes time to arrive and drops on the way. Bullet-hole decals stay on the struck walls, floors, cover, and targets, including moving targets. The latest 128 marks remain until replaced or until you reset/change levels. Swapping or reloading preserves them. Impact sizes are adjustable through `impact_diameter` in each weapon resource (metres).
 

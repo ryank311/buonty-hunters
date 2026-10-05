@@ -17,7 +17,7 @@ The pilot now also has a [complete character/motion collection](CHARACTERS.md): 
 | Backspace | Return to the selected spawn and refill |
 | Cmd+1 / F1 | Return to the other levels or adjust camera settings |
 
-The pilot stands remain inspection displays. The playable soldier now uses recovered character geometry and native full-body locomotion; the browser’s **Use selected character for player** button and **[ / ]** switch the playable model. The M4 follows the recovered hand/weapon track. Aim layers and weapon-specific models remain follow-up work. The recovery area has no combat roster. The M4 and character can be viewed from every side; the plaza has visible fences at its cropped edges.
+The pilot stands remain inspection displays. The playable soldier now uses recovered character geometry and native full-body locomotion; the browser’s **Use selected character for player** button and **[ / ]** switch the playable model. The M4 follows the recovered hand/weapon track. Raised aim/fire poses, recoil and reload layers are now connected; weapon-specific models and remaining actions are follow-up work. The recovery area has no combat roster. The M4 and character can be viewed from every side; the plaza has visible fences at its cropped edges.
 
 ## First assets
 

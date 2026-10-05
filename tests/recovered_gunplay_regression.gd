@@ -30,6 +30,17 @@ func _run() -> void:
 	check(absf(advanced - length / 6.0) < 0.002, "Rifle idle uses the source six-second cycle, not the half-second key duration (%.3f s of keys per second)" % advanced)
 	await H.step(self, 20, {"hold": ["aim"]})
 	check(gun.fire_clip == "seal_fp_stand" and gun.fire_blend > 0.99 and direction(skin).z < -0.98, "Standing aim raises the original fire pose and points the rifle forward")
+	var forearm: int = skin.motion.rig.names.find("rforearm")
+	await H.step(self, 3, {"hold": ["aim"], "tap": ["fire"]})
+	var fire_time: float = fmod(gun.fire_clock, 1.0) * skin.motion.get_animation("seal_fp_stand").length
+	var reference: Array[Transform3D] = skin.motion.sample("seal_fp_stand", fire_time)
+	var recoil_angle: float = driver.last_pose[forearm].basis.get_rotation_quaternion().angle_to(reference[forearm].basis.get_rotation_quaternion())
+	check(recoil_angle > 0.003, "A shot visibly deforms the native forearm beyond the fire-pose loop (%.4f rad)" % recoil_angle)
+	await H.step(self, 15, {"hold": ["aim"]})
+	fire_time = fmod(gun.fire_clock, 1.0) * skin.motion.get_animation("seal_fp_stand").length
+	reference = skin.motion.sample("seal_fp_stand", fire_time)
+	recoil_angle = driver.last_pose[forearm].basis.get_rotation_quaternion().angle_to(reference[forearm].basis.get_rotation_quaternion())
+	check(recoil_angle < 0.002, "The forearm returns to the native fire pose without accumulating recoil")
 	var neutral_direction := direction(skin)
 	await H.apply(self, {"pitch": 30.0})
 	await H.step(self, 15, {"hold": ["aim"]})
