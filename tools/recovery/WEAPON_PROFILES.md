@@ -33,7 +33,9 @@ Behavioral evidence is the local `previous/recovery/research/socom-unzipped/web/
 
 ## Adaptations and limits
 
-This ports weapon behavior into the existing controller, not the entire original kit/view state machine. Damage, ammunition, reloads, projectile speed/drop, pellet count, sounds and available scope zoom levels retain prototype family settings. Launchers, underbarrel fire and accessory states remain unimplemented.
+This ports weapon behavior into the existing controller, not the entire original kit/view state machine. Damage, ammunition, reload timers, projectile speed/drop, pellet count and available scope zoom levels retain prototype family defaults. Firing and reload sounds now use the original per-record references; see [WEAPON_AUDIO.md](WEAPON_AUDIO.md). Launchers, underbarrel fire and accessory states remain unimplemented.
+
+**F1 → Debug tuning** replaces the old rifle recoil, pistol recoil and accuracy pages. Select any currently carried weapon or equipment to edit its applicable settings immediately, then **Save changes** to persist them. Overrides use the original gun record ID (or equipment kind), so M4A1 tuning follows that gun across selections without leaking into an AK-47 in the same slot. **Reset this weapon** restores only that profile. Version 7 settings migrate the older slot-based recoil settings. Source records stay unchanged. The loadout page selects 32 primary profiles, 10 pistols, two equipment slots and all 202 playable character models; those choices last for the current run.
 
 Projection uses the recovered reference half-horizontal FOV 0.6109, preserving those angular profiles independently of the prototype's adjustable camera. The original aim/muzzle depth ratio is approximated as 1. HUD pixels map to the project's 640×480 presentation. Existing focus aim does not apply the retired 0.75 accuracy multiplier.
 

@@ -87,9 +87,10 @@ def templates(version):
 
 
 def inventory():
-    """Every installed runtime model and raw recovery JSON must survive export."""
+    """Every runtime model, audio clip and raw recovery JSON must survive export."""
     raw = {"res://" + str(p.relative_to(ROOT)): digest(p) for p in sorted((ROOT / "resources/recovered").rglob("*.json"))}
     resources = ["res://" + str(p.relative_to(ROOT)) for p in sorted((ROOT / "art/models").rglob("*.glb"))]
+    resources += ["res://" + str(p.relative_to(ROOT)) for p in sorted((ROOT / "audio").rglob("*.wav"))]
     resources += ["res://scenes/main.tscn", "res://resources/recovered/native.res"]
     return raw, resources
 

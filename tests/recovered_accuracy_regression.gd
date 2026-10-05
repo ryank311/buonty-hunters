@@ -1,6 +1,7 @@
 extends SceneTree
 const Guns := preload("res://scripts/combat/recovered_weapons.gd")
 const Accuracy := preload("res://scripts/combat/recovered_accuracy.gd")
+const Audio := preload("res://scripts/combat/recovered_weapon_audio.gd")
 const H := preload("res://tools/agent/harness.gd")
 var failures: Array[String] = []
 
@@ -21,7 +22,16 @@ func _run() -> void:
 				missing.append(entry.id)
 	check(missing.is_empty(), "All 65 playable mesh variants resolve stance tables and legal modes: %s" % [missing])
 	check(Guns.profile_catalogue().records.size() == 86, "All 86 original records are retained with provenance and raw tokens")
+	var audio_missing: Array[String] = []
+	for name: String in Audio.catalogue().sounds:
+		for index: int in range(3):
+			var stream := Audio.stream_for(name, index)
+			if stream == null or stream.get_length() <= 0.0:
+				audio_missing.append(name)
+	check(Audio.catalogue().records.size() == 42 and audio_missing.is_empty(), "All 42 gun records have loadable recovered audio, including every sequencer variant: %s" % [audio_missing])
 	var m4 := Guns.profile_for("m4acarbine")
+	check(m4.display_name == "M4A1" and Audio.event_name(m4) == ".M4A1" and Audio.event_name(m4, "reload") == ".M4A1_RLD" and m4.sound_pitch == 1.0, "M4A1 uses its real name and original firing/reload events without prototype pitch shifting")
+	check(Audio.event_name(m4, "fire", 9) == ".M4A1_M" and Audio.event_name(m4, "fire", 50) == ".M4A1_F" and Audio.event_name(Guns.profile_for("sig_commando", 67)) == ".SIG_552_SIL" and Audio.event_name(Guns.profile_for("sig_commando", 67), "fire", 9) == "", "Distance reports and suppressed shared-mesh variants follow the original sound references")
 	check(m4.recovered_stats.modes == [1, 2, 3] and m4.fire_mode == 2, "M4 enables semi/burst/auto and defaults to burst")
 	check(Guns.profile_for("glock18").recovered_stats.modes == [1, 3] and Guns.profile_for("m60e").recovered_stats.modes == [3], "Explicit mode flags retain Glock auto despite MaxFireMode 1; M60 is auto only")
 	check(Guns.profile_for("m16a2").recovered_stats.modes == [1, 2], "M16 has semi and burst, without automatic fire")
@@ -67,6 +77,7 @@ func _run() -> void:
 	var camera_before: Basis = session.player.camera_rig.camera.global_basis
 	await H.step(self, 60, {"hold": ["fire"]})
 	check(w.shots_fired == 3 and w.mode_caption() == "BURST", "Holding default M4 trigger fires exactly three rounds")
+	check(w.weapon_audio.last_fire == ".M4A1" and w.weapon_audio.shots_played == 3, "Successful shots dispatch the equipped gun's recovered report once per round")
 	check(camera_before.is_equal_approx(session.player.camera_rig.camera.global_basis), "Unscoped source recoil leaves the actual camera orientation unchanged")
 	await H.step(self, 1)
 	await H.step(self, 1, {"hold": ["fire"]})
@@ -98,6 +109,11 @@ func _run() -> void:
 	var before_reload := w.shots_fired
 	await H.step(self, 180, {"hold": ["fire"], "tap": ["reload"]})
 	check(w.shots_fired == before_reload and w.ammo == w.profile.magazine_size, "Reload interrupts a burst and does not resume it while the trigger stays held")
+	check(w.weapon_audio.reloads_played == 1 and w.weapon_audio.last_reload == ".M4A1_RLD", "Reload starts the recovered event once, independently of the held trigger")
+	w.ammo -= 1
+	await H.step(self, 1, {"tap": ["reload"]})
+	w.equip(1)
+	check(w.weapon_audio.last_reload == "" and not w.weapon_audio.reload_output.playing and w.reload_remaining == 0.0, "Swapping cancels both the reload action and its audio")
 	await H.scenario(self, "lab_start", {"class": "marksman", "roster": false, "freeze": true, "hold": ["aim"]})
 	check(w.scoped and not w.cycle_fire_mode(), "Scope view refuses fire-mode switching")
 	print("\nRESULT: %d failure(s)" % failures.size())

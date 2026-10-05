@@ -146,7 +146,10 @@ func _sync_carried() -> void:
 
 func save_changes() -> void:
 	for edit: SpinBox in editors.values():
-		edit.apply()
+		# Only the field being typed can have uncommitted text. Other SpinBoxes
+		# may still be waiting for their deferred text refresh after a gun change.
+		if edit.get_line_edit().has_focus():
+			edit.apply()
 	Tuning.capture(edited_profile)
 	var error: Error = hud.session._save_settings()
 	feedback.text = "Saved weapon tuning." if error == OK else "Applied for this QA session; saved settings are disabled." if error == ERR_UNAVAILABLE else "Could not save: %s" % error_string(error)

@@ -483,7 +483,7 @@ func change_page(direction: int) -> void:
 
 func close_menu_popup() -> bool:
 	for control: Control in focus_order:
-		if control is OptionButton and control.get_popup().visible:
+		if is_instance_valid(control) and control is OptionButton and control.get_popup().visible:
 			control.get_popup().hide()
 			return true
 	return false

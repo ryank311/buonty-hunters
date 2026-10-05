@@ -20,7 +20,7 @@ const FIELDS := {
 	"impact_diameter": ["Impact mark diameter (m)", 0.01, 1, 0.01],
 	"muzzle_velocity": ["Bullet speed (m/s; 0 = hitscan)", 0, 2000, 10],
 	"bullet_gravity": ["Bullet gravity (m/s²)", 0, 100, 0.1],
-	"sound_pitch": ["Shot sound pitch", 0.1, 3, 0.05],
+	"sound_pitch": ["Weapon sound pitch", 0.1, 3, 0.05],
 	"throw_speed": ["Full throw speed (m/s)", 1, 60, 0.5],
 	"throw_speed_min": ["Minimum throw speed (m/s)", 1, 60, 0.5],
 	"fuse_seconds": ["Fuse / arm time (s)", 0.05, 30, 0.05],

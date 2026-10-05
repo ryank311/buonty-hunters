@@ -223,6 +223,9 @@ func reset_tuning() -> void:
 	player.camera_settings = load("res://resources/camera/default_camera.tres").duplicate()
 	player.camera_rig.profile = player.camera_settings
 	player.weapon.reset_profiles()
+	# Replacing a custom loadout must also refresh held models, ammunition and
+	# accuracy bindings, and cancel an in-progress reload or throw.
+	player.weapon.reset()
 	hud.refresh_settings()
 
 func _save_settings() -> Error:

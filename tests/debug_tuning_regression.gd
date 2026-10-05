@@ -53,6 +53,7 @@ func _run() -> void:
 	w.receive(0, selected_ak, 30, 90)
 	check(w.profiles[0].damage == 34 and is_equal_approx(w.profiles[0].recovered_recoil_scale, 1.0), "Choosing a different primary does not inherit the previous gun's tuning")
 	session.reset_tuning()
+	check(w.profile.recovered_model == "m4acarbine" and w.ammo == w.profile.magazine_size and session.player.soldier.soldier_skin.weapon_ids.long == "m4acarbine", "Restoring all defaults refreshes the held model and ammunition after a custom loadout")
 	session.apply_settings_config(config)
 	check(w.profiles[0].damage == 47 and w.profiles[1].damage == 41 and is_equal_approx(w.profiles[2].fuse_seconds, 2.75) and is_equal_approx(w.profiles[2].effect_radius, 9.5), "Loading saved settings restores gun-specific and equipment tuning")
 	check(Guns.profile_for("m4acarbine").damage == 47 and Guns.profile_for("ak47").damage == 34, "Re-selecting a saved gun restores its overrides without changing other guns")

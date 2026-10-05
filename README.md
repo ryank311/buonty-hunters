@@ -67,28 +67,30 @@ The HUD uses compact, borderless translucent strips with a 5% screen margin. Bot
 
 ## Classes, weapons, and round rules
 
-You choose a soldier class, not individual weapons. **F4**, or **Choose class** in the Start menu, opens the list; choosing one respawns you with its loadout.
+**F4**, or **Choose class** in the Start menu, respawns you with a class loadout. **F1 / Cmd+1 / Start → Loadout** also lets you choose a primary, pistol and two equipment items individually, and search all 202 recovered character models to swap your player immediately. Weapon choices refill their slot; selections survive respawn and map changes for this run.
+
+**Debug tuning** combines recoil, accuracy and other weapon settings in one page. Choose a carried item, edit its values, then **Save changes** to keep that gun or equipment type’s tuning across launches. **Reset this weapon** restores only the selected item. Firing and reload audio use the [recovered per-gun sound references](tools/recovery/WEAPON_AUDIO.md).
 
 | Class | Primary | Pistol | Equipment |
 | --- | --- | --- | --- |
-| Rifleman | Field rifle: semi/burst/auto, 625 rpm burst/auto, 30 rounds | Service pistol: 9 mm, 12 rounds | 2 frag grenades, 1 smoke grenade |
-| Marksman | Sniper rifle: scoped, 5 rounds | Machine pistol: semi/auto, 1,250 rpm auto, 18 rounds | 2 claymores, 1 smoke grenade |
-| Breacher | Combat shotgun: 6 shells of 9 pellets | Heavy pistol: 7 rounds, 55 damage each | 2 flashbangs, 2 frag grenades |
-| Pointman | Submachine gun: semi/burst/auto, 750 rpm burst/auto, 30 rounds | Service pistol | 2 flashbangs, 2 claymores |
+| Rifleman | M4A1: semi/burst/auto, 625 rpm burst/auto, 30 rounds | M9: 9 mm, 12 rounds | 2 frag grenades, 1 smoke grenade |
+| Marksman | M40A1: scoped, 5 rounds | Model 18: semi/auto, 1,250 rpm auto, 18 rounds | 2 claymores, 1 smoke grenade |
+| Breacher | 870: 6 shells of 9 pellets | DE .50: 7 rounds, 55 damage each | 2 flashbangs, 2 frag grenades |
+| Pointman | HK5: semi/burst/auto, 750 rpm burst/auto, 30 rounds | M9 | 2 flashbangs, 2 claymores |
 
 Soldiers have 100 health. A hit to the head does about three times a weapon's damage and a hit to the legs about three quarters. Damage also falls with distance, at a different rate for each weapon:
 
 | Weapon | Damage up close | Falls to | Between |
 | --- | --- | --- | --- |
-| Field rifle | 34 | 70% | 60 and 150 m |
-| Submachine gun | 22 | 45% | 15 and 45 m |
-| Combat shotgun | 9 × 14, recovered stance-dependent spread | 20% | 6 and 25 m |
-| Sniper rifle | 95 | 80% | 250 and 400 m |
-| Service pistol | 26 | 50% | 20 and 50 m |
-| Heavy pistol | 55 | 50% | 20 and 60 m |
-| Machine pistol | 16 | 40% | 10 and 35 m |
+| M4A1 | 34 | 70% | 60 and 150 m |
+| HK5 | 22 | 45% | 15 and 45 m |
+| 870 | 9 × 14, recovered stance-dependent spread | 20% | 6 and 25 m |
+| M40A1 | 95 | 80% | 250 and 400 m |
+| M9 | 26 | 50% | 20 and 50 m |
+| DE .50 | 55 | 50% | 20 and 60 m |
+| Model 18 | 16 | 40% | 10 and 35 m |
 
-- **Sniper rifle.** Hold the right mouse button (LT) to look through the scope; the wheel, **=** / **-**, or D-pad up/down steps through ×3, ×6, and ×12. The bullet leaves at 380 m/s and falls under gravity, so a distant or moving target needs lead and hold-over; the ticks under the scope's centre are for that. Fired without the scope it is inaccurate.
+- **M40A1.** Hold the right mouse button (LT) to look through the scope; the wheel, **=** / **-**, or D-pad up/down steps through ×3, ×6, and ×12. The bullet leaves at 380 m/s and falls under gravity, so a distant or moving target needs lead and hold-over; the ticks under the scope's centre are for that. Fired without the scope it is inaccurate.
 - **Frag grenade.** Thrown where you aim, bounces, and explodes 3.5 seconds later. It does not know who threw it: it kills anyone within about 4 m, you and your teammates included, wounds out to 8 m, and does nothing behind cover. The lightest toss on level ground comes down about 9 m away; aimed at the ground ahead it stops within 4 m.
 - **Smoke grenade.** Bursts after 2 seconds into a cloud about 9 m across that lasts 18 seconds.
 - **Flashbang.** Goes off after 1.8 seconds and whites out the view of anyone within 14 m who can see it, for up to 4.5 seconds: less with distance and when facing away, and not at all behind cover.
