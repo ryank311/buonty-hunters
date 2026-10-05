@@ -29,9 +29,27 @@ func _ready() -> void:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if not qa_mode:
 		get_window().focus_exited.connect(func() -> void: set_modal(true))
+		_size_window()
 	Input.joy_connection_changed.connect(_controller_connection_changed)
 	if "--capture" in OS.get_cmdline_user_args():
 		_capture_preview()
+
+func _size_window() -> void:
+	# Open at twice the 640x480 render in screen points, so a Retina display does not
+	# halve it, stepping down only as far as needed to fit the usable screen area.
+	var window := get_window()
+	if DisplayServer.get_name() == "headless" or window.mode != Window.MODE_WINDOWED or Engine.is_embedded_in_editor():
+		return
+	var screen := window.current_screen
+	var usable := DisplayServer.screen_get_usable_rect(screen)
+	var points := DisplayServer.screen_get_scale(screen)
+	var render := Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"), ProjectSettings.get_setting("display/window/size/viewport_height"))
+	var title_bar := 32.0 * points
+	var factor := 2.0
+	while factor > 1.0 and (render.x * factor * points > usable.size.x or render.y * factor * points + title_bar > usable.size.y):
+		factor -= 0.25
+	window.size = Vector2i(render * factor * points)
+	window.position = usable.position + (usable.size - window.size) / 2
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause") or event.is_action_pressed("tuning"):
@@ -156,7 +174,7 @@ func _save_settings() -> void:
 
 func settings_config() -> ConfigFile:
 	var config := ConfigFile.new()
-	config.set_value("meta", "version", 4)
+	config.set_value("meta", "version", 5)
 	for key: String in ["run_speed", "acceleration", "braking", "body_weight", "prone_speed"]:
 		config.set_value("movement", key, player.movement.get(key))
 	for key: String in ["field_of_view", "distance", "shoulder_offset", "height_offset", "mouse_sensitivity", "pad_sensitivity", "pad_deadzone", "pad_aim_multiplier", "vibration", "invert_y", "hud_opacity"]:
@@ -181,7 +199,8 @@ func apply_settings_config(config: ConfigFile) -> void:
 			continue
 		player.movement.set(key, config.get_value("movement", key, player.movement.get(key)))
 	for key: String in ["field_of_view", "distance", "shoulder_offset", "height_offset", "mouse_sensitivity", "pad_sensitivity", "pad_deadzone", "pad_aim_multiplier", "vibration", "invert_y", "hud_opacity"]:
-		if config.get_value("meta", "version", 1) < 4 and key == "shoulder_offset":
+		# Presets before version 5 saved the centered framing; take the off-center default.
+		if config.get_value("meta", "version", 1) < 5 and key == "shoulder_offset":
 			continue
 		player.camera_settings.set(key, config.get_value("camera", key, player.camera_settings.get(key)))
 	for slot: int in range(2):

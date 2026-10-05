@@ -64,6 +64,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
 
 The `ext_resource` line goes with the others at the top of the file; the last three numbers of the transform are the position. Try positions with `place` first, then write the one that works. Afterwards run the `godot-dev-loop` checks; `prototype_smoke` walks the town routes and will catch a prop that blocks one.
 
+## The soldier: a rigged, textured model
+
+`art/blender/soldier.blend` is the playable soldier, and the reference for anything with bones or textures.
+
+- **Rig.** One armature (`Soldier`, 19 bones named after Godot's humanoid profile) with every mesh object parented to it and weighted through vertex groups. A mesh object must not share a name with a bone: Godot renames one of them on import, and code that looks the bone up then fails.
+- **In the game.** `scripts/actors/soldier_skin.gd` loads `soldier.glb` and poses its bones from `SoldierProxy` each frame; the proxy still computes every pose. The rest pose's shoulder, elbow, wrist, knee, and ankle positions are the proxy's own limb lengths. Reshape the mesh freely, but move a joint only together with that script.
+- **Textures.** PNGs live in `art/blender/textures/<model>/` and are linked (not packed) by Image Texture nodes. The export embeds them and Godot extracts them beside the `.glb` as `<model>_<texture>.png`, so replacing a PNG and running export and import is the whole update. `art/blender/textures/soldier/template/TEMPLATE.md` describes the soldier's eight textures and how each is laid out.
+- **Checks.** The export's triangle and collision notes are for props and do not apply. Judge a rigged model in its game poses, not only at rest: `tools/dev shot lab_start`, the same with `stance=crouch` or `stance=prone`, and stand-in soldiers (`actors` in the harness spec) to see other sides.
+
 ## Your Blender instance
 
 - Each kind of agent has its own: Claude Code on port 9886, Codex on 9887. `tools/dev blender status` lists what is running, the open file, and whether it has unsaved changes.

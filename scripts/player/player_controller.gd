@@ -33,6 +33,7 @@ var test_command: Dictionary = {}
 var pending_mouse := Vector2.ZERO
 var input_armed: bool = true
 var local_acceleration := Vector3.ZERO
+var look_scale: float = 1.0 # Below one while a scope is zoomed in, so aim speed tracks the magnification.
 
 func _ready() -> void:
 	movement = movement.duplicate()
@@ -112,10 +113,10 @@ func _physics_process(delta: float) -> void:
 		pending_mouse = Vector2.ZERO
 		return
 	dive_recovery = maxf(0.0,dive_recovery - delta)
-	var yaw_input := -pending_mouse.x * camera_settings.mouse_sensitivity
-	camera_rig.add_pitch(pending_mouse.y * camera_settings.mouse_sensitivity)
+	var yaw_input := -pending_mouse.x * camera_settings.mouse_sensitivity * look_scale
+	camera_rig.add_pitch(pending_mouse.y * camera_settings.mouse_sensitivity * look_scale)
 	pending_mouse = Vector2.ZERO
-	var look := PlayerInput.look_vector(camera_settings.pad_deadzone)
+	var look := PlayerInput.look_vector(camera_settings.pad_deadzone) * look_scale
 	if aiming:
 		look *= camera_settings.pad_aim_multiplier
 	yaw_input -= look.x * camera_settings.pad_sensitivity * delta
@@ -191,6 +192,7 @@ func _physics_process(delta: float) -> void:
 			request_stance(StanceController.Stance.STAND)
 		elif stance.has_clearance(self, 0, rotation.y):
 			velocity.y = sqrt(2.0 * movement.gravity * movement.jump_height)
+			soldier.begin_jump(velocity.y)
 			jump_cooldown = 0.25
 	var was_grounded := is_on_floor()
 	var impact_speed := -velocity.y
@@ -209,7 +211,7 @@ func _physics_process(delta: float) -> void:
 	camera_rig.update_view(self, StanceController.EYE_HEIGHTS[stance.current], lean, aiming, delta)
 	var speed_now := Vector2(velocity.x, velocity.z).length()
 	var local_velocity := basis.inverse() * Vector3(velocity.x, 0, velocity.z)
-	soldier.pose(stance.current, speed_now, Vector2(local_velocity.x, local_velocity.z), camera_rig.aim_pitch(), camera_rig.actual_lean, delta, movement.body_weight, local_acceleration, is_on_floor(), weapon.recoil.visual_kick, weapon.draw_remaining / weapon.profile.draw_seconds, aiming, 1.0 if diving else 0.0, prone_strafe_phase, prone_strafe_amount, clampf((movement.dive_lift - velocity.y) / (2.0 * movement.dive_lift),0.0,1.0))
+	soldier.pose(stance.current, speed_now, Vector2(local_velocity.x, local_velocity.z), camera_rig.aim_pitch(), camera_rig.actual_lean, delta, movement.body_weight, local_acceleration, is_on_floor(), weapon.recoil.visual_kick, weapon.draw_remaining / weapon.profile.draw_seconds, aiming, 1.0 if diving else 0.0, prone_strafe_phase, prone_strafe_amount, clampf((movement.dive_lift - velocity.y) / (2.0 * movement.dive_lift),0.0,1.0), velocity.y)
 	soldier.set_close_fade(camera_rig.arm.get_hit_length() < 0.70)
 	weapon.tick(delta, Input.is_action_pressed("fire"), Input.is_action_just_pressed("reload"))
 	if is_on_floor() and speed_now > 0.25 and stance.current != StanceController.Stance.PRONE:

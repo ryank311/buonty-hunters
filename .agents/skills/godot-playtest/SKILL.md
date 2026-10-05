@@ -30,7 +30,7 @@ The `preload` warning in each response is expected.
 | Call | Does |
 |---|---|
 | `await H.scenario(tree, "name", overrides := {})` | Respawns cleanly, then applies a named scenario. `H.scenarios()` lists them. |
-| `await H.apply(tree, spec)` | Applies any state on top of the current one: level, spawn, position, facing, stance, weapon, ammo, health, tuning values, menu page, freeze. |
+| `await H.apply(tree, spec)` | Applies any state on top of the current one: level, spawn, position, facing, stance, class, weapon, ammo, health, other soldiers, tuning values, menu page, freeze. |
 | `await H.step(tree, frames, input := {})` | Plays exactly `frames` ticks (1/60 s each) holding the given input, then releases it. |
 | `await H.walk_to(tree, [[x, z], ...])` | Walks waypoints at 4x speed and reports whether it arrived or where it was blocked. |
 | `H.state(tree)` | Returns the digest without changing anything. |
@@ -52,6 +52,29 @@ return await H.step(scene_tree, 60, {"forward": 1.0, "trace": 10})
 
 # Open the tuning menu on the Camera page for a screenshot.
 return await H.apply(scene_tree, {"menu": 1})
+```
+
+Combat uses the same calls. Each level starts with two teammates and four enemies (`actors` in the digest; places in `scripts/combat/roster.gd`); `"roster": false` clears them when a test should place its own.
+
+```gdscript
+# A frag against one enemy 12 m down the lane: throw, wait out the fuse at 4x speed.
+await H.scenario(scene_tree, "lab_start", {"class": "breacher", "weapon": "frag", "roster": false,
+	"actors": [{"team": 1, "pos": [0, 0, 14], "name": "TARGET"}]})
+await H.step(scene_tree, 6, {"tap": ["fire"]})
+return await H.step(scene_tree, 300, {"speed": 4})        # actors[0].alive, live, player.health
+
+# A marksman's scoped shot at the far enemy; the bullet takes a few ticks to arrive.
+await H.scenario(scene_tree, "lab_start", {"class": "marksman", "hold": ["aim"], "look_at": [8, 1.5, -30], "settle": 30})
+return await H.step(scene_tree, 30, {"hold": ["aim"], "tap": ["fire"]})   # weapon.last_damage, actors
+
+# Eliminate the player, then switch the view: teammates first, then the body.
+await H.scenario(scene_tree, "lab_start", {"health": 0})
+return await H.step(scene_tree, 4, {"tap": ["lean_right"]})   # watching
+
+# Stand at a body with the search menu open, then take its primary.
+await H.scenario(scene_tree, "lab_start", {"panel": "search",
+	"actors": [{"team": 1, "class": "breacher", "pos": [0, 0, 24.6], "dead": true}]})
+return await H.step(scene_tree, 4, {"tap": ["interact"]})    # carried[0]
 ```
 
 Several harness calls can share one `run_script` body; return the last digest or build your own dictionary from them.

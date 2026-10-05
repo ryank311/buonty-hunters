@@ -53,7 +53,9 @@ extends Resource
 
 @export_group("Equipment")
 # Thrown and placed items: magazine_size is how many are carried.
+# A grenade's launch speed at full strength, and from the briefest tap of the button.
 @export var throw_speed: float = 15.0
+@export var throw_speed_min: float = 9.0
 @export var fuse_seconds: float = 3.5
 @export var effect_radius: float = 8.0
 @export var effect_seconds: float = 0.0

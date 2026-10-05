@@ -224,9 +224,34 @@ func _set_card_rect(id: String, position: Vector2, size: Vector2) -> void:
 	panel.position = position
 	panel.size = Vector2(size.x, maxf(size.y, panel.get_combined_minimum_size().y))
 
+## The rows under the player's own list teammates, standing or down; the rest stay open.
+func _update_squad() -> void:
+	var mates: Array[Node] = []
+	for actor: Node in get_tree().get_nodes_in_group(&"combat_actors"):
+		if actor != session.player and actor.get("team") == 0 and not actor.is_queued_for_deletion():
+			mates.append(actor)
+	for index: int in range(1, squad_rows.size()):
+		var title := squad_rows[index].get_child(0) as Label
+		var status := squad_rows[index].get_child(1) as Label
+		var mate: Node = mates[index - 1] if index - 1 < mates.size() else null
+		title.text = "%02d  %s" % [index + 1, mate.display_name if mate else "OPEN SLOT"]
+		title.add_theme_color_override("font_color", INK if mate and mate.alive else MUTED)
+		status.text = "—" if mate == null else "OK" if mate.alive else "DOWN"
+		status.add_theme_color_override("font_color", MUTED if mate == null else Color("96bf78") if mate.alive else Color("e48871"))
+		status.custom_minimum_size.x = 46 if mate else 20
+
 func _draw_weapon_icon() -> void:
 	var color := Color("d9dfce")
-	if session.player.weapon.active_slot == 0:
+	var kind: String = session.player.weapon.profile.kind
+	if kind == "claymore":
+		weapon_icon.draw_rect(Rect2(34, 9, 56, 20), color)
+		weapon_icon.draw_line(Vector2(45, 29), Vector2(39, 41), color, 3)
+		weapon_icon.draw_line(Vector2(79, 29), Vector2(85, 41), color, 3)
+	elif kind != "firearm":
+		weapon_icon.draw_circle(Vector2(62, 27), 13, color)
+		weapon_icon.draw_rect(Rect2(56, 6, 12, 10), color)
+		weapon_icon.draw_line(Vector2(68, 8), Vector2(82, 20), color, 3)
+	elif session.player.weapon.active_slot == 0:
 		weapon_icon.draw_colored_polygon(PackedVector2Array([Vector2(5,18), Vector2(25,20), Vector2(30,14), Vector2(68,14), Vector2(73,18), Vector2(100,18), Vector2(100,23), Vector2(69,23), Vector2(66,27), Vector2(30,27), Vector2(25,24), Vector2(5,30)]), color)
 		weapon_icon.draw_rect(Rect2(100, 19, 20, 3), color)
 		weapon_icon.draw_colored_polygon(PackedVector2Array([Vector2(42,25), Vector2(53,25), Vector2(50,39), Vector2(39,37)]), color)
@@ -352,6 +377,7 @@ func _build_menu() -> void:
 	var bottom := HBoxContainer.new()
 	menu_box.add_child(bottom)
 	common_controls.append(_button(bottom, "Next spawn", func() -> void: session.next_spawn(); session.set_modal(false)))
+	common_controls.append(_button(bottom, "Choose class", func() -> void: session.set_modal(false); session.player.weapon.director.open_class_menu()))
 	common_controls.append(_button(bottom, "Restore all defaults", func() -> void: session.reset_tuning()))
 	common_controls.append(_button(bottom, "Quit", func() -> void: session._save_settings(); get_tree().quit()))
 	_label(menu_box, "C / B: tap crouch · hold prone · hold while running forward to dive\nX / R reload · D-pad ← rifle / → pistol / ↑ spawn / ↓ reset · L3 / Shift walk", Vector2.ZERO, 13, MUTED)
@@ -436,16 +462,18 @@ func update_display(delta: float) -> void:
 	location_label.text = session.location_name()
 	stance_label.text = "DIVING" if player.diving else "SETTLING" if player.dive_recovery > 0 else StanceController.NAMES[player.stance.current]
 	weapon_label.text = player.weapon.profile.display_name
-	mode_label.text = "AUTO" if player.weapon.profile.automatic else "SEMI"
-	ammo_label.text = "%02d / %02d" % [player.weapon.ammo, player.weapon.reserve]
-	ammo_caption.text = "%d MAGS" % ceili(float(player.weapon.reserve) / player.weapon.profile.magazine_size)
+	# Grenades and claymores are counted, not loaded from magazines.
+	var equipment: bool = player.weapon.profile.kind != "firearm"
+	mode_label.text = "GEAR" if equipment else "AUTO" if player.weapon.profile.automatic else "SEMI"
+	ammo_label.text = "x %d" % player.weapon.ammo if equipment else "%02d / %02d" % [player.weapon.ammo, player.weapon.reserve]
+	ammo_caption.text = "CARRIED" if equipment else "%d MAGS" % ceili(float(player.weapon.reserve) / player.weapon.profile.magazine_size)
 	var pad := not Input.get_connected_joypads().is_empty()
 	if player.weapon.reload_remaining > 0.0:
 		weapon_state_label.text = "RELOADING  %.1f s" % player.weapon.reload_remaining
 	elif player.weapon.draw_remaining > 0.0:
-		weapon_state_label.text = "DRAWING  %s" % ("PISTOL" if player.weapon.active_slot == 1 else "RIFLE")
+		weapon_state_label.text = "READYING" if equipment else "DRAWING  %s" % ("PISTOL" if player.weapon.active_slot == 1 else "RIFLE")
 	elif player.weapon.ammo == 0:
-		weapon_state_label.text = "EMPTY  ·  %s RELOAD" % ("X" if pad else "R")
+		weapon_state_label.text = "NONE LEFT" if equipment else "EMPTY  ·  %s RELOAD" % ("X" if pad else "R")
 	else:
 		weapon_state_label.text = ""
 	weapon_state_label.visible = not weapon_state_label.text.is_empty()
@@ -458,6 +486,7 @@ func update_display(delta: float) -> void:
 	var health_color := Color("e48871") if health_fraction <= 0.25 else (Color("d5bd7f") if health_fraction <= 0.5 else Color("96bf78"))
 	health_fill.bg_color = health_color
 	squad_fill.bg_color = health_color
+	_update_squad()
 	stats_label.text = "%.1f m/s  ·  %d hits" % [Vector2(player.velocity.x, player.velocity.z).length(), player.weapon.hits]
 	if session.lap_running:
 		lap_label.text = "%05.2f s  ·  %s STOP" % [session.lap_time, "Y" if pad else "T"]

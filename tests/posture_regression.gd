@@ -22,6 +22,55 @@ func bone_matches(id: String, start: Vector3, end: Vector3) -> bool:
 	# Test actual visible mesh endpoints, not only the solver's joint positions.
 	return (mesh.transform * Vector3(0,-0.5,0)).distance_to(start) < 0.0001 and (mesh.transform * Vector3(0,0.5,0)).distance_to(end) < 0.0001 and absf(mesh.basis.x.length() - 1) < 0.0001 and absf(mesh.basis.z.length() - 1) < 0.0001
 
+func check_jumps() -> void:
+	var connected := true
+	var anatomical := true
+	var grips := true
+	var tucked := true
+	var extended := true
+	var planted := true
+	var smooth := true
+	var max_foot_step := 0.0
+	for slot: int in [0,1]:
+		soldier.set_weapon(slot)
+		for speed: float in [0.0,4.5]:
+			for direction: Vector2 in [Vector2.UP,Vector2.LEFT,Vector2.DOWN]:
+				soldier.reset_pose()
+				settle(0,speed,direction)
+				soldier.begin_jump(5.0)
+				var previous: Array[Vector3] = [soldier.parts.LBoot.position,soldier.parts.RBoot.position]
+				for frame: int in range(34):
+					soldier.pose(0,speed,direction,0,0,1.0/60.0,1.0,Vector3.ZERO,false,0,0,false,0,-1,0,0,5.0 - frame * 0.3)
+					for index: int in range(2):
+						var side := "L" if index == 0 else "R"
+						var leg: Array = soldier.leg_joints[side]
+						var arm: Array = soldier.arm_joints[side]
+						var boot: MeshInstance3D = soldier.parts[side + "Boot"]
+						max_foot_step = maxf(max_foot_step,previous[index].distance_to(boot.position))
+						previous[index] = boot.position
+						connected = connected and bone_matches(side + "Thigh",leg[0],leg[1]) and bone_matches(side + "Shin",leg[1],leg[2]) and (boot.transform * Vector3(0,0.04,0.035)).distance_to(leg[2]) < 0.001
+						anatomical = anatomical and absf(leg[0].distance_to(leg[1]) - SoldierProxy.THIGH_LENGTH) < 0.001 and absf(leg[1].distance_to(leg[2]) - SoldierProxy.SHIN_LENGTH) < 0.001
+						grips = grips and absf(arm[0].distance_to(arm[1]) - SoldierProxy.UPPER_ARM_LENGTH) < 0.001 and absf(arm[1].distance_to(arm[2]) - SoldierProxy.FOREARM_LENGTH) < 0.001 and soldier.parts[side + "Hand"].position.distance_to(arm[2]) < 0.001
+						if frame == 17:
+							tucked = tucked and boot.position.y > 0.26 and not soldier.foot_samples[side].contact
+						if frame == 33:
+							extended = extended and boot.position.y < 0.09
+				soldier.land(5.0,1.0)
+				for frame: int in range(30):
+					soldier.pose(0,0,Vector2.ZERO,0,0,1.0/60.0)
+					for side: String in ["L","R"]:
+						var boot: MeshInstance3D = soldier.parts[side + "Boot"]
+						var bottom := boot.position.y - absf(boot.basis.x.y)*0.09 - absf(boot.basis.y.y)*0.07 - absf(boot.basis.z.y)*0.145
+						planted = planted and bottom >= -0.001
+				smooth = smooth and soldier.body_drop < 0.01
+	check(tucked and extended, "Standing, running and directional jumps tuck at the apex and extend before touchdown")
+	check(connected and anatomical, "Jumping keeps visible boots and fixed-length legs connected")
+	check(grips, "Rifle and pistol grips remain reachable throughout flight")
+	check(max_foot_step < 0.13, "Jump foot trajectories stay continuous (max %.3f m/frame)" % max_foot_step)
+	check(planted and smooth, "Landing boots clear the floor and the body recovers from impact")
+	soldier.reset_pose()
+	check(not soldier.jump_active and soldier.jump_blend == 0 and soldier.landing_compression == 0, "Respawn clears flight and landing animation")
+
 func _run() -> void:
 	soldier = SoldierProxy.new()
 	root.add_child(soldier)
@@ -138,6 +187,7 @@ func _run() -> void:
 		for i: int in range(0,vertices.size(),3):
 			winding = winding and (vertices[i+1]-vertices[i]).cross(vertices[i+2]-vertices[i]).dot(normals[i]) < -0.0000001
 	check(winding, "Faceted cloth meshes face outward with valid nondegenerate triangles")
+	check_jumps()
 	print("\nRESULT: %d checks, %d failure(s)" % [checks,failures.size()])
 	soldier.queue_free()
 	await process_frame

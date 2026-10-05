@@ -3,7 +3,8 @@ extends Resource
 
 @export_range(50.0, 80.0) var field_of_view: float = 60.0
 @export_range(1.5, 5.0) var distance: float = 3.0
-@export_range(-0.6, 0.6) var shoulder_offset: float = 0.0
+## Positive moves the camera right, framing the soldier slightly left of the reticle.
+@export_range(-0.6, 0.6) var shoulder_offset: float = 0.25
 @export_range(0.0, 1.4) var height_offset: float = 0.85
 @export var mouse_sensitivity: float = 0.0025
 @export var pad_sensitivity: float = 2.5

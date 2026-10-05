@@ -15,7 +15,10 @@ extends RefCounted
 ## held to, and the returned "notes" say when the result is not a reachable state.
 
 const STANCES: Array[String] = ["stand", "crouch", "prone"]
-const WEAPONS: Array[String] = ["rifle", "pistol"]
+const Combat := preload("res://scripts/combat/combat.gd")
+const Loadouts := preload("res://scripts/combat/loadouts.gd")
+const DUMMY := preload("res://scenes/actors/combat_dummy.tscn")
+const Roster := preload("res://scripts/combat/roster.gd")
 const HELD_META := &"agent_held_actions"
 const PLACED_GROUP := &"agent_placed"
 const READY_META := &"agent_ready"
@@ -67,8 +70,13 @@ static func scenario(tree: SceneTree, title: String, overrides: Dictionary = {})
 ##   reset bool (respawn, refill, default tuning)
 ##   at "Locations/Market" (level node)   pos [x,y,z]
 ##   yaw deg, pitch deg                   look_at [x,y,z] | level node path
-##   stance "stand"|"crouch"|"prone"      weapon "rifle"|"pistol", ammo int, reserve int
-##   health float                         hold ["aim", ...] (kept down until the next call)
+##   stance "stand"|"crouch"|"prone"      class "rifleman"|"marksman"|"breacher"|"pointman"
+##   weapon "primary"|"secondary"|"frag"|"smoke"|"flash"|"claymore"|slot index
+##   ammo int, reserve int                health float (0 eliminates the player)
+##   hold ["aim", ...] (kept down until the next call)
+##   actors [{"team": 0|1, "class": id, "pos": [x,y,z], "yaw": deg, "travel": m, "name": text, "dead": bool}]
+##   roster bool (false removes the level's default soldiers; a reset brings them back)
+##   panel "class"|"search" (open the class menu, or search the body in reach)
 ##   tuning {"movement"|"camera"|"weapon": {property: value}}
 ##   place [{"scene": "res://art/models/crate.glb", "pos": [x,y,z], "yaw": deg, "scale": n}]
 ##   menu bool|page index, debug bool     settle frames (default 8), freeze bool
@@ -88,7 +96,8 @@ static func apply(tree: SceneTree, spec: Dictionary) -> Dictionary:
 		s.set_modal(false)
 	var reset: bool = spec.get("reset", false)
 	if reset:
-		# A clean slate includes tuning, or one experiment would skew the next.
+		# A clean slate includes the class and tuning, or one experiment would skew the next.
+		w.soldier_class = Loadouts.CLASSES[0]
 		s.reset_tuning()
 		for placed: Node in tree.get_nodes_in_group(PLACED_GROUP):
 			placed.queue_free()
@@ -108,6 +117,29 @@ static func apply(tree: SceneTree, spec: Dictionary) -> Dictionary:
 			s.reset_player()
 	elif reset:
 		s.reset_player()
+	if spec.has("class"):
+		if Loadouts.index_of(str(spec["class"])) < 0:
+			notes.append("unknown class '%s' (%s)" % [str(spec["class"]), ", ".join(Loadouts.IDS)])
+		else:
+			w.set_class(str(spec["class"]))
+	# The level's own soldiers (scripts/combat/roster.gd) come back with every reset;
+	# "roster": false takes them out for an experiment that places its own.
+	if spec.has("roster") or reset:
+		Roster.set_present(s.level, s.in_lab, bool(spec.get("roster", true)))
+	# Stand-in soldiers: teammates (team 0) and enemies. Like placed scenes, they last
+	# until the next reset or level change.
+	for item: Dictionary in spec.get("actors", []):
+		var dummy := DUMMY.instantiate()
+		dummy.team = int(item.get("team", 1))
+		dummy.soldier_class = str(item.get("class", "rifleman"))
+		dummy.travel = float(item.get("travel", 0.0))
+		dummy.display_name = str(item.get("name", "TEAMMATE" if dummy.team == 0 else "ENEMY"))
+		dummy.add_to_group(PLACED_GROUP)
+		dummy.position = _vec(item.get("pos", [0.0, 0.0, 0.0]))
+		dummy.rotation.y = deg_to_rad(float(item.get("yaw", 0.0)))
+		s.level.add_child(dummy)
+		if item.get("dead", false):
+			dummy.die()
 	# Scenes dropped into the level for a look: a model fresh out of Blender, a prop in
 	# context. They last until the next reset or level change and are never saved.
 	for item: Dictionary in spec.get("place", []):
@@ -145,9 +177,9 @@ static func apply(tree: SceneTree, spec: Dictionary) -> Dictionary:
 	if not p.stance.has_clearance(p, p.stance.current, p.rotation.y):
 		notes.append("%s has no clearance here; a player could not hold this stance" % STANCES[p.stance.current])
 	if spec.has("weapon"):
-		var slot := WEAPONS.find(str(spec.weapon))
+		var slot := _slot_for(w, spec.weapon)
 		if slot < 0:
-			notes.append("unknown weapon '%s'" % str(spec.weapon))
+			notes.append("the %s class carries no '%s'" % [w.soldier_class.display_name.to_lower(), str(spec.weapon)])
 		else:
 			w.equip(slot)
 			# Ready at once; drive the equip action through step() to test the draw itself.
@@ -171,17 +203,27 @@ static func apply(tree: SceneTree, spec: Dictionary) -> Dictionary:
 				target.set(key, tuning[section][key])
 			else:
 				notes.append("no %s property '%s'" % [section, key])
+	# Held actions go down before aiming, so a scoped weapon is aimed through its scope.
+	for action: String in spec.get("hold", []):
+		_hold(s, action)
 	if spec.has("look_at"):
 		var point: Variant = _point(s, spec.look_at)
 		if point == null:
 			notes.append("cannot resolve look_at '%s'" % str(spec.look_at))
 		else:
+			await _ticks(tree, 3)
 			await _aim(tree, p, point)
-	for action: String in spec.get("hold", []):
-		_hold(s, action)
 	if spec.has("debug"):
 		s.debug_visible = bool(spec.debug)
 	await _ticks(tree, int(spec.get("settle", 8)))
+	# The two combat panels, for looking at them: "class" (choose a class) or "search"
+	# (the body within reach, if there is one).
+	if spec.get("panel", "") == "class":
+		w.director.open_class_menu()
+	elif spec.get("panel", "") == "search":
+		w.director.open_loot_menu()
+		if not w.director.loot_open:
+			notes.append("no body within reach to search")
 	var menu: Variant = spec.get("menu", false)
 	if not (menu is bool and not menu):
 		s.set_modal(true)
@@ -295,8 +337,20 @@ static func state(tree: SceneTree) -> Dictionary:
 	var collider: Variant = hit.get("collider")
 	var targets: Dictionary = {}
 	for target: Node in tree.get_nodes_in_group("range_targets"):
-		if s.level.is_ancestor_of(target):
-			targets[str(target.name)] = {"pos": _round(target.global_position), "lit": target.flash_remaining > 0.0}
+		if s.level.is_ancestor_of(target) and target.get("flash_remaining") != null:
+			targets[str(target.name)] = {"pos": _round(target.global_position), "lit": target.flash_remaining > 0.0, "damage": snappedf(target.last_damage, 0.1)}
+	var actors: Array = []
+	for actor: Node in tree.get_nodes_in_group(Combat.ACTOR_GROUP):
+		if actor != p and actor is Node3D and not actor.is_queued_for_deletion():
+			actors.append({"name": Combat.name_of(actor), "team": Combat.team_of(actor), "alive": Combat.is_alive(actor), "health": snappedf(actor.health, 0.1), "pos": _round(actor.global_position)})
+	var slots: Array = []
+	for index: int in range(w.profiles.size()):
+		slots.append({"name": w.profiles[index].display_name, "kind": w.profiles[index].kind, "ammo": w.magazines[index], "reserve": w.reserves[index]})
+	var live: Dictionary = {}
+	for node: Node in tree.get_nodes_in_group(Combat.SPAWNED_GROUP):
+		if not node.is_queued_for_deletion() and node.get_script() != null:
+			var kind: String = node.get_script().resource_path.get_file().get_basename()
+			live[kind] = int(live.get(kind, 0)) + 1
 	var result: Dictionary = {
 		"level": "lab" if s.in_lab else "town",
 		"location": s.location_name(),
@@ -312,19 +366,25 @@ static func state(tree: SceneTree) -> Dictionary:
 			"vertical_speed": snappedf(p.velocity.y, 0.001),
 			"stance": STANCES[p.stance.current],
 			"on_floor": p.is_on_floor(),
-			"health": p.health,
+			"health": snappedf(p.health, 0.1),
+			"alive": Combat.is_alive(p),
 			"aiming": p.aiming,
 			"diving": p.get("diving") == true,
 		},
+		"class": Loadouts.IDS[maxi(0, Loadouts.CLASSES.find(w.soldier_class))],
 		"weapon": {
 			"name": w.profile.display_name,
+			"slot": w.active_slot,
 			"ammo": w.ammo,
 			"reserve": w.reserve,
 			"reloading": w.reload_remaining > 0.0,
 			"shots": w.shots_fired,
 			"hits": w.hits,
 			"spread": snappedf(w.spread_degrees(), 0.01),
+			"last_damage": snappedf(w.last_damage, 0.1),
+			"scoped": w.scoped,
 		},
+		"carried": slots,
 		"aim": {
 			"hit": str(collider.name) if collider is Node else "",
 			"point": _round(w.aim_point),
@@ -335,6 +395,12 @@ static func state(tree: SceneTree) -> Dictionary:
 	}
 	if not targets.is_empty():
 		result["targets"] = targets
+	if not actors.is_empty():
+		result["actors"] = actors
+	if not live.is_empty():
+		result["live"] = live
+	if w.director.dead:
+		result["watching"] = w.director.spectator.caption()
 	var placed: Array = tree.get_nodes_in_group(PLACED_GROUP).filter(func(node: Node) -> bool: return not node.is_queued_for_deletion())
 	if not placed.is_empty():
 		result["placed"] = placed.map(func(node: Node) -> String: return str(node.name))
@@ -415,7 +481,7 @@ static func _aim(tree: SceneTree, p: CharacterBody3D, point: Vector3) -> void:
 	# The camera sits off the shoulder, so its position shifts as the body turns; a few
 	# passes converge the view ray onto the point.
 	for index: int in range(6):
-		var direction: Vector3 = p.camera_rig.camera.global_position.direction_to(point)
+		var direction: Vector3 = p.weapon.view_origin().direction_to(point)
 		p.rotation.y = atan2(-direction.x, -direction.z)
 		_set_pitch(p, rad_to_deg(asin(direction.y)))
 		await _ticks(tree, 1)
@@ -435,6 +501,21 @@ static func _vec(value: Variant) -> Vector3:
 
 static func _round(value: Vector3) -> Array:
 	return [snappedf(value.x, 0.001), snappedf(value.y, 0.001), snappedf(value.z, 0.001)]
+
+## The slot holding a weapon named by role ("primary", "secondary"), by equipment kind
+## ("frag"), by part of its display name ("sniper"), or by index.
+static func _slot_for(w: Node, key: Variant) -> int:
+	if key is int or key is float:
+		return int(key) if int(key) >= 0 and int(key) < w.profiles.size() else -1
+	var wanted := str(key).to_lower()
+	if wanted in ["primary", "rifle"]:
+		return 0
+	if wanted in ["secondary", "pistol"]:
+		return 1
+	for index: int in range(w.profiles.size()):
+		if w.profiles[index].kind == wanted or wanted in w.profiles[index].display_name.to_lower():
+			return index
+	return -1
 
 static func _child_index(parent: Node, key: Variant) -> int:
 	if key is String:

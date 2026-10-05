@@ -10,7 +10,7 @@ Every change goes through the same three steps, cheapest first. Fix the first fa
 | Step | Command | Time | What it proves |
 |---|---|---|---|
 | Check | `tools/dev check` | ~1 s | Every script, scene, resource, and shader loads. Errors come back as `path:line: message`. |
-| Test | `tools/dev test [suite...]` | ~17 s for all | The headless regression suites in `tests/` pass. |
+| Test | `tools/dev test [suite...]` | ~25 s for all | The headless regression suites in `tests/` pass. |
 | Look | `tools/dev shot <scenario...>` | ~4 s + 0.3 s each | What the player actually sees, as PNG files you can read. |
 
 Run these from the repo root, spelled exactly as above (they are pre-approved in that form).
@@ -31,6 +31,7 @@ Run it after every edit, before anything slower. GDScript is only compiled when 
 | `impact_regression` | Bullet-hole decals: placement, orientation, budget, level change | 2 s |
 | `hud_layout` | HUD safe area at several resolutions, minimap, tuning pages fit | 2 s |
 | `posture_regression` | Soldier skeleton pose and rifle anchoring | 2 s |
+| `weapons_regression` | Class loadouts, damage and falloff per weapon, sniper bullet flight and scope, grenades, smoke, flashbangs, claymores, elimination and spectating, searching bodies, the level rosters | 7 s |
 | `agent_harness` | `tools/agent/harness.gd` against the live game: every scenario, stepping, freeze, tuning reset | 3 s |
 
 Run the suites that cover what you touched while iterating, and all of them before you finish. A suite whose scripts fail to compile never reaches `quit()`, so the runner kills it after 240 s and reports `TIMEOUT`; running `check` first avoids that wait.
@@ -51,6 +52,8 @@ tools/dev shot lab_range --state     # add the state digest (positions, ammo, ai
 tools/dev shot lab_range ammo=0 stance=crouch                 # a scenario with overrides
 tools/dev shot level=lab pos=0,0.1,20 stance=prone yaw=90     # any state, saved as custom.png
 tools/dev shot lab_start step.frames=45 step.forward=1        # capture mid-run
+tools/dev shot lab_start class=breacher weapon=frag            # another class, equipment in hand
+tools/dev shot lab_start health=0                             # the eliminated view, watching a teammate
 tools/dev shot --model=crate                                  # a model from art/models in the lab
 ```
 

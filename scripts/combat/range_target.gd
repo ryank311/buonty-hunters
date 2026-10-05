@@ -4,6 +4,8 @@ extends StaticBody3D
 var start_position: Vector3
 var elapsed: float = 0.0
 var flash_remaining: float = 0.0
+var last_damage: float = 0.0
+var damage_taken: float = 0.0
 var material: StandardMaterial3D
 
 func _ready() -> void:
@@ -22,7 +24,16 @@ func _physics_process(delta: float) -> void:
 func register_hit() -> void:
 	flash_remaining = 0.22
 
+## Practice targets never fall; they report what each hit would have done.
+func apply_damage(amount: float, _info: Dictionary = {}) -> float:
+	last_damage = amount
+	damage_taken += amount
+	register_hit()
+	return amount
+
 func reset_target() -> void:
 	elapsed = 0.0
 	flash_remaining = 0.0
+	last_damage = 0.0
+	damage_taken = 0.0
 	position = start_position

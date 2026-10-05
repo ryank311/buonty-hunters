@@ -88,7 +88,7 @@ func _run() -> void:
 	root.size = Vector2i(1024,768)
 	await frames(10)
 	var head := rig.camera.unproject_position(player.soldier.parts.Helmet.global_position)
-	check(head.y > 480*0.60 and head.y < 480*0.75 and absf(head.x-320) < 22,"Elevated centered camera frames the soldier below the reticle (%s)" % head)
+	check(head.y > 480*0.60 and head.y < 480*0.75 and head.x < 320-10 and head.x > 320-45,"Elevated camera frames the soldier below and slightly left of the reticle (%s)" % head)
 	# Motion, stance, lean and camera pitch never add a cosmetic reticle offset.
 	var stays_centered := true
 	for stance: int in [0,1,2]:
@@ -137,7 +137,7 @@ func _run() -> void:
 	legacy.set_value("camera","shoulder_offset",0.2)
 	legacy.set_value("camera","mouse_sensitivity",0.004)
 	session.apply_settings_config(legacy)
-	check(is_zero_approx(player.camera_settings.shoulder_offset) and is_equal_approx(player.camera_settings.height_offset,0.85) and is_equal_approx(player.camera_settings.mouse_sensitivity,0.004),"Older presets receive centered elevated framing while keeping look sensitivity")
+	check(is_equal_approx(player.camera_settings.shoulder_offset,0.25) and is_equal_approx(player.camera_settings.height_offset,0.85) and is_equal_approx(player.camera_settings.mouse_sensitivity,0.004),"Older presets receive the off-center elevated framing while keeping look sensitivity")
 	session.reset_tuning()
 	wall.queue_free()
 	await place(1)

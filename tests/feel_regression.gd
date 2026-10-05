@@ -137,7 +137,19 @@ func _run() -> void:
 	check(player.stance.current == 0, "A rises from prone")
 	await tap(JOY_BUTTON_A)
 	check(not player.is_on_floor(), "A jumps from standing")
-	await frames(60)
+	check(player.soldier.jump_active, "A jump drives the airborne animation")
+	var highest_boot := 0.0
+	var touchdown_boot := 1.0
+	var impact_load := 0.0
+	for tick: int in range(60):
+		await frames()
+		if not player.is_on_floor():
+			highest_boot = maxf(highest_boot,player.soldier.parts.LBoot.position.y)
+			touchdown_boot = player.soldier.parts.LBoot.position.y
+		else:
+			impact_load = maxf(impact_load,player.soldier.body_drop)
+	check(highest_boot > 0.30 and touchdown_boot < 0.13, "Live jump folds the legs then reaches down before ground contact")
+	check(impact_load > 0.07 and player.soldier.body_drop < 0.01, "Live touchdown absorbs impact and settles back to ready")
 	button(JOY_BUTTON_RIGHT_SHOULDER, true)
 	await frames(10)
 	check(player.camera_rig.actual_lean > 0.9, "Shoulder button leans")

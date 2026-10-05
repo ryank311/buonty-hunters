@@ -10,6 +10,9 @@ const KEYS: Dictionary = {
 	"pause": KEY_ESCAPE, "tuning": KEY_F1, "debug_view": KEY_F3,
 	"switch_level": KEY_F2, "start_lap": KEY_T, "next_spawn": KEY_N,
 	"equip_rifle": KEY_1, "equip_pistol": KEY_2,
+	"equip_item_1": KEY_3, "equip_item_2": KEY_4,
+	"interact": KEY_F, "class_menu": KEY_F4,
+	"zoom_in": KEY_EQUAL, "zoom_out": KEY_MINUS,
 }
 
 static func setup() -> void:
@@ -25,6 +28,9 @@ static func setup() -> void:
 			InputMap.add_action(action)
 	_mouse("fire", MOUSE_BUTTON_LEFT)
 	_mouse("aim", MOUSE_BUTTON_RIGHT)
+	_mouse("zoom_in", MOUSE_BUTTON_WHEEL_UP)
+	_mouse("zoom_out", MOUSE_BUTTON_WHEEL_DOWN)
+	_button("interact", JOY_BUTTON_Y)
 	_button("jump", JOY_BUTTON_A)
 	_button("pad_stance", JOY_BUTTON_B)
 	_button("reload", JOY_BUTTON_X)

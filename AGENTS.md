@@ -6,9 +6,9 @@ A third-person tactical shooter prototype in Godot 4.7: GDScript, Jolt physics, 
 
 | Path | Contents |
 |---|---|
-| `scripts/` | Gameplay code: `player/`, `combat/`, `levels/` (session and level switching), `ui/`, `resources/` (tuning profile classes) |
-| `scenes/` | `main.tscn`, `actors/player.tscn`, `levels/old_quarter.tscn`, `levels/movement_lab.tscn` |
-| `resources/` | Default tuning values (`.tres`) for movement, camera, and weapons |
+| `scripts/` | Gameplay code: `player/`, `combat/` (weapons, bullets, grenades, claymores, elimination and spectating, level rosters), `actors/` (stand-in soldiers), `levels/` (session and level switching), `ui/`, `resources/` (tuning profile and class definitions) |
+| `scenes/` | `main.tscn`, `actors/player.tscn`, `actors/combat_dummy.tscn`, `levels/old_quarter.tscn`, `levels/movement_lab.tscn` |
+| `resources/` | Default tuning values (`.tres`) for movement, camera, and each weapon and piece of equipment (`weapons/`); what each soldier class carries (`classes/`) |
 | `art/` | `blender/` holds model sources (`.blend`, hidden from Godot); `models/` holds the exported `.glb` files the game loads; `decals/` |
 | `tests/` | Headless regression suites, one `SceneTree` script each |
 | `tools/dev` | The single command for checking, testing, and capturing the game, and for the Blender asset pipeline |
@@ -18,7 +18,7 @@ A third-person tactical shooter prototype in Godot 4.7: GDScript, Jolt physics, 
 ## Verify every change
 
 1. `tools/dev check`: every script, scene, and resource loads (about 1 s).
-2. `tools/dev test`: the regression suites pass (about 17 s; name suites to run fewer).
+2. `tools/dev test`: the regression suites pass (about 25 s; name suites to run fewer).
 3. If the change can be seen or felt, look at it: `tools/dev shot <scenario>` for a frame, or the `godot` MCP server to play it.
 
 Say what you ran and what it showed. A change that was not checked is not done.
